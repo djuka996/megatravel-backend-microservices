@@ -1,0 +1,35 @@
+# Na GitHub repo se kreira folder koji odgovara svakom servisu. U tom folderu nalaze se konfiguracioni fajlovi tog servisa. Konvencija imenovanja fajlova je 
+# appname-env.yml ( npr usersservice.yml , usersservice-dev.yml , itd. ), a konvencija imenovanja foldera appname. 
+# Kada se doda novi servis, i za njega napravi folder koji sadrzi konfiguracione fajlove,
+# neophodno je to naznaciti ovde unutar searchPaths-a, na sledeci nacin :
+# searchPaths: folder1,folder2,folder3
+# Takodje za potrebe logovanja menja se logging sekcija, nisam zalazio u nju.
+
+# Ukoliko se konfiguracioni fajlovi smestaju na fajl sistem, to se radi na sledeci nacin :
+# spring:
+#	profiles:
+#		active: native
+#	cloud:
+#		config:
+#			server:
+#				native: file://dalja/putanja/do/foldera
+
+
+server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      discovery:
+        enabled: true
+      server:
+        encrypt.enabled: false
+        git:
+          uri: https://github.com/djuka996/megatravel-config-repo
+          searchPaths: zuulservice,demoservice
+
+logging:
+  level:
+    com.netflix: WARN
+    org.springframework.web: WARN
+    com.megatravel: DEBUG
