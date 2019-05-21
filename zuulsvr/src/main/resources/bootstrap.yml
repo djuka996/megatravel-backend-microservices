@@ -7,3 +7,11 @@ spring:
   cloud:
     config:
       enabled: true
+
+#probavanje da bi radio round robin
+      
+#eureka:
+#  instance:
+#    instance-id: 
+#      ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    

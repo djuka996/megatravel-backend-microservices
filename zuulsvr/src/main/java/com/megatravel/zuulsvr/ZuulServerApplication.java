@@ -13,6 +13,7 @@ import com.megatravel.zuulsvr.filters.RouteFilter;
 
 
 @SpringBootApplication
+//@EnableDiscoveryClient
 @EnableZuulProxy
 public class ZuulServerApplication {
 
