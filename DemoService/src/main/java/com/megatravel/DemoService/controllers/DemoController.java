@@ -1,5 +1,7 @@
 package com.megatravel.DemoService.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,8 +14,9 @@ import com.megatravel.DemoService.model.Student;
 public class DemoController {
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String testEndpoint() {
-		return "Test endpoints works fine.";
+	public String testEndpoint(HttpServletRequest request) {
+		System.out.println(request.getLocalPort());
+		return request.getLocalPort() + "Test endpoints works fine.";
 	}
 	
 	@RequestMapping(value = "/test-post", method = RequestMethod.POST)

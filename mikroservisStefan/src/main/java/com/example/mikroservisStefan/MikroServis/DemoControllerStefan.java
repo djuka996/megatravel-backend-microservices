@@ -21,7 +21,7 @@ public class DemoControllerStefan {
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String testEndpoint(HttpServletRequest request) {
 		System.out.println(request.getLocalPort());
-		return "Stefan is pro. Stefan knows how to copy paste code";
+		return request.getLocalPort() + "Stefan is pro. Stefan knows how to copy paste code";
 	}
 	
 	@RequestMapping(value = "/test-post", method = RequestMethod.POST)
@@ -44,6 +44,6 @@ public class DemoControllerStefan {
 	@RequestMapping(value = "/test/pozivanjeTudjeg", method = RequestMethod.GET)
 	public String testEndpointTudji(HttpServletRequest request) {
 		System.out.println(request.getLocalPort());
-		return demoInterface.metodaKaDemo();
+		return request.getLocalPort() + demoInterface.metodaKaDemo();
 	}	
 }
