@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mikroservisStefan.interfaces.DemoInterface;
+import com.example.mikroservisStefan.model.Student;
 
 @RestController
 @RequestMapping(value = "/stefan")
@@ -29,10 +30,20 @@ public class DemoControllerStefan {
 		return "You've sent: From Stefan" + message;
 	}
 	
+	@RequestMapping(value = "/objekat", method = RequestMethod.POST)
+	public String testPostEndpointObject(@RequestBody Student student) {
+		return "I got Student: " + student.toString();
+	}
+	
+
+	@RequestMapping(value = "/studentKaDemo", method = RequestMethod.POST)
+	public String testEndpointTudjiStudent(@RequestBody Student student) {
+		return "pozvan iz stefan " + demoInterface.posaljiStudentaKaDemo(student);
+	}	
+	
 	@RequestMapping(value = "/test/pozivanjeTudjeg", method = RequestMethod.GET)
 	public String testEndpointTudji(HttpServletRequest request) {
 		System.out.println(request.getLocalPort());
 		return demoInterface.metodaKaDemo();
-	}
-	
+	}	
 }

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.megatravel.DemoService.model.Student;
+
 @RestController
 @RequestMapping(value = "/collection")
 public class DemoController {
@@ -17,6 +19,11 @@ public class DemoController {
 	@RequestMapping(value = "/test-post", method = RequestMethod.POST)
 	public String testPostEndpoint(@RequestBody String message) {
 		return "You've sent: " + message;
+	}
+	
+	@RequestMapping(value = "/objekat", method = RequestMethod.POST)
+	public String testPostEndpointObject(@RequestBody Student student) {
+		return "I got Student DEMO: " + student.toString();
 	}
 	
 }
