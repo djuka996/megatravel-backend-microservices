@@ -20,7 +20,9 @@
     <module>confsvr</module>
     <module>eurekasvr</module>
     <module>zuulsvr</module>
-    <module>demosvr</module>
+    <module>mikroservisStefan</module>
+    <module>DemoService</module>
+    <module>LoginAndRegistration</module>
   </modules>
   <build>
     <plugins>
