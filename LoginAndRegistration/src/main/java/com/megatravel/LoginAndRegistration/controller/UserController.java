@@ -3,6 +3,8 @@ package com.megatravel.LoginAndRegistration.controller;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +31,7 @@ import com.megatravel.LoginAndRegistration.validation.CheckPassword;
 
 
 @RestController
-@CrossOrigin(origins = "https://localhost:4200")
+@CrossOrigin
 @RequestMapping(value = "/users")
 public class UserController {
 	
@@ -45,8 +47,13 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	//@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	@PreAuthorize("@permissionAccess.canAccess()")
-	public ResponseEntity<List<SystemUserInfoDTO>> getAllUsers(Pageable page) {
+	//@PreAuthorize("@permissionAccess.canAccess()")
+	@PreAuthorize("@permissionAccess.canAccessString('Metoda')")
+	public ResponseEntity<List<SystemUserInfoDTO>> getAllUsers(Pageable page, HttpServletRequest request) {
+		
+		System.out.println(request.getHeader("Authorization"));
+		request.getHeader("Authorization");
+		
 		
 		List<SystemUserInfoDTO> found = userService.findAll(page);		
 		HttpHeaders headers = new HttpHeaders();
@@ -73,16 +80,21 @@ public class UserController {
 		return new ResponseEntity<>(new SystemUserInfoDTO(userService.findByEmail(email)), HttpStatus.OK);
 	}
 	
-	@PreAuthorize("@permissionAccess.canAccessCheckPermission(#userId)")
+	//@PreAuthorize("@permissionAccess.canAccessCheckPermission(#userId)")
+	//@PreAuthorize("hasAnyAuthority('readAll', 'read')")
+	@PreAuthorize("@permissionAccess.canAccess()")
 	@RequestMapping(value = "/{userId}/role/{roleId}", method = RequestMethod.GET)
-	public ResponseEntity<Void> addRoleToUser(@PathVariable("id") Long userId, @PathVariable Long roleId) {
+	public ResponseEntity<Void> addRoleToUser(@PathVariable Long userId, @PathVariable Long roleId) {
+		System.out.println("can accesss");
 		userService.addRoleToUser(userId, roleId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PreAuthorize("@permissionAccess.canAccessCheckId(#userId)")
+	//@PreAuthorize("@permissionAccess.canAccessCheckId(#userId)")
+	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
 	@RequestMapping(value = "/{userId}/role/{roleId}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteRoleFromUser(@PathVariable("id") Long userId, @PathVariable Long roleId) {
+	public ResponseEntity<Void> deleteRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
+		System.out.println("has any autority");
 		userService.deleteRoleFromUser(userId, roleId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

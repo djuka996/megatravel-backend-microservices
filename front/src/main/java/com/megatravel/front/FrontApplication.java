@@ -1,4 +1,4 @@
-package com.megatravel.LoginAndRegistration;
+package com.megatravel.front;
 
 import java.util.Collections;
 import java.util.Map;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @SpringBootApplication
 @EnableFeignClients
 @EnableEurekaClient
-public class LoginAndRegistrationApplication {
+public class FrontApplication {
 
 	// All the resources that cannot be found on server are redirected to
 	// index.html. Angular will handle the routing for them.
@@ -36,25 +36,6 @@ public class LoginAndRegistrationApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(LoginAndRegistrationApplication.class, args);
+		SpringApplication.run(FrontApplication.class, args);
 	}
-	
-	
-//	@Bean
-//	public CorsFilter corsFilter() {
-//
-//	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//	    CorsConfiguration config = new CorsConfiguration();
-//	    config.setAllowCredentials(true); 
-//	    config.addAllowedOrigin("https://localhost:4200");
-//	    config.addAllowedHeader("*");
-//	    config.addAllowedMethod("GET");
-//	    config.addAllowedMethod("PUT");
-//	    config.addAllowedMethod("POST");
-//	    config.addAllowedMethod("DELETE");
-//	    config.addAllowedMethod("OPTIONS");
-//	    source.registerCorsConfiguration("/**", config);
-//	    return new CorsFilter(source);
-//	}
-
 }

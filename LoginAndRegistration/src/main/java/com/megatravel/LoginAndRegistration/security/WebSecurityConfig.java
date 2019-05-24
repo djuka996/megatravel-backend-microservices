@@ -11,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.megatravel.LoginAndRegistration.jwt.JwtTokenFilterConfigurer;
 import com.megatravel.LoginAndRegistration.jwt.JwtTokenUtils;
@@ -43,6 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Disable CSRF (cross site request forgery)
 		http.csrf().disable();
 		
+		http.cors();
+		
 		//http.headers().httpStrictTransportSecurity().disable();
 
 		// No session will be created or used by spring security
@@ -63,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		//http.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class);
 	}
-
+	
 //	@Override
 //	public void configure(WebSecurity web) throws Exception {
 //		//sve sto ce se ignorisati za web

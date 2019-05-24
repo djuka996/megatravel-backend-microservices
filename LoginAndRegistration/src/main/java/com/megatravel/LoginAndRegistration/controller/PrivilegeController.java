@@ -21,7 +21,7 @@ import com.megatravel.LoginAndRegistration.model.Privilege;
 import com.megatravel.LoginAndRegistration.service.PrivilegeService;
 
 @RestController
-@CrossOrigin(origins = "https://localhost:4200")
+@CrossOrigin
 @RequestMapping(value = "/privileges")
 public class PrivilegeController {
 

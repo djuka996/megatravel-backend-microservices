@@ -23,6 +23,7 @@
     <module>mikroservisStefan</module>
     <module>DemoService</module>
     <module>LoginAndRegistration</module>
+    <module>front</module>
   </modules>
   <build>
     <plugins>

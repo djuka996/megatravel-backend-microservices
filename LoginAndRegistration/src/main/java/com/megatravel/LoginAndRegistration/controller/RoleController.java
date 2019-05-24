@@ -21,7 +21,7 @@ import com.megatravel.LoginAndRegistration.model.Role;
 import com.megatravel.LoginAndRegistration.service.RoleService;
 
 @RestController
-@CrossOrigin(origins = "https://localhost:4200")
+@CrossOrigin
 @RequestMapping(value = "/roles")
 public class RoleController {
 
@@ -29,7 +29,8 @@ public class RoleController {
 	private RoleService roleService;
 
 	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("@permissionAccess.canAccess()")
+	//@PreAuthorize("@permissionAccess.canAccess()")
+	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
 	public ResponseEntity<List<RoleDTO>> findAll(Pageable pageable) {
 		List<RoleDTO> found = roleService.findAll(pageable);		
 		HttpHeaders headers = new HttpHeaders();

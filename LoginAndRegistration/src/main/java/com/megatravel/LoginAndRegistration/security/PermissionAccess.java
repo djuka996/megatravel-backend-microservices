@@ -10,6 +10,12 @@ public class PermissionAccess {
 		return true;
 	}
 	
+	public Boolean canAccessString(String tempString) {
+		System.out.println("USAO u string");
+		System.out.println(tempString);
+		return true;
+	}
+	
 	public Boolean canAccessCheckId(Long id) {
 		System.out.println("ID" + id);
 		return true;
