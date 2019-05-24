@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.megatravel.LoginAndRegistration.exception.CustomException;
+import com.megatravel.LoginAndRegistration.model.Privilege;
 import com.megatravel.LoginAndRegistration.model.Role;
 import com.megatravel.LoginAndRegistration.security.ImplementedUserDetails;
 
@@ -44,10 +45,13 @@ public class JwtTokenUtils {
 	}
 
 	public String createToken(String email, Collection<Role> roles) {
-		List<SimpleGrantedAuthority> usersType = new ArrayList<>();
-		
+		List<SimpleGrantedAuthority> usersType = new ArrayList<>();	
 		for (Role role : roles) {
-			usersType.add(new SimpleGrantedAuthority(role.getRoleName()));
+			//usersType.add(new SimpleGrantedAuthority(role.getRoleName()));
+			for (Privilege privilege : role.getPrivileges()) {
+				usersType.add(new SimpleGrantedAuthority(privilege.getName()));
+			}
+			
 		}
 		
 		Claims claims = Jwts.claims().setSubject(email);
