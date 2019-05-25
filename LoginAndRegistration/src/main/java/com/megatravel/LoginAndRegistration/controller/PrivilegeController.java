@@ -29,8 +29,8 @@ public class PrivilegeController {
 	private PrivilegeService privilegeService;
 
 	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<List<PrivilegeDTO>> findAll(Pageable pageable) {
+	@PreAuthorize("hasAnyAuthority('getAllPrivileges')")
+	public ResponseEntity<List<PrivilegeDTO>> getAllPrivileges(Pageable pageable) {
 		List<PrivilegeDTO> found = privilegeService.findAll(pageable);		
 		HttpHeaders headers = new HttpHeaders();
 		long privilegeTotal = found.size();
@@ -39,26 +39,26 @@ public class PrivilegeController {
 	}
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<PrivilegeDTO> findById(@PathVariable("id") Long id) {
+	@PreAuthorize("hasAnyAuthority('getPrivilege')")
+	public ResponseEntity<PrivilegeDTO> getPrivilege(@PathVariable("id") Long id) {
 		return new ResponseEntity<PrivilegeDTO>(privilegeService.findOne(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping( method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<PrivilegeDTO> create(@RequestBody PrivilegeDTO privilegeDTO) {
+	@PreAuthorize("hasAnyAuthority('createPrivilege')")
+	public ResponseEntity<PrivilegeDTO> createPrivilege(@RequestBody PrivilegeDTO privilegeDTO) {
 		return new ResponseEntity<PrivilegeDTO>(new PrivilegeDTO(privilegeService.save(new Privilege(privilegeDTO))), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<PrivilegeDTO> update(@PathVariable("id") Long id, @RequestBody PrivilegeDTO privilegeDTO){
+	@PreAuthorize("hasAnyAuthority('updatePrivilege')")
+	public ResponseEntity<PrivilegeDTO> updatePrivilege(@PathVariable("id") Long id, @RequestBody PrivilegeDTO privilegeDTO){
 		return new ResponseEntity<PrivilegeDTO>(new PrivilegeDTO(privilegeService.update(id, new Privilege(privilegeDTO))), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+	@PreAuthorize("hasAnyAuthority('deletePrivilege')")
+	public ResponseEntity<?> deletePrivilege(@PathVariable("id") Long id) {
 		privilegeService.remove(id);
 		return ResponseEntity.ok().build();
 	}	

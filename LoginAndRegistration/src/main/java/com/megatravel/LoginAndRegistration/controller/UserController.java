@@ -46,9 +46,9 @@ public class UserController {
 	
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
-	//@PreAuthorize("hasAnyAuthority('readAll', 'read')")
 	//@PreAuthorize("@permissionAccess.canAccess()")
-	@PreAuthorize("@permissionAccess.canAccessString('Metoda')")
+	//@PreAuthorize("@permissionAccess.canAccessString('Metoda')")
+	@PreAuthorize("hasAnyAuthority('getAllUsers')")
 	public ResponseEntity<List<SystemUserInfoDTO>> getAllUsers(Pageable page, HttpServletRequest request) {
 		
 		System.out.println(request.getHeader("Authorization"));
@@ -64,7 +64,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('deleteSomething')")
+	@PreAuthorize("hasAnyAuthority('getUser')")
 	public ResponseEntity<SystemUserInfoDTO> getUser(@PathVariable Long id) {
 		return new ResponseEntity<>(userService.findOne(id), HttpStatus.OK);
 	}
@@ -81,8 +81,8 @@ public class UserController {
 	}
 	
 	//@PreAuthorize("@permissionAccess.canAccessCheckPermission(#userId)")
-	//@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	@PreAuthorize("@permissionAccess.canAccess()")
+	//@PreAuthorize("@permissionAccess.canAccess()")
+	@PreAuthorize("hasAnyAuthority('addRoleToUser')")
 	@RequestMapping(value = "/{userId}/role/{roleId}", method = RequestMethod.GET)
 	public ResponseEntity<Void> addRoleToUser(@PathVariable Long userId, @PathVariable Long roleId) {
 		System.out.println("can accesss");
@@ -91,7 +91,7 @@ public class UserController {
 	}
 	
 	//@PreAuthorize("@permissionAccess.canAccessCheckId(#userId)")
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
+	@PreAuthorize("hasAnyAuthority('deleteRoleFromUser')")
 	@RequestMapping(value = "/{userId}/role/{roleId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteRoleFromUser(@PathVariable Long userId, @PathVariable Long roleId) {
 		System.out.println("has any autority");

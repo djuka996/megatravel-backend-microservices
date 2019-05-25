@@ -65,7 +65,7 @@ public class DemoControllerStefan {
 	//@PreAuthorize("@permissionAccess.canAccessString('Metoda')")
 	@RequestMapping(value = "/test/jwt", method = RequestMethod.GET)
 	public String probajZaJwt(HttpServletRequest request) {
-		if(!permissionAccess.canAccessMethod("read", request.getHeader("Authorization"))) {
+		if(!permissionAccess.canAccessMethod("getAllUsers", request.getHeader("Authorization"))) {
 			return "BACI exception";
 		}
 		

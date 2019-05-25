@@ -30,8 +30,8 @@ public class RoleController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	//@PreAuthorize("@permissionAccess.canAccess()")
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<List<RoleDTO>> findAll(Pageable pageable) {
+	@PreAuthorize("hasAnyAuthority('getAllRoles')")
+	public ResponseEntity<List<RoleDTO>> getAllRoles(Pageable pageable) {
 		List<RoleDTO> found = roleService.findAll(pageable);		
 		HttpHeaders headers = new HttpHeaders();
 		long rolesTotal = found.size();
@@ -41,38 +41,38 @@ public class RoleController {
 	}
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<RoleDTO> findById(@PathVariable("id") Long id) {
+	@PreAuthorize("hasAnyAuthority('getRole')")
+	public ResponseEntity<RoleDTO> getRole(@PathVariable("id") Long id) {
 		return new ResponseEntity<RoleDTO>(roleService.findOne(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping( method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<RoleDTO> create(@RequestBody RoleDTO roleDTO) {
+	@PreAuthorize("hasAnyAuthority('createRole')")
+	public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO roleDTO) {
 		return new ResponseEntity<RoleDTO>(new RoleDTO(roleService.save(new Role(roleDTO))), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<RoleDTO> update(@PathVariable("id") Long id, @RequestBody RoleDTO roleDTO){
+	@PreAuthorize("hasAnyAuthority('updateRole')")
+	public ResponseEntity<RoleDTO> updateRole(@PathVariable("id") Long id, @RequestBody RoleDTO roleDTO){
 		return new ResponseEntity<RoleDTO>(new RoleDTO(roleService.update(id, new Role(roleDTO))), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
-	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+	@PreAuthorize("hasAnyAuthority('deleteRole')")
+	public ResponseEntity<?> deleteRole(@PathVariable("id") Long id) {
 		roleService.remove(id);
 		return ResponseEntity.ok().build();
 	}
 	
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
+	@PreAuthorize("hasAnyAuthority('addPrivilegeToRole')")
 	@RequestMapping(value = "/role/{roleId}/privilege/{privilegeId}", method = RequestMethod.GET)
 	public ResponseEntity<Void> addPrivilegeToRole(@PathVariable Long roleId, @PathVariable Long privilegeId) {
 		roleService.addPrivilegeToRole(roleId, privilegeId);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@PreAuthorize("hasAnyAuthority('readAll', 'read')")
+	@PreAuthorize("hasAnyAuthority('deletePrivilegeFromRole')")
 	@RequestMapping(value = "/role/{roleId}/privilege/{privilegeId}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deletePrivilegeFromRole(@PathVariable Long roleId, @PathVariable Long privilegeId) {
 		roleService.deletePrivilegeFromRole(roleId, privilegeId);
