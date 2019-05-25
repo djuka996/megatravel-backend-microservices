@@ -26,12 +26,14 @@ public class DemoControllerStefan {
 	@Autowired
 	PermissionAccess permissionAccess;
 	
+	//@PermitAll
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String testEndpoint(HttpServletRequest request) {
 		System.out.println(request.getLocalPort());
 		return request.getLocalPort() + "Stefan is pro. Stefan knows how to copy paste code";
 	}
 	
+	//@PermitAll
 	@RequestMapping(value = "/test-post", method = RequestMethod.POST)
 	public String testPostEndpoint(@RequestBody String message, HttpServletRequest request) {
 		System.out.println(request.getLocalPort());
@@ -60,6 +62,7 @@ public class DemoControllerStefan {
 		return request.getLocalPort() + demoInterface.metodaKaDemo();
 	}
 	
+	//@PreAuthorize("@permissionAccess.canAccessString('Metoda')")
 	@RequestMapping(value = "/test/jwt", method = RequestMethod.GET)
 	public String probajZaJwt(HttpServletRequest request) {
 		if(!permissionAccess.canAccessMethod("read", request.getHeader("Authorization"))) {
