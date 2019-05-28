@@ -21,7 +21,10 @@
     <module>eurekasvr</module>
     <module>zuulsvr</module>
     <module>xml-service</module>
+    <module>mikroservisStefan</module>
     <module>DemoService</module>
+    <module>LoginAndRegistration</module>
+    <module>front</module>
   </modules>
   <build>
     <plugins>
