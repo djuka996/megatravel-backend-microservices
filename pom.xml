@@ -25,6 +25,7 @@
     <module>DemoService</module>
     <module>LoginAndRegistration</module>
     <module>front</module>
+    <module>demo-soap-and-rest</module>
   </modules>
   <build>
     <plugins>

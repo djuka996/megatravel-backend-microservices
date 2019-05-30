@@ -3,6 +3,7 @@ package com.megatravel.zuulsvr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
@@ -13,7 +14,7 @@ import com.megatravel.zuulsvr.filters.RouteFilter;
 
 
 @SpringBootApplication
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @EnableZuulProxy
 public class ZuulServerApplication {
 
