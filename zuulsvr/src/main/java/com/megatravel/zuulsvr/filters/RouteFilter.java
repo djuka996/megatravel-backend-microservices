@@ -5,8 +5,14 @@ import com.netflix.zuul.ZuulFilter;
 public class RouteFilter extends ZuulFilter {
 
 	@Override
-	public String filterType() {
-		return "route";
+	public Object run() {
+		System.out.println("Inside Route filter");
+		return null;
+	}
+
+	@Override
+	public boolean shouldFilter() {
+		return false;
 	}
 
 	@Override
@@ -15,13 +21,8 @@ public class RouteFilter extends ZuulFilter {
 	}
 
 	@Override
-	public boolean shouldFilter() {
-		return true;
+	public String filterType() {
+		return "pre";
 	}
 
-	@Override
-	public Object run() {
-		System.out.println("Inside Route Filter");
-		return null;
-	}
 }

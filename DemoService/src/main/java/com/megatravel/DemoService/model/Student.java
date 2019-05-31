@@ -1,14 +1,13 @@
 package com.megatravel.DemoService.model;
 
 public class Student {
+	
 	Long id;
 	String firstName;
 	String lastName;
 	int age;
 	
-	public Student() {
-		
-	}
+	public Student() { }
 
 	public Student(Long id, String firstname, String lastName, int age) {
 		super();
