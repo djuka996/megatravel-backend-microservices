@@ -25,7 +25,7 @@ spring:
       server:
         encrypt.enabled: false
         git:
-          uri: https://github.com/djuka996/megatravel-config-repo
+          uri: https://github.com/stefan096/megatravel-config
           searchPaths: zuulservice, demoservice, stefanservice, loginAndRegistration, front
 
 logging:
