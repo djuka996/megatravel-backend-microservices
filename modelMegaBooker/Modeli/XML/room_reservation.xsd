@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:mt="http://www.megatravel.com/global_parameters"
+    targetNamespace="http://www.megatravel.com/room_reservation"
+    xmlns:info="http://www.megatravel.com/system_user_info"
+    xmlns:hotel="http://www.megatravel.com/hotel"
+    xmlns:room_reservation="http://www.megatravel.com/room_reservation" jxb:version="2.0">
+
+    <xs:import namespace="http://www.megatravel.com/global_parameters"
+        schemaLocation="global_parameters.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/hotel" schemaLocation="hotel.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/system_user_info"
+        schemaLocation="system_user_info.xsd"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <jxb:schemaBindings>
+                <jxb:package name="com.megatravel.dto.room_reservation"/>
+            </jxb:schemaBindings>
+        </xs:appinfo>
+    </xs:annotation>
+    <xs:element name="Room_reservationDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Begin_date" type="mt:Date"/>
+                <xs:element name="End_date" type="mt:Date"/>
+                <xs:element default="0" name="Realised" type="xs:boolean"/>
+                <xs:element ref="hotel:RoomDTO" minOccurs="0"/>
+                <xs:element name="Price" type="mt:Price"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

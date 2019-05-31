@@ -30,6 +30,7 @@ import com.megatravel.LoginAndRegistration.service.UserService;
 import com.megatravel.LoginAndRegistration.validation.CheckPassword;
 
 
+
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/users")

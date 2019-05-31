@@ -26,6 +26,8 @@
     <module>LoginAndRegistration</module>
     <module>front</module>
     <module>demo-soap-and-rest</module>
+    <module>modelMegaBooker</module>
+    <module>Search</module>
   </modules>
   <build>
     <plugins>

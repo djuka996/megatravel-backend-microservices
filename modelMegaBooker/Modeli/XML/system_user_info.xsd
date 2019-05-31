@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    targetNamespace="http://www.megatravel.com/system_user_info" elementFormDefault="qualified"
+    xmlns:info="http://www.megatravel.com/system_user_info"
+    xmlns:mt="http://www.megatravel.com/global_parameters"
+    xmlns:hotel="http://www.megatravel.com/hotel"
+    xmlns:room_reservation="http://www.megatravel.com/room_reservation" jxb:version="2.0">
+    <xs:import namespace="http://www.megatravel.com/global_parameters"
+        schemaLocation="global_parameters.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/hotel" schemaLocation="hotel.xsd"/>
+    <xs:import namespace="http://www.megatravel.com/room_reservation"
+        schemaLocation="room_reservation.xsd"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <jxb:schemaBindings>
+                <jxb:package name="com.megatravel.dto.system_user_info"/>
+            </jxb:schemaBindings>
+        </xs:appinfo>
+    </xs:annotation>
+    <xs:element name="System_user_infoDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="First_name" type="mt:Name"/>
+                <xs:element name="Last_name" type="mt:Name"/>
+                <xs:element name="Username" type="mt:Name"/>
+                <xs:element name="Email" type="mt:Email"/>
+                <xs:element name="Active" type="xs:boolean"/>
+                <xs:element name="Adress" type="mt:AddressDTO"/>
+                <xs:element name="Work_certificate_number" type="mt:Work_certificate_number"/>
+                <xs:element name="Role" type="mt:RoleDTO" maxOccurs="unbounded"/>
+                <xs:element ref="hotel:HotelDTO"/>
+                <xs:element ref="room_reservation:Room_reservationDTO" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="System_user_loginDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Email" type="mt:Email"/>
+                <xs:element name="Password" type="mt:Password"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="System_user_registrationDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="First_name" type="mt:Name"/>
+                <xs:element name="Last_name" type="mt:Name"/>
+                <xs:element name="Username" type="mt:Name"/>
+                <xs:element name="Password" type="mt:Password"/>
+                <xs:element name="Repeat_password" type="mt:Password"/>
+                <xs:element name="Email" type="mt:Email"/>
+                <xs:element name="Active" type="xs:boolean"/>
+                <xs:element name="Adress" type="mt:AddressDTO"/>
+                <xs:element name="Work_certificate_number" type="mt:Work_certificate_number"/>
+                <xs:element name="Role" type="mt:RoleDTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ChatDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element ref="hotel:HotelDTO"/>
+                <xs:element maxOccurs="unbounded" ref="info:MessageDTO">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <jxb:property name="Messages"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MessageDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Caption" type="mt:Description"/>
+                <xs:element name="Text" type="mt:Description"/>
+                <xs:element name="Opened" type="xs:boolean"/>
+                <xs:element name="Date" type="mt:Date"/>
+                <xs:element ref="info:System_user_infoDTO">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <jxb:property name="sender"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="info:System_user_infoDTO">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <jxb:property name="receiver"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="User_reviewDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Rating" type="mt:User_rating"/>
+                <xs:element name="Comment" type="mt:Description"/>
+                <xs:element name="Time_stamp" type="mt:Date"/>
+                <xs:element minOccurs="0" ref="hotel:RoomDTO"/>
+                <xs:element minOccurs="0" ref="info:System_user_infoDTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

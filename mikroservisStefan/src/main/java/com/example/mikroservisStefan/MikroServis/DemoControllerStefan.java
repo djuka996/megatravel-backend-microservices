@@ -13,6 +13,7 @@ import com.example.mikroservisStefan.interfaces.ToLoginInterface;
 import com.example.mikroservisStefan.model.Student;
 import com.example.mikroservisStefan.security.PermissionAccess;
 
+
 @RestController
 @RequestMapping(value = "/stefan")
 public class DemoControllerStefan {
@@ -68,6 +69,8 @@ public class DemoControllerStefan {
 		if(!permissionAccess.canAccessMethod("getAllUsers", request.getHeader("Authorization"))) {
 			return "BACI exception";
 		}
+		
+		//HotelDTO hotel = new HotelDTO();
 		
 		return request.getLocalPort() + "USPEO";
 	}

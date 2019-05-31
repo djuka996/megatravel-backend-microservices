@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:hotel="http://www.megatravel.com/hotel"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+    targetNamespace="http://www.megatravel.com/hotel" elementFormDefault="qualified"
+    vc:minVersion="1.0" vc:maxVersion="1.1" xmlns:mt="http://www.megatravel.com/global_parameters"
+    jxb:version="2.0">
+    <xs:import namespace="http://www.megatravel.com/global_parameters"
+        schemaLocation="global_parameters.xsd"/>
+    <xs:annotation>
+        <xs:appinfo>
+            <jxb:schemaBindings>
+                <jxb:package name="com.megatravel.dto.hotel"/>
+            </jxb:schemaBindings>
+        </xs:appinfo>
+    </xs:annotation>
+    <xs:element name="HotelDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="mt:Id"/>
+                <xs:element name="rating" type="mt:Rating"/>
+                <xs:element name="Address" type="mt:AddressDTO"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="hotel:Extra_optionDTO"/>
+                <xs:element minOccurs="0" ref="hotel:ImageDTO" maxOccurs="unbounded"/>
+                <xs:element minOccurs="1" ref="hotel:Price_listDTO"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="hotel:RoomDTO" >
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <jxb:property name="Rooms"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RoomDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="mt:Id"/>
+                <xs:element name="description" type="mt:Description"/>
+                <xs:element name="cancellationDays">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:maxInclusive value="20"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="cancellationAllowed" type="xs:boolean"/>
+                <xs:element name="capacity">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:maxInclusive value="10"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="numberOfBeds">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:positiveInteger">
+                            <xs:maxInclusive value="10"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Accomodation_typeDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Name" type="mt:Name"/>
+                <xs:element minOccurs="0" ref="hotel:RoomDTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ImageDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="mt:Id"/>
+                <xs:element name="filePath" type="mt:FilePath"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Extra_optionDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Name" type="mt:Name"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Price_listDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Begin_date" type="mt:Date"/>
+                <xs:element name="End_date" type="mt:Date"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded"
+                    ref="hotel:Unit_price_informationDTO"> </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Unit_price_informationDTO">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="mt:Id"/>
+                <xs:element name="Price" type="mt:Currency_priceDTO"/>
+                <xs:element name="Room" type="mt:Id"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
