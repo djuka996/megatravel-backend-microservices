@@ -60,6 +60,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:element>
+            <xs:element name="Id" type="mt:Id"/>
         </xs:sequence>
     </xs:complexType>
     <xs:simpleType name="Rating">
@@ -83,6 +84,7 @@
     </xs:simpleType>
     <xs:complexType name="Currency_priceDTO">
         <xs:sequence>
+            <xs:element name="Id" type="mt:Id"/>
             <xs:element name="Amount" type="mt:Amount_typeDTO"> </xs:element>
         </xs:sequence>
     </xs:complexType>
@@ -102,7 +104,7 @@
     <xs:simpleType name="Date">
         <xs:annotation>
             <xs:appinfo>
-                <jxb:javaType name="java.util.Date" parseMethod="vp.spring.mtb.util.MyDatatypeConverter.parseDate" printMethod="vp.spring.mtb.util.MyDatatypeConverter.printDate"/>
+                <jxb:javaType name="java.util.Date" parseMethod="com.megatravel.util.MyDatatypeConverter.parseDate" printMethod="com.megatravel.util.MyDatatypeConverter.printDate"/>
             </xs:appinfo>
         </xs:annotation>
         <xs:restriction base="xs:dateTime">
@@ -126,16 +128,10 @@
         </xs:restriction>
     </xs:simpleType>
     <xs:complexType name="Amount_typeDTO">
-        <xs:simpleContent>
-            <xs:extension base="mt:Price">
-                <xs:attribute default="$" name="currency">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:pattern value="\p{Sc}"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
-            </xs:extension>
-        </xs:simpleContent>
+        <xs:sequence>
+            <xs:element name="Id" type="mt:Id"/>
+            <xs:element name="Price" type="mt:Price"/>
+            <xs:element name="currency" type="xs:string"/>
+        </xs:sequence>
     </xs:complexType>
 </xs:schema>

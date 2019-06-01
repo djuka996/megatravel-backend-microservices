@@ -10,9 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.megatravel.dto.system_user_info.SystemUserInfoDTO;
+import com.megatravel.model.hotel.Hotel;
+import com.megatravel.model.room_reservation.RoomReservation;
 import com.megatravel.validation.EmailValidation;
 import com.megatravel.validation.StaticData;
 
@@ -46,6 +50,16 @@ public class User {
         inverseJoinColumns = @JoinColumn(
           name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles;
+	
+	@OneToMany(mappedBy = "usersReservation")
+	private Set<RoomReservation> roomReservations;
+	
+	@OneToMany(mappedBy = "usersHotel")
+	private Set<Hotel> hotels;
+	@OneToMany(mappedBy = "sender")
+	private Set<Message> senders;
+	@OneToMany(mappedBy = "receiver")
+	private Set<Message> receivers;
 		
 	public User() {
 		
@@ -58,6 +72,13 @@ public class User {
 		this.password = password;
 		this.salt = salt;
 		this.email = email;
+	}
+
+	public User(SystemUserInfoDTO systemUserInfoDTO) {
+		this.id = systemUserInfoDTO.getId();
+		this.name = systemUserInfoDTO.getFirstName();
+		this.lastName = systemUserInfoDTO.getLastName();
+		this.email = systemUserInfoDTO.getEmail();
 	}
 
 	public Long getId() {
