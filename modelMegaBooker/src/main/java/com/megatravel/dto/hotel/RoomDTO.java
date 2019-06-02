@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.megatravel.model.hotel.Room;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -76,8 +78,21 @@ public class RoomDTO {
     protected boolean cancellationAllowed;
     protected int capacity;
     protected int numberOfBeds;
+    
+    public RoomDTO() {
+    	
+    }
 
-    /**
+    public RoomDTO(Room room) {
+		this.id = room.getId();
+		this.description = room.getDescription();
+		this.cancellationDays = room.getCancellationDays();
+		this.cancellationAllowed = room.isCancellationAllowed();
+		this.capacity = room.getCapacity();
+		this.numberOfBeds = room.getNumberOfBeds();
+    }
+
+	/**
      * Gets the value of the id property.
      * 
      */
