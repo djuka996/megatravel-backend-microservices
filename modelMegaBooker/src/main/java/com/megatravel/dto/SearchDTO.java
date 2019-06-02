@@ -1,9 +1,15 @@
 package com.megatravel.dto;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SearchDTO {
 	private String city;
-	private String beginDate;
-	private String endDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private Date beginDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	private Date endDate;
 	private int numberOfPeople;
 	private boolean advance;
 	private String accomodationtype;
@@ -19,18 +25,6 @@ public class SearchDTO {
 	}
 	public void setCity(String city) {
 		this.city = city;
-	}
-	public String getBeginDate() {
-		return beginDate;
-	}
-	public void setBeginDate(String beginDate) {
-		this.beginDate = beginDate;
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
 	}
 	public int getNumberOfPeople() {
 		return numberOfPeople;
@@ -61,5 +55,20 @@ public class SearchDTO {
 	}
 	public void setAdditionalService(String additionalService) {
 		this.additionalService = additionalService;
+	}
+	public Date getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

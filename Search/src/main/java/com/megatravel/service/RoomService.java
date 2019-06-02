@@ -1,5 +1,6 @@
 package com.megatravel.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class RoomService {
 		}
 	}
 	
-	public List<Room> findAllSearch(String city, String beginDate, String endDate, int numberOfPeople, Pageable pageable) {
+	public List<Room> findAllSearch(String city, Date beginDate, Date endDate, int numberOfPeople, Pageable pageable) {
 		Page<Room> rooms = roomRepository.findResult(city, beginDate, endDate, numberOfPeople, pageable);
 
 		if(rooms.hasContent()) {		
@@ -48,7 +49,7 @@ public class RoomService {
 		}
 	}
 	
-	public List<Room> findAllAdvanceSearch(String city, String beginDate, String endDate, int numberOfPeople, 
+	public List<Room> findAllAdvanceSearch(String city, Date beginDate, Date endDate, int numberOfPeople, 
 			String accomodationtype, double category, String additionalService, Pageable pageable) {
 		Page<Room> rooms = roomRepository.findResultAdvance
 				(city, beginDate, endDate, numberOfPeople, accomodationtype, category, additionalService, pageable);
