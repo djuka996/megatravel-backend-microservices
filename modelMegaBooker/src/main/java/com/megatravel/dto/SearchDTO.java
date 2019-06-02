@@ -15,6 +15,7 @@ public class SearchDTO {
 	private String accomodationtype;
 	private double category;
 	private String additionalService;
+	private double distance;
 	
 	public SearchDTO() {
 		
@@ -70,5 +71,13 @@ public class SearchDTO {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
 	}
 }
