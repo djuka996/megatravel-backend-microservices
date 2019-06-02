@@ -16,31 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `unit_price_information`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `unit_price_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `user` (
+CREATE TABLE `unit_price_information` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(60) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `salt` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `price_id` bigint(20) DEFAULT NULL,
+  `price_list_id` bigint(20) DEFAULT NULL,
+  `room_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKqr6h7nrylorh4i95g3p1jr7hm` (`price_id`),
+  KEY `FKa7u9qafsf1atjg7w9oo31p50q` (`price_list_id`),
+  KEY `FK9i62l0ix6fe4hf7f9i5xasbam` (`room_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `unit_price_information`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(2,'andrija@gmail.com','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw=='),(3,'katarina@gmail.com','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `unit_price_information` WRITE;
+/*!40000 ALTER TABLE `unit_price_information` DISABLE KEYS */;
+/*!40000 ALTER TABLE `unit_price_information` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-02 20:46:59
+-- Dump completed on 2019-06-02 20:47:03

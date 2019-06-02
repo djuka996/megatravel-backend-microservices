@@ -16,31 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `room_reservation`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `room_reservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `user` (
+CREATE TABLE `room_reservation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(60) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `salt` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `begin_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `price` decimal(19,2) DEFAULT NULL,
+  `realised` bit(1) NOT NULL,
+  `room_reservation_id` bigint(20) DEFAULT NULL,
+  `user_review_id` bigint(20) DEFAULT NULL,
+  `users_reservation_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK6dq3w3lmmmg7ju4pnf427quu7` (`room_reservation_id`),
+  KEY `FKtm6wlkvl6xm9xph27afb1r1ku` (`user_review_id`),
+  KEY `FK8cby3h2f54kex06d3octwnau1` (`users_reservation_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `room_reservation`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(2,'andrija@gmail.com','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw=='),(3,'katarina@gmail.com','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `room_reservation` WRITE;
+/*!40000 ALTER TABLE `room_reservation` DISABLE KEYS */;
+INSERT INTO `room_reservation` VALUES (1,'2017-11-15 00:00:00','2017-11-25 00:00:00',500.00,_binary '',1,NULL,NULL),(2,'2017-10-15 00:00:00','2017-11-25 00:00:00',200.00,_binary '',1,NULL,NULL),(3,'2019-10-10 00:00:00','2019-10-20 00:00:00',1500.00,_binary '\0',2,NULL,NULL),(4,'2019-10-10 00:00:00','2019-10-30 00:00:00',2500.00,_binary '\0',3,NULL,NULL),(5,'2019-11-15 00:00:00','2019-11-25 00:00:00',3500.00,_binary '\0',4,NULL,NULL);
+/*!40000 ALTER TABLE `room_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-02 20:46:59
+-- Dump completed on 2019-06-02 20:46:55

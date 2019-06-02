@@ -16,31 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user`
+-- Table structure for table `hotel_extra_option`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `hotel_extra_option`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `user` (
+CREATE TABLE `hotel_extra_option` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(60) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `salt` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `extra_option_id` bigint(20) DEFAULT NULL,
+  `hotel_extra_option_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKi6r1ve186qtv9bx7jnl2j7ulu` (`extra_option_id`),
+  KEY `FKqmpf66lsf48egq3dj053hddl1` (`hotel_extra_option_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `hotel_extra_option`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(2,'andrija@gmail.com','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw=='),(3,'katarina@gmail.com','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `hotel_extra_option` WRITE;
+/*!40000 ALTER TABLE `hotel_extra_option` DISABLE KEYS */;
+INSERT INTO `hotel_extra_option` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,1,2),(6,2,2),(7,3,2),(8,1,3),(9,2,3),(10,3,3),(11,5,3),(12,6,3),(13,5,4),(14,2,4);
+/*!40000 ALTER TABLE `hotel_extra_option` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-02 20:46:59
+-- Dump completed on 2019-06-02 20:46:58
