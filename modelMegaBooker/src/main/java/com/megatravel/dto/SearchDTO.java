@@ -1,6 +1,7 @@
 package com.megatravel.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,8 +15,9 @@ public class SearchDTO {
 	private boolean advance;
 	private String accomodationtype;
 	private double category;
-	private String additionalService;
+	private List<String> additionalService;
 	private double distance;
+	private String orderByValue; //NONE, PRICE, LOCATION, MARK, CATEGORY
 	
 	public SearchDTO() {
 		
@@ -51,12 +53,6 @@ public class SearchDTO {
 	public void setCategory(double category) {
 		this.category = category;
 	}
-	public String getAdditionalService() {
-		return additionalService;
-	}
-	public void setAdditionalService(String additionalService) {
-		this.additionalService = additionalService;
-	}
 	public Date getBeginDate() {
 		return beginDate;
 	}
@@ -79,5 +75,21 @@ public class SearchDTO {
 
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+
+	public List<String> getAdditionalService() {
+		return additionalService;
+	}
+
+	public void setAdditionalService(List<String> additionalService) {
+		this.additionalService = additionalService;
+	}
+
+	public String getOrderByValue() {
+		return orderByValue;
+	}
+
+	public void setOrderByValue(String orderByValue) {
+		this.orderByValue = orderByValue;
 	}
 }

@@ -34,7 +34,7 @@ public class RoomController {
 		if(searchDTO.isAdvance()) {
 			rooms = convertToDTORoomList(roomService.findAllAdvanceSearch(searchDTO.getCity(), 
 					searchDTO.getBeginDate(), searchDTO.getEndDate(), searchDTO.getNumberOfPeople(), 
-					searchDTO.getAccomodationtype(), searchDTO.getCategory(), searchDTO.getAdditionalService(), searchDTO.getDistance(), pageable));
+					searchDTO.getAccomodationtype(), searchDTO.getCategory(), searchDTO.getAdditionalService(), searchDTO.getDistance(), searchDTO.getOrderByValue(), pageable));
 		}
 		else {
 			rooms = convertToDTORoomList(roomService.findAllSearch(searchDTO.getCity(), 

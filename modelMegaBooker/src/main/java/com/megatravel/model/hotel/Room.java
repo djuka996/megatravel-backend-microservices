@@ -41,6 +41,7 @@ public class Room {
     protected AccomodationType accomodationType;
     @ManyToOne()
     protected Hotel roomsHotel;
+    protected double currentlyPrice;
     
     public Room() {
 	}

@@ -22,107 +22,139 @@ public class RoomService {
 
 	@Autowired
 	RoomRepository roomRepository;
-	
+
 	@Autowired
 	AdressRepository adressRepository;
-	
+
 	public final double degreToKilometers = 111.32;
-	
+
 	public List<Room> findAll(Pageable page) {
 		Page<Room> rooms = roomRepository.findAll(page);
 
-		if(rooms.hasContent()) {		
+		if (rooms.hasContent()) {
 			MyLogger.info("findAll RoomService", true, null, null, "All Room returned");
 			return rooms.getContent();
-		}
-		else {
-			MyLogger.error("findAll RoomService", false, null, null, "Error when returning all Room - error: \" + \"Requested page is empty.", null);
+		} else {
+			MyLogger.error("findAll RoomService", false, null, null,
+					"Error when returning all Room - error: \" + \"Requested page is empty.", null);
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested page is empty.");
 		}
 	}
-	
+
 	public List<Room> findAllSearch(String city, Date beginDate, Date endDate, int numberOfPeople, Pageable pageable) {
 		Page<Room> rooms = roomRepository.findResult(city, beginDate, endDate, numberOfPeople, pageable);
 
-		if(rooms.hasContent()) {		
+		if (rooms.hasContent()) {
 			MyLogger.info("findAll findAllSearch", true, null, null, "All Room returned");
 			return rooms.getContent();
-		}
-		else {
-			MyLogger.error("findAll findAllSearch", false, null, null, "Error when returning all Room - error: \" + \"Requested page is empty.", null);
+		} else {
+			MyLogger.error("findAll findAllSearch", false, null, null,
+					"Error when returning all Room - error: \" + \"Requested page is empty.", null);
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested page is empty.");
 		}
 	}
-	
-	public List<Room> findAllAdvanceSearch(String city, Date beginDate, Date endDate, int numberOfPeople, 
-			String accomodationtype, double category, String additionalService, double distance, Pageable pageable) {
-		Page<Room> rooms = roomRepository.findResultAdvance
-				(additionalService, beginDate, endDate, numberOfPeople, accomodationtype, category, pageable);
 
-		if(rooms.hasContent()) {		
-			MyLogger.info("findAll findAllAdvanceSearch", true, null, null, "All Room returned");
-			/*List<Room> retVal = calculateDistanceFromCity(distance, city);
-			
-			rooms.getContent().forEach(room ->{
-				retVal.add(room);
-			});*/
-			
-			if(distance == 0) {
-				distance = degreToKilometers/2;
-			}
-			
-			return calculateDistanceFromCity(rooms.getContent(), distance, city); 
+	public List<Room> findAllAdvanceSearch(String city, Date beginDate, Date endDate, int numberOfPeople,
+			String accomodationtype, double category, List<String> additionalService, double distance,
+			String orderByValue, Pageable pageable) {
+		Page<Room> rooms = null;
+		if (orderByValue.equals("NONE")) 
+		{
+			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
+		} 
+		else if (orderByValue.equals("PRICE")) 
+		{
+			rooms = roomRepository.findResultAdvanceOrderByPrice(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
+		} 
+		else if (orderByValue.equals("LOCATION")) 
+		{
+			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
+		} 
+		else if (orderByValue.equals("MARK")) 
+		{
+			rooms = roomRepository.findResultAdvanceOrderByRating(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
 		}
-		else {
-			MyLogger.error("findAll findAllAdvanceSearch", false, null, null, "Error when returning all Room - error: \" + \"Requested page is empty.", null);
+		else if (orderByValue.equals("CATEGORY")) 
+		{
+			rooms = roomRepository.findResultAdvanceOrderByCategory(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
+		}
+		else 
+		{
+			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
+		}
+		
+
+		if (rooms.hasContent()) 
+		{
+			MyLogger.info("findAll findAllAdvanceSearch", true, null, null, "All Room returned");
+
+			return calculateDistanceFromCity(rooms.getContent(), distance, city);
+		} 
+		else 
+		{
+			MyLogger.error("findAll findAllAdvanceSearch", false, null, null,
+					"Error when returning all Room - error: \" + \"Requested page is empty.", null);
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested page is empty.");
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @param rooms - lista soba
-	 * @param distance - razdaljina na kojoj se smeju nalaziti mesta, tj maksimalno toliko smeju biti udaljene
-	 * @param city - zadato mesto
-	 * @return prefiltriranu listu koja sadrzi samo one sobe koje su unutar zadatog radijusa 
+	 * @param rooms
+	 *            - lista soba
+	 * @param distance
+	 *            - razdaljina na kojoj se smeju nalaziti mesta, tj maksimalno
+	 *            toliko smeju biti udaljene
+	 * @param city
+	 *            - zadato mesto
+	 * @return prefiltriranu listu koja sadrzi samo one sobe koje su unutar zadatog
+	 *         radijusa
 	 */
-	private List<Room> calculateDistanceFromCity(List<Room> rooms, double distance, String city){
+	private List<Room> calculateDistanceFromCity(List<Room> rooms, double distance, String city) {
 		List<Address> addressList = adressRepository.findByCity(city);
-		/*List<Room> rooms = roomRepository.findAll();
-		List<Room> retVal = new ArrayList<>();*/
+		/*
+		 * List<Room> rooms = roomRepository.findAll(); List<Room> retVal = new
+		 * ArrayList<>();
+		 */
 		List<Room> retVal = new ArrayList<>();
-		
-		
-		addressList.forEach(address ->{
+
+		addressList.forEach(address -> {
 			rooms.forEach(room -> {
 				double x = room.getRoomsHotel().getAddress().getCoordinateX();
-				double y = room.getRoomsHotel().getAddress().getCoordinateY();	
-				double calculatedDistance = Math.sqrt(Math.pow(x-address.getCoordinateX(), 2) + Math.pow(y-address.getCoordinateY(), 2));
-				
+				double y = room.getRoomsHotel().getAddress().getCoordinateY();
+				double calculatedDistance = 
+						Math.sqrt(Math.pow(x - address.getCoordinateX(), 2) + Math.pow(y - address.getCoordinateY(), 2));
+
 				System.out.println("izra " + calculatedDistance * degreToKilometers);
 				System.out.println("dist " + distance);
-				
-				
-				if(calculatedDistance * degreToKilometers <= distance) {
-					if(doesNotExistInList(retVal, room)) {
+
+				if (calculatedDistance * degreToKilometers <= distance) {
+					if (doesNotExistInList(retVal, room)) {
 						retVal.add(room);
 					}
-					
-					return; //equals continue 
+
+					return; // equals continue
 				}
 			});
 		});
-		
+
 		return retVal;
 	}
-	
+
 	private boolean doesNotExistInList(List<Room> rooms, Room toAddRoom) {
 		for (Room room : rooms) {
-			if(toAddRoom.getId().equals(room.getId())) {
+			if (toAddRoom.getId().equals(room.getId())) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
+
 }
