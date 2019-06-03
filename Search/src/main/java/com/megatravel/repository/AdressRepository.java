@@ -13,4 +13,5 @@ public interface AdressRepository extends JpaRepository<Address, Long> {
 	
 	@Query("SELECT a FROM Address a WHERE LOWER(a.city) LIKE LOWER(CONCAT('%',?1,'%'))")
 	public List<Address> findByCity(String city);
+	
 }

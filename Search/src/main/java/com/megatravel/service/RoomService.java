@@ -3,6 +3,7 @@ package com.megatravel.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,19 @@ public class RoomService {
 			MyLogger.error("findAll findAllSearch", false, null, null,
 					"Error when returning all Room - error: \" + \"Requested page is empty.", null);
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested page is empty.");
+		}
+	}
+	
+	public Room findById(Long id) {
+		Optional<Room> room = roomRepository.findById(id);
+
+		if (room.isPresent()) {
+			MyLogger.info("findById RoomService", true, null, null, "Room returned");
+			return room.get();
+		} else {
+			MyLogger.error("findById RoomService", false, null, null,
+					"Error when returning findById - error: \" + \"Requested room does not exist.", null);
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room does not exist.");
 		}
 	}
 

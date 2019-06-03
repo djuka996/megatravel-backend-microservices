@@ -15,4 +15,8 @@ public class AdressService {
 		return adressRepository.findByCity(city);
 	}
 	
+	public List<Address> findAll() {
+		return adressRepository.findAll();
+	}
+	
 }

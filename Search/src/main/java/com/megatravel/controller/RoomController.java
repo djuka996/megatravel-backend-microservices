@@ -1,6 +1,7 @@
 package com.megatravel.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.dto.SearchDTO;
 import com.megatravel.dto.hotel.RoomDTO;
+import com.megatravel.model.hotel.PriceList;
 import com.megatravel.model.hotel.Room;
+import com.megatravel.model.hotel.UnitPriceInformation;
 import com.megatravel.service.RoomService;
 
 @RestController
@@ -51,9 +54,31 @@ public class RoomController {
 	private List<RoomDTO> convertToDTORoomList(List<Room> rooms) {
 		List<RoomDTO> retVal = new ArrayList<>();
 		rooms.forEach(room -> {
+			room.setCurrentlyPrice(currentlyPriceForRoom(room));
 			retVal.add(new RoomDTO(room));
 		});
 		
 		return retVal;
+	}
+	
+	private double currentlyPriceForRoom(Room room) {
+		Date date = new Date();
+		PriceList maxPriceList = room.getRoomsHotel().getPriceList().iterator().next();
+		for (PriceList priceList : room.getRoomsHotel().getPriceList()) {
+			if(priceList.getBeginDate().before(date) && priceList.getBeginDate().after(maxPriceList.getBeginDate())) 
+			{
+				maxPriceList = priceList;
+			}
+		}
+		
+		double currentPrice = 0;
+		
+		for (UnitPriceInformation unitPrice: maxPriceList.getUnitPriceInformation()) {
+			if(unitPrice.getId().equals(room.getId())) {
+				currentPrice = unitPrice.getPrice().getAmount().getPrice().doubleValue();
+			}
+		}
+		
+		return currentPrice;
 	}
 }

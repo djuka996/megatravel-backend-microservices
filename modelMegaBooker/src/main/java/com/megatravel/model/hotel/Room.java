@@ -5,7 +5,6 @@
 // Generated on: 2019.04.21 at 06:51:34 PM CEST 
 //
 
-
 package com.megatravel.model.hotel;
 
 import java.util.Set;
@@ -25,34 +24,35 @@ public class Room {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-    protected String description;
-    protected int cancellationDays;
-    protected boolean cancellationAllowed;
-    protected int capacity;
-    protected int numberOfBeds;
-    @OneToMany(mappedBy = "room")
-    protected Set<UnitPriceInformation> unitPriceInformations;
-    @OneToMany(mappedBy = "roomImage")
-    protected Set<Image> images;
-    @OneToMany(mappedBy = "roomReservation")
-    protected Set<RoomReservation> roomReservations;
-    @ManyToOne()
-    protected AccomodationType accomodationType;
-    @ManyToOne()
-    protected Hotel roomsHotel;
-    protected double currentlyPrice;
-    
-    public Room() {
+	protected Long id;
+	protected String description;
+	protected int cancellationDays;
+	protected boolean cancellationAllowed;
+	protected int capacity;
+	protected int numberOfBeds;
+	@OneToMany(mappedBy = "room")
+	protected Set<UnitPriceInformation> unitPriceInformations;
+	@OneToMany(mappedBy = "roomImage")
+	protected Set<Image> images;
+	@OneToMany(mappedBy = "roomReservation")
+	protected Set<RoomReservation> roomReservations;
+	@ManyToOne()
+	protected AccomodationType accomodationType;
+	@ManyToOne()
+	protected Hotel roomsHotel;
+	protected double currentlyPrice;
+
+	public Room() {
 	}
-    
-    public Room(RoomDTO roomDTO) {
-    	this.id = roomDTO.getId();
+
+	public Room(RoomDTO roomDTO) {
+		this.id = roomDTO.getId();
 		this.description = roomDTO.getDescription();
 		this.cancellationDays = roomDTO.getCancellationDays();
 		this.cancellationAllowed = roomDTO.isCancellationAllowed();
 		this.capacity = roomDTO.getCapacity();
 		this.numberOfBeds = roomDTO.getNumberOfBeds();
+		this.currentlyPrice = roomDTO.getCurrentlyPrice();
 	}
 
 	public Room(Long id, String description, int cancellationDays, boolean cancellationAllowed, int capacity,
@@ -154,5 +154,13 @@ public class Room {
 
 	public void setRoomsHotel(Hotel roomsHotel) {
 		this.roomsHotel = roomsHotel;
+	}
+
+	public double getCurrentlyPrice() {
+		return currentlyPrice;
+	}
+
+	public void setCurrentlyPrice(double currentlyPrice) {
+		this.currentlyPrice = currentlyPrice;
 	}
 }
