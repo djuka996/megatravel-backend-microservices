@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		//TODO 1: ono cemu neregistrovani korisnik sme da pristupi
 		http.authorizeRequests().antMatchers("/*", "/users/email/*", 
-				"/proba/test", "/users/login", "/users/signup").permitAll()
+				"/proba/test", "/users/login", "/users/signup", "/rooms/search").permitAll()
 		.anyRequest()
 		.authenticated();
 
