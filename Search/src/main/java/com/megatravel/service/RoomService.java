@@ -57,7 +57,7 @@ public class RoomService {
 	public List<Room> findAllAdvanceSearch(String city, Date beginDate, Date endDate, int numberOfPeople, 
 			String accomodationtype, double category, String additionalService, double distance, Pageable pageable) {
 		Page<Room> rooms = roomRepository.findResultAdvance
-				(city, beginDate, endDate, numberOfPeople, accomodationtype, category, additionalService, pageable);
+				(additionalService, beginDate, endDate, numberOfPeople, accomodationtype, category, pageable);
 
 		if(rooms.hasContent()) {		
 			MyLogger.info("findAll findAllAdvanceSearch", true, null, null, "All Room returned");
@@ -66,6 +66,10 @@ public class RoomService {
 			rooms.getContent().forEach(room ->{
 				retVal.add(room);
 			});*/
+			
+			if(distance == 0) {
+				distance = degreToKilometers/2;
+			}
 			
 			return calculateDistanceFromCity(rooms.getContent(), distance, city); 
 		}
@@ -78,29 +82,47 @@ public class RoomService {
 	/**
 	 * 
 	 * @param rooms - lista soba
-	 * @param distance - razdaljina koja ne sme biti manja od zadatog mesta
+	 * @param distance - razdaljina na kojoj se smeju nalaziti mesta, tj maksimalno toliko smeju biti udaljene
 	 * @param city - zadato mesto
 	 * @return prefiltriranu listu koja sadrzi samo one sobe koje su unutar zadatog radijusa 
 	 */
 	private List<Room> calculateDistanceFromCity(List<Room> rooms, double distance, String city){
-		Address address = adressRepository.findByCity(city);
+		List<Address> addressList = adressRepository.findByCity(city);
 		/*List<Room> rooms = roomRepository.findAll();
 		List<Room> retVal = new ArrayList<>();*/
 		List<Room> retVal = new ArrayList<>();
+		
+		
+		addressList.forEach(address ->{
+			rooms.forEach(room -> {
+				double x = room.getRoomsHotel().getAddress().getCoordinateX();
+				double y = room.getRoomsHotel().getAddress().getCoordinateY();	
+				double calculatedDistance = Math.sqrt(Math.pow(x-address.getCoordinateX(), 2) + Math.pow(y-address.getCoordinateY(), 2));
 				
-		rooms.forEach(room -> {
-			double x = room.getRoomsHotel().getAddress().getCoordinateX();
-			double y = room.getRoomsHotel().getAddress().getCoordinateY();	
-			double calculatedDistance = Math.sqrt(Math.pow(x-address.getCoordinateX(), 2) + Math.pow(y-address.getCoordinateY(), 2));
-			
-			System.out.println("izra " + calculatedDistance * degreToKilometers);
-			System.out.println("dist " + distance);
-			
-			if(calculatedDistance * degreToKilometers <= distance) {
-				retVal.add(room);
-			}
+				System.out.println("izra " + calculatedDistance * degreToKilometers);
+				System.out.println("dist " + distance);
+				
+				
+				if(calculatedDistance * degreToKilometers <= distance) {
+					if(doesNotExistInList(retVal, room)) {
+						retVal.add(room);
+					}
+					
+					return; //equals continue 
+				}
+			});
 		});
 		
 		return retVal;
+	}
+	
+	private boolean doesNotExistInList(List<Room> rooms, Room toAddRoom) {
+		for (Room room : rooms) {
+			if(toAddRoom.getId().equals(room.getId())) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }

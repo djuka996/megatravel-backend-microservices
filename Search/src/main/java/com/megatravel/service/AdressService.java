@@ -1,5 +1,7 @@
 package com.megatravel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.megatravel.model.global_parameters.Address;
@@ -9,7 +11,7 @@ public class AdressService {
 	@Autowired
 	AdressRepository adressRepository;
 	
-	public Address findByCity(String city) {
+	public List<Address> findByCity(String city) {
 		return adressRepository.findByCity(city);
 	}
 	
