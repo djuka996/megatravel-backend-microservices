@@ -23,13 +23,6 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="hotel:Extra_optionDTO"/>
                 <xs:element minOccurs="0" ref="hotel:ImageDTO" maxOccurs="unbounded"/>
                 <xs:element minOccurs="0" ref="hotel:Price_listDTO" maxOccurs="unbounded"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="hotel:RoomDTO">
-                    <xs:annotation>
-                        <xs:appinfo>
-                            <jxb:property name="Rooms"/>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -60,6 +53,8 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:element>
+                <xs:element name="currentlyPrice" type="xs:double"/>
+                <xs:element ref="hotel:HotelDTO"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

@@ -54,7 +54,7 @@ public class RoomController {
 	private List<RoomDTO> convertToDTORoomList(List<Room> rooms) {
 		List<RoomDTO> retVal = new ArrayList<>();
 		rooms.forEach(room -> {
-			room.setCurrentlyPrice(currentlyPriceForRoom(room));
+			//room.setCurrentlyPrice(currentlyPriceForRoom(room));
 			retVal.add(new RoomDTO(room));
 		});
 		

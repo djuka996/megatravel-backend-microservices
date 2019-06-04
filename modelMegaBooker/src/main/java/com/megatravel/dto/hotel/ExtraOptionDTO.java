@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.megatravel.model.hotel.ExtraOption;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -47,8 +49,17 @@ public class ExtraOptionDTO {
     protected long id;
     @XmlElement(name = "Name", required = true)
     protected String name;
+    
+    public ExtraOptionDTO() {
+    	
+    }
 
-    /**
+    public ExtraOptionDTO(ExtraOption option) {
+    	this.id = option.getId();
+    	this.name = option.getName();
+	}
+
+	/**
      * Gets the value of the id property.
      * 
      */

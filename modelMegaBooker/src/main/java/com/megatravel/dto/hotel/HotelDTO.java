@@ -10,12 +10,15 @@ package com.megatravel.dto.hotel;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
 import com.megatravel.dto.global_parameters.AddressDTO;
+import com.megatravel.model.hotel.Hotel;
 
 
 /**
@@ -66,8 +69,16 @@ public class HotelDTO {
     protected List<ImageDTO> imageDTO;
     @XmlElement(name = "Price_listDTO")
     protected List<PriceListDTO> priceListDTO;
-    @XmlElement(name = "RoomDTO")
-    protected List<RoomDTO> rooms;
+    
+    public HotelDTO() {
+    	
+    }
+    
+    public HotelDTO(Hotel hotel) {
+    	this.id = hotel.getId();
+    	this.rating = hotel.getRating();
+    	this.address = hotel.getAddress() != null ? new AddressDTO(hotel.getAddress()) : null;
+    }
 
     /**
      * Gets the value of the id property.
@@ -210,35 +221,6 @@ public class HotelDTO {
             priceListDTO = new ArrayList<PriceListDTO>();
         }
         return this.priceListDTO;
-    }
-
-    /**
-     * Gets the value of the rooms property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the rooms property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRooms().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RoomDTO }
-     * 
-     * 
-     */
-    public List<RoomDTO> getRooms() {
-        if (rooms == null) {
-            rooms = new ArrayList<RoomDTO>();
-        }
-        return this.rooms;
     }
 
 }

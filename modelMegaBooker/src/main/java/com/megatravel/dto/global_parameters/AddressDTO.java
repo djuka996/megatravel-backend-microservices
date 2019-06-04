@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.megatravel.model.global_parameters.Address;
+
 
 /**
  * <p>Java class for AddressDTO complex type.
@@ -79,6 +81,20 @@ public class AddressDTO {
     protected double coordinateY;
     @XmlElement(name = "Id")
     protected long id;
+    
+    public AddressDTO() {
+    	
+    }
+    
+    public AddressDTO(Address address) {
+    	this.id = address.getId();
+    	this.country = address.getCountry();
+    	this.city = address.getCity();
+    	this.street = address.getStreet();
+    	this.streetNumber = address.getStreetNumber();
+    	this.coordinateX = address.getCoordinateX();
+    	this.coordinateY = address.getCoordinateY();
+    }
 
     /**
      * Gets the value of the country property.

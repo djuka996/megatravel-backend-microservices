@@ -81,6 +81,8 @@ public class RoomDTO {
     protected int capacity;
     protected int numberOfBeds;
     protected double currentlyPrice;
+    @XmlElement(name = "HotelDTO", required = true)
+    protected HotelDTO hotelDTO;
     
     public RoomDTO(Room room) {
 		this.id = room.getId();
@@ -90,6 +92,7 @@ public class RoomDTO {
 		this.capacity = room.getCapacity();
 		this.numberOfBeds = room.getNumberOfBeds();
 		this.currentlyPrice = room.getCurrentlyPrice();
+		this.hotelDTO = room.getRoomsHotel() != null ? new HotelDTO(room.getRoomsHotel()) : null;
     }
     
     public RoomDTO() {
@@ -214,6 +217,22 @@ public class RoomDTO {
      */
     public void setCurrentlyPrice(double value) {
         this.currentlyPrice = value;
+    }
+    
+    public HotelDTO getHotelDTO() {
+        return hotelDTO;
+    }
+
+    /**
+     * Sets the value of the hotelDTO property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link HotelDTO }
+     *     
+     */
+    public void setHotelDTO(HotelDTO value) {
+        this.hotelDTO = value;
     }
 
 }

@@ -10,11 +10,14 @@ package com.megatravel.dto.hotel;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+
+import com.megatravel.model.hotel.AccomodationType;
 
 
 /**
@@ -53,6 +56,15 @@ public class AccomodationTypeDTO {
     protected String name;
     @XmlElement(name = "RoomDTO")
     protected List<RoomDTO> roomDTO;
+    
+    public AccomodationTypeDTO() {
+    	
+    }
+    
+    public AccomodationTypeDTO(AccomodationType accomodationType) {
+    	this.id = accomodationType.getId();
+    	this.name = accomodationType.getName();
+    }
 
     /**
      * Gets the value of the id property.
