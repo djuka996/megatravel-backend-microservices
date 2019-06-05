@@ -62,7 +62,7 @@ public class RoomController {
 	}
 	
 	private double currentlyPriceForRoom(Room room) {
-		if(room.getRoomsHotel().getPriceList() != null) {
+		if(room.getRoomsHotel().getPriceList() != null && !room.getRoomsHotel().getPriceList().isEmpty()) {
 			Date date = new Date();
 			PriceList maxPriceList = room.getRoomsHotel().getPriceList().iterator().next();
 			for (PriceList priceList : room.getRoomsHotel().getPriceList()) {
