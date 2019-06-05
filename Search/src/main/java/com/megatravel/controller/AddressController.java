@@ -18,7 +18,7 @@ import com.megatravel.model.global_parameters.Address;
 import com.megatravel.service.AddressService;
 
 @RestController
-//@CrossOrigin
+@CrossOrigin
 @RequestMapping(value = "/addresses")
 public class AddressController {
 	
