@@ -18,7 +18,7 @@ import com.megatravel.model.hotel.ExtraOption;
 import com.megatravel.service.ExtraOptionService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping(value = "/extraoptions")
 public class ExtraOptionController {
 	@Autowired

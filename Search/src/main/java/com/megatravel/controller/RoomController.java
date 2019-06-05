@@ -24,7 +24,7 @@ import com.megatravel.model.hotel.UnitPriceInformation;
 import com.megatravel.service.RoomService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping(value = "/rooms")
 public class RoomController {
 

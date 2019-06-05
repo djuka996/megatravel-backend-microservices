@@ -18,7 +18,7 @@ import com.megatravel.model.hotel.AccomodationType;
 import com.megatravel.service.AccomodationTypeService;
 
 @RestController
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping(value = "/accomodations")
 public class AccomodationTypeController {
 	
