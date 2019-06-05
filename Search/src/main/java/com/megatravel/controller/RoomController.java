@@ -54,7 +54,7 @@ public class RoomController {
 	private List<RoomDTO> convertToDTORoomList(List<Room> rooms) {
 		List<RoomDTO> retVal = new ArrayList<>();
 		rooms.forEach(room -> {
-			//room.setCurrentlyPrice(currentlyPriceForRoom(room));
+			room.setCurrentlyPrice(currentlyPriceForRoom(room));
 			retVal.add(new RoomDTO(room));
 		});
 		
@@ -62,23 +62,28 @@ public class RoomController {
 	}
 	
 	private double currentlyPriceForRoom(Room room) {
-		Date date = new Date();
-		PriceList maxPriceList = room.getRoomsHotel().getPriceList().iterator().next();
-		for (PriceList priceList : room.getRoomsHotel().getPriceList()) {
-			if(priceList.getBeginDate().before(date) && priceList.getBeginDate().after(maxPriceList.getBeginDate())) 
-			{
-				maxPriceList = priceList;
+		if(room.getRoomsHotel().getPriceList() != null) {
+			Date date = new Date();
+			PriceList maxPriceList = room.getRoomsHotel().getPriceList().iterator().next();
+			for (PriceList priceList : room.getRoomsHotel().getPriceList()) {
+				if(priceList.getBeginDate().before(date) && priceList.getBeginDate().after(maxPriceList.getBeginDate())) 
+				{
+					maxPriceList = priceList;
+				}
 			}
-		}
-		
-		double currentPrice = 0;
-		
-		for (UnitPriceInformation unitPrice: maxPriceList.getUnitPriceInformation()) {
-			if(unitPrice.getId().equals(room.getId())) {
-				currentPrice = unitPrice.getPrice().getAmount().getPrice().doubleValue();
+			
+			double currentPrice = 0;
+			
+			for (UnitPriceInformation unitPrice: maxPriceList.getUnitPriceInformation()) {
+				if(unitPrice.getId().equals(room.getId())) {
+					currentPrice = unitPrice.getPrice().getAmount().getPrice().doubleValue();
+				}
 			}
+			
+			return currentPrice;
 		}
-		
-		return currentPrice;
+	else {
+		return 0;
+		}
 	}
 }
