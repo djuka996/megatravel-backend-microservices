@@ -26,7 +26,7 @@ public class AddressController {
 	private AddressService addressService;
 	
 	@RequestMapping( method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<AddressDTO>> getAllAccomodations() {
+	public ResponseEntity<List<AddressDTO>> getAllImages() {
 		List<AddressDTO> addresses = convertToDTOAddresses(addressService.findAll());
 
 		HttpHeaders headers = new HttpHeaders();

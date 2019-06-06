@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.megatravel.model.hotel.Image;
+
 
 /**
  * <p>Java class for anonymous complex type.
@@ -46,8 +48,17 @@ public class ImageDTO {
     protected long id;
     @XmlElement(required = true)
     protected String filePath;
+    
+    public ImageDTO() {
+    	
+    }
 
-    /**
+    public ImageDTO(Image image) {
+		this.id = image.getId();
+		this.filePath = image.getFilePath();
+	}
+
+	/**
      * Gets the value of the id property.
      * 
      */

@@ -1,4 +1,4 @@
-package com.megatravel.front;
+package com.megatravel;
 
 import java.util.Collections;
 import java.util.Map;
