@@ -27,6 +27,7 @@
     <module>front</module>
     <module>demo-soap-and-rest</module>
     <module>modelMegaBooker</module>
+    <module>MessagingService</module>
     <module>Search</module>
   </modules>
   <build>
