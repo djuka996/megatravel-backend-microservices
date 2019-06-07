@@ -4,7 +4,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import com.megatravel.dto.system_user_info.SystemUserRegistrationDTO;
+import com.megatravel.models.SystemUserRegistrationDTO;
 import com.megatravel.models.SystemUserLoginDTO;
 
 @WebService
