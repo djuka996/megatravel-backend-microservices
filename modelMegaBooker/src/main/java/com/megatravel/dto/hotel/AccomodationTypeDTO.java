@@ -54,8 +54,6 @@ public class AccomodationTypeDTO {
     protected long id;
     @XmlElement(name = "Name", required = true)
     protected String name;
-    @XmlElement(name = "RoomDTO")
-    protected List<RoomDTO> roomDTO;
     
     public AccomodationTypeDTO() {
     	
@@ -104,35 +102,6 @@ public class AccomodationTypeDTO {
      */
     public void setName(String value) {
         this.name = value;
-    }
-
-    /**
-     * Gets the value of the roomDTO property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the roomDTO property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRoomDTO().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RoomDTO }
-     * 
-     * 
-     */
-    public List<RoomDTO> getRoomDTO() {
-        if (roomDTO == null) {
-            roomDTO = new ArrayList<RoomDTO>();
-        }
-        return this.roomDTO;
     }
 
 }
