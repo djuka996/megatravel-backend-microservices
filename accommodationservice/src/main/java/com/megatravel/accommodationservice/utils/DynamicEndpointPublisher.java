@@ -1,4 +1,4 @@
-package com.megatravel.demosoapandrest.utils;
+package com.megatravel.accommodationservice.utils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,7 +10,12 @@ import javax.xml.ws.Endpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.megatravel.demosoapandrest.services.VehicleServiceImpl;
+import com.megatravel.accommodationservice.webservices.AccommodationTypeServiceImpl;
+import com.megatravel.accommodationservice.webservices.AddressServiceImpl;
+import com.megatravel.accommodationservice.webservices.ExtraOptionServiceImpl;
+import com.megatravel.accommodationservice.webservices.HotelServiceImpl;
+import com.megatravel.accommodationservice.webservices.ReservationServiceImpl;
+import com.megatravel.accommodationservice.webservices.RoomServiceImpl;
 import com.netflix.appinfo.ApplicationInfoManager;
 
 @Component
@@ -24,11 +29,15 @@ public class DynamicEndpointPublisher {
 	@PostConstruct
 	public void init() {
 		Map<String, String> map = applicationInfoManager.getInfo().getMetadata();
-		System.out.println("Port sada je: " + applicationInfoManager.getInfo().getPort());
 		applicationInfoManager.refreshDataCenterInfoIfRequired();
 		int port = this.getEmptyPort();
 		map.put(SOAP_PORT, Integer.toString(port));
-		publishEndpoint(port, VehicleServiceImpl.ENDPOINT, VehicleServiceImpl.class);
+		publishEndpoint(port, AccommodationTypeServiceImpl.ENDPOINT, AccommodationTypeServiceImpl.class);
+		publishEndpoint(port, AddressServiceImpl.ENDPOINT, AddressServiceImpl.class);
+		publishEndpoint(port, ExtraOptionServiceImpl.ENDPOINT, ExtraOptionServiceImpl.class);
+		publishEndpoint(port, HotelServiceImpl.ENDPOINT, HotelServiceImpl.class);
+		publishEndpoint(port, ReservationServiceImpl.ENDPOINT, ReservationServiceImpl.class);
+		publishEndpoint(port, RoomServiceImpl.ENDPOINT, RoomServiceImpl.class);
 	}
 	
 	private int getEmptyPort() {

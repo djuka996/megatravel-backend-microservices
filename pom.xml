@@ -29,6 +29,7 @@
     <module>modelMegaBooker</module>
     <module>MessagingService</module>
     <module>Search</module>
+    <module>accommodationservice</module>
   </modules>
   <build>
     <plugins>
