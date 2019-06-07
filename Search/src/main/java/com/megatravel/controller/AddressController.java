@@ -25,8 +25,9 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 	
+	//vide svi
 	@RequestMapping( method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<AddressDTO>> getAllImages() {
+	public ResponseEntity<List<AddressDTO>> getAllAdresses() {
 		List<AddressDTO> addresses = convertToDTOAddresses(addressService.findAll());
 
 		HttpHeaders headers = new HttpHeaders();

@@ -31,6 +31,7 @@ public class RoomController {
 	@Autowired
 	private RoomService roomService;
 
+	//vide svi
 	@RequestMapping(value = "/search", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<RoomDTO>> getAllRoomsSearch(@RequestBody SearchDTO searchDTO, Pageable pageable) {
 		List<RoomDTO> rooms = new ArrayList<>();

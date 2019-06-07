@@ -55,6 +55,7 @@ public class ImageController {
 		return null;
 	}
 	
+	//vide svi
 	@RequestMapping( method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<ImageDTO>> getAllImages() {
 		List<ImageDTO> images = convertToDTOImages(imageService.findAll());
