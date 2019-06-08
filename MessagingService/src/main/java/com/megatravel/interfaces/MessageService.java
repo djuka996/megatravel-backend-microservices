@@ -3,6 +3,7 @@ package com.megatravel.interfaces;
 import java.util.List;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.megatravel.dto.system_user_info.ChatDTO;
@@ -13,19 +14,19 @@ import com.megatravel.dto.system_user_info.MessageDTO;
 public interface MessageService {
 
 	@WebMethod
-	List<ChatDTO> getInbox(Long userId); 
+	List<ChatDTO> getInbox(@WebParam(name="UserId") Long userId); 
 	
 	@WebMethod
-	ChatDTO getChat(Long userId,Long chatId); 
+	ChatDTO getChat(@WebParam(name="UserId") Long userId, @WebParam(name="ChatId") Long chatId); 
 	
 	@WebMethod
-	List<MessageDTO> getMessages(Long userId); 
+	List<MessageDTO> getMessages(@WebParam(name="UserId")Long userId); 
 	
 	@WebMethod
-	Boolean sendMessage(Long userId,Long chatId,String message);
+	Boolean sendMessage(@WebParam(name="ChatId")Long chatId,@WebParam(name="MessageDTO")MessageDTO message);
 	
 	@WebMethod
-	Boolean markRead(Long UserId,Long chatId);
+	Boolean markRead(@WebParam(name="UserId")Long UserId,@WebParam(name="ChatId")Long chatId);
 		
 	
 }

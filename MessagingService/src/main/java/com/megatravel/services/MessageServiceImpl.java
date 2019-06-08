@@ -98,7 +98,7 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	@WebMethod
-	public Boolean sendMessage(Long userId, Long chatId, String message) {
+	public Boolean sendMessage(Long chatId, MessageDTO message) {
 		// TODO Auto-generated method stub
 		return true;
 	}
