@@ -36,7 +36,7 @@ public class MessageController {
 		return new ResponseEntity<ChatDTO>(this.messageServiceImpl.getChat(id,chatId), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@RequestMapping(value ="/{id}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("id") Long chatId) {
 		return new ResponseEntity<Boolean>(messageServiceImpl.sendMessage(messageDTO.getSender().getId(), chatId,  messageDTO.getText()), HttpStatus.CREATED);
 	}
