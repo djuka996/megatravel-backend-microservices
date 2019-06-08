@@ -1,4 +1,4 @@
-package com.megatravel.MessagingService.interfaces;
+package com.megatravel.interfaces;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ public interface MessageService {
 
 	@WebMethod
 	List<Boolean> getInbox(Long userId); //lista ChatDTO
+	
+	@WebMethod
+	List<Boolean> getChat(Long userId,Long chatId); //lista MessageDTO 
 	
 	@WebMethod
 	List<Boolean> getMessages(Long userId); //lista MessageDTO 

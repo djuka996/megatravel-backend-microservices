@@ -1,4 +1,4 @@
-package com.megatravel.MessagingService.utils;
+package com.megatravel.utils;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,8 +10,7 @@ import javax.xml.ws.Endpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-import com.megatravel.MessagingService.services.MessageServiceImpl;
+import com.megatravel.services.MessageServiceImpl;
 import com.netflix.appinfo.ApplicationInfoManager;
 
 @Component

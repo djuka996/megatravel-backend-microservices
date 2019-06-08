@@ -1,4 +1,4 @@
-package com.megatravel.MessagingService.services;
+package com.megatravel.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostP
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.megatravel.MessagingService.configurations.WebApplicationContextLocator;
-import com.megatravel.MessagingService.interfaces.MessageService;
+import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.interfaces.MessageService;
 
 
 @WebService(endpointInterface = "com.megatravel.MessagingService.interfaces.MessageService")
@@ -42,6 +42,12 @@ public class MessageServiceImpl implements MessageService {
 		return returning;
 	}
 
+	@Override
+	public List<Boolean> getChat(Long userId, Long chatId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	@WebMethod
 	public List<Boolean> getMessages(Long userId) {
