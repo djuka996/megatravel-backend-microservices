@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlElement;
 
 import com.megatravel.accommodationservice.dtos.HotelDTO;
 
@@ -14,15 +15,15 @@ public interface HotelServiceInterface {
 	List<HotelDTO> getAllHotels();
 	
 	@WebMethod
-	HotelDTO getHotel(Long id);
+	HotelDTO getHotel(@XmlElement(name = "hotel-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
-	HotelDTO createHotel(HotelDTO hotel);
+	HotelDTO createHotel(@XmlElement(name = "hotel", nillable = false, required = true) HotelDTO hotel);
 	
 	@WebMethod
-	HotelDTO updateHotel(HotelDTO hotel);
+	HotelDTO updateHotel(@XmlElement(name = "hotel", nillable = false, required = true) HotelDTO hotel);
 	
 	@WebMethod
-	boolean removeHotel(Long id);
+	boolean removeHotel(@XmlElement(name = "hotel-id", nillable = false, required = true) Long id);
 	
 }

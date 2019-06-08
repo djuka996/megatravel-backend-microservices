@@ -2,6 +2,7 @@ package com.megatravel.accommodationservice.interfaces;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlElement;
 
 import com.megatravel.accommodationservice.dtos.AccommodationTypeDTO;
 
@@ -9,15 +10,15 @@ import com.megatravel.accommodationservice.dtos.AccommodationTypeDTO;
 public interface AccommodationTypeServiceInterface {
 
 	@WebMethod
-	AccommodationTypeDTO getRoomType(Long id);
+	AccommodationTypeDTO getRoomType(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
-	AccommodationTypeDTO createAccommodationType(AccommodationTypeDTO accommodationType);
+	AccommodationTypeDTO createAccommodationType(@XmlElement(name = "new-type", nillable = false, required = true) AccommodationTypeDTO accommodationType);
 	
 	@WebMethod
-	AccommodationTypeDTO updateAccommodationType(AccommodationTypeDTO accommodationType);
+	AccommodationTypeDTO updateAccommodationType(@XmlElement(name = "new-type", nillable = false, required = true) AccommodationTypeDTO accommodationType);
 	
 	@WebMethod
-	boolean removeAccommodationType(Long id);
+	boolean removeAccommodationType(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
 	
 }
