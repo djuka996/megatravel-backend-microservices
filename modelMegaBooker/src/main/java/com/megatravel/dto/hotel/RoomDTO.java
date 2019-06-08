@@ -68,7 +68,9 @@ import com.megatravel.model.hotel.Room;
     "cancellationAllowed",
     "capacity",
     "numberOfBeds",
-    "currentlyPrice"
+    "currentlyPrice",
+    "hotelDTO",
+    "accomodationTypeDTO"
 })
 @XmlRootElement(name = "RoomDTO")
 public class RoomDTO {

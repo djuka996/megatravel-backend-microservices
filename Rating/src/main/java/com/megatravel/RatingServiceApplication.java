@@ -1,4 +1,4 @@
-package com.megatravel.MessagingService;
+package com.megatravel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,11 +9,11 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-@ComponentScan(basePackages = {"com.megatravel.MessagingService"})
-public class MessagingServiceApplication {
+@ComponentScan(basePackages = {"com.megatravel"})
+public class RatingServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MessagingServiceApplication.class, args);
+		SpringApplication.run(RatingServiceApplication.class, args);
 	}
 
 }

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Rating
+  profiles:
+    active:
+      default
+  cloud:
+    config:
+      enabled: true

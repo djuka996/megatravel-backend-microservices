@@ -53,8 +53,7 @@ import com.megatravel.model.hotel.Hotel;
     "address",
     "extraOptionDTO",
     "imageDTO",
-    "priceListDTO",
-    "rooms"
+    "priceListDTO"
 })
 @XmlRootElement(name = "HotelDTO")
 public class HotelDTO {

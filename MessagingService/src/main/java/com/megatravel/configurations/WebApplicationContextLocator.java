@@ -1,4 +1,4 @@
-package com.megatravel.MessagingService.configurations;
+package com.megatravel.configurations;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

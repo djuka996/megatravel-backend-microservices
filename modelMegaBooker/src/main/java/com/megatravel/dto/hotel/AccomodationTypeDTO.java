@@ -44,8 +44,7 @@ import com.megatravel.model.hotel.AccomodationType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
-    "name",
-    "roomDTO"
+    "name"
 })
 @XmlRootElement(name = "Accomodation_typeDTO")
 public class AccomodationTypeDTO {
