@@ -25,6 +25,7 @@ public class AccomodationTypeController {
 	@Autowired
 	private AccomodationTypeService accomodationTypeService;
 	
+	//vide svi
 	@RequestMapping( method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<AccomodationTypeDTO>> getAllAccomodations() {
 		List<AccomodationTypeDTO> accomodations = convertToDTOAccomodations(accomodationTypeService.findAll());

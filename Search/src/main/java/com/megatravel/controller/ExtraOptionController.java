@@ -24,8 +24,9 @@ public class ExtraOptionController {
 	@Autowired
 	private ExtraOptionService extraOptionService;
 	
+	//vide svi
 	@RequestMapping( method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<ExtraOptionDTO>> getAllAccomodations() {
+	public ResponseEntity<List<ExtraOptionDTO>> getAllExtraOptions() {
 		List<ExtraOptionDTO> options = convertToDTOOptions(extraOptionService.findAll());
 
 		HttpHeaders headers = new HttpHeaders();

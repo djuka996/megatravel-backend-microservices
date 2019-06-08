@@ -30,6 +30,7 @@
     <module>MessagingService</module>
     <module>Search</module>
     <module>Rating</module>
+    <module>accommodationservice</module>
   </modules>
   <build>
     <plugins>

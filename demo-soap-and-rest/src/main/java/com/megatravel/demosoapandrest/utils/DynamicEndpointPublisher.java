@@ -24,6 +24,8 @@ public class DynamicEndpointPublisher {
 	@PostConstruct
 	public void init() {
 		Map<String, String> map = applicationInfoManager.getInfo().getMetadata();
+		System.out.println("Port sada je: " + applicationInfoManager.getInfo().getPort());
+		applicationInfoManager.refreshDataCenterInfoIfRequired();
 		int port = this.getEmptyPort();
 		map.put(SOAP_PORT, Integer.toString(port));
 		publishEndpoint(port, VehicleServiceImpl.ENDPOINT, VehicleServiceImpl.class);

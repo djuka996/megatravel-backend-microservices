@@ -1,4 +1,4 @@
-package com.megatravel.front.controllers;
+package com.megatravel.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 

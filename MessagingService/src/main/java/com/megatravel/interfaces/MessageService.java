@@ -5,18 +5,21 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import com.megatravel.dto.system_user_info.ChatDTO;
+import com.megatravel.dto.system_user_info.MessageDTO;
+
 
 @WebService
 public interface MessageService {
 
 	@WebMethod
-	List<Boolean> getInbox(Long userId); //lista ChatDTO
+	List<ChatDTO> getInbox(Long userId); 
 	
 	@WebMethod
-	List<Boolean> getChat(Long userId,Long chatId); //lista MessageDTO 
+	ChatDTO getChat(Long userId,Long chatId); 
 	
 	@WebMethod
-	List<Boolean> getMessages(Long userId); //lista MessageDTO 
+	List<MessageDTO> getMessages(Long userId); 
 	
 	@WebMethod
 	Boolean sendMessage(Long userId,Long chatId,String message);

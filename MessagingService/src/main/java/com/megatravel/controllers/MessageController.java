@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.megatravel.dto.system_user_info.ChatDTO;
 import com.megatravel.dto.system_user_info.MessageDTO;
 import com.megatravel.services.MessageServiceImpl;
 
@@ -26,13 +27,13 @@ public class MessageController {
 	private MessageServiceImpl messageServiceImpl;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Boolean>> getInbox(@PathVariable("id") Long id) {
-		return new ResponseEntity<List<Boolean>>(this.messageServiceImpl.getInbox(id), HttpStatus.OK);
+	public ResponseEntity<List<ChatDTO>> getInbox(@PathVariable("id") Long id) {
+		return new ResponseEntity<List<ChatDTO>>(this.messageServiceImpl.getInbox(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}/chat/{chatId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<Boolean>> getChat(@PathVariable("id") Long id,@PathVariable("id") Long chatId) {
-		return new ResponseEntity<List<Boolean>>(this.messageServiceImpl.getChat(id,chatId), HttpStatus.OK);
+	public ResponseEntity<ChatDTO> getChat(@PathVariable("id") Long id,@PathVariable("id") Long chatId) {
+		return new ResponseEntity<ChatDTO>(this.messageServiceImpl.getChat(id,chatId), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})

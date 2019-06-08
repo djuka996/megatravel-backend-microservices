@@ -68,7 +68,9 @@ import com.megatravel.model.hotel.Room;
     "cancellationAllowed",
     "capacity",
     "numberOfBeds",
-    "currentlyPrice"
+    "currentlyPrice",
+    "hotelDTO",
+    "accomodationTypeDTO"
 })
 @XmlRootElement(name = "RoomDTO")
 public class RoomDTO {
@@ -83,6 +85,8 @@ public class RoomDTO {
     protected double currentlyPrice;
     @XmlElement(name = "HotelDTO", required = true)
     protected HotelDTO hotelDTO;
+    @XmlElement(name = "Accomodation_typeDTO", required = true)
+    protected AccomodationTypeDTO accomodationTypeDTO;
     
     public RoomDTO(Room room) {
 		this.id = room.getId();
@@ -93,6 +97,7 @@ public class RoomDTO {
 		this.numberOfBeds = room.getNumberOfBeds();
 		this.currentlyPrice = room.getCurrentlyPrice();
 		this.hotelDTO = room.getRoomsHotel() != null ? new HotelDTO(room.getRoomsHotel()) : null;
+		this.accomodationTypeDTO = room.getAccomodationType() != null ? new AccomodationTypeDTO(room.getAccomodationType()) : null;
     }
     
     public RoomDTO() {
@@ -233,6 +238,30 @@ public class RoomDTO {
      */
     public void setHotelDTO(HotelDTO value) {
         this.hotelDTO = value;
+    }
+    
+    /**
+     * Gets the value of the accomodationTypeDTO property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link AccomodationTypeDTO }
+     *     
+     */
+    public AccomodationTypeDTO getAccomodationTypeDTO() {
+        return accomodationTypeDTO;
+    }
+
+    /**
+     * Sets the value of the accomodationTypeDTO property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link AccomodationTypeDTO }
+     *     
+     */
+    public void setAccomodationTypeDTO(AccomodationTypeDTO value) {
+        this.accomodationTypeDTO = value;
     }
 
 }

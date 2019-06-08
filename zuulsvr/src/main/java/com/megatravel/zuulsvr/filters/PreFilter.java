@@ -9,7 +9,6 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.netflix.zuul.filters.ProxyRequestHelper;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.zuul.ZuulFilter;
@@ -19,15 +18,11 @@ public class PreFilter extends ZuulFilter {
 
 	private static final String APP_HEADER = "MT-Forward-to-App";
 	private static final String ENDPOINT_HEADER = "MT-Forward-to-Endpoint";
-
-	private static final String CONTENT_TYPE = "text/xml";
 	
 	private static final String SOAP_PORT = "soap-port";
 	
 	@Autowired
 	private DiscoveryClient discoveryClient;
-
-	private ProxyRequestHelper helper = new ProxyRequestHelper();
 
 	@Override
 	@HystrixProperty(name = "hystrix.command.default.execution.timeout.enabled", value = "false")
