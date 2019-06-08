@@ -2,7 +2,6 @@ package com.megatravel.accommodationservice.webservices;
 
 import java.util.List;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
@@ -25,35 +24,30 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	}
 	
 	@Override
-	@WebMethod
 	public List<ExtraOptionDTO> getRoomExtraOptions(Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public ExtraOptionDTO getRoomExtraOption(Long id, Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public boolean removeExtraOption(Long id) {
 		// TODO Auto-generated method stub
 		return false;

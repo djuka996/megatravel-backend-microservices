@@ -2,6 +2,7 @@ package com.megatravel.accommodationservice.interfaces;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlElement;
 
 import com.megatravel.accommodationservice.dtos.AddressDTO;
 
@@ -9,15 +10,15 @@ import com.megatravel.accommodationservice.dtos.AddressDTO;
 public interface AddressServiceInterface {
 
 	@WebMethod
-	AddressDTO getHotelsAddress(Long id);
+	AddressDTO getHotelsAddress(@XmlElement(name = "hotel-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
-	AddressDTO createAddress(AddressDTO address);
+	AddressDTO createAddress(@XmlElement(name = "new-address", nillable = false, required = true) AddressDTO address);
 	
 	@WebMethod
-	AddressDTO updateAddress(AddressDTO address);
+	AddressDTO updateAddress(@XmlElement(name = "new-address", nillable = false, required = true) AddressDTO address);
 	
 	@WebMethod
-	boolean removeAddress(AddressDTO address);
+	boolean removeAddress(@XmlElement(name = "address-id", nillable = false, required = true) Long id);
 	
 }
