@@ -2,7 +2,6 @@ package com.megatravel.accommodationservice.webservices;
 
 import java.util.List;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
@@ -25,49 +24,42 @@ public class ReservationServiceImpl implements ReservationServiceInterface {
 	}
 	
 	@Override
-	@WebMethod
 	public List<RoomReservationDTO> getAllReservations() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public RoomReservationDTO getReservation(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public List<RoomReservationDTO> getRoomReservations(Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public List<RoomReservationDTO> getHotelReservations(Long hotelId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public RoomReservationDTO createReservation(RoomReservationDTO roomReservation, Long roomId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public RoomReservationDTO updateReservation(RoomReservationDTO roomReservation) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public boolean deleteReservation(Long id) {
 		// TODO Auto-generated method stub
 		return false;

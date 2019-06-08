@@ -3,8 +3,11 @@ package com.megatravel.accommodationservice.dtos;
 public class AddressDTO {
 
 	private String country;
+	
 	private String city;
+	
 	private String street;
+	
 	private int streetNumber;
 	
 	public String getCountry() {

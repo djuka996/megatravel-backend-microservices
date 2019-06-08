@@ -48,14 +48,12 @@ public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 	
 	
 	@Override
-	@WebMethod(operationName = "testMethod")
 	public String testMethod() {
 		return "USPEO";
 	}
 
 	@Override
-	@WebMethod(operationName = "login")
-	public String login(@WebParam(name = "loginDTO") SystemUserLoginDTO loginDTO) {
+	public String login(SystemUserLoginDTO loginDTO) {
 		
 		User user = userService.findByEmail(loginDTO.getEmail());
 		if(user == null) {
@@ -74,8 +72,7 @@ public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "signup")
-	public void signup(@WebParam(name = "registrationDTO") SystemUserRegistrationDTO registrationDTO){
+	public void signup(SystemUserRegistrationDTO registrationDTO){
 		if (!registrationDTO.getRepeatPassword().equals(registrationDTO.getPassword())) {
 			//ako nisu jednaki passwordi mora ponovo da unosi
 			return;

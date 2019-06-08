@@ -1,6 +1,5 @@
 package com.megatravel.accommodationservice.webservices;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
@@ -23,28 +22,24 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
 	}
 	
 	@Override
-	@WebMethod
 	public AccommodationTypeDTO getRoomType(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public AccommodationTypeDTO createAccommodationType(AccommodationTypeDTO accommodationType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public AccommodationTypeDTO updateAccommodationType(AccommodationTypeDTO accommodationType) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public boolean removeAccommodationType(Long id) {
 		// TODO Auto-generated method stub
 		return false;

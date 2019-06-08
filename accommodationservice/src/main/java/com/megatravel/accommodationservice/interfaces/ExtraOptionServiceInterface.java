@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.xml.bind.annotation.XmlElement;
 
 import com.megatravel.accommodationservice.dtos.ExtraOptionDTO;
 
@@ -11,18 +12,21 @@ import com.megatravel.accommodationservice.dtos.ExtraOptionDTO;
 public interface ExtraOptionServiceInterface {
 
 	@WebMethod
-	List<ExtraOptionDTO> getRoomExtraOptions(Long roomId);
+	List<ExtraOptionDTO> getRoomExtraOptions(@XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
 	
 	@WebMethod
-	ExtraOptionDTO getRoomExtraOption(Long id, Long roomId);
+	ExtraOptionDTO getRoomExtraOption(@XmlElement(name = "extra-option-id", nillable = false, required = true) Long id,
+									  @XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
 	
 	@WebMethod
-	ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption, Long roomId);
+	ExtraOptionDTO createRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption, 
+										 @XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
 	
 	@WebMethod
-	ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption, Long roomId);
+	ExtraOptionDTO updateRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption, 
+										 @XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
 	
 	@WebMethod
-	boolean removeExtraOption(Long id);
+	boolean removeExtraOption(@XmlElement(name = "extra-option-id", nillable = false, required = true) Long id);
 	
 }

@@ -1,7 +1,5 @@
 package com.megatravel.accommodationservice.webservices;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
@@ -24,29 +22,25 @@ public class AddressServiceImpl implements AddressServiceInterface {
 	}
 	
 	@Override
-	@WebMethod
-	public AddressDTO getHotelsAddress(@WebParam(name = "hotel-id") Long id) {
+	public AddressDTO getHotelsAddress(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public AddressDTO createAddress(AddressDTO address) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
 	public AddressDTO updateAddress(AddressDTO address) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@WebMethod
-	public boolean removeAddress(AddressDTO address) {
+	public boolean removeAddress(Long id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
