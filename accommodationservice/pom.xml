@@ -75,6 +75,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.jvnet.jax-ws-commons</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>1</id>
+						<goals>
+							<goal>wsgen</goal>
+						</goals>
+						<phase>prepare-package</phase>
+						<configuration>
+							<sei>com.megatravel.accommodationservice.interfaces.AddressServiceInterface</sei>
+							<genWsdl>true</genWsdl>
+							<keep>true</keep>
+							<resourceDestDir>wsdl/</resourceDestDir>
+							<inlineSchemas>true</inlineSchemas>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
