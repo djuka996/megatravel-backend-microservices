@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AddressServiceInterface"
+	targetNamespace="http://interfaces.megatravel.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://interfaces.megatravel.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://www.megatravel.com/global_parameters"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/global_parameters"
+			version="1.0">
+			<xs:element name="newElement" type="xs:anyType" />
+			<xs:complexType name="AddressDTO">
+				<xs:sequence>
+					<xs:element name="Country" type="xs:string" />
+					<xs:element name="City" type="xs:string" />
+					<xs:element name="Street" type="xs:string" />
+					<xs:element name="Street_number" type="xs:int" />
+					<xs:element name="Coordinate_x" type="xs:double" />
+					<xs:element name="Coordinate_y" type="xs:double" />
+					<xs:element name="Id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Amount_typeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Price" type="xs:decimal" />
+					<xs:element name="currency" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrivilegeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Currency_priceDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Amount" type="tns:Amount_typeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RoleDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="role_name" type="xs:string" />
+					<xs:element maxOccurs="unbounded" name="privileges"
+						type="tns:PrivilegeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/global_parameters"
+			xmlns:tns="http://interfaces.megatravel.com/"
+			elementFormDefault="unqualified"
+			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
+			<xs:import
+				namespace="http://www.megatravel.com/global_parameters" />
+			<xs:element name="createAddress" type="tns:createAddress" />
+			<xs:element name="createAddressResponse"
+				type="tns:createAddressResponse" />
+			<xs:element name="getHotelsAddress"
+				type="tns:getHotelsAddress" />
+			<xs:element name="getHotelsAddressResponse"
+				type="tns:getHotelsAddressResponse" />
+			<xs:element name="removeAddress" type="tns:removeAddress" />
+			<xs:element name="removeAddressResponse"
+				type="tns:removeAddressResponse" />
+			<xs:element name="updateAddress" type="tns:updateAddress" />
+			<xs:element name="updateAddressResponse"
+				type="tns:updateAddressResponse" />
+			<xs:complexType name="removeAddress">
+				<xs:sequence>
+					<xs:element name="address-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="removeAddressResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createAddress">
+				<xs:sequence>
+					<xs:element name="new-address" type="ns1:AddressDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createAddressResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="ns1:AddressDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getHotelsAddress">
+				<xs:sequence>
+					<xs:element name="hotel-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getHotelsAddressResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="ns1:AddressDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateAddress">
+				<xs:sequence>
+					<xs:element name="new-address" type="ns1:AddressDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateAddressResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="ns1:AddressDTO" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="removeAddressResponse">
+		<wsdl:part name="parameters"
+			element="tns:removeAddressResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createAddress">
+		<wsdl:part name="parameters" element="tns:createAddress">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateAddress">
+		<wsdl:part name="parameters" element="tns:updateAddress">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateAddressResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateAddressResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="removeAddress">
+		<wsdl:part name="parameters" element="tns:removeAddress">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getHotelsAddressResponse">
+		<wsdl:part name="parameters"
+			element="tns:getHotelsAddressResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createAddressResponse">
+		<wsdl:part name="parameters"
+			element="tns:createAddressResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getHotelsAddress">
+		<wsdl:part name="parameters" element="tns:getHotelsAddress">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="AddressServiceInterface">
+		<wsdl:operation name="removeAddress">
+			<wsdl:input name="removeAddress"
+				message="tns:removeAddress">
+			</wsdl:input>
+			<wsdl:output name="removeAddressResponse"
+				message="tns:removeAddressResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createAddress">
+			<wsdl:input name="createAddress"
+				message="tns:createAddress">
+			</wsdl:input>
+			<wsdl:output name="createAddressResponse"
+				message="tns:createAddressResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getHotelsAddress">
+			<wsdl:input name="getHotelsAddress"
+				message="tns:getHotelsAddress">
+			</wsdl:input>
+			<wsdl:output name="getHotelsAddressResponse"
+				message="tns:getHotelsAddressResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateAddress">
+			<wsdl:input name="updateAddress"
+				message="tns:updateAddress">
+			</wsdl:input>
+			<wsdl:output name="updateAddressResponse"
+				message="tns:updateAddressResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding
+		name="AddressServiceInterfaceServiceSoapBinding"
+		type="tns:AddressServiceInterface">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="removeAddress">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="removeAddress">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="removeAddressResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createAddress">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="createAddress">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="createAddressResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getHotelsAddress">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getHotelsAddress">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getHotelsAddressResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateAddress">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="updateAddress">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateAddressResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AddressServiceInterface">
+		<wsdl:port name="AddressServicePort"
+			binding="tns:AddressServiceInterfaceServiceSoapBinding">
+			<soap:address
+				location="http://localhost:9090/AddressServicePort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

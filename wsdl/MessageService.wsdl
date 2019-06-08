@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="MessageService"
+	targetNamespace="http://interfaces.megatravel.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://interfaces.megatravel.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/global_parameters"
+			xmlns:ns2="http://www.megatravel.com/hotel"
+			xmlns:ns3="http://www.megatravel.com/room_reservation"
+			xmlns:tns="http://www.megatravel.com/system_user_info"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/system_user_info"
+			version="1.0">
+			<xs:import
+				namespace="http://www.megatravel.com/global_parameters" />
+			<xs:import namespace="http://www.megatravel.com/hotel" />
+			<xs:import
+				namespace="http://www.megatravel.com/room_reservation" />
+			<xs:element name="ChatDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element ref="ns2:HotelDTO" />
+						<xs:element maxOccurs="unbounded" ref="tns:MessageDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="MessageDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Caption" type="xs:string" />
+						<xs:element name="Text" type="xs:string" />
+						<xs:element name="Opened" type="xs:boolean" />
+						<xs:element name="Date" type="xs:string" />
+						<xs:element ref="tns:System_user_infoDTO" />
+						<xs:element ref="tns:System_user_infoDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="System_user_infoDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="First_name" type="xs:string" />
+						<xs:element name="Last_name" type="xs:string" />
+						<xs:element name="Username" type="xs:string" />
+						<xs:element name="Email" type="xs:string" />
+						<xs:element name="Active" type="xs:boolean" />
+						<xs:element name="Adress" type="ns1:AddressDTO" />
+						<xs:element name="Work_certificate_number"
+							type="xs:string" />
+						<xs:element maxOccurs="unbounded" name="Role"
+							type="ns1:RoleDTO" />
+						<xs:element ref="ns2:HotelDTO" />
+						<xs:element maxOccurs="unbounded"
+							ref="ns3:Room_reservationDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="System_user_loginDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Email" type="xs:string" />
+						<xs:element name="Password" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="System_user_registrationDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="First_name" type="xs:string" />
+						<xs:element name="Last_name" type="xs:string" />
+						<xs:element name="Username" type="xs:string" />
+						<xs:element name="Password" type="xs:string" />
+						<xs:element name="Repeat_password" type="xs:string" />
+						<xs:element name="Email" type="xs:string" />
+						<xs:element name="Active" type="xs:boolean" />
+						<xs:element name="Adress" type="ns1:AddressDTO" />
+						<xs:element name="Work_certificate_number"
+							type="xs:string" />
+						<xs:element name="Role" type="ns1:RoleDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="User_reviewDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Rating" type="xs:int" />
+						<xs:element name="Comment" type="xs:string" />
+						<xs:element name="Time_stamp" type="xs:string" />
+						<xs:element minOccurs="0" ref="ns2:RoomDTO" />
+						<xs:element minOccurs="0" ref="tns:System_user_infoDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/hotel"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/room_reservation"
+			version="1.0">
+			<xs:import namespace="http://www.megatravel.com/hotel" />
+			<xs:element name="Room_reservationDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Begin_date" type="xs:string" />
+						<xs:element name="End_date" type="xs:string" />
+						<xs:element default="0" name="Realised"
+							type="xs:boolean" />
+						<xs:element minOccurs="0" ref="ns1:RoomDTO" />
+						<xs:element name="Price" type="xs:decimal" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/global_parameters"
+			xmlns:tns="http://www.megatravel.com/hotel"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/hotel" version="1.0">
+			<xs:import
+				namespace="http://www.megatravel.com/global_parameters" />
+			<xs:element name="Accomodation_typeDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Extra_optionDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HotelDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="rating" type="xs:double" />
+						<xs:element name="Address" type="ns1:AddressDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Extra_optionDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:ImageDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Price_listDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ImageDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="filePath" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Price_listDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Begin_date" type="xs:string" />
+						<xs:element name="End_date" type="xs:string" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Unit_price_informationDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RoomDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="description" type="xs:string" />
+						<xs:element name="cancellationDays" type="xs:int" />
+						<xs:element name="cancellationAllowed"
+							type="xs:boolean" />
+						<xs:element name="capacity" type="xs:int" />
+						<xs:element name="numberOfBeds" type="xs:int" />
+						<xs:element name="currentlyPrice" type="xs:double" />
+						<xs:element ref="tns:HotelDTO" />
+						<xs:element ref="tns:Accomodation_typeDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Unit_price_informationDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Price" type="ns1:Currency_priceDTO" />
+						<xs:element name="Room" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://www.megatravel.com/global_parameters"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/global_parameters"
+			version="1.0">
+			<xs:element name="newElement" type="xs:anyType" />
+			<xs:complexType name="AddressDTO">
+				<xs:sequence>
+					<xs:element name="Country" type="xs:string" />
+					<xs:element name="City" type="xs:string" />
+					<xs:element name="Street" type="xs:string" />
+					<xs:element name="Street_number" type="xs:int" />
+					<xs:element name="Coordinate_x" type="xs:double" />
+					<xs:element name="Coordinate_y" type="xs:double" />
+					<xs:element name="Id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RoleDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="role_name" type="xs:string" />
+					<xs:element maxOccurs="unbounded" name="privileges"
+						type="tns:PrivilegeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrivilegeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Currency_priceDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Amount" type="tns:Amount_typeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Amount_typeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Price" type="xs:decimal" />
+					<xs:element name="currency" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/system_user_info"
+			xmlns:ns2="http://www.megatravel.com/hotel"
+			xmlns:tns="http://interfaces.megatravel.com/"
+			elementFormDefault="unqualified"
+			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
+			<xs:import
+				namespace="http://www.megatravel.com/system_user_info" />
+			<xs:import namespace="http://www.megatravel.com/hotel" />
+			<xs:element name="getChat" type="tns:getChat" />
+			<xs:element name="getChatResponse"
+				type="tns:getChatResponse" />
+			<xs:element name="getInbox" type="tns:getInbox" />
+			<xs:element name="getInboxResponse"
+				type="tns:getInboxResponse" />
+			<xs:element name="getMessages" type="tns:getMessages" />
+			<xs:element name="getMessagesResponse"
+				type="tns:getMessagesResponse" />
+			<xs:element name="markRead" type="tns:markRead" />
+			<xs:element name="markReadResponse"
+				type="tns:markReadResponse" />
+			<xs:element name="sendMessage" type="tns:sendMessage" />
+			<xs:element name="sendMessageResponse"
+				type="tns:sendMessageResponse" />
+			<xs:complexType name="sendMessage">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="ChatId" type="xs:long" />
+					<xs:element minOccurs="0" name="MessageDTO">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element form="qualified" name="Id" type="xs:long" />
+								<xs:element form="qualified" name="Caption"
+									type="xs:string" />
+								<xs:element form="qualified" name="Text"
+									type="xs:string" />
+								<xs:element form="qualified" name="Opened"
+									type="xs:boolean" />
+								<xs:element form="qualified" name="Date"
+									type="xs:string" />
+								<xs:element ref="ns1:System_user_infoDTO" />
+								<xs:element ref="ns1:System_user_infoDTO" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="sendMessageResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getInbox">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="UserId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getInboxResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="return">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element form="qualified" name="Id" type="xs:long" />
+								<xs:element ref="ns2:HotelDTO" />
+								<xs:element maxOccurs="unbounded"
+									ref="ns1:MessageDTO" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getChat">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="UserId" type="xs:long" />
+					<xs:element minOccurs="0" name="ChatId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getChatResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getMessages">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="UserId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getMessagesResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="markRead">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="UserId" type="xs:long" />
+					<xs:element minOccurs="0" name="ChatId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="markReadResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getChat">
+		<wsdl:part name="parameters" element="tns:getChat">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sendMessage">
+		<wsdl:part name="parameters" element="tns:sendMessage">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getInbox">
+		<wsdl:part name="parameters" element="tns:getInbox">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getChatResponse">
+		<wsdl:part name="parameters" element="tns:getChatResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getInboxResponse">
+		<wsdl:part name="parameters" element="tns:getInboxResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getMessages">
+		<wsdl:part name="parameters" element="tns:getMessages">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getMessagesResponse">
+		<wsdl:part name="parameters"
+			element="tns:getMessagesResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="markRead">
+		<wsdl:part name="parameters" element="tns:markRead">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="markReadResponse">
+		<wsdl:part name="parameters" element="tns:markReadResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sendMessageResponse">
+		<wsdl:part name="parameters"
+			element="tns:sendMessageResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="MessageService">
+		<wsdl:operation name="sendMessage">
+			<wsdl:input name="sendMessage" message="tns:sendMessage">
+			</wsdl:input>
+			<wsdl:output name="sendMessageResponse"
+				message="tns:sendMessageResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getInbox">
+			<wsdl:input name="getInbox" message="tns:getInbox">
+			</wsdl:input>
+			<wsdl:output name="getInboxResponse"
+				message="tns:getInboxResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getChat">
+			<wsdl:input name="getChat" message="tns:getChat">
+			</wsdl:input>
+			<wsdl:output name="getChatResponse"
+				message="tns:getChatResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getMessages">
+			<wsdl:input name="getMessages" message="tns:getMessages">
+			</wsdl:input>
+			<wsdl:output name="getMessagesResponse"
+				message="tns:getMessagesResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="markRead">
+			<wsdl:input name="markRead" message="tns:markRead">
+			</wsdl:input>
+			<wsdl:output name="markReadResponse"
+				message="tns:markReadResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MessageServiceServiceSoapBinding"
+		type="tns:MessageService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="sendMessage">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="sendMessage">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="sendMessageResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getInbox">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getInbox">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getInboxResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getChat">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getChat">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getChatResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getMessages">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getMessages">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getMessagesResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="markRead">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="markRead">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="markReadResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MessageService">
+		<wsdl:port name="MessageServicePort"
+			binding="tns:MessageServiceServiceSoapBinding">
+			<soap:address
+				location="http://localhost:9090/MessageServicePort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

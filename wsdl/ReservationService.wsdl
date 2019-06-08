@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ReservationServiceInterface"
+	targetNamespace="http://interfaces.megatravel.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://interfaces.megatravel.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/hotel"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/room_reservation"
+			version="1.0">
+			<xs:import namespace="http://www.megatravel.com/hotel" />
+			<xs:element name="Room_reservationDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Begin_date" type="xs:string" />
+						<xs:element name="End_date" type="xs:string" />
+						<xs:element default="0" name="Realised"
+							type="xs:boolean" />
+						<xs:element minOccurs="0" ref="ns1:RoomDTO" />
+						<xs:element name="Price" type="xs:decimal" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/global_parameters"
+			xmlns:tns="http://www.megatravel.com/hotel"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/hotel" version="1.0">
+			<xs:import
+				namespace="http://www.megatravel.com/global_parameters" />
+			<xs:element name="Accomodation_typeDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Extra_optionDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HotelDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="rating" type="xs:double" />
+						<xs:element name="Address" type="ns1:AddressDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Extra_optionDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:ImageDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Price_listDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ImageDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="filePath" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Price_listDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Begin_date" type="xs:string" />
+						<xs:element name="End_date" type="xs:string" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Unit_price_informationDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RoomDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="description" type="xs:string" />
+						<xs:element name="cancellationDays" type="xs:int" />
+						<xs:element name="cancellationAllowed"
+							type="xs:boolean" />
+						<xs:element name="capacity" type="xs:int" />
+						<xs:element name="numberOfBeds" type="xs:int" />
+						<xs:element name="currentlyPrice" type="xs:double" />
+						<xs:element ref="tns:HotelDTO" />
+						<xs:element ref="tns:Accomodation_typeDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Unit_price_informationDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Price" type="ns1:Currency_priceDTO" />
+						<xs:element name="Room" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://www.megatravel.com/global_parameters"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/global_parameters"
+			version="1.0">
+			<xs:element name="newElement" type="xs:anyType" />
+			<xs:complexType name="AddressDTO">
+				<xs:sequence>
+					<xs:element name="Country" type="xs:string" />
+					<xs:element name="City" type="xs:string" />
+					<xs:element name="Street" type="xs:string" />
+					<xs:element name="Street_number" type="xs:int" />
+					<xs:element name="Coordinate_x" type="xs:double" />
+					<xs:element name="Coordinate_y" type="xs:double" />
+					<xs:element name="Id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Currency_priceDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Amount" type="tns:Amount_typeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Amount_typeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Price" type="xs:decimal" />
+					<xs:element name="currency" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RoleDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="role_name" type="xs:string" />
+					<xs:element maxOccurs="unbounded" name="privileges"
+						type="tns:PrivilegeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PrivilegeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/hotel"
+			xmlns:ns2="http://www.megatravel.com/room_reservation"
+			xmlns:tns="http://interfaces.megatravel.com/"
+			elementFormDefault="unqualified"
+			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
+			<xs:import namespace="http://www.megatravel.com/hotel" />
+			<xs:import
+				namespace="http://www.megatravel.com/room_reservation" />
+			<xs:element name="createReservation"
+				type="tns:createReservation" />
+			<xs:element name="createReservationResponse"
+				type="tns:createReservationResponse" />
+			<xs:element name="deleteReservation"
+				type="tns:deleteReservation" />
+			<xs:element name="deleteReservationResponse"
+				type="tns:deleteReservationResponse" />
+			<xs:element name="getAllReservations"
+				type="tns:getAllReservations" />
+			<xs:element name="getAllReservationsResponse"
+				type="tns:getAllReservationsResponse" />
+			<xs:element name="getHotelReservations"
+				type="tns:getHotelReservations" />
+			<xs:element name="getHotelReservationsResponse"
+				type="tns:getHotelReservationsResponse" />
+			<xs:element name="getReservation"
+				type="tns:getReservation" />
+			<xs:element name="getReservationResponse"
+				type="tns:getReservationResponse" />
+			<xs:element name="getRoomReservations"
+				type="tns:getRoomReservations" />
+			<xs:element name="getRoomReservationsResponse"
+				type="tns:getRoomReservationsResponse" />
+			<xs:element name="updateReservation"
+				type="tns:updateReservation" />
+			<xs:element name="updateReservationResponse"
+				type="tns:updateReservationResponse" />
+			<xs:complexType name="getHotelReservations">
+				<xs:sequence>
+					<xs:element name="hotel-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getHotelReservationsResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="return">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element form="qualified" name="Id" type="xs:long" />
+								<xs:element form="qualified" name="Begin_date"
+									type="xs:string" />
+								<xs:element form="qualified" name="End_date"
+									type="xs:string" />
+								<xs:element default="0" form="qualified"
+									name="Realised" type="xs:boolean" />
+								<xs:element minOccurs="0" ref="ns1:RoomDTO" />
+								<xs:element form="qualified" name="Price"
+									type="xs:decimal" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateReservation">
+				<xs:sequence>
+					<xs:element name="reservation" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateReservationResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createReservation">
+				<xs:sequence>
+					<xs:element name="reservation" />
+					<xs:element name="room-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createReservationResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getAllReservations">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="getAllReservationsResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getRoomReservations">
+				<xs:sequence>
+					<xs:element name="room-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getRoomReservationsResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deleteReservation">
+				<xs:sequence>
+					<xs:element name="reservation-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="deleteReservationResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getReservation">
+				<xs:sequence>
+					<xs:element name="reservation-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getReservationResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="deleteReservationResponse">
+		<wsdl:part name="parameters"
+			element="tns:deleteReservationResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getHotelReservations">
+		<wsdl:part name="parameters"
+			element="tns:getHotelReservations">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateReservationResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateReservationResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateReservation">
+		<wsdl:part name="parameters" element="tns:updateReservation">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRoomReservationsResponse">
+		<wsdl:part name="parameters"
+			element="tns:getRoomReservationsResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createReservation">
+		<wsdl:part name="parameters" element="tns:createReservation">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createReservationResponse">
+		<wsdl:part name="parameters"
+			element="tns:createReservationResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllReservations">
+		<wsdl:part name="parameters"
+			element="tns:getAllReservations">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllReservationsResponse">
+		<wsdl:part name="parameters"
+			element="tns:getAllReservationsResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteReservation">
+		<wsdl:part name="parameters" element="tns:deleteReservation">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getHotelReservationsResponse">
+		<wsdl:part name="parameters"
+			element="tns:getHotelReservationsResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRoomReservations">
+		<wsdl:part name="parameters"
+			element="tns:getRoomReservations">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getReservationResponse">
+		<wsdl:part name="parameters"
+			element="tns:getReservationResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getReservation">
+		<wsdl:part name="parameters" element="tns:getReservation">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ReservationServiceInterface">
+		<wsdl:operation name="getHotelReservations">
+			<wsdl:input name="getHotelReservations"
+				message="tns:getHotelReservations">
+			</wsdl:input>
+			<wsdl:output name="getHotelReservationsResponse"
+				message="tns:getHotelReservationsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateReservation">
+			<wsdl:input name="updateReservation"
+				message="tns:updateReservation">
+			</wsdl:input>
+			<wsdl:output name="updateReservationResponse"
+				message="tns:updateReservationResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createReservation">
+			<wsdl:input name="createReservation"
+				message="tns:createReservation">
+			</wsdl:input>
+			<wsdl:output name="createReservationResponse"
+				message="tns:createReservationResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllReservations">
+			<wsdl:input name="getAllReservations"
+				message="tns:getAllReservations">
+			</wsdl:input>
+			<wsdl:output name="getAllReservationsResponse"
+				message="tns:getAllReservationsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoomReservations">
+			<wsdl:input name="getRoomReservations"
+				message="tns:getRoomReservations">
+			</wsdl:input>
+			<wsdl:output name="getRoomReservationsResponse"
+				message="tns:getRoomReservationsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteReservation">
+			<wsdl:input name="deleteReservation"
+				message="tns:deleteReservation">
+			</wsdl:input>
+			<wsdl:output name="deleteReservationResponse"
+				message="tns:deleteReservationResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getReservation">
+			<wsdl:input name="getReservation"
+				message="tns:getReservation">
+			</wsdl:input>
+			<wsdl:output name="getReservationResponse"
+				message="tns:getReservationResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding
+		name="ReservationServiceInterfaceServiceSoapBinding"
+		type="tns:ReservationServiceInterface">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getHotelReservations">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getHotelReservations">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getHotelReservationsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateReservation">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="updateReservation">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateReservationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createReservation">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="createReservation">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="createReservationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllReservations">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getAllReservations">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAllReservationsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoomReservations">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getRoomReservations">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getRoomReservationsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteReservation">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="deleteReservation">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="deleteReservationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getReservation">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getReservation">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getReservationResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ReservationServiceInterface">
+		<wsdl:port name="ReservationServicePort"
+			binding="tns:ReservationServiceInterfaceServiceSoapBinding">
+			<soap:address
+				location="http://localhost:9090/ReservationServicePort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

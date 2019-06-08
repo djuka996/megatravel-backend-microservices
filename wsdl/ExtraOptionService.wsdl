@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ExtraOptionServiceInterface"
+	targetNamespace="http://interfaces.megatravel.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://interfaces.megatravel.com/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/global_parameters"
+			xmlns:tns="http://www.megatravel.com/hotel"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/hotel" version="1.0">
+			<xs:import
+				namespace="http://www.megatravel.com/global_parameters" />
+			<xs:element name="Accomodation_typeDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Extra_optionDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Name" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="HotelDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="rating" type="xs:double" />
+						<xs:element name="Address" type="ns1:AddressDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Extra_optionDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:ImageDTO" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Price_listDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ImageDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="filePath" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Price_listDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Begin_date" type="xs:string" />
+						<xs:element name="End_date" type="xs:string" />
+						<xs:element maxOccurs="unbounded" minOccurs="0"
+							ref="tns:Unit_price_informationDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RoomDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id" type="xs:long" />
+						<xs:element name="description" type="xs:string" />
+						<xs:element name="cancellationDays" type="xs:int" />
+						<xs:element name="cancellationAllowed"
+							type="xs:boolean" />
+						<xs:element name="capacity" type="xs:int" />
+						<xs:element name="numberOfBeds" type="xs:int" />
+						<xs:element name="currentlyPrice" type="xs:double" />
+						<xs:element ref="tns:HotelDTO" />
+						<xs:element ref="tns:Accomodation_typeDTO" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Unit_price_informationDTO">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Id" type="xs:long" />
+						<xs:element name="Price" type="ns1:Currency_priceDTO" />
+						<xs:element name="Room" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://www.megatravel.com/global_parameters"
+			elementFormDefault="qualified"
+			targetNamespace="http://www.megatravel.com/global_parameters"
+			version="1.0">
+			<xs:complexType name="AddressDTO">
+				<xs:sequence>
+					<xs:element name="Country" type="xs:string" />
+					<xs:element name="City" type="xs:string" />
+					<xs:element name="Street" type="xs:string" />
+					<xs:element name="Street_number" type="xs:int" />
+					<xs:element name="Coordinate_x" type="xs:double" />
+					<xs:element name="Coordinate_y" type="xs:double" />
+					<xs:element name="Id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Currency_priceDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Amount" type="tns:Amount_typeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Amount_typeDTO">
+				<xs:sequence>
+					<xs:element name="Id" type="xs:long" />
+					<xs:element name="Price" type="xs:decimal" />
+					<xs:element name="currency" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:ns1="http://www.megatravel.com/hotel"
+			xmlns:tns="http://interfaces.megatravel.com/"
+			elementFormDefault="unqualified"
+			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
+			<xs:import namespace="http://www.megatravel.com/hotel" />
+			<xs:element name="createRoomExtraOption"
+				type="tns:createRoomExtraOption" />
+			<xs:element name="createRoomExtraOptionResponse"
+				type="tns:createRoomExtraOptionResponse" />
+			<xs:element name="getRoomExtraOption"
+				type="tns:getRoomExtraOption" />
+			<xs:element name="getRoomExtraOptionResponse"
+				type="tns:getRoomExtraOptionResponse" />
+			<xs:element name="getRoomExtraOptions"
+				type="tns:getRoomExtraOptions" />
+			<xs:element name="getRoomExtraOptionsResponse"
+				type="tns:getRoomExtraOptionsResponse" />
+			<xs:element name="removeExtraOption"
+				type="tns:removeExtraOption" />
+			<xs:element name="removeExtraOptionResponse"
+				type="tns:removeExtraOptionResponse" />
+			<xs:element name="updateRoomExtraOption"
+				type="tns:updateRoomExtraOption" />
+			<xs:element name="updateRoomExtraOptionResponse"
+				type="tns:updateRoomExtraOptionResponse" />
+			<xs:complexType name="createRoomExtraOption">
+				<xs:sequence>
+					<xs:element name="extra-option">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element form="qualified" name="Id" type="xs:long" />
+								<xs:element form="qualified" name="Name"
+									type="xs:string" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="room-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="createRoomExtraOptionResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="removeExtraOption">
+				<xs:sequence>
+					<xs:element name="extra-option-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="removeExtraOptionResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateRoomExtraOption">
+				<xs:sequence>
+					<xs:element name="extra-option" />
+					<xs:element name="room-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="updateRoomExtraOptionResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getRoomExtraOptions">
+				<xs:sequence>
+					<xs:element name="room-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getRoomExtraOptionsResponse">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="return" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getRoomExtraOption">
+				<xs:sequence>
+					<xs:element name="extra-option-id" type="xs:long" />
+					<xs:element name="room-id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="getRoomExtraOptionResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getRoomExtraOptions">
+		<wsdl:part name="parameters"
+			element="tns:getRoomExtraOptions">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="removeExtraOptionResponse">
+		<wsdl:part name="parameters"
+			element="tns:removeExtraOptionResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createRoomExtraOptionResponse">
+		<wsdl:part name="parameters"
+			element="tns:createRoomExtraOptionResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateRoomExtraOptionResponse">
+		<wsdl:part name="parameters"
+			element="tns:updateRoomExtraOptionResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="createRoomExtraOption">
+		<wsdl:part name="parameters"
+			element="tns:createRoomExtraOption">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="removeExtraOption">
+		<wsdl:part name="parameters" element="tns:removeExtraOption">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRoomExtraOptionResponse">
+		<wsdl:part name="parameters"
+			element="tns:getRoomExtraOptionResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateRoomExtraOption">
+		<wsdl:part name="parameters"
+			element="tns:updateRoomExtraOption">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRoomExtraOptionsResponse">
+		<wsdl:part name="parameters"
+			element="tns:getRoomExtraOptionsResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getRoomExtraOption">
+		<wsdl:part name="parameters"
+			element="tns:getRoomExtraOption">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ExtraOptionServiceInterface">
+		<wsdl:operation name="createRoomExtraOption">
+			<wsdl:input name="createRoomExtraOption"
+				message="tns:createRoomExtraOption">
+			</wsdl:input>
+			<wsdl:output name="createRoomExtraOptionResponse"
+				message="tns:createRoomExtraOptionResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="removeExtraOption">
+			<wsdl:input name="removeExtraOption"
+				message="tns:removeExtraOption">
+			</wsdl:input>
+			<wsdl:output name="removeExtraOptionResponse"
+				message="tns:removeExtraOptionResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateRoomExtraOption">
+			<wsdl:input name="updateRoomExtraOption"
+				message="tns:updateRoomExtraOption">
+			</wsdl:input>
+			<wsdl:output name="updateRoomExtraOptionResponse"
+				message="tns:updateRoomExtraOptionResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoomExtraOptions">
+			<wsdl:input name="getRoomExtraOptions"
+				message="tns:getRoomExtraOptions">
+			</wsdl:input>
+			<wsdl:output name="getRoomExtraOptionsResponse"
+				message="tns:getRoomExtraOptionsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoomExtraOption">
+			<wsdl:input name="getRoomExtraOption"
+				message="tns:getRoomExtraOption">
+			</wsdl:input>
+			<wsdl:output name="getRoomExtraOptionResponse"
+				message="tns:getRoomExtraOptionResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding
+		name="ExtraOptionServiceInterfaceServiceSoapBinding"
+		type="tns:ExtraOptionServiceInterface">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="createRoomExtraOption">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="createRoomExtraOption">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="createRoomExtraOptionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="removeExtraOption">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="removeExtraOption">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="removeExtraOptionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateRoomExtraOption">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="updateRoomExtraOption">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateRoomExtraOptionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoomExtraOptions">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getRoomExtraOptions">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getRoomExtraOptionsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getRoomExtraOption">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getRoomExtraOption">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getRoomExtraOptionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ExtraOptionServiceInterface">
+		<wsdl:port name="ExtraOptionServicePort"
+			binding="tns:ExtraOptionServiceInterfaceServiceSoapBinding">
+			<soap:address
+				location="http://localhost:9090/ExtraOptionServicePort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
