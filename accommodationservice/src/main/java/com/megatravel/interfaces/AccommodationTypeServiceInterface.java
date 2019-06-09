@@ -4,19 +4,21 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.megatravel.dtos.AccommodationTypeDTO;
+import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
+
+
 
 @WebService
 public interface AccommodationTypeServiceInterface {
 
 	@WebMethod
-	AccommodationTypeDTO getRoomType(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
+	AccomodationTypeDTO getRoomType(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
-	AccommodationTypeDTO createAccommodationType(@XmlElement(name = "new-type", nillable = false, required = true) AccommodationTypeDTO accommodationType);
+	AccomodationTypeDTO createAccommodationType(@XmlElement(name = "new-type", nillable = false, required = true) AccomodationTypeDTO accommodationType);
 	
 	@WebMethod
-	AccommodationTypeDTO updateAccommodationType(@XmlElement(name = "new-type", nillable = false, required = true) AccommodationTypeDTO accommodationType);
+	AccomodationTypeDTO updateAccommodationType(@XmlElement(name = "new-type", nillable = false, required = true) AccomodationTypeDTO accommodationType);
 	
 	@WebMethod
 	boolean removeAccommodationType(@XmlElement(name = "room-id", nillable = false, required = true) Long id);

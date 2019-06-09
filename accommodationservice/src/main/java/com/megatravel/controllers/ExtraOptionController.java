@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.dtos.ExtraOptionDTO;
+import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 import com.megatravel.services.ExtraOptionService;
 
 @RestController

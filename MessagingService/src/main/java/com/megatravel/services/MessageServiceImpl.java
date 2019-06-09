@@ -3,24 +3,25 @@ package com.megatravel.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
-import com.megatravel.dto.system_user_info.ChatDTO;
-import com.megatravel.dto.system_user_info.MessageDTO;
-import com.megatravel.dto.system_user_info.SystemUserInfoDTO;
+import com.megatravel.dtosoap.system_user_info.ChatDTO;
+import com.megatravel.dtosoap.system_user_info.MessageDTO;
+import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.interfaces.MessageService;
 
 
-@WebService(endpointInterface = "com.megatravel.interfaces.MessageService")
+@WebService(portName="MessageServicePort",
+serviceName="MessageService",
+targetNamespace="http://interfaces.megatravel.com/",
+endpointInterface = "com.megatravel.interfaces.MessageService")
 @Service
 public class MessageServiceImpl implements MessageService {
 

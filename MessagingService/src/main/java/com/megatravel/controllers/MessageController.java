@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.dto.system_user_info.ChatDTO;
-import com.megatravel.dto.system_user_info.MessageDTO;
+import com.megatravel.dtosoap.system_user_info.ChatDTO;
+import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.services.MessageServiceImpl;
 
 

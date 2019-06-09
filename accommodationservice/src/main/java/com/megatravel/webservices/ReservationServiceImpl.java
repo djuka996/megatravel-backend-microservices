@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostP
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
-import com.megatravel.dtos.RoomReservationDTO;
+import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
 import com.megatravel.interfaces.ReservationServiceInterface;
 
-@WebService(endpointInterface = "com.megatravel.accommodationservice.interfaces.ReservationServiceInterface")
+@WebService(portName="ReservationServicePort",
+serviceName="ReservationServiceInterface",
+targetNamespace="http://interfaces.megatravel.com/",
+endpointInterface = "com.megatravel.accommodationservice.interfaces.ReservationServiceInterface")
 public class ReservationServiceImpl implements ReservationServiceInterface {
 
 	public static final String ENDPOINT = "/services/reservations";

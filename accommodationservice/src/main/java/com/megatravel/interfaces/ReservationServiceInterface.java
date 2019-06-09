@@ -6,7 +6,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.megatravel.dtos.RoomReservationDTO;
+import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
+
 
 @WebService
 public interface ReservationServiceInterface {

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.megatravel.dto.hotel.ImageDTO;
+import com.megatravel.dtosoap.hotel.ImageDTO;
 import com.megatravel.model.hotel.Image;
 import com.megatravel.service.ImageService;
 import com.megatravel.service.UploadFileService;

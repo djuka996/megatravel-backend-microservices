@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.dtos.RoomDTO;
+import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.services.RoomService;
 
 @RestController

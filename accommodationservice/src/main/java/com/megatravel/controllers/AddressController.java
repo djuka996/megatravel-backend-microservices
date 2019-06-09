@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.dtos.AddressDTO;
+import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.services.AddressService;
 
 @RestController

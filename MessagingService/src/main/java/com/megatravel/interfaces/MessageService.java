@@ -6,8 +6,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import com.megatravel.dto.system_user_info.ChatDTO;
-import com.megatravel.dto.system_user_info.MessageDTO;
+import com.megatravel.dtosoap.system_user_info.ChatDTO;
+import com.megatravel.dtosoap.system_user_info.MessageDTO;
 
 
 @WebService

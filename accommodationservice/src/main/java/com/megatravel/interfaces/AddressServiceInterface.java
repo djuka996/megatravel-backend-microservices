@@ -4,7 +4,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.megatravel.dtos.AddressDTO;
+import com.megatravel.dtosoap.global_parameters.AddressDTO;
+
 
 @WebService
 public interface AddressServiceInterface {

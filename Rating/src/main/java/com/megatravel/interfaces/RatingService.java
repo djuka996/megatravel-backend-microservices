@@ -2,7 +2,8 @@ package com.megatravel.interfaces;
 
 import java.util.List;
 
-import com.megatravel.dto.system_user_info.UserReviewDTO;
+import com.megatravel.dtosoap.system_user_info.UserReviewDTO;
+
 
 public interface RatingService {
 

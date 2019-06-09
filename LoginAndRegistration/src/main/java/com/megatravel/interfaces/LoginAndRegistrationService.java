@@ -4,15 +4,10 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import com.megatravel.models.SystemUserRegistrationDTO;
-import com.megatravel.models.SystemUserLoginDTO;
+import com.megatravel.dtosoap.system_user_info.SystemUserLoginDTO;
+import com.megatravel.dtosoap.system_user_info.SystemUserRegistrationDTO;
 
 @WebService()
-//@XmlSeeAlso({com.megatravel.dto.system_user_info.ObjectFactory.class, 
-//	com.megatravel.dto.global_parameters.ObjectFactory.class, 
-//	com.megatravel.dto.room_reservation.ObjectFactory.class,
-//	com.megatravel.dto.hotel.ObjectFactory.class})
-//@SOAPBinding( use = Use.LITERAL)
 public interface LoginAndRegistrationService {
 
 	@WebMethod(operationName = "testMethod")

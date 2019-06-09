@@ -2,8 +2,6 @@ package com.megatravel.service;
 
 import java.util.HashSet;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +11,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.dtosoap.system_user_info.SystemUserLoginDTO;
+import com.megatravel.dtosoap.system_user_info.SystemUserRegistrationDTO;
 import com.megatravel.interfaces.LoginAndRegistrationService;
 import com.megatravel.model.system_user_info.Role;
 import com.megatravel.model.system_user_info.User;
-import com.megatravel.models.SystemUserLoginDTO;
-import com.megatravel.models.SystemUserRegistrationDTO;
-import com.megatravel.repository.UserRepository;
 import com.megatravel.validation.CheckPassword;
 
 @WebService(portName="LoginAndRegistrationPort",
@@ -30,8 +27,8 @@ public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 
 	public static final String ENDPOINT = "/agentLogin";
 	
-	@Autowired
-	private UserRepository userRepository;
+//	@Autowired
+//	private UserRepository userRepository;
 	
 	@Autowired
 	UserService userService;

@@ -3,9 +3,14 @@ package com.megatravel.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.megatravel.dto.system_user_info.UserReviewDTO;
+import javax.jws.WebService;
+
+import org.springframework.stereotype.Service;
+
+import com.megatravel.dtosoap.system_user_info.UserReviewDTO;
 import com.megatravel.interfaces.RatingService;
 
+@Service
 public class RatingServiceImpl implements RatingService {
 
 	@Override

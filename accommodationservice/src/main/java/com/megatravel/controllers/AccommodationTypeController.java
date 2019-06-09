@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.dtos.AccommodationTypeDTO;
+import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 import com.megatravel.services.AccommodationTypeService;
 
 @RestController
@@ -20,18 +20,18 @@ public class AccommodationTypeController {
 	private AccommodationTypeService service;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<AccommodationTypeDTO> getRoomType(@PathVariable("id") Long id, @PathVariable("room-id") Long room) {
-		return new ResponseEntity<AccommodationTypeDTO>(new AccommodationTypeDTO(), HttpStatus.OK);
+	public ResponseEntity<AccomodationTypeDTO> getRoomType(@PathVariable("id") Long id, @PathVariable("room-id") Long room) {
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<AccommodationTypeDTO> createAccommodationType(@RequestBody AccommodationTypeDTO type, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<AccommodationTypeDTO>(new AccommodationTypeDTO(), HttpStatus.CREATED);
+	public ResponseEntity<AccomodationTypeDTO> createAccommodationType(@RequestBody AccomodationTypeDTO type, @PathVariable("room-id") Long id) {
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<AccommodationTypeDTO> updateAccommodationType(@RequestBody AccommodationTypeDTO type, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<AccommodationTypeDTO>(new AccommodationTypeDTO(), HttpStatus.ACCEPTED);
+	public ResponseEntity<AccomodationTypeDTO> updateAccommodationType(@RequestBody AccomodationTypeDTO type, @PathVariable("room-id") Long id) {
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

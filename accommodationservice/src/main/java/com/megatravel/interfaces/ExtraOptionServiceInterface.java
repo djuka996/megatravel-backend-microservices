@@ -6,7 +6,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlElement;
 
-import com.megatravel.dtos.ExtraOptionDTO;
+import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
+
 
 @WebService
 public interface ExtraOptionServiceInterface {
