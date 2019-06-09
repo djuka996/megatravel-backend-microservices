@@ -7,7 +7,7 @@ import javax.jws.WebService;
 import com.megatravel.models.SystemUserRegistrationDTO;
 import com.megatravel.models.SystemUserLoginDTO;
 
-@WebService
+@WebService()
 //@XmlSeeAlso({com.megatravel.dto.system_user_info.ObjectFactory.class, 
 //	com.megatravel.dto.global_parameters.ObjectFactory.class, 
 //	com.megatravel.dto.room_reservation.ObjectFactory.class,

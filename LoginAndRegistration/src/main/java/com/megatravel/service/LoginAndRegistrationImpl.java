@@ -21,7 +21,10 @@ import com.megatravel.models.SystemUserRegistrationDTO;
 import com.megatravel.repository.UserRepository;
 import com.megatravel.validation.CheckPassword;
 
-@WebService(endpointInterface = "com.megatravel.interfaces.LoginAndRegistrationService")
+@WebService(portName="LoginAndRegistrationPort",
+	serviceName="LoginAndRegistrationService",
+	targetNamespace="http://interfaces.megatravel.com",
+	endpointInterface = "com.megatravel.interfaces.LoginAndRegistrationService")
 @Service
 public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 

@@ -42,7 +42,7 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Boolean> readChat(@RequestBody MessageDTO messageDTO,@PathVariable("id") Long chatId) {
+	public ResponseEntity<Boolean> markReadChat(@RequestBody MessageDTO messageDTO,@PathVariable("id") Long chatId) {
 		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(messageDTO.getSender().getId(),chatId), HttpStatus.ACCEPTED);
 	}
 		
