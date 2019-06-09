@@ -25,7 +25,7 @@ import com.megatravel.validation.CheckPassword;
 @Service
 public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 
-	public static final String ENDPOINT = "/agentLogin";
+	public static final String ENDPOINT = "/services/agentLogin";
 	
 //	@Autowired
 //	private UserRepository userRepository;
