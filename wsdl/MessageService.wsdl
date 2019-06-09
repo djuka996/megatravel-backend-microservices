@@ -7,256 +7,9 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/global_parameters"
-			xmlns:ns2="http://www.megatravel.com/hotel"
-			xmlns:ns3="http://www.megatravel.com/room_reservation"
-			xmlns:tns="http://www.megatravel.com/system_user_info"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/system_user_info"
-			version="1.0">
-			<xs:import
-				namespace="http://www.megatravel.com/global_parameters" />
-			<xs:import namespace="http://www.megatravel.com/hotel" />
-			<xs:import
-				namespace="http://www.megatravel.com/room_reservation" />
-			<xs:element name="ChatDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element ref="ns2:HotelDTO" />
-						<xs:element maxOccurs="unbounded" ref="tns:MessageDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="MessageDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Caption" type="xs:string" />
-						<xs:element name="Text" type="xs:string" />
-						<xs:element name="Opened" type="xs:boolean" />
-						<xs:element name="Date" type="xs:string" />
-						<xs:element ref="tns:System_user_infoDTO" />
-						<xs:element ref="tns:System_user_infoDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="System_user_infoDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="First_name" type="xs:string" />
-						<xs:element name="Last_name" type="xs:string" />
-						<xs:element name="Username" type="xs:string" />
-						<xs:element name="Email" type="xs:string" />
-						<xs:element name="Active" type="xs:boolean" />
-						<xs:element name="Adress" type="ns1:AddressDTO" />
-						<xs:element name="Work_certificate_number"
-							type="xs:string" />
-						<xs:element maxOccurs="unbounded" name="Role"
-							type="ns1:RoleDTO" />
-						<xs:element ref="ns2:HotelDTO" />
-						<xs:element maxOccurs="unbounded"
-							ref="ns3:Room_reservationDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="System_user_loginDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Email" type="xs:string" />
-						<xs:element name="Password" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="System_user_registrationDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="First_name" type="xs:string" />
-						<xs:element name="Last_name" type="xs:string" />
-						<xs:element name="Username" type="xs:string" />
-						<xs:element name="Password" type="xs:string" />
-						<xs:element name="Repeat_password" type="xs:string" />
-						<xs:element name="Email" type="xs:string" />
-						<xs:element name="Active" type="xs:boolean" />
-						<xs:element name="Adress" type="ns1:AddressDTO" />
-						<xs:element name="Work_certificate_number"
-							type="xs:string" />
-						<xs:element name="Role" type="ns1:RoleDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="User_reviewDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Rating" type="xs:int" />
-						<xs:element name="Comment" type="xs:string" />
-						<xs:element name="Time_stamp" type="xs:string" />
-						<xs:element minOccurs="0" ref="ns2:RoomDTO" />
-						<xs:element minOccurs="0" ref="tns:System_user_infoDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/hotel"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/room_reservation"
-			version="1.0">
-			<xs:import namespace="http://www.megatravel.com/hotel" />
-			<xs:element name="Room_reservationDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Begin_date" type="xs:string" />
-						<xs:element name="End_date" type="xs:string" />
-						<xs:element default="0" name="Realised"
-							type="xs:boolean" />
-						<xs:element minOccurs="0" ref="ns1:RoomDTO" />
-						<xs:element name="Price" type="xs:decimal" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/global_parameters"
-			xmlns:tns="http://www.megatravel.com/hotel"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/hotel" version="1.0">
-			<xs:import
-				namespace="http://www.megatravel.com/global_parameters" />
-			<xs:element name="Accomodation_typeDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Name" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Extra_optionDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Name" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="HotelDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long" />
-						<xs:element name="rating" type="xs:double" />
-						<xs:element name="Address" type="ns1:AddressDTO" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:Extra_optionDTO" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:ImageDTO" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:Price_listDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ImageDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long" />
-						<xs:element name="filePath" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Price_listDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Begin_date" type="xs:string" />
-						<xs:element name="End_date" type="xs:string" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:Unit_price_informationDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="RoomDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long" />
-						<xs:element name="description" type="xs:string" />
-						<xs:element name="cancellationDays" type="xs:int" />
-						<xs:element name="cancellationAllowed"
-							type="xs:boolean" />
-						<xs:element name="capacity" type="xs:int" />
-						<xs:element name="numberOfBeds" type="xs:int" />
-						<xs:element name="currentlyPrice" type="xs:double" />
-						<xs:element ref="tns:HotelDTO" />
-						<xs:element ref="tns:Accomodation_typeDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Unit_price_informationDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Price" type="ns1:Currency_priceDTO" />
-						<xs:element name="Room" type="xs:long" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:tns="http://www.megatravel.com/global_parameters"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/global_parameters"
-			version="1.0">
-			<xs:element name="newElement" type="xs:anyType" />
-			<xs:complexType name="AddressDTO">
-				<xs:sequence>
-					<xs:element name="Country" type="xs:string" />
-					<xs:element name="City" type="xs:string" />
-					<xs:element name="Street" type="xs:string" />
-					<xs:element name="Street_number" type="xs:int" />
-					<xs:element name="Coordinate_x" type="xs:double" />
-					<xs:element name="Coordinate_y" type="xs:double" />
-					<xs:element name="Id" type="xs:long" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="RoleDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="role_name" type="xs:string" />
-					<xs:element maxOccurs="unbounded" name="privileges"
-						type="tns:PrivilegeDTO" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="PrivilegeDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="name" type="xs:string" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Currency_priceDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="Amount" type="tns:Amount_typeDTO" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Amount_typeDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="Price" type="xs:decimal" />
-					<xs:element name="currency" type="xs:string" />
-				</xs:sequence>
-			</xs:complexType>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/system_user_info"
-			xmlns:ns2="http://www.megatravel.com/hotel"
 			xmlns:tns="http://interfaces.megatravel.com/"
 			elementFormDefault="unqualified"
 			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
-			<xs:import
-				namespace="http://www.megatravel.com/system_user_info" />
-			<xs:import namespace="http://www.megatravel.com/hotel" />
 			<xs:element name="getChat" type="tns:getChat" />
 			<xs:element name="getChatResponse"
 				type="tns:getChatResponse" />
@@ -275,23 +28,154 @@
 			<xs:complexType name="sendMessage">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="ChatId" type="xs:long" />
-					<xs:element minOccurs="0" name="MessageDTO">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element form="qualified" name="Id" type="xs:long" />
-								<xs:element form="qualified" name="Caption"
-									type="xs:string" />
-								<xs:element form="qualified" name="Text"
-									type="xs:string" />
-								<xs:element form="qualified" name="Opened"
-									type="xs:boolean" />
-								<xs:element form="qualified" name="Date"
-									type="xs:string" />
-								<xs:element ref="ns1:System_user_infoDTO" />
-								<xs:element ref="ns1:System_user_infoDTO" />
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
+					<xs:element minOccurs="0" name="MessageDTO"
+						type="tns:messageDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="messageDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="caption"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="date" type="xs:dateTime" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element name="opened" type="xs:boolean" />
+					<xs:element minOccurs="0" name="receiver"
+						type="tns:systemUserInfoDTO" />
+					<xs:element minOccurs="0" name="sender"
+						type="tns:systemUserInfoDTO" />
+					<xs:element minOccurs="0" name="text" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="systemUserInfoDTO">
+				<xs:sequence>
+					<xs:element name="active" type="xs:boolean" />
+					<xs:element minOccurs="0" name="adress"
+						type="tns:addressDTO" />
+					<xs:element minOccurs="0" name="email" type="xs:string" />
+					<xs:element minOccurs="0" name="firstName"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="hotelDTO"
+						type="tns:hotelDTO" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="lastName"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="username"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="workCertificateNumber"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="addressDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="city" type="xs:string" />
+					<xs:element name="coordinateX" type="xs:double" />
+					<xs:element name="coordinateY" type="xs:double" />
+					<xs:element minOccurs="0" name="country"
+						type="xs:string" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="street" type="xs:string" />
+					<xs:element name="streetNumber" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="hotelDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="address"
+						type="tns:addressDTO" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element name="rating" type="xs:double" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="roleDTO">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="roleName"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="privilegeDTO">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="priceListDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="beginDate"
+						type="xs:dateTime" />
+					<xs:element minOccurs="0" name="endDate"
+						type="xs:dateTime" />
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="unitPriceInformationDTO">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="price"
+						type="tns:currencyPriceDTO" />
+					<xs:element name="room" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="currencyPriceDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="amount"
+						type="tns:amountTypeDTO" />
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="amountTypeDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="currency"
+						type="xs:string" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="price" type="xs:decimal" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="imageDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="filePath"
+						type="xs:string" />
+					<xs:element name="id" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="extraOptionDTO">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="roomReservationDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="beginDate"
+						type="xs:dateTime" />
+					<xs:element minOccurs="0" name="endDate"
+						type="xs:dateTime" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="price" type="xs:decimal" />
+					<xs:element name="realised" type="xs:boolean" />
+					<xs:element minOccurs="0" name="roomDTO"
+						type="tns:roomDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="roomDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="accomodationTypeDTO"
+						type="tns:accomodationTypeDTO" />
+					<xs:element name="cancellationAllowed" type="xs:boolean" />
+					<xs:element name="cancellationDays" type="xs:int" />
+					<xs:element name="capacity" type="xs:int" />
+					<xs:element name="currentlyPrice" type="xs:double" />
+					<xs:element minOccurs="0" name="description"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="hotelDTO"
+						type="tns:hotelDTO" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element name="numberOfBeds" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="accomodationTypeDTO">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="sendMessageResponse">
@@ -308,16 +192,14 @@
 			<xs:complexType name="getInboxResponse">
 				<xs:sequence>
 					<xs:element maxOccurs="unbounded" minOccurs="0"
-						name="return">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element form="qualified" name="Id" type="xs:long" />
-								<xs:element ref="ns2:HotelDTO" />
-								<xs:element maxOccurs="unbounded"
-									ref="ns1:MessageDTO" />
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
+						name="return" type="tns:chatDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="chatDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="hotelDTO"
+						type="tns:hotelDTO" />
+					<xs:element name="id" type="xs:long" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="getChat">
@@ -328,7 +210,8 @@
 			</xs:complexType>
 			<xs:complexType name="getChatResponse">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="return" />
+					<xs:element minOccurs="0" name="return"
+						type="tns:chatDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="getMessages">
@@ -339,7 +222,7 @@
 			<xs:complexType name="getMessagesResponse">
 				<xs:sequence>
 					<xs:element maxOccurs="unbounded" minOccurs="0"
-						name="return" />
+						name="return" type="tns:messageDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="markRead">

@@ -7,57 +7,9 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:tns="http://www.megatravel.com/global_parameters"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/global_parameters"
-			version="1.0">
-			<xs:element name="newElement" type="xs:anyType" />
-			<xs:complexType name="AddressDTO">
-				<xs:sequence>
-					<xs:element name="Country" type="xs:string" />
-					<xs:element name="City" type="xs:string" />
-					<xs:element name="Street" type="xs:string" />
-					<xs:element name="Street_number" type="xs:int" />
-					<xs:element name="Coordinate_x" type="xs:double" />
-					<xs:element name="Coordinate_y" type="xs:double" />
-					<xs:element name="Id" type="xs:long" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Amount_typeDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="Price" type="xs:decimal" />
-					<xs:element name="currency" type="xs:string" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="PrivilegeDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="name" type="xs:string" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Currency_priceDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="Amount" type="tns:Amount_typeDTO" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="RoleDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="role_name" type="xs:string" />
-					<xs:element maxOccurs="unbounded" name="privileges"
-						type="tns:PrivilegeDTO" />
-				</xs:sequence>
-			</xs:complexType>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/global_parameters"
 			xmlns:tns="http://interfaces.megatravel.com/"
 			elementFormDefault="unqualified"
 			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
-			<xs:import
-				namespace="http://www.megatravel.com/global_parameters" />
 			<xs:element name="createAddress" type="tns:createAddress" />
 			<xs:element name="createAddressResponse"
 				type="tns:createAddressResponse" />
@@ -83,13 +35,25 @@
 			</xs:complexType>
 			<xs:complexType name="createAddress">
 				<xs:sequence>
-					<xs:element name="new-address" type="ns1:AddressDTO" />
+					<xs:element name="new-address" type="tns:addressDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="addressDTO">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="city" type="xs:string" />
+					<xs:element name="coordinateX" type="xs:double" />
+					<xs:element name="coordinateY" type="xs:double" />
+					<xs:element minOccurs="0" name="country"
+						type="xs:string" />
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="street" type="xs:string" />
+					<xs:element name="streetNumber" type="xs:int" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="createAddressResponse">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="return"
-						type="ns1:AddressDTO" />
+						type="tns:addressDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="getHotelsAddress">
@@ -100,18 +64,18 @@
 			<xs:complexType name="getHotelsAddressResponse">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="return"
-						type="ns1:AddressDTO" />
+						type="tns:addressDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="updateAddress">
 				<xs:sequence>
-					<xs:element name="new-address" type="ns1:AddressDTO" />
+					<xs:element name="new-address" type="tns:addressDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="updateAddressResponse">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="return"
-						type="ns1:AddressDTO" />
+						type="tns:addressDTO" />
 				</xs:sequence>
 			</xs:complexType>
 		</xs:schema>

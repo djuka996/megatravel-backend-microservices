@@ -8,124 +8,9 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
 	<wsdl:types>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/global_parameters"
-			xmlns:tns="http://www.megatravel.com/hotel"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/hotel" version="1.0">
-			<xs:import
-				namespace="http://www.megatravel.com/global_parameters" />
-			<xs:element name="Accomodation_typeDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Name" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Extra_optionDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Name" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="HotelDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long" />
-						<xs:element name="rating" type="xs:double" />
-						<xs:element name="Address" type="ns1:AddressDTO" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:Extra_optionDTO" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:ImageDTO" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:Price_listDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="ImageDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long" />
-						<xs:element name="filePath" type="xs:string" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Price_listDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Begin_date" type="xs:string" />
-						<xs:element name="End_date" type="xs:string" />
-						<xs:element maxOccurs="unbounded" minOccurs="0"
-							ref="tns:Unit_price_informationDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="RoomDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="id" type="xs:long" />
-						<xs:element name="description" type="xs:string" />
-						<xs:element name="cancellationDays" type="xs:int" />
-						<xs:element name="cancellationAllowed"
-							type="xs:boolean" />
-						<xs:element name="capacity" type="xs:int" />
-						<xs:element name="numberOfBeds" type="xs:int" />
-						<xs:element name="currentlyPrice" type="xs:double" />
-						<xs:element ref="tns:HotelDTO" />
-						<xs:element ref="tns:Accomodation_typeDTO" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="Unit_price_informationDTO">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="Id" type="xs:long" />
-						<xs:element name="Price" type="ns1:Currency_priceDTO" />
-						<xs:element name="Room" type="xs:long" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:tns="http://www.megatravel.com/global_parameters"
-			elementFormDefault="qualified"
-			targetNamespace="http://www.megatravel.com/global_parameters"
-			version="1.0">
-			<xs:complexType name="Currency_priceDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="Amount" type="tns:Amount_typeDTO" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="Amount_typeDTO">
-				<xs:sequence>
-					<xs:element name="Id" type="xs:long" />
-					<xs:element name="Price" type="xs:decimal" />
-					<xs:element name="currency" type="xs:string" />
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="AddressDTO">
-				<xs:sequence>
-					<xs:element name="Country" type="xs:string" />
-					<xs:element name="City" type="xs:string" />
-					<xs:element name="Street" type="xs:string" />
-					<xs:element name="Street_number" type="xs:int" />
-					<xs:element name="Coordinate_x" type="xs:double" />
-					<xs:element name="Coordinate_y" type="xs:double" />
-					<xs:element name="Id" type="xs:long" />
-				</xs:sequence>
-			</xs:complexType>
-		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-			xmlns:ns1="http://www.megatravel.com/hotel"
 			xmlns:tns="http://interfaces.megatravel.com/"
 			elementFormDefault="unqualified"
 			targetNamespace="http://interfaces.megatravel.com/" version="1.0">
-			<xs:import namespace="http://www.megatravel.com/hotel" />
 			<xs:element name="createAccommodationType"
 				type="tns:createAccommodationType" />
 			<xs:element name="createAccommodationTypeResponse"
@@ -143,30 +28,32 @@
 				type="tns:updateAccommodationTypeResponse" />
 			<xs:complexType name="updateAccommodationType">
 				<xs:sequence>
-					<xs:element name="new-type">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element form="qualified" name="Id" type="xs:long" />
-								<xs:element form="qualified" name="Name"
-									type="xs:string" />
-							</xs:sequence>
-						</xs:complexType>
-					</xs:element>
+					<xs:element name="new-type"
+						type="tns:accomodationTypeDTO" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="accomodationTypeDTO">
+				<xs:sequence>
+					<xs:element name="id" type="xs:long" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="updateAccommodationTypeResponse">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="return" />
+					<xs:element minOccurs="0" name="return"
+						type="tns:accomodationTypeDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="createAccommodationType">
 				<xs:sequence>
-					<xs:element name="new-type" />
+					<xs:element name="new-type"
+						type="tns:accomodationTypeDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="createAccommodationTypeResponse">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="return" />
+					<xs:element minOccurs="0" name="return"
+						type="tns:accomodationTypeDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="getRoomType">
@@ -176,7 +63,8 @@
 			</xs:complexType>
 			<xs:complexType name="getRoomTypeResponse">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="return" />
+					<xs:element minOccurs="0" name="return"
+						type="tns:accomodationTypeDTO" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="removeAccommodationType">
