@@ -3,7 +3,6 @@ package com.megatravel.zuulsvr.filters;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,12 +30,27 @@ public class PreFilter extends ZuulFilter {
 	private ZuulProperties properties;
 	
 	@Override
+	public boolean shouldFilter() {
+		return true;
+	}
+
+	@Override
+	public int filterOrder() {
+		return 1;
+	}
+
+	@Override
+	public String filterType() {
+		return "pre";
+	}
+	
+	@Override
 	@HystrixProperty(name = "hystrix.command.default.execution.timeout.enabled", value = "false")
 	public Object run() {
 		RequestContext context = RequestContext.getCurrentContext();
 		HttpServletRequest request = context.getRequest();
 		String requestURL = this.getFullURL(request);
-		if(requestURL.contains("/services/")) {
+		if(requestURL.contains(SOAP_PREFIX)) {
 			String path = this.getZuulPathFromURL(requestURL);
 			String microserviceName = this.getServiceNameFromRoute(path);
 			List<ServiceInstance> microserviceInstances = discoveryClient.getInstances(microserviceName);
@@ -56,19 +70,6 @@ public class PreFilter extends ZuulFilter {
 			        e.printStackTrace();
 			    }
 			}
-				/*int serviceIndex = 0;
-				ServiceInstance serviceInstance = serviceInstances.get(serviceIndex);
-				String soapPort = serviceInstance.getMetadata().get(SOAP_PORT);
-				@SuppressWarnings("unused")
-				String serviceHost = serviceInstance.getHost();
-				String serviceFullAddress = "http://localhost:" + soapPort + "/" + endpoint;
-				try {
-					context.setSendZuulResponse(false);
-					context.setResponseStatusCode(HttpStatus.SC_TEMPORARY_REDIRECT);
-					context.getResponse().sendRedirect(serviceFullAddress);
-			    } catch (IOException e) {
-			        e.printStackTrace();
-			    }*/
 		}
 	    return null;
 	}
@@ -102,21 +103,6 @@ public class PreFilter extends ZuulFilter {
 	    } else {
 	        return requestURL.append('?').append(queryString).toString();
 	    }
-	}
-	
-	@Override
-	public boolean shouldFilter() {
-		return true;
-	}
-
-	@Override
-	public int filterOrder() {
-		return 1;
-	}
-
-	@Override
-	public String filterType() {
-		return "pre";
 	}
 
 }
