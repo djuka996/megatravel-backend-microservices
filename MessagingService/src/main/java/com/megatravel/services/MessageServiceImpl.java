@@ -7,6 +7,7 @@ import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
@@ -16,6 +17,8 @@ import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.interfaces.MessageService;
+import com.megatravel.repositories.ChatRepository;
+import com.megatravel.repositories.MessageRepository;
 
 
 @WebService(portName="MessageServicePort",
@@ -27,9 +30,11 @@ public class MessageServiceImpl implements MessageService {
 
 	public static final String ENDPOINT = "/inbox";
 	
-	//@Autowired
-	//private MessageRepository messageRepository;
-	//TODO dodati kada se doda model
+	@Autowired
+	private MessageRepository messageRepository;
+	
+	@Autowired
+	private ChatRepository chatRepository;
 	
     public MessageServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -80,7 +85,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	@WebMethod
 	public List<ChatDTO> getInbox(Long userId) {
-		// TODO Auto-generated method stub
+		messageRepository.f
 		return getInboxExample();
 	}
 

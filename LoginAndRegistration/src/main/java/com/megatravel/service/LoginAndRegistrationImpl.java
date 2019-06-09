@@ -73,6 +73,8 @@ public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 
 	@Override
 	public void signup(SystemUserRegistrationDTO registrationDTO){
+		
+		
 		if (!registrationDTO.getRepeatPassword().equals(registrationDTO.getPassword())) {
 			//ako nisu jednaki passwordi mora ponovo da unosi
 			return;
@@ -100,7 +102,8 @@ public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 		}
 		user.getRoles().add(role);
 		userService.signup(user);
-
+		
+		System.out.println("Uspesno dodat korisnik:" + user.getEmail());
 		//uspeo
 	}
 	
