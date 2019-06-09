@@ -85,7 +85,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	@WebMethod
 	public List<ChatDTO> getInbox(Long userId) {
-		messageRepository.f
+		//messageRepository.f
 		return getInboxExample();
 	}
 
@@ -98,7 +98,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	@WebMethod
 	public List<MessageDTO> getMessages(Long userId) {
-		// TODO Auto-generated method stub
+		//messageRepository.find
 		return getMessagesExample();
 	}
 
