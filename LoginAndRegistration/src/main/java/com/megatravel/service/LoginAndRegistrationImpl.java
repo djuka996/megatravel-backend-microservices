@@ -23,7 +23,7 @@ import com.megatravel.validation.CheckPassword;
 
 @WebService(portName="LoginAndRegistrationPort",
 	serviceName="LoginAndRegistrationService",
-	targetNamespace="http://interfaces.megatravel.com",
+	targetNamespace="http://interfaces.megatravel.com/",
 	endpointInterface = "com.megatravel.interfaces.LoginAndRegistrationService")
 @Service
 public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
