@@ -7,10 +7,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 
-import com.megatravel.zuulsvr.filters.ErrorFilter;
 import com.megatravel.zuulsvr.filters.PostFilter;
 import com.megatravel.zuulsvr.filters.PreFilter;
-import com.megatravel.zuulsvr.filters.RouteFilter;
 
 
 @SpringBootApplication
@@ -30,16 +28,6 @@ public class ZuulServerApplication {
     @Bean
     public PostFilter postFilter() {
         return new PostFilter();
-    }
-    
-    @Bean
-    public ErrorFilter errorFilter() {
-        return new ErrorFilter();
-    }
-    
-    @Bean
-    public RouteFilter routeFilter() {
-        return new RouteFilter();
     }
     
 }
