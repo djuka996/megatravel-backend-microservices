@@ -80,6 +80,13 @@ public class User {
 		this.lastName = systemUserInfoDTO.getLastName();
 		this.email = systemUserInfoDTO.getEmail();
 	}
+	
+	public User(com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO systemUserInfoDTO) {
+		this.id = systemUserInfoDTO.getId();
+		this.name = systemUserInfoDTO.getFirstName();
+		this.lastName = systemUserInfoDTO.getLastName();
+		this.email = systemUserInfoDTO.getEmail();
+	}
 
 	public Long getId() {
 		return id;

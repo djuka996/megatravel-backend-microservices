@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.megatravel.dtosoap.hotel.HotelDTO;
+import com.megatravel.model.system_user_info.Chat;
 
 public class ChatDTO {
 
@@ -19,6 +20,17 @@ public class ChatDTO {
     protected HotelDTO hotelDTO;
     protected List<MessageDTO> messages;
 
+    public ChatDTO() {
+    	super();
+    }
+    
+    public ChatDTO(Chat chat) {
+    	HotelDTO hotelDTO = new HotelDTO();
+    	hotelDTO.setId(chat.getChatsHotel().getId());
+    	this.hotelDTO = hotelDTO;
+    	this.id = chat.getId();
+    }
+    
     /**
      * Gets the value of the id property.
      * 

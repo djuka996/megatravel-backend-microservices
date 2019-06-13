@@ -1,26 +1,33 @@
 package com.megatravel.services;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
-import com.megatravel.dto.hotel.HotelDTO;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
-import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.interfaces.MessageService;
+import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.system_user_info.Chat;
+import com.megatravel.model.system_user_info.Message;
+import com.megatravel.model.system_user_info.User;
 import com.megatravel.repositories.ChatRepository;
+import com.megatravel.repositories.HotelRepository;
 import com.megatravel.repositories.MessageRepository;
+import com.megatravel.repositories.UserRepository;
 
 
 @WebService(portName="MessageServicePort",
@@ -38,91 +45,96 @@ public class MessageServiceImpl implements MessageService {
 	@Autowired
 	private ChatRepository chatRepository;
 	
+	@Autowired
+	private HotelRepository hotelRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
     public MessageServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
         WebApplicationContext currentContext = WebApplicationContextLocator.getCurrentWebApplicationContext();
         bpp.setBeanFactory(currentContext.getAutowireCapableBeanFactory());
         bpp.processInjection(this);
     }
-	
-    //TODO remove examples methods
-    private List<ChatDTO> getInboxExample(){
-    	List<ChatDTO> returning = new ArrayList<>();
-		returning.add(getChatExample());		
-		return returning;
-    }
-    
-    private ChatDTO getChatExample() {
-    	ChatDTO chatExample1 = new ChatDTO();
-		chatExample1.getMessages().add(getMessageExample());
-		return chatExample1;
-    }
-    
-    private MessageDTO getMessageExample() {
-		MessageDTO messageExample1 = new MessageDTO();
-		messageExample1.setCaption("Caption mozda treba u chat");
-		messageExample1.setDate(new Date());
-		messageExample1.setId(0);
-		messageExample1.setOpened(false);
-		SystemUserInfoDTO user1 = new SystemUserInfoDTO();
-		user1.setFirstName("User1");
-		user1.setId(1);
-		messageExample1.setSender(user1);
-		
-		SystemUserInfoDTO user2 = new SystemUserInfoDTO();
-		user1.setFirstName("User2");
-		user1.setId(2);
-		messageExample1.setReceiver(user2);
-		return messageExample1;
-    }
-  
-    private List<MessageDTO> getMessagesExample(){
-    	List<MessageDTO> messages = new ArrayList<>();
-    	messages.add(getMessageExample());
-    	messages.add(getMessageExample());
-    	return messages;
-    }
-    
+	   
     
 	@Override
 	@WebMethod
 	public List<ChatDTO> getInbox(Long userId) {
-		List<Chat> chats = chatRepository.findAllChatsForUser(userId);
+		List<Chat> chats = chatRepository.allChats(userId);
 		List<ChatDTO> returning = new ArrayList<>();
 		for (Chat chat : chats) {
-			ChatDTO adding = new ChatDTO();
-			HotelDTO newHotel = new HotelDTO(chat.getChatsHotel());
-			adding.setId(chat.getId());
-			adding.setHotelDTO(newHotel);
+			returning.add(new ChatDTO(chat));
 		}
-		return getInboxExample();
+		return returning;
 	}
 
-	@Override
-	public ChatDTO getChat(Long userId, Long chatId) {
-		// TODO Auto-generated method stub
-		return getChatExample();
-	}
 	
 	@Override
 	@WebMethod
-	public List<MessageDTO> getMessages(Long userId) {
-		//messageRepository.find
-		return getMessagesExample();
+	public List<MessageDTO> getMessages(Long userId,Long chatId) {
+		List<Message> got = messageRepository.findAllByChat_IdOrderByDateDesc(chatId);
+		List<MessageDTO> returning = new ArrayList<>();
+		for (Message message : got) {
+			returning.add(new MessageDTO(message));
+		}
+		if(got.size()>0)
+			if(got.get(0).getReceiver().getId().equals(userId))
+			{
+				markRead(chatId);
+			}
+		return returning;
 	}
 
 	@Override
 	@WebMethod
-	public Boolean sendMessage(Long chatId, MessageDTO message) {
-		// TODO Auto-generated method stub
+	public Boolean sendMessage(Long chatId, Long hotelId, MessageDTO message) {
+		Message sending = new Message(message);
+		Optional<User> receiver = userRepository.findById(message.getReceiver().getId());
+		Optional<User> sender = userRepository.findById(message.getSender().getId());
+		
+		Optional<Chat> chat = chatRepository.findById(chatId);
+		
+		if(!receiver.isPresent() || !sender.isPresent())
+		{
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Users sent not valid");
+		}
+		
+		if(!chat.isPresent())
+		{
+			Chat newChat = new Chat();
+			Optional<Hotel> hotel = hotelRepository.findById(hotelId);
+			
+			if(!hotel.isPresent())
+				throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Invalid hotel id sent");
+			
+			newChat.setChatsHotel(hotel.get());
+			Set<Message> newMessages = new HashSet<>();
+			newMessages.add(sending);
+			newChat.setMessages(newMessages);
+			chatRepository.save(newChat);
+			sending.setChat(newChat);
+		}
+		sending.setOpened(false);
+		sending.setReceiver(receiver.get());
+		sending.setSender(sender.get());
+		messageRepository.save(sending);
 		return true;
 	}
 
 	@Override
 	@WebMethod
-	public Boolean markRead(Long UserId, Long chatId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean markRead(Long chatId) {
+		Message found = messageRepository.findFirstByChat_IdOrderByDateDesc(chatId);
+		if(found != null)
+		{
+			found.setOpened(true);
+			messageRepository.save(found);
+			return true;
+		}
+		else 
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Invalid chatId sent to mark read");
 	}
-
+	
 }

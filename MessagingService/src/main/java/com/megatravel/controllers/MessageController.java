@@ -31,19 +31,23 @@ public class MessageController {
 		return new ResponseEntity<List<ChatDTO>>(this.messageServiceImpl.getInbox(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{id}/chat/{chatId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<ChatDTO> getChat(@PathVariable("id") Long id,@PathVariable("id") Long chatId) {
-		return new ResponseEntity<ChatDTO>(this.messageServiceImpl.getChat(id,chatId), HttpStatus.OK);
+	@RequestMapping(value = "/{userId}/chat/{chatId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<MessageDTO>> getChat(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId) {
+		return new ResponseEntity<List<MessageDTO>>(this.messageServiceImpl.getMessages(userId,chatId), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value ="/{id}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("id") Long chatId) {
-		return new ResponseEntity<Boolean>(messageServiceImpl.sendMessage(chatId, messageDTO), HttpStatus.CREATED);
+	/**
+	 * Nova poruka ChatId=Null i HotelId se salje
+	 * Stara poruka ChatId se salje, ne mora hotelId
+	 */
+	@RequestMapping(value ="/{chatId}/{hotelId}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("chatId") Long chatId,@PathVariable(name = "hotelId",required=false) Long hotelId) {
+		return new ResponseEntity<Boolean>(messageServiceImpl.sendMessage(chatId, hotelId, messageDTO), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Boolean> markReadChat(@RequestBody MessageDTO messageDTO,@PathVariable("id") Long chatId) {
-		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(messageDTO.getSender().getId(),chatId), HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> markReadChat(@PathVariable("id") Long chatId) {
+		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(chatId), HttpStatus.ACCEPTED);
 	}
 		
 }

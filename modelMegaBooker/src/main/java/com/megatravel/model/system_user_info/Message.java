@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.OrderBy;
+
 import com.megatravel.dto.system_user_info.MessageDTO;
 
 @Entity
@@ -26,6 +28,8 @@ public class Message {
 	protected String caption;
 	protected String text;
 	protected boolean opened;
+	
+	@OrderBy(clause="date DESC")
 	protected Date date;
 	@ManyToOne()
 	protected User sender;
@@ -38,6 +42,16 @@ public class Message {
 
 	}
 
+	public Message(com.megatravel.dtosoap.system_user_info.MessageDTO messageDTO ) {
+		this.id = messageDTO.getId();
+		this.caption = messageDTO.getCaption();
+		this.text = messageDTO.getText();
+		this.opened = messageDTO.isOpened();
+		this.date = messageDTO.getDate();
+		//this.sender = messageDTO.getSender() != null ? new User(messageDTO.getSender()) : null;
+		//this.receiver = messageDTO.getReceiver() != null ? new User(messageDTO.getReceiver()) : null;
+	}
+	
 	public Message(MessageDTO messageDTO) {
 		this.id = messageDTO.getId();
 		this.caption = messageDTO.getCaption();

@@ -10,6 +10,8 @@ package com.megatravel.dtosoap.system_user_info;
 
 import java.util.Date;
 
+import com.megatravel.model.system_user_info.Message;
+
 public class MessageDTO {
     protected long id;
     protected String caption;
@@ -19,6 +21,30 @@ public class MessageDTO {
     protected SystemUserInfoDTO sender;
     protected SystemUserInfoDTO receiver;
 
+    
+    public MessageDTO() {
+    	super();
+    }
+    
+    public MessageDTO(Message message) {
+    	this.id = message.getId();
+    	this.caption = message.getCaption();
+    	this.text = message.getText();
+    	this.opened = message.isOpened();
+    	this.date = message.getDate();
+    	
+    	this.sender = new SystemUserInfoDTO();
+    	this.sender.id = message.getSender().getId();
+    	this.sender.firstName = message.getSender().getName();
+       	this.sender.lastName = message.getSender().getLastName();
+   
+      	this.receiver = new SystemUserInfoDTO();
+    	this.receiver.id = message.getReceiver().getId();
+    	this.receiver.firstName = message.getReceiver().getName();
+       	this.receiver.lastName = message.getReceiver().getLastName();
+    }
+    
+    
     /**
      * Gets the value of the id property.
      * 
