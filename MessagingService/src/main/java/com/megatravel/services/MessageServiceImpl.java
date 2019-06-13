@@ -1,6 +1,7 @@
 package com.megatravel.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -89,23 +90,35 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	@WebMethod
+	/**
+	 * Za MessageDTO neophodno popuniti Text,Caption,Sender.Id
+	 * Stari chat => ChatId proslediti, HotelId = null
+	 * Novi chat => ChatId= null, HotelId proslediti
+	 */
 	public Boolean sendMessage(Long chatId, Long hotelId, MessageDTO message) {
-		Message sending = new Message(message);
-		Optional<User> receiver = userRepository.findById(message.getReceiver().getId());
-		Optional<User> sender = userRepository.findById(message.getSender().getId());
 		
-		Optional<Chat> chat = chatRepository.findById(chatId);
-		
-		if(!receiver.isPresent() || !sender.isPresent())
-		{
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Users sent not valid");
-		}
-		
-		if(!chat.isPresent())
-		{
-			Chat newChat = new Chat();
-			Optional<Hotel> hotel = hotelRepository.findById(hotelId);
+		if(message == null)
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No MessageDTO payload sent");
+		if(message.getText().length()==0 || message.getSender() == null)
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid MessageDTO payload sent");
 			
+		
+		Message sending = new Message(message);
+
+		Optional<User> sender = userRepository.findById(message.getSender().getId());
+		Optional<Chat> chat = chatRepository.findById(chatId);
+		Optional<Hotel> hotel = hotelRepository.findById(hotelId);
+		
+		if(!sender.isPresent())
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Users sent not valid");
+		
+		Date date = new Date();
+		sending.setDate(date);
+		User receiver = null;
+		
+		if(!chat.isPresent()) //Pravi novi chat
+		{
+			Chat newChat = new Chat();		
 			if(!hotel.isPresent())
 				throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Invalid hotel id sent");
 			
@@ -115,9 +128,12 @@ public class MessageServiceImpl implements MessageService {
 			newChat.setMessages(newMessages);
 			chatRepository.save(newChat);
 			sending.setChat(newChat);
+			receiver = hotel.get().getUsersHotel();
 		}
+		else 
+			receiver = chat.get().getChatsHotel().getUsersHotel(); //Nastavlja chat
 		sending.setOpened(false);
-		sending.setReceiver(receiver.get());
+		sending.setReceiver(receiver);
 		sending.setSender(sender.get());
 		messageRepository.save(sending);
 		return true;
