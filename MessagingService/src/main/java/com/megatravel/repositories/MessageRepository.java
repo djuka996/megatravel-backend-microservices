@@ -16,7 +16,6 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
 	
 	List<Message> findAllByReciverId(Long id);
 	
-	@Query("Select m.chat from Message m where m.sender = :Id and m.receiver = :Id")
-	List<Long> findAllChatsForUser(@Param("Id")Long id);
+
 
 }

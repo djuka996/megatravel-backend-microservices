@@ -13,10 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.dto.hotel.HotelDTO;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.interfaces.MessageService;
+import com.megatravel.model.system_user_info.Chat;
 import com.megatravel.repositories.ChatRepository;
 import com.megatravel.repositories.MessageRepository;
 
@@ -85,7 +87,14 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	@WebMethod
 	public List<ChatDTO> getInbox(Long userId) {
-		//messageRepository.f
+		List<Chat> chats = chatRepository.findAllChatsForUser(userId);
+		List<ChatDTO> returning = new ArrayList<>();
+		for (Chat chat : chats) {
+			ChatDTO adding = new ChatDTO();
+			HotelDTO newHotel = new HotelDTO(chat.getChatsHotel());
+			adding.setId(chat.getId());
+			adding.setHotelDTO(newHotel);
+		}
 		return getInboxExample();
 	}
 
