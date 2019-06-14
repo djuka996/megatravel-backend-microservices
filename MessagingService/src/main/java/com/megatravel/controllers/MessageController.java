@@ -37,11 +37,11 @@ public class MessageController {
 	}
 	
 	/**
-	 * Nova poruka ChatId=Null i HotelId se salje
-	 * Stara poruka ChatId se salje, ne mora hotelId
+	 * Nova poruka ChatId=-1 i HotelId se salje
+	 * Stara poruka ChatId se salje, hotelId = -1
 	 */
-	@RequestMapping(value ="/{chatId}/{hotelId}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("chatId") Long chatId,@PathVariable(name = "hotelId",required=false) Long hotelId) {
+	@RequestMapping(value ="/{chatId}/hotel/{hotelId}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("chatId") Long chatId,@PathVariable(name = "hotelId") Long hotelId) {
 		return new ResponseEntity<Boolean>(messageServiceImpl.sendMessage(chatId, hotelId, messageDTO), HttpStatus.CREATED);
 	}
 	

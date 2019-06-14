@@ -92,8 +92,8 @@ public class MessageServiceImpl implements MessageService {
 	@WebMethod
 	/**
 	 * Za MessageDTO neophodno popuniti Text,Caption,Sender.Id
-	 * Stari chat => ChatId proslediti, HotelId = null
-	 * Novi chat => ChatId= null, HotelId proslediti
+	 * Stari chat => ChatId proslediti, HotelId = -1
+	 * Novi chat => ChatId= -1, HotelId proslediti
 	 */
 	public Boolean sendMessage(Long chatId, Long hotelId, MessageDTO message) {
 		
@@ -130,8 +130,12 @@ public class MessageServiceImpl implements MessageService {
 			sending.setChat(newChat);
 			receiver = hotel.get().getUsersHotel();
 		}
-		else 
-			receiver = chat.get().getChatsHotel().getUsersHotel(); //Nastavlja chat
+		else //Nastavlja chat
+		{
+			receiver = chat.get().getChatsHotel().getUsersHotel(); 
+			sending.setChat(chat.get());
+		}
+			
 		sending.setOpened(false);
 		sending.setReceiver(receiver);
 		sending.setSender(sender.get());
