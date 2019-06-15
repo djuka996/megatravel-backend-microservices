@@ -40,6 +40,17 @@ public class Address {
 		this.coordinateY = adressDTO.getCoordinateY();
 	}
 
+	public Address(com.megatravel.dtosoap.global_parameters.AddressDTO adressDTO) {
+		this.id = adressDTO.getId();
+		this.country = adressDTO.getCountry();
+		this.city = adressDTO.getCity();
+		this.street = adressDTO.getStreet();
+		this.streetNumber = adressDTO.getStreetNumber();
+		this.coordinateX = adressDTO.getCoordinateX();
+		this.coordinateY = adressDTO.getCoordinateY();
+	}
+	
+	
 	public Address(Long id, String country, String city, String street, int streetNumber, double coordinateX,
 			double coordinateY) {
 		super();

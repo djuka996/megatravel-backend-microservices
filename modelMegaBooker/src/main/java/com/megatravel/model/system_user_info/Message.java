@@ -15,8 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.OrderBy;
-
 import com.megatravel.dto.system_user_info.MessageDTO;
 
 @Entity
@@ -28,8 +26,6 @@ public class Message {
 	protected String caption;
 	protected String text;
 	protected boolean opened;
-	
-	@OrderBy(clause="date DESC")
 	protected Date date;
 	@ManyToOne()
 	protected User sender;

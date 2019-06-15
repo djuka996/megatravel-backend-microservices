@@ -59,6 +59,13 @@ public class Hotel {
 		this.rating = hotelDTO.getRating();
 		this.address = hotelDTO.getAddress() != null ? new Address(hotelDTO.getAddress()) : null;
 	}
+	
+
+	public Hotel(com.megatravel.dtosoap.hotel.HotelDTO hotelDTO) {
+		this.id = hotelDTO.getId();
+		this.rating = hotelDTO.getRating();
+		this.address = hotelDTO.getAddress() != null ? new Address(hotelDTO.getAddress()) : null;
+	}
 
 	public Long getId() {
 		return id;
