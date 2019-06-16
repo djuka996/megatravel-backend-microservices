@@ -5,6 +5,7 @@ import java.util.List;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
@@ -12,9 +13,9 @@ import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
 import com.megatravel.interfaces.ReservationServiceInterface;
 
 @WebService(portName="ReservationServicePort",
-serviceName="ReservationServiceInterface",
+serviceName="ReservationService",
 targetNamespace="http://interfaces.megatravel.com/",
-endpointInterface = "com.megatravel.accommodationservice.interfaces.ReservationServiceInterface")
+endpointInterface = "com.megatravel.interfaces.ReservationServiceInterface")
 public class ReservationServiceImpl implements ReservationServiceInterface {
 
 	public static final String ENDPOINT = "/services/reservations";

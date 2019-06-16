@@ -4,20 +4,26 @@ import java.util.List;
 
 import javax.jws.WebService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
 import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 import com.megatravel.interfaces.ExtraOptionServiceInterface;
+import com.megatravel.repositories.ExtraOptionRepository;
 
 @WebService(portName="ExtraOptionServicePort",
-serviceName="ExtraOptionServiceInterface",
+serviceName="ExtraOptionService",
 targetNamespace="http://interfaces.megatravel.com/",
-endpointInterface = "com.megatravel.accommodationservice.interfaces.ExtraOptionServiceInterface")
+endpointInterface = "com.megatravel.interfaces.ExtraOptionServiceInterface")
 public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 
 	public static final String ENDPOINT = "/services/extra-options";
+	
+	@Autowired
+	private ExtraOptionRepository extraOptionRepository;
 	
 	public ExtraOptionServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -28,7 +34,7 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	
 	@Override
 	public List<ExtraOptionDTO> getRoomExtraOptions(Long roomId) {
-		// TODO Auto-generated method stub
+		//extraOptionRepository.find
 		return null;
 	}
 

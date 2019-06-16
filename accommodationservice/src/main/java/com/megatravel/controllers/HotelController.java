@@ -1,10 +1,8 @@
 package com.megatravel.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,28 +22,28 @@ public class HotelController {
 	private HotelService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<HotelDTO>> getAllHotels(Pageable page) {
-		return new ResponseEntity<List<HotelDTO>>(service.findAll(page), HttpStatus.OK);
+	public ResponseEntity<List<HotelDTO>> getAllHotels() {
+		return new ResponseEntity<List<HotelDTO>>(service.getAllHotels(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<HotelDTO> getHotel(@PathVariable("id") Long id) {
-		return new ResponseEntity<HotelDTO>(service.findOne(id), HttpStatus.OK);
+		return new ResponseEntity<HotelDTO>(service.getHotel(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<HotelDTO> createHotel(@RequestBody HotelDTO hotel) {
-		return new ResponseEntity<HotelDTO>(service.create(hotel), HttpStatus.CREATED);
+		return new ResponseEntity<HotelDTO>(service.createHotel(hotel), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<HotelDTO> updateHotel(@RequestBody HotelDTO hotel) {
-		return new ResponseEntity<HotelDTO>(service.update(hotel), HttpStatus.ACCEPTED);
+		return new ResponseEntity<HotelDTO>(service.updateHotel(hotel), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> removeHotel(@PathVariable("id") Long id) {
-		return new ResponseEntity<Boolean>(service.remove(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.removeHotel(id),HttpStatus.ACCEPTED);
 	}
 	
 }

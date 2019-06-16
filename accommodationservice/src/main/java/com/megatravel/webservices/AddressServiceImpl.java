@@ -3,6 +3,7 @@ package com.megatravel.webservices;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
@@ -10,9 +11,10 @@ import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.interfaces.AddressServiceInterface;
 
 @WebService(portName="AddressServicePort",
-serviceName="AddressServiceInterface",
+serviceName="AddressService",
 targetNamespace="http://interfaces.megatravel.com/",
-endpointInterface = "com.megatravel.accommodationservice.interfaces.AddressServiceInterface")
+endpointInterface = "com.megatravel.interfaces.AddressServiceInterface")
+@Service
 public class AddressServiceImpl implements AddressServiceInterface {
 
 	public static final String ENDPOINT = "/services/address";

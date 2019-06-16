@@ -55,6 +55,16 @@ public class Room {
 		this.currentlyPrice = roomDTO.getCurrentlyPrice();
 	}
 
+	public Room(com.megatravel.dtosoap.hotel.RoomDTO roomDTO) {
+		this.id = roomDTO.getId();
+		this.description = roomDTO.getDescription();
+		this.cancellationDays = roomDTO.getCancellationDays();
+		this.cancellationAllowed = roomDTO.isCancellationAllowed();
+		this.capacity = roomDTO.getCapacity();
+		this.numberOfBeds = roomDTO.getNumberOfBeds();
+		this.currentlyPrice = roomDTO.getCurrentlyPrice();
+	}
+	
 	public Room(Long id, String description, int cancellationDays, boolean cancellationAllowed, int capacity,
 			int numberOfBeds, AccomodationType accomodationType, Hotel roomsHotel) {
 		super();

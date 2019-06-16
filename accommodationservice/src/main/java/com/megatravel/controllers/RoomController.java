@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,14 +23,14 @@ public class RoomController {
 	@Autowired
 	private RoomService service;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/{hotel-id}",method = RequestMethod.GET)
 	public ResponseEntity<List<RoomDTO>> getHotelRooms(@PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<List<RoomDTO>>(new ArrayList<RoomDTO>(), HttpStatus.OK);
+		return new ResponseEntity<List<RoomDTO>>(service.getHotelRooms(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<RoomDTO> getHotelRoom(@PathVariable("id") Long id, @PathVariable("hotel-id") Long hotel) {
-		return new ResponseEntity<RoomDTO>(new RoomDTO(), HttpStatus.OK);
+	public ResponseEntity<RoomDTO> getHotelRoom(@PathVariable("id") Long id) {
+		return new ResponseEntity<RoomDTO>(service.getRoom(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

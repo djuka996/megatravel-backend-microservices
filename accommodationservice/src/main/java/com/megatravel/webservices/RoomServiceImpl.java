@@ -1,23 +1,43 @@
 package com.megatravel.webservices;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.jws.WebService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
 import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.interfaces.RoomServiceInterface;
+import com.megatravel.model.hotel.AccomodationType;
+import com.megatravel.model.hotel.Hotel;
+import com.megatravel.model.hotel.Room;
+import com.megatravel.repositories.AccomodationTypeRepository;
+import com.megatravel.repositories.HotelRepository;
+import com.megatravel.repositories.RoomRepository;
 
 @WebService(portName="RoomServiceInterface",
 serviceName="RoomServiceInterface",
 targetNamespace="http://interfaces.megatravel.com/",
-endpointInterface = "com.megatravel.accommodationservice.interfaces.RoomServiceInterface")
+endpointInterface = "com.megatravel.interfaces.RoomServiceInterface")
 public class RoomServiceImpl implements RoomServiceInterface {
 
 	public static final String ENDPOINT = "/services/rooms";
+	
+	@Autowired
+	private RoomRepository roomRepository;
+	
+	@Autowired
+	private HotelRepository hotelRepository;
+	
+	@Autowired
+	private AccomodationTypeRepository accomodationTypeRepository;
 	
 	public RoomServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -28,32 +48,91 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	
 	@Override
 	public List<RoomDTO> getHotelRooms(Long hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Room> rooms = roomRepository.findAllByRoomsHotel_IdOrderByCurrentlyPriceAsc(hotelId);
+		if(rooms.size()>0) {
+			List<RoomDTO> retVal = new ArrayList<>();
+			for (Room room : rooms) {
+				RoomDTO userDTO = new RoomDTO(room);
+				retVal.add(userDTO);
+			}	
+			return retVal;
+		}
+		else {
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested page is empty.");
+		}
 	}
 
 	@Override
-	public RoomDTO getRoom(Long id, Long hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+	public RoomDTO getRoom(Long id) {
+		Optional<Room> room = roomRepository.findById(id);
+		if(room.isPresent()) {
+			return new RoomDTO(room.get());
+		}
+		else 
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested hotel with id " + id + " doesn't exist.");
 	}
 
 	@Override
 	public RoomDTO createRoom(RoomDTO room, Long hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+		if(room == null)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain room data");
+		Optional<Hotel> found = hotelRepository.findById(hotelId);
+		if(!found.isPresent())
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room to be added to non existing room");
+		
+		//TODO dodatna provera za roomDTO koji dolazi
+		
+		Hotel gotHotel = found.get();
+		Room toSave = new Room(room);
+		toSave.setRoomsHotel(found.get());
+		Room saved = roomRepository.save(toSave);
+		gotHotel.getRooms().add(toSave);
+		hotelRepository.save(gotHotel);				
+		return new RoomDTO(saved);
 	}
 
 	@Override
 	public RoomDTO updateRoom(RoomDTO room, Long hotelId) {
-		// TODO Auto-generated method stub
-		return null;
+		if(room == null)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain room data");
+		
+		Optional<Room> found = roomRepository.findById(room.getId());
+		
+		if(!found.isPresent())
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Room does not exist");
+
+		Room gotRoom = found.get();
+		gotRoom.setCancellationAllowed(room.isCancellationAllowed()); 
+		gotRoom.setCancellationDays(room.getCancellationDays());
+		gotRoom.setCapacity(room.getCapacity());
+		gotRoom.setDescription(room.getDescription());
+		gotRoom.setCurrentlyPrice(room.getCurrentlyPrice());
+		gotRoom.setNumberOfBeds(room.getNumberOfBeds());
+
+		Optional<AccomodationType> newAccomodation = accomodationTypeRepository.findById(room.getAccomodationTypeDTO().getId());
+		
+		if(!newAccomodation.isPresent())
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Room does not exist");	
+		
+		AccomodationType gotAccomodationType = newAccomodation.get();
+		
+		gotRoom.setAccomodationType(gotAccomodationType);
+		Room savedRoom = roomRepository.save(gotRoom);
+		
+		gotAccomodationType.getRooms().add(savedRoom);
+		accomodationTypeRepository.save(gotAccomodationType);
+		
+		return new RoomDTO(savedRoom); 
+		
 	}
 
 	@Override
 	public boolean removeRoom(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		Optional<Room> found = roomRepository.findById(id);
+		if(!found.isPresent())
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Room does not exist");
+		roomRepository.delete(found.get());
+		return true;
 	}
 
 }

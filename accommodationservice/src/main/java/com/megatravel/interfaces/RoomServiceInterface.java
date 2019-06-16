@@ -16,8 +16,7 @@ public interface RoomServiceInterface {
 	List<RoomDTO> getHotelRooms(@XmlElement(name = "hotel-id", nillable = false, required = true) Long hotelId);
 	
 	@WebMethod
-	RoomDTO getRoom(@XmlElement(name = "room-id", nillable = false, required = true) Long id, 
-					@XmlElement(name = "hotel-id", nillable = false, required = true) Long hotelId);
+	RoomDTO getRoom(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
 	RoomDTO createRoom(@XmlElement(name = "room", nillable = false, required = true) RoomDTO room, 
