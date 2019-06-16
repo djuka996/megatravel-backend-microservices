@@ -1,5 +1,6 @@
 package com.megatravel.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,9 @@ public interface RoomReservationRepository extends JpaRepository<RoomReservation
 	List<RoomReservation> findAllForHotel(Long hotelId);
 	
 	List<RoomReservation> findAllByRoomReservation_Id(Long RoomId);
+	
+	@Query("Select r from RoomReservation r where r.roomReservation.id = ?1 AND r.id in "
+			+ "(Select rr.id from RoomReservation rr where rr.roomReservation.id = r.roomReservation.id)")
+		
+	List<RoomReservation> findOverlapsingReservations(Long roomId,Date beginDate,Date endDate);
 }

@@ -34,8 +34,8 @@ public class ReservationService{
 	}
 
 
-	public RoomReservationDTO createReservation(RoomReservationDTO roomReservation, Long roomId) {
-		return reservationServiceImpl.createReservation(roomReservation, roomId);
+	public RoomReservationDTO createReservation(RoomReservationDTO roomReservation, Long roomId,Long userId) {
+		return reservationServiceImpl.createReservation(roomReservation, roomId,userId);
 	}
 
 

@@ -62,6 +62,15 @@ public class RoomReservation {
 		this.price = roomReservationDTO.getPrice();
     }
     
+    public RoomReservation(com.megatravel.dtosoap.room_reservation.RoomReservationDTO roomReservationDTO) {
+    	this.id = roomReservationDTO.getId();
+		this.beginDate = roomReservationDTO.getBeginDate();
+		this.endDate = roomReservationDTO.getEndDate();
+		this.realised = roomReservationDTO.isRealised();
+		this.roomReservation = roomReservationDTO.getRoomDTO() != null ? new Room(roomReservationDTO.getRoomDTO()) : null;
+		this.price = roomReservationDTO.getPrice();
+    }
+    
 	public RoomReservation(Long id, Date beginDate, Date endDate, boolean realised, Room roomReservation,
 			BigDecimal price, UserReview userReview, User usersReservation) {
 		super();
