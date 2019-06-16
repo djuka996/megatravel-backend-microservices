@@ -38,6 +38,11 @@ public class AccomodationType {
 		this.name = accomodationTypeDTO.getName();
 	}
     
+    public AccomodationType(com.megatravel.dtosoap.hotel.AccomodationTypeDTO accomodationTypeDTO) {
+		this.id = accomodationTypeDTO.getId();
+		this.name = accomodationTypeDTO.getName();
+	}
+    
 	public AccomodationType(Long id, String name) {
 		super();
 		this.id = id;

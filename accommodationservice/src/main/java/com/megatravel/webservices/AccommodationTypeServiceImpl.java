@@ -1,14 +1,22 @@
 package com.megatravel.webservices;
 
+import java.util.HashSet;
+import java.util.Optional;
+
 import javax.jws.WebService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 import com.megatravel.interfaces.AccommodationTypeServiceInterface;
+import com.megatravel.model.hotel.AccomodationType;
+import com.megatravel.repositories.AccommodationTypeRepository;
 
 @WebService(portName="AccommodationTypeServicePort",
 serviceName="AccommodationTypeService",
@@ -17,6 +25,9 @@ endpointInterface = "com.megatravel.interfaces.AccommodationTypeServiceInterface
 public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInterface {
 
 	public static final String ENDPOINT = "/services/accommodations";
+	
+	@Autowired
+	private AccommodationTypeRepository accommodationTypeRepository;
 	
 	public AccommodationTypeServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -27,26 +38,49 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
 	
 	@Override
 	public AccomodationTypeDTO getRoomType(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<AccomodationType> accommodation = accommodationTypeRepository.findById(id);
+		if(accommodation.isPresent())
+			return new AccomodationTypeDTO(accommodation.get());
+		else 
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation does not exist.");
 	}
 
 	@Override
-	public AccomodationTypeDTO createAccommodationType(AccomodationTypeDTO accommodationType) {
-		// TODO Auto-generated method stub
-		return null;
+	public AccomodationTypeDTO createAccommodationType(AccomodationTypeDTO accommodationType) {		
+		if(accommodationType==null)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
+		if(accommodationType.getName().length()<=0)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
+		AccomodationType toSave = new AccomodationType(accommodationType);
+		toSave.setRooms(new HashSet<>());
+		AccomodationType saved = accommodationTypeRepository.save(toSave);
+		return new AccomodationTypeDTO(saved);
 	}
 
 	@Override
 	public AccomodationTypeDTO updateAccommodationType(AccomodationTypeDTO accommodationType) {
-		// TODO Auto-generated method stub
-		return null;
+		if(accommodationType==null)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
+		if(accommodationType.getName().length()<=0 || accommodationType.getId() <= 0)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
+		Optional<AccomodationType> accommodation = accommodationTypeRepository.findById(accommodationType.getId());
+		AccomodationType found = accommodation.get();
+		found.setId(accommodationType.getId());
+		found.setName(accommodationType.getName());
+		AccomodationType saved = accommodationTypeRepository.save(found);
+		return new AccomodationTypeDTO(saved);
 	}
 
 	@Override
 	public boolean removeAccommodationType(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		Optional<AccomodationType> accommodation = accommodationTypeRepository.findById(id);
+		if(accommodation.isPresent())
+		{
+			accommodationTypeRepository.delete(accommodation.get());
+			return true;
+		}
+		else 
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation does not exist.");
 	}
 
 }

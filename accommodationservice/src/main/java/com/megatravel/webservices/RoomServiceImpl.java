@@ -18,7 +18,7 @@ import com.megatravel.interfaces.RoomServiceInterface;
 import com.megatravel.model.hotel.AccomodationType;
 import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.hotel.Room;
-import com.megatravel.repositories.AccomodationTypeRepository;
+import com.megatravel.repositories.AccommodationTypeRepository;
 import com.megatravel.repositories.HotelRepository;
 import com.megatravel.repositories.RoomRepository;
 
@@ -37,7 +37,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	private HotelRepository hotelRepository;
 	
 	@Autowired
-	private AccomodationTypeRepository accomodationTypeRepository;
+	private AccommodationTypeRepository accomodationTypeRepository;
 	
 	public RoomServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();

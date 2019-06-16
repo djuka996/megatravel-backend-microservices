@@ -32,6 +32,16 @@ public class AddressDTO {
     	this.coordinateX = address.getCoordinateX();
     	this.coordinateY = address.getCoordinateY();
     }
+    
+    public AddressDTO(com.megatravel.dtosoap.global_parameters.AddressDTO address) {
+    	this.id = address.getId();
+    	this.country = address.getCountry();
+    	this.city = address.getCity();
+    	this.street = address.getStreet();
+    	this.streetNumber = address.getStreetNumber();
+    	this.coordinateX = address.getCoordinateX();
+    	this.coordinateY = address.getCoordinateY();
+    }
 
     /**
      * Gets the value of the country property.

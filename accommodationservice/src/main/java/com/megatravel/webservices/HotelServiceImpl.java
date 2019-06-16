@@ -20,7 +20,7 @@ import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.interfaces.HotelServiceInterface;
 import com.megatravel.model.global_parameters.Address;
 import com.megatravel.model.hotel.Hotel;
-import com.megatravel.repositories.AdressRepository;
+import com.megatravel.repositories.AddressRepository;
 import com.megatravel.repositories.ExtraOptionRepository;
 import com.megatravel.repositories.HotelRepository;
 
@@ -35,7 +35,7 @@ public class HotelServiceImpl implements HotelServiceInterface {
 	@Autowired
 	private HotelRepository hotelRepository;
 	@Autowired
-	private AdressRepository adressRepository;
+	private AddressRepository adressRepository;
 	@Autowired
 	private ExtraOptionRepository extraOptionRepository;
 	
