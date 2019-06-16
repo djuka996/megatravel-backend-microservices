@@ -21,22 +21,22 @@ public class AddressController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<AddressDTO> getHotelsAddress(@PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<AddressDTO>(new AddressDTO(), HttpStatus.OK);
+		return new ResponseEntity<AddressDTO>(service.getHotelsAddress(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<AddressDTO> createAddress(@RequestBody AddressDTO address, @PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<AddressDTO>(new AddressDTO(), HttpStatus.CREATED);
+		return new ResponseEntity<AddressDTO>(service.createAddress(address), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<AddressDTO> updateAddress(@RequestBody AddressDTO address, @PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<AddressDTO>(new AddressDTO(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<AddressDTO>(service.updateAddress(address), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> removeAddress(@PathVariable("id") Long id) {
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> removeAddress(@PathVariable("id") Long id) {
+		return new ResponseEntity<Boolean>(service.removeAddress(id),HttpStatus.ACCEPTED);
 	}
 	
 }

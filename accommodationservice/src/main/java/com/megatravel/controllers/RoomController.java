@@ -1,10 +1,8 @@
 package com.megatravel.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,17 +33,17 @@ public class RoomController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<RoomDTO> createRoom(@RequestBody RoomDTO room, @PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<RoomDTO>(new RoomDTO(), HttpStatus.CREATED);
+		return new ResponseEntity<RoomDTO>(service.createRoom(room, id), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<RoomDTO> updateRoom(@RequestBody RoomDTO room, @PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<RoomDTO>(new RoomDTO(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<RoomDTO>(service.updateRoom(room, id), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> removeRoom(@PathVariable("id") Long id) {
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> removeRoom(@PathVariable("id") Long id) {
+		return new ResponseEntity<Boolean>(service.removeRoom(id),HttpStatus.ACCEPTED);
 	}
 	
 }

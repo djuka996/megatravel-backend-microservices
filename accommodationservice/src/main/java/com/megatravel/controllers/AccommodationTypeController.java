@@ -21,22 +21,22 @@ public class AccommodationTypeController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<AccomodationTypeDTO> getRoomType(@PathVariable("id") Long id, @PathVariable("room-id") Long room) {
-		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(), HttpStatus.OK);
+		return new ResponseEntity<AccomodationTypeDTO>(service.getRoomType(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<AccomodationTypeDTO> createAccommodationType(@RequestBody AccomodationTypeDTO type, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(), HttpStatus.CREATED);
+		return new ResponseEntity<AccomodationTypeDTO>(service.createAccommodationType(type), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<AccomodationTypeDTO> updateAccommodationType(@RequestBody AccomodationTypeDTO type, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<AccomodationTypeDTO>(service.updateAccommodationType(type), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> removeAccommodationType(@PathVariable("id") Long id) {
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> removeAccommodationType(@PathVariable("id") Long id) {
+		return new ResponseEntity<Boolean>(service.removeAccommodationType(id),HttpStatus.ACCEPTED);
 	}
 	
 }
