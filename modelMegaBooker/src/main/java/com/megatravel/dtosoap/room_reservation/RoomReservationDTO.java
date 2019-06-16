@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.megatravel.dtosoap.hotel.RoomDTO;
+import com.megatravel.model.room_reservation.RoomReservation;
 
 
 public class RoomReservationDTO {
@@ -23,6 +24,19 @@ public class RoomReservationDTO {
     protected RoomDTO roomDTO;
     protected BigDecimal price;
 
+    public RoomReservationDTO(){
+    	super();
+    }
+    public RoomReservationDTO(RoomReservation reservation) {
+    	this.id = reservation.getId();
+    	this.beginDate = reservation.getBeginDate();
+    	this.endDate = reservation.getEndDate();
+    	this.realised = reservation.isRealised();
+    	this.price = reservation.getPrice();
+    	this.roomDTO = (reservation.getRoomReservation()==null)?null: new RoomDTO(reservation.getRoomReservation());
+    }
+    
+    
     /**
      * Gets the value of the id property.
      * 
