@@ -23,37 +23,37 @@ public class ReservationController {
 	
 	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
 	public ResponseEntity<List<RoomReservationDTO>> getAllReservations() {
-		return new ResponseEntity<List<RoomReservationDTO>>(new ArrayList<RoomReservationDTO>(), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(service.getAllReservations(), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/reservations/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RoomReservationDTO> getReservation(@PathVariable("id") Long id) {
-		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(), HttpStatus.OK);
+		return new ResponseEntity<RoomReservationDTO>(service.getReservation(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/reservations", method = RequestMethod.GET)
 	public ResponseEntity<List<RoomReservationDTO>> getRoomReservations(@PathVariable("room-id") Long id) {
-		return new ResponseEntity<List<RoomReservationDTO>>(new ArrayList<RoomReservationDTO>(), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(service.getRoomReservations(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/hotels/{hotel-id}/reservations", method = RequestMethod.GET)
 	public ResponseEntity<List<RoomReservationDTO>> getHotelReservations(@PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<List<RoomReservationDTO>>(new ArrayList<RoomReservationDTO>(), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(service.getHotelReservations(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/reservations", method = RequestMethod.POST)
-	public ResponseEntity<RoomReservationDTO> createReservation(@RequestBody RoomReservationDTO reservation, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(), HttpStatus.CREATED);
+	@RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/reservations/{user-id}", method = RequestMethod.POST)
+	public ResponseEntity<RoomReservationDTO> createReservation(@RequestBody RoomReservationDTO reservation, @PathVariable("room-id") Long roomId, @PathVariable("user-id") Long userId) {
+		return new ResponseEntity<RoomReservationDTO>(service.createReservation(reservation, roomId, userId), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/reservations", method = RequestMethod.PUT)
 	public ResponseEntity<RoomReservationDTO> updateReservation(@RequestBody RoomReservationDTO reservation) {
-		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<RoomReservationDTO>(service.updateReservation(reservation), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/reservations/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> removeReservation(@PathVariable("id") Long id) {
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> removeReservation(@PathVariable("id") Long id) {
+		return new ResponseEntity<Boolean>(service.deleteReservation(id),HttpStatus.ACCEPTED);
 	}
 	
 }
