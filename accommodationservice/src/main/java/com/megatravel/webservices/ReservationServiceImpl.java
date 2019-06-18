@@ -53,7 +53,10 @@ public class ReservationServiceImpl implements ReservationServiceInterface {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data.");
 		List<RoomReservationDTO> returning = new ArrayList<>();
 		for (RoomReservation roomReservation : found) {
-			returning.add(new RoomReservationDTO(roomReservation));
+			RoomReservationDTO adding = new RoomReservationDTO(roomReservation);
+			if(roomReservation.getRoomReservation().isCancellationAllowed())
+				adding.setAllowedCancel(checkIfOkayToCancel(roomReservation));
+			returning.add(adding);
 		}
 		return returning;
 	}
@@ -151,6 +154,16 @@ public class ReservationServiceImpl implements ReservationServiceInterface {
 		return true;
 	}
 
+	
+	private Boolean checkIfOkayToCancel(RoomReservation roomReservation) {
+		Calendar current = Calendar.getInstance();
+		Calendar beginDate = Calendar.getInstance();
+		current.setTime(new Date());
+		beginDate.setTime(roomReservation.getBeginDate());
+		current.add(Calendar.DATE, roomReservation.getRoomReservation().getCancellationDays());
+		return current.before(beginDate);
+	}
+	
 	/**
 	 * 1)Check for beginDate before endDate => false
 	 * 2)Check if beginDate == endDate => false

@@ -37,6 +37,7 @@ import com.megatravel.dto.hotel.RoomDTO;
  *         &lt;element name="Realised" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *         &lt;element ref="{http://www.megatravel.com/hotel}RoomDTO" minOccurs="0"/>
  *         &lt;element name="Price" type="{http://www.megatravel.com/global_parameters}Price"/>
+ *         &lt;element name="AllowedCancel" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -71,7 +72,8 @@ public class RoomReservationDTO {
     protected RoomDTO roomDTO;
     @XmlElement(name = "Price", required = true)
     protected BigDecimal price;
-
+    @XmlElement(name = "AllowedCancel", defaultValue = "0")
+    protected boolean allowedCancel;
     /**
      * Gets the value of the id property.
      * 
@@ -200,4 +202,19 @@ public class RoomReservationDTO {
         this.price = value;
     }
 
+    /**
+     * Gets the value of the allowedCancel property.
+     * 
+     */
+    public boolean isAllowedCancel() {
+        return allowedCancel;
+    }
+
+    /**
+     * Sets the value of the allowedCancel property.
+     * 
+     */
+    public void setAllowedCancel(boolean value) {
+        this.allowedCancel = value;
+    }
 }

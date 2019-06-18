@@ -17,6 +17,7 @@ import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.interfaces.RoomServiceInterface;
 import com.megatravel.model.hotel.AccomodationType;
 import com.megatravel.model.hotel.Hotel;
+import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.repositories.AccommodationTypeRepository;
 import com.megatravel.repositories.HotelRepository;
@@ -83,6 +84,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 		if(!foundAccommodation.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation invalid accommodation type");
 		//TODO dodatna provera za roomDTO koji dolazi
+		List<Image> imagesToSave = new ArrayList<>();
 		
 		Hotel gotHotel = found.get();
 		Room toSave = new Room(room);

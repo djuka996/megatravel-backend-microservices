@@ -18,13 +18,14 @@ import com.megatravel.model.room_reservation.RoomReservation;
 public class RoomReservationDTO {
 
     protected long id;
-    protected Date beginDate;
+	protected Date beginDate;
     protected Date endDate;
     protected boolean realised;
     protected RoomDTO roomDTO;
     protected BigDecimal price;
+    protected boolean allowedCancel;
 
-    public RoomReservationDTO(){
+	public RoomReservationDTO(){
     	super();
     }
     public RoomReservationDTO(RoomReservation reservation) {
@@ -164,5 +165,21 @@ public class RoomReservationDTO {
     public void setPrice(BigDecimal value) {
         this.price = value;
     }
+    
+    /**
+     * Gets the value of the allowedCancel property.
+     * 
+     */
+    public boolean isAllowedCancel() {
+		return allowedCancel;
+	}
+    
+    /**
+     * Sets the value of the allowedCancel property.
+     * 
+     */
+	public void setAllowedCancel(boolean allowedCancel) {
+		this.allowedCancel = allowedCancel;
+	}
 
 }
