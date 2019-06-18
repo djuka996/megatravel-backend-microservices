@@ -1,6 +1,8 @@
 package com.megatravel.webservices;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import javax.jws.WebService;
@@ -33,6 +35,19 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
         WebApplicationContext currentContext = WebApplicationContextLocator.getCurrentWebApplicationContext();
         bpp.setBeanFactory(currentContext.getAutowireCapableBeanFactory());
         bpp.processInjection(this);
+	}
+	
+
+	@Override
+	public List<AccomodationTypeDTO> getAll() {
+		List<AccomodationType> accommodations = accommodationTypeRepository.findAll();
+		if(accommodations.size() == 0)
+				throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No content in accomodations.");
+		List<AccomodationTypeDTO> returning  = new ArrayList<>();
+		for (AccomodationType accomodationType : accommodations) {
+			returning.add(new AccomodationTypeDTO(accomodationType));
+		}
+		return returning;
 	}
 	
 	@Override
@@ -81,5 +96,4 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
 		else 
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation does not exist.");
 	}
-
 }

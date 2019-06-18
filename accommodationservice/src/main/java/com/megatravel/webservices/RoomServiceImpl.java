@@ -58,7 +58,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 			return retVal;
 		}
 		else {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested page is empty.");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation dont exist.");
 		}
 	}
 
@@ -78,12 +78,15 @@ public class RoomServiceImpl implements RoomServiceInterface {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain room data");
 		Optional<Hotel> found = hotelRepository.findById(hotelId);
 		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room to be added to non existing room");
-		
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation to be added to non existing hotel");
+		Optional<AccomodationType> foundAccommodation = accomodationTypeRepository.findById(room.getAccomodationTypeDTO().getId());
+		if(!foundAccommodation.isPresent())
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation invalid accommodation type");
 		//TODO dodatna provera za roomDTO koji dolazi
 		
 		Hotel gotHotel = found.get();
 		Room toSave = new Room(room);
+		toSave.setAccomodationType(foundAccommodation.get());
 		toSave.setRoomsHotel(found.get());
 		Room saved = roomRepository.save(toSave);
 		gotHotel.getRooms().add(toSave);
@@ -94,12 +97,12 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	@Override
 	public RoomDTO updateRoom(RoomDTO room, Long hotelId) {
 		if(room == null)
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain room data");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain accommodation data");
 		
 		Optional<Room> found = roomRepository.findById(room.getId());
 		
 		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Room does not exist");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Accommodation does not exist");
 
 		Room gotRoom = found.get();
 		gotRoom.setCancellationAllowed(room.isCancellationAllowed()); 
@@ -112,7 +115,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 		Optional<AccomodationType> newAccomodation = accomodationTypeRepository.findById(room.getAccomodationTypeDTO().getId());
 		
 		if(!newAccomodation.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Room does not exist");	
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Accommodation does not exist");	
 		
 		AccomodationType gotAccomodationType = newAccomodation.get();
 		
@@ -130,7 +133,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	public boolean removeRoom(Long id) {
 		Optional<Room> found = roomRepository.findById(id);
 		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Room does not exist");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Accommodation does not exist");
 		roomRepository.delete(found.get());
 		return true;
 	}

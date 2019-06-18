@@ -19,7 +19,7 @@ public interface RoomReservationRepository extends JpaRepository<RoomReservation
 	List<RoomReservation> findAllByRoomReservation_Id(Long RoomId);
 	
 	@Query("Select r from RoomReservation r where r.roomReservation.id = ?1 AND r.id in "
-			+ "(Select rr.id from RoomReservation rr where rr.roomReservation.id = r.roomReservation.id)")
-		
+			+ "(Select rr.id from RoomReservation rr where rr.roomReservation.id = r.roomReservation.id AND "
+			+ "((rr.beginDate >= ?2 AND rr.endDate <= ?3) OR (rr.beginDate >= ?2 AND rr.beginDate <= ?3) OR (rr.endDate >= ?2 AND rr.endDate <= ?3) ))")
 	List<RoomReservation> findOverlapsingReservations(Long roomId,Date beginDate,Date endDate);
 }

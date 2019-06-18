@@ -8,6 +8,10 @@
 
 package com.megatravel.dtosoap.hotel;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.megatravel.dto.hotel.ImageDTO;
 import com.megatravel.model.hotel.Room;
 
 public class RoomDTO {
@@ -21,6 +25,7 @@ public class RoomDTO {
     protected double currentlyPrice;
     protected HotelDTO hotelDTO;
     protected AccomodationTypeDTO accomodationTypeDTO;
+    protected List<ImageDTO> imagesDTO;
     
     public RoomDTO(Room room) {
 		this.id = room.getId();
@@ -197,5 +202,34 @@ public class RoomDTO {
     public void setAccomodationTypeDTO(AccomodationTypeDTO value) {
         this.accomodationTypeDTO = value;
     }
-
+    
+    
+    /**
+     * Gets the value of the imagesDTO property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the imagesDTO property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getImagesDTO().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ImageDTO }
+     * 
+     * 
+     */
+    public List<ImageDTO> getImagesDTO() {
+        if (imagesDTO == null) {
+        	imagesDTO = new ArrayList<ImageDTO>();
+        }
+        return this.imagesDTO;
+    }
 }

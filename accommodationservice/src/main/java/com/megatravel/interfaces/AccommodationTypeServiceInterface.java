@@ -1,5 +1,7 @@
 package com.megatravel.interfaces;
 
+import java.util.List;
+
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlElement;
@@ -11,6 +13,9 @@ import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 @WebService
 public interface AccommodationTypeServiceInterface {
 
+	@WebMethod
+	List<AccomodationTypeDTO> getAll();
+	
 	@WebMethod
 	AccomodationTypeDTO getRoomType(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
 	

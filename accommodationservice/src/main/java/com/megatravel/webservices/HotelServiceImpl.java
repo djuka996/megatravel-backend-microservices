@@ -49,8 +49,8 @@ public class HotelServiceImpl implements HotelServiceInterface {
 		
 		if(hotels.size()>0) {
 			List<HotelDTO> retVal = new ArrayList<>();
-			for (Hotel user : hotels) {
-				HotelDTO userDTO = new HotelDTO(user);
+			for (Hotel hotel : hotels) {
+				HotelDTO userDTO = new HotelDTO(hotel);
 				retVal.add(userDTO);
 			}	
 			return retVal;
