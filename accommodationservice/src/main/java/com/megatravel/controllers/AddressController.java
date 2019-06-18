@@ -3,6 +3,7 @@ package com.megatravel.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.services.AddressService;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/hotels/{hotel-id}/address")
 public class AddressController {
 

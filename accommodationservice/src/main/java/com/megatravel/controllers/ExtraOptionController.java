@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 import com.megatravel.services.ExtraOptionService;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/options")
 public class ExtraOptionController {
 	
