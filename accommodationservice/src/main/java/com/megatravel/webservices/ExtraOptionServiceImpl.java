@@ -76,7 +76,7 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	}
 
 	@Override
-	public ExtraOptionDTO getRoomExtraOption(Long id, Long roomId) {
+	public ExtraOptionDTO getRoomExtraOption(Long id) {
 		Optional<ExtraOption> found = extraOptionRepository.findById(id);
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room does not exist.");

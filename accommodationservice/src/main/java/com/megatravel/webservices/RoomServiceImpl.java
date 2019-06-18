@@ -13,6 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.dtosoap.hotel.ImageDTO;
 import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.interfaces.RoomServiceInterface;
 import com.megatravel.model.hotel.AccomodationType;
@@ -21,6 +22,7 @@ import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.repositories.AccommodationTypeRepository;
 import com.megatravel.repositories.HotelRepository;
+import com.megatravel.repositories.ImageRepository;
 import com.megatravel.repositories.RoomRepository;
 
 @WebService(portName="RoomServiceInterface",
@@ -33,12 +35,12 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	
 	@Autowired
 	private RoomRepository roomRepository;
-	
 	@Autowired
 	private HotelRepository hotelRepository;
-	
 	@Autowired
 	private AccommodationTypeRepository accomodationTypeRepository;
+	@Autowired
+	private ImageRepository imageRepository;
 	
 	public RoomServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -83,13 +85,19 @@ public class RoomServiceImpl implements RoomServiceInterface {
 		Optional<AccomodationType> foundAccommodation = accomodationTypeRepository.findById(room.getAccomodationTypeDTO().getId());
 		if(!foundAccommodation.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation invalid accommodation type");
-		//TODO dodatna provera za roomDTO koji dolazi
-		List<Image> imagesToSave = new ArrayList<>();
-		
+		//TODO dodatna provera za roomDTO koji dolazi	
 		Hotel gotHotel = found.get();
 		Room toSave = new Room(room);
 		toSave.setAccomodationType(foundAccommodation.get());
 		toSave.setRoomsHotel(found.get());
+		
+		List<ImageDTO> receivedImages = room.getImagesDTO();
+		for (ImageDTO imageDTO : receivedImages) {
+			Image foundImg = imageRepository.findImageByFilePathEquals(imageDTO.getFilePath());
+			foundImg.setHotel(found.get());
+			foundImg.setRoomImage(toSave);
+			imageRepository.save(foundImg);
+		}	
 		Room saved = roomRepository.save(toSave);
 		gotHotel.getRooms().add(toSave);
 		hotelRepository.save(gotHotel);				

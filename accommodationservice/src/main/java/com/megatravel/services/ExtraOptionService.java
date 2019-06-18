@@ -17,12 +17,14 @@ public class ExtraOptionService{
 	public List<ExtraOptionDTO> getRoomExtraOptions(Long roomId) {
 		return extraOptionServiceImpl.getRoomExtraOptions(roomId);
 	}
-
 	 
-	public ExtraOptionDTO getRoomExtraOption(Long id, Long roomId) {
-		return extraOptionServiceImpl.getRoomExtraOption(id,roomId);
+	public ExtraOptionDTO getExtraOption(Long id) {
+		return extraOptionServiceImpl.getRoomExtraOption(id);
 	}
 
+	public List<ExtraOptionDTO> getHotelExtraOption(Long hotelId) {
+		return extraOptionServiceImpl.getHotelExtraOptions(hotelId);
+	}
 	 
 	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
 		return extraOptionServiceImpl.createRoomExtraOption(extraOption, roomId);

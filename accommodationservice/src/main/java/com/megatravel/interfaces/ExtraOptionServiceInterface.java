@@ -22,8 +22,7 @@ public interface ExtraOptionServiceInterface {
 	List<ExtraOptionDTO> getRoomExtraOptions(@XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
 	
 	@WebMethod
-	ExtraOptionDTO getRoomExtraOption(@XmlElement(name = "extra-option-id", nillable = false, required = true) Long id,
-									  @XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
+	ExtraOptionDTO getRoomExtraOption(@XmlElement(name = "extra-option-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
 	ExtraOptionDTO createRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption, 

@@ -11,7 +11,7 @@ package com.megatravel.dtosoap.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.megatravel.dto.hotel.ImageDTO;
+import com.megatravel.dtosoap.hotel.ImageDTO;
 import com.megatravel.model.hotel.Room;
 
 public class RoomDTO {

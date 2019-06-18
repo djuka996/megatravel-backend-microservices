@@ -18,34 +18,39 @@ import com.megatravel.services.ExtraOptionService;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/options")
+@RequestMapping(value = "/options/")
 public class ExtraOptionController {
 	
 	@Autowired
 	private ExtraOptionService service;
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<ExtraOptionDTO>> getRoomExtraOptions(@PathVariable("hotel-id") Long id) {
-		return new ResponseEntity<List<ExtraOptionDTO>>(new ArrayList<ExtraOptionDTO>(), HttpStatus.OK);
+	@RequestMapping(value="/hotel/{hotel-id}",method = RequestMethod.GET)
+	public ResponseEntity<List<ExtraOptionDTO>> getRoomExtraOptionsWithHotelId(@PathVariable("hotel-id") Long id) {
+		return new ResponseEntity<List<ExtraOptionDTO>>(service.getHotelExtraOption(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/room/{room-id}",method = RequestMethod.GET)
+	public ResponseEntity<List<ExtraOptionDTO>> getRoomExtraOptionsWithRoomId(@PathVariable("room-id") Long id) {
+		return new ResponseEntity<List<ExtraOptionDTO>>(service.getRoomExtraOptions(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ExtraOptionDTO> getRoomExtraOption(@PathVariable("id") Long id, @PathVariable("room-id") Long room) {
-		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(), HttpStatus.OK);
+	public ResponseEntity<ExtraOptionDTO> getRoomExtraOption(@PathVariable("id") Long id) {
+		return new ResponseEntity<ExtraOptionDTO>(service.getExtraOption(id), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/room/{room-id}", method = RequestMethod.POST)
 	public ResponseEntity<ExtraOptionDTO> createExtraOption(@RequestBody ExtraOptionDTO extraOption, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(), HttpStatus.CREATED);
+		return new ResponseEntity<ExtraOptionDTO>(service.createRoomExtraOption(extraOption, id), HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value = "room/{room-id}",method = RequestMethod.PUT)
 	public ResponseEntity<ExtraOptionDTO> updateRoom(@RequestBody ExtraOptionDTO extraOption, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(), HttpStatus.ACCEPTED);
+		return new ResponseEntity<ExtraOptionDTO>(service.updateRoomExtraOption(extraOption, id), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> removeRoom(@PathVariable("id") Long id) {
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+	public ResponseEntity<Boolean> removeRoom(@PathVariable("id") Long id) {
+		return new ResponseEntity<Boolean>(service.removeExtraOption(id),HttpStatus.ACCEPTED);
 	}
 }
