@@ -31,7 +31,7 @@ public class UserReview {
 	protected Room room;
 	@OneToOne()
 	protected User user;
-
+	protected boolean approved;
 	public UserReview() {
 
 	}
@@ -102,5 +102,14 @@ public class UserReview {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+	
 
 }
