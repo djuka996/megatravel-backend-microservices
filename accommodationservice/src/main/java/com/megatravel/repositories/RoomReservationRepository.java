@@ -12,6 +12,8 @@ import com.megatravel.model.room_reservation.RoomReservation;
 @Repository
 public interface RoomReservationRepository extends JpaRepository<RoomReservation, Long> {
 	
+	List<RoomReservation> findAllByUsersReservation_Id(Long userId);
+	
 	@Query("Select rr from RoomReservation rr where rr.roomReservation.id in "
 		+ "(select ro from Room ro where ro.roomsHotel.id = ?1)")
 	List<RoomReservation> findAllForHotel(Long hotelId);

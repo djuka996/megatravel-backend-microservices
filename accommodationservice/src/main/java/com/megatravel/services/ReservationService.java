@@ -19,6 +19,10 @@ public class ReservationService{
 	}
 
 
+	public List<RoomReservationDTO> getAllReservationsForUser(Long id){
+		return reservationServiceImpl.getAllReservationsForUser(id);
+	}
+	
 	public RoomReservationDTO getReservation(Long id) {
 		return reservationServiceImpl.getReservation(id);
 	}

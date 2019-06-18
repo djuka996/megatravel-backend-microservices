@@ -47,6 +47,18 @@ public class ReservationServiceImpl implements ReservationServiceInterface {
 	}
 	
 	@Override
+	public List<RoomReservationDTO> getAllReservationsForUser(Long userId) {
+		List<RoomReservation> found = reservationRepository.findAllByUsersReservation_Id(userId);
+		if(found.size()==0)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data.");
+		List<RoomReservationDTO> returning = new ArrayList<>();
+		for (RoomReservation roomReservation : found) {
+			returning.add(new RoomReservationDTO(roomReservation));
+		}
+		return returning;
+	}
+	
+	@Override
 	public List<RoomReservationDTO> getAllReservations() {
 		List<RoomReservation> found = reservationRepository.findAll();
 		if(found.size()==0)

@@ -16,6 +16,9 @@ public interface ReservationServiceInterface {
 	List<RoomReservationDTO> getAllReservations();
 	
 	@WebMethod
+	List<RoomReservationDTO> getAllReservationsForUser(Long userId);
+	
+	@WebMethod
 	RoomReservationDTO getReservation(@XmlElement(name = "reservation-id", nillable = false, required = true) Long id);
 	
 	@WebMethod

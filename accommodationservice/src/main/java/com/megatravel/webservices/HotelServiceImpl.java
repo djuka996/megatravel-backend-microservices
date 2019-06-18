@@ -94,9 +94,8 @@ public class HotelServiceImpl implements HotelServiceInterface {
 		if(found.isPresent())
 		{
 			Hotel got = found.get();
-			//TODO SETOVATI
-			// ExtraOptions <=> HotelExtraOptions?????		
-			
+			got.setRating(hotel.getRating());
+			//TODO Check what to set
 			return new HotelDTO(got);
 		}
 		else 

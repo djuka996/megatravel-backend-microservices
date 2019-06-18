@@ -26,6 +26,13 @@ public class ReservationController {
 		return new ResponseEntity<List<RoomReservationDTO>>(service.getAllReservations(), HttpStatus.OK);
 	}
 	
+	
+	@RequestMapping(value = "/reservations/user/{user-id}", method = RequestMethod.GET)
+	public ResponseEntity<List<RoomReservationDTO>> getAllReservations(@PathVariable("user-id") Long id) {
+		return new ResponseEntity<List<RoomReservationDTO>>(service.getAllReservationsForUser(id), HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value = "/reservations/{id}", method = RequestMethod.GET)
 	public ResponseEntity<RoomReservationDTO> getReservation(@PathVariable("id") Long id) {
 		return new ResponseEntity<RoomReservationDTO>(service.getReservation(id), HttpStatus.OK);
