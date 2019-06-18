@@ -21,7 +21,7 @@ public class RoomController {
 	@Autowired
 	private RoomService service;
 	
-	@RequestMapping(value = "/{hotel-id}",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<RoomDTO>> getHotelRooms(@PathVariable("hotel-id") Long id) {
 		return new ResponseEntity<List<RoomDTO>>(service.getHotelRooms(id), HttpStatus.OK);
 	}
