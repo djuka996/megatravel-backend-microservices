@@ -41,6 +41,7 @@ public class UserReview {
 		this.rating = userReviewDTO.getRating();
 		this.comment = userReviewDTO.getComment();
 		this.timeStamp = userReviewDTO.getTimeStamp();
+		this.approved = false;
 		this.room = userReviewDTO.getRoomDTO() != null ? new Room(userReviewDTO.getRoomDTO()) : null;
 		this.user = userReviewDTO.getSystemUserInfoDTO() != null ? new User(userReviewDTO.getSystemUserInfoDTO()) : null;
 	}
@@ -51,6 +52,7 @@ public class UserReview {
 		this.rating = rating;
 		this.comment = comment;
 		this.timeStamp = timeStamp;
+		this.approved = false;
 		this.room = room;
 		this.user = user;
 	}

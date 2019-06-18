@@ -20,6 +20,7 @@ public class UserReviewDTO {
     protected Date timeStamp;
     protected RoomDTO roomDTO;
     protected SystemUserInfoDTO systemUserInfoDTO;
+    protected boolean approved;
 
     /**
      * Gets the value of the id property.
@@ -148,5 +149,13 @@ public class UserReviewDTO {
     public void setSystemUserInfoDTO(SystemUserInfoDTO value) {
         this.systemUserInfoDTO = value;
     }
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
 
 }

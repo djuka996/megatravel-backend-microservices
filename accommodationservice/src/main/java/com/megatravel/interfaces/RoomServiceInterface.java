@@ -28,5 +28,8 @@ public interface RoomServiceInterface {
 	
 	@WebMethod
 	boolean removeRoom(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
+
+	@WebMethod
+	Boolean updateRating(@XmlElement(name = "room-id", nillable = false, required = true) Long id);
 	
 }

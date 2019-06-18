@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,6 +47,11 @@ public class RoomController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> removeRoom(@PathVariable("id") Long id) {
 		return new ResponseEntity<Boolean>(service.removeRoom(id),HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value="/updateRoom/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<Boolean> updateRating(@PathVariable("id") Long id) {
+		return new ResponseEntity<Boolean>(service.updateRating(id), HttpStatus.OK);
 	}
 	
 }

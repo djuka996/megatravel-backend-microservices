@@ -34,4 +34,8 @@ public class RoomService{
 		return roomServiceImpl.removeRoom(id);
 	}
 	
+	public Boolean updateRating(Long id) {
+		return roomServiceImpl.updateRating(id);
+	}
+	
 }

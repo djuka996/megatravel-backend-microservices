@@ -76,6 +76,21 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	}
 
 	@Override
+	public Boolean updateRating(Long id) {
+		// TODO Auto-generated method stub
+		double rating =  roomRepository.updateRating(id);
+		Optional<Room> room = roomRepository.findById(id);
+		
+		if(room.isPresent()) {
+			room.get().getRoomsHotel().setRating(rating);
+			hotelRepository.save(room.get().getRoomsHotel());
+			return true;
+		}
+		else 
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested hotel with id " + id + " doesn't exist.");
+	}
+	
+	@Override
 	public RoomDTO createRoom(RoomDTO room, Long hotelId) {
 		if(room == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain room data");

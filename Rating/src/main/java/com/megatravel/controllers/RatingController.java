@@ -3,6 +3,7 @@ package com.megatravel.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +31,19 @@ public class RatingController {
 		return new ResponseEntity<UserReviewDTO>(this.ratingServiceImpl.getReview(id), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<UserReviewDTO>> getUserReviews(@PathVariable("id") Long id) {
+		return new ResponseEntity<List<UserReviewDTO>>(this.ratingServiceImpl.getUserReviews(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<UserReviewDTO>> getUnreviewedReviews(Pageable pageable) {
+		return new ResponseEntity<List<UserReviewDTO>>(this.ratingServiceImpl.getUnreviewedReviews(pageable), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/room/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<UserReviewDTO>> getReviewsForRoom(@PathVariable("id") Long id) {
-		return new ResponseEntity<List<UserReviewDTO>>(this.ratingServiceImpl.getReviewsForRoom(id), HttpStatus.OK);
+	public ResponseEntity<List<UserReviewDTO>> getReviewsForRoom(@PathVariable("id") Long id, Pageable pageable) {
+		return new ResponseEntity<List<UserReviewDTO>>(this.ratingServiceImpl.getReviewsForRoom(id, pageable), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
