@@ -30,6 +30,11 @@ public class RatingController {
 		return new ResponseEntity<UserReviewDTO>(this.ratingServiceImpl.getReview(id), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<UserReviewDTO>> getReviewsForRoom(@PathVariable("id") Long id) {
+		return new ResponseEntity<List<UserReviewDTO>>(this.ratingServiceImpl.getReviewsForRoom(id), HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<UserReviewDTO> createReview(@RequestBody UserReviewDTO userReviewDTO) {
 		return new ResponseEntity<UserReviewDTO>(this.ratingServiceImpl.createReview(userReviewDTO), HttpStatus.CREATED);
