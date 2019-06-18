@@ -13,6 +13,12 @@ import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 public interface ExtraOptionServiceInterface {
 
 	@WebMethod
+	List<ExtraOptionDTO> getAllExtraOptions();
+	
+	@WebMethod
+	List<ExtraOptionDTO> getHotelExtraOptions(@XmlElement(name = "hotel-id", nillable = false, required = true) Long hotelId);
+	
+	@WebMethod
 	List<ExtraOptionDTO> getRoomExtraOptions(@XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
 	
 	@WebMethod
