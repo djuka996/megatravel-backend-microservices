@@ -12,15 +12,15 @@ import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.dtosoap.system_user_info.UserReviewDTO;
 import com.megatravel.interfaces.RatingService;
 import com.megatravel.model.system_user_info.UserReview;
-
-import Repository.RatingRepository;
+import com.megatravel.repositories.RatingRepository;
 
 @Service
 public class RatingServiceImpl implements RatingService {
 	
-	@Autowired
-	private RatingRepository repository;
 
+	@Autowired
+	private RatingRepository ratingRepository;
+	
 	@Override
 	public List<UserReviewDTO> getHotelReviews(Long hotelId) {
 		// TODO Auto-generated method stub
