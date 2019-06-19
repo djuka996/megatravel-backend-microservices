@@ -113,9 +113,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 			foundImg.setRoomImage(toSave);
 			imageRepository.save(foundImg);
 		}	
-		Room saved = roomRepository.save(toSave);
-		gotHotel.getRooms().add(toSave);
-		hotelRepository.save(gotHotel);				
+		Room saved = roomRepository.save(toSave);	
 		return new RoomDTO(saved);
 	}
 
@@ -148,8 +146,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 		Room savedRoom = roomRepository.save(gotRoom);
 		
 		gotAccomodationType.getRooms().add(savedRoom);
-		accomodationTypeRepository.save(gotAccomodationType);
-		
+		accomodationTypeRepository.save(gotAccomodationType);	
 		return new RoomDTO(savedRoom); 
 		
 	}

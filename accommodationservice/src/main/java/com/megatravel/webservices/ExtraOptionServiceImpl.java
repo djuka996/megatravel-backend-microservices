@@ -16,10 +16,8 @@ import com.megatravel.configurations.WebApplicationContextLocator;
 import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 import com.megatravel.interfaces.ExtraOptionServiceInterface;
 import com.megatravel.model.hotel.ExtraOption;
-import com.megatravel.model.hotel.HotelExtraOption;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.repositories.ExtraOptionRepository;
-import com.megatravel.repositories.HotelExtraOptionRepository;
 import com.megatravel.repositories.RoomRepository;
 
 @WebService(portName="ExtraOptionServicePort",
@@ -105,7 +103,7 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	@Override
 	public boolean removeExtraOption(Long id) {
 		Optional<ExtraOption> found = extraOptionRepository.findById(id);
-		if(found.isPresent())
+		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent extra option does not exist.");
 		extraOptionRepository.delete(found.get());
 		return true;
