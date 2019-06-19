@@ -42,7 +42,7 @@ public class EncryptionService {
 	 */
 	private static final String ENCRYPTED_ELEMENT_TAG = "EncryptedData";
 	
-	public MyEncriptionUtility() {
+	public EncryptionService() {
 		Security.addProvider(new BouncyCastleProvider());
 		org.apache.xml.security.Init.init();
 	}

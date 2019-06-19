@@ -8,6 +8,7 @@
 package com.megatravel.model.hotel;
 
 import java.util.Set;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.megatravel.dto.hotel.HotelDTO;
 import com.megatravel.model.global_parameters.Address;
@@ -29,6 +32,8 @@ public class Hotel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 	protected double rating;
+	@Temporal(TemporalType.TIMESTAMP)
+	protected Date lastChangedTime;
 	@OneToOne
 	protected Address address;
 	@OneToMany(mappedBy = "hotelExtraOption")
@@ -137,5 +142,13 @@ public class Hotel {
 
 	public void setPriceList(Set<PriceList> priceList) {
 		this.priceList = priceList;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

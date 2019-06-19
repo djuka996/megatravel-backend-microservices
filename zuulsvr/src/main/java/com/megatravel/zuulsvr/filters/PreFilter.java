@@ -58,9 +58,10 @@ public class PreFilter extends ZuulFilter {
 			String soapServiceEndpoint = utilites.getSoapServiceEndpointFromUrl(requestURL);
 			String serviceFullAddress = "http://localhost:" + soapServicePort + soapServiceEndpoint;
 			context.setSendZuulResponse(false);
-			ServiceResponse response = caller.sendRequestTo(serviceFullAddress, request);
+			ServiceResponse response = caller.sendRequestTo(serviceFullAddress, microserviceName, request);
 			context.setResponseStatusCode(response.getStatus());
 			context.setResponseBody(response.getBody());
+			context.addZuulResponseHeader("Content-Type", "text/xml; charset=utf-8");
 		}
 		return null;
 	}

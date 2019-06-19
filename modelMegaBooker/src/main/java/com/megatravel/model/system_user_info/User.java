@@ -1,5 +1,6 @@
 package com.megatravel.model.system_user_info;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,6 +29,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Temporal(TemporalType.TIMESTAMP)
+	protected Date lastChangedTime;
 	@NotNull
     @Size(min=StaticData.minLength, max=StaticData.lengthValue)
 	private String name;
