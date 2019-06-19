@@ -34,8 +34,6 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	private ExtraOptionRepository extraOptionRepository;
 	@Autowired
 	private RoomRepository roomRepository;
-	@Autowired
-	private HotelExtraOptionRepository hotelExtraOptionRepository;
 	
 	public ExtraOptionServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -84,24 +82,19 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	}
 
 	@Override
-	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
-		Optional<Room> foundRoom = roomRepository.findById(roomId);
-		if(!foundRoom.isPresent())
+	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption) {
+		if(extraOption == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent room does not exist.");
 		ExtraOption newExtra = new ExtraOption();
 		newExtra.setName(extraOption.getName());
-		HotelExtraOption hotelExtraOption = new HotelExtraOption();
-		hotelExtraOption.setExtraOption(newExtra);
-		hotelExtraOption.setHotelExtraOption(foundRoom.get().getRoomsHotel());
-		hotelExtraOptionRepository.save(hotelExtraOption);
 		ExtraOption saved = extraOptionRepository.save(newExtra);
 		return new ExtraOptionDTO(saved);
 	}
 
 	@Override
-	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
+	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption) {
 		Optional<ExtraOption> found = extraOptionRepository.findById(extraOption.getId());
-		if(found.isPresent())
+		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent extra option does not exist.");
 		ExtraOption got = found.get();
 		got.setName(extraOption.getName());

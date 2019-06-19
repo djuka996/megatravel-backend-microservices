@@ -25,12 +25,10 @@ public interface ExtraOptionServiceInterface {
 	ExtraOptionDTO getRoomExtraOption(@XmlElement(name = "extra-option-id", nillable = false, required = true) Long id);
 	
 	@WebMethod
-	ExtraOptionDTO createRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption, 
-										 @XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
+	ExtraOptionDTO createRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption);
 	
 	@WebMethod
-	ExtraOptionDTO updateRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption, 
-										 @XmlElement(name = "room-id", nillable = false, required = true) Long roomId);
+	ExtraOptionDTO updateRoomExtraOption(@XmlElement(name = "extra-option", nillable = false, required = true) ExtraOptionDTO extraOption);
 	
 	@WebMethod
 	boolean removeExtraOption(@XmlElement(name = "extra-option-id", nillable = false, required = true) Long id);

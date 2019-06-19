@@ -26,13 +26,13 @@ public class ExtraOptionService{
 		return extraOptionServiceImpl.getHotelExtraOptions(hotelId);
 	}
 	 
-	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
-		return extraOptionServiceImpl.createRoomExtraOption(extraOption, roomId);
+	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption) {
+		return extraOptionServiceImpl.createRoomExtraOption(extraOption);
 	}
 
 	 
-	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption, Long roomId) {
-		return extraOptionServiceImpl.updateRoomExtraOption(extraOption, roomId);
+	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption) {
+		return extraOptionServiceImpl.updateRoomExtraOption(extraOption);
 	}
 
 	 

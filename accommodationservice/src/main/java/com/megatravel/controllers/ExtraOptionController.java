@@ -1,6 +1,5 @@
 package com.megatravel.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +40,12 @@ public class ExtraOptionController {
 	
 	@RequestMapping(value = "/room/{room-id}", method = RequestMethod.POST)
 	public ResponseEntity<ExtraOptionDTO> createExtraOption(@RequestBody ExtraOptionDTO extraOption, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<ExtraOptionDTO>(service.createRoomExtraOption(extraOption, id), HttpStatus.CREATED);
+		return new ResponseEntity<ExtraOptionDTO>(service.createRoomExtraOption(extraOption), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "room/{room-id}",method = RequestMethod.PUT)
-	public ResponseEntity<ExtraOptionDTO> updateRoom(@RequestBody ExtraOptionDTO extraOption, @PathVariable("room-id") Long id) {
-		return new ResponseEntity<ExtraOptionDTO>(service.updateRoomExtraOption(extraOption, id), HttpStatus.ACCEPTED);
+	public ResponseEntity<ExtraOptionDTO> updateRoom(@RequestBody ExtraOptionDTO extraOption,@PathVariable("room-id") Long id) {
+		return new ResponseEntity<ExtraOptionDTO>(service.updateRoomExtraOption(extraOption), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
