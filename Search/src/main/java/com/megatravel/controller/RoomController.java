@@ -22,6 +22,7 @@ import com.megatravel.model.hotel.PriceList;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.model.hotel.UnitPriceInformation;
 import com.megatravel.service.RoomService;
+import com.netflix.ribbon.proxy.annotation.Http;
 
 @RestController
 @CrossOrigin
@@ -49,6 +50,7 @@ public class RoomController {
 		long roomsTotal = rooms.size();
 		headers.add("X-Total-Count", String.valueOf(roomsTotal));
 		
+		ResponseEntity<List<RoomDTO>> check =  new ResponseEntity<List<RoomDTO>> (rooms,headers,HttpStatus.OK);
 		return new ResponseEntity<List<RoomDTO>>(rooms, headers, HttpStatus.OK);
 	}
 	

@@ -147,6 +147,14 @@ public class UserController {
 		if(user.getRoles() == null) {
 			user.setRoles(new HashSet<Role>());
 		}
+		if(registrationDTO.getWorkCertificateNumber() != null)
+			if(registrationDTO.getWorkCertificateNumber().length()>0)
+			{
+				//Role roleAgent = roleService.findByRoleName("Role_AGENT");
+				//user.getRoles().add(roleAgent);
+				//TODO ANDRIJA ZAVRSI
+			}
+				
 		user.getRoles().add(role);
 		userService.signup(user);
 

@@ -8,12 +8,19 @@
 
 package com.megatravel.dto.hotel;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.megatravel.dtosoap.hotel.ImageDTO;
+import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
 
 
@@ -87,6 +94,8 @@ public class RoomDTO {
     protected HotelDTO hotelDTO;
     @XmlElement(name = "Accomodation_typeDTO", required = true)
     protected AccomodationTypeDTO accomodationTypeDTO;
+    @XmlElement(name = "ImageDTO")
+    protected List<ImageDTO> imageDTO;
     
     public RoomDTO(Room room) {
 		this.id = room.getId();
@@ -98,6 +107,10 @@ public class RoomDTO {
 		this.currentlyPrice = room.getCurrentlyPrice();
 		this.hotelDTO = room.getRoomsHotel() != null ? new HotelDTO(room.getRoomsHotel()) : null;
 		this.accomodationTypeDTO = room.getAccomodationType() != null ? new AccomodationTypeDTO(room.getAccomodationType()) : null;
+		this.imageDTO = new ArrayList<>();
+		for (Image image : room.getImages()) {
+			this.imageDTO.add(new ImageDTO(image));
+		}
     }
     
     public RoomDTO() {
@@ -263,5 +276,34 @@ public class RoomDTO {
     public void setAccomodationTypeDTO(AccomodationTypeDTO value) {
         this.accomodationTypeDTO = value;
     }
+    /**
+     * Gets the value of the imageDTO property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the imageDTO property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getImageDTO().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ImageDTO }
+     * 
+     * 
+     */
+    public List<ImageDTO> getImageDTO() {
+        if (imageDTO == null) {
+            imageDTO = new ArrayList<ImageDTO>();
+        }
+        return this.imageDTO;
+    }
+
 
 }

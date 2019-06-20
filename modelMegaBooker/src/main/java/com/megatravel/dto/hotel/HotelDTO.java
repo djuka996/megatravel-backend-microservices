@@ -18,7 +18,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import com.megatravel.dto.global_parameters.AddressDTO;
+import com.megatravel.dtosoap.hotel.ImageDTO;
 import com.megatravel.model.hotel.Hotel;
+import com.megatravel.model.hotel.Image;
 
 
 /**
@@ -77,6 +79,10 @@ public class HotelDTO {
     	this.id = hotel.getId();
     	this.rating = hotel.getRating();
     	this.address = hotel.getAddress() != null ? new AddressDTO(hotel.getAddress()) : null;
+		this.imageDTO = new ArrayList<>();
+		for (Image image : hotel.getImage()) {
+			this.imageDTO.add(new ImageDTO(image));
+		}
     }
 
     /**
