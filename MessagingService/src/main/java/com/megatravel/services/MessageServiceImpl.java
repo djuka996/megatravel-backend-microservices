@@ -67,7 +67,6 @@ public class MessageServiceImpl implements MessageService {
 		List<ChatDTO> returning = new ArrayList<>();
 		for (Chat chat : chats) {
 			ChatDTO toAdd = new ChatDTO(chat);
-
 			returning.add(toAdd);
 		}
 		return returning;
