@@ -9,9 +9,11 @@
 package com.megatravel.dtosoap.hotel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import com.megatravel.dtosoap.hotel.ImageDTO;
+import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
 
 public class RoomDTO {
@@ -36,6 +38,11 @@ public class RoomDTO {
 		this.numberOfBeds = room.getNumberOfBeds();
 		this.currentlyPrice = room.getCurrentlyPrice();
 		this.hotelDTO = room.getRoomsHotel() != null ? new HotelDTO(room.getRoomsHotel()) : null;
+		this.imagesDTO = new ArrayList<>();
+		for (Image image : room.getImages()) {
+			this.imagesDTO.add(new ImageDTO(image));
+		}
+		
 		this.accomodationTypeDTO = room.getAccomodationType() != null ? new AccomodationTypeDTO(room.getAccomodationType()) : null;
     }
     
