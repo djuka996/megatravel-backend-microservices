@@ -187,7 +187,7 @@
 		<wsdl:port name="LoginAndRegistrationPort"
 			binding="tns:LoginAndRegistrationServiceServiceSoapBinding">
 			<soap:address
-				location="http://localhost:9090/LoginAndRegistrationPort" />
+				location="http://localhost:5555/api/login/services/agentLogin"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

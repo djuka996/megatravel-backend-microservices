@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.megatravel.zuulsvr.interfaces.XmlServiceFeignClient;
+
 @Component
 public class SoapRequestCaller {
 
@@ -27,7 +29,10 @@ public class SoapRequestCaller {
 	@Autowired
 	private StringUtilities utilites;
 	
-	public ServiceResponse sendRequestTo(String fullUrl, HttpServletRequest request) {
+	@Autowired
+	private XmlServiceFeignClient service;
+	
+	public ServiceResponse sendRequestTo(String fullUrl, String recipient, HttpServletRequest request) {
 		URL url;
 		HttpURLConnection connection = null;
 		try {
@@ -35,13 +40,16 @@ public class SoapRequestCaller {
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod(request.getMethod());
 			if(request.getMethod().equals(POST)) {
-				String body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+				String message = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 				connection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
-				connection.setRequestProperty("SOAPAction", utilites.returnSoapAction(fullUrl, body));
+				connection.setRequestProperty("SOAPAction", utilites.returnSoapAction(fullUrl, message));
 				connection.setDoOutput(true);
+				boolean test = false;
+				if(test)
+					message = this.service.verifySignatureAndDecode(message, recipient).getBody();
 				OutputStream outStream = connection.getOutputStream();
 				OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream);
-				outStreamWriter.write(body);
+				outStreamWriter.write(message);
 				outStreamWriter.flush();
 				outStreamWriter.close();
 				outStream.close();

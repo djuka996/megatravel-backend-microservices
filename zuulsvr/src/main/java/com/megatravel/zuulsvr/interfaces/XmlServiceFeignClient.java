@@ -1,35 +1,23 @@
-package com.megatravel.xmlservice.controllers;
+package com.megatravel.zuulsvr.interfaces;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.xmlservice.services.CoordinatorService;
+@FeignClient("xmlservice")
+public interface XmlServiceFeignClient {
 
-@RestController
-@RequestMapping
-public class XmlConverterController {
-
-	@Autowired
-	private CoordinatorService service;
-	
 	@RequestMapping(value = "/verify", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
 	public ResponseEntity<String> verifySignatureAndDecode(@RequestBody String message, 
-														   @RequestParam("recipient") String recipient) {
-		return new ResponseEntity<String>(this.service.verifySignatureAndDecode(message, recipient), HttpStatus.OK);
-	}
+			   											   @RequestParam("recipient") String recipient);
 	
 	@RequestMapping(value = "/sign", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
 	public ResponseEntity<String> signAndEncode(@RequestBody String message,
 												@RequestParam("recipient-serial-number") String recipientSerialNumber,
-												@RequestParam("sender") String sender) {
-		return new ResponseEntity<String>(this.service.signAndEncode(message, recipientSerialNumber, sender), HttpStatus.OK);
-	}
+												@RequestParam("sender") String sender);
 	
 }

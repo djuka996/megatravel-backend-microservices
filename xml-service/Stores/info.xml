@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<KeyStorePairs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="file:/E:/Projects/helper_xsd.xsd">
+    <KeyStorePair>
+        <MicroserviceName>Mikroservis1</MicroserviceName>
+        <MicroservicePassword>sifra1</MicroservicePassword>
+    </KeyStorePair>
+    <KeyStorePair>
+        <MicroserviceName>Mikroservis2</MicroserviceName>
+        <MicroservicePassword>sifra2</MicroservicePassword>
+    </KeyStorePair>
+</KeyStorePairs>

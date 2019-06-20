@@ -14,7 +14,9 @@ import org.apache.xml.security.transforms.TransformationException;
 import org.apache.xml.security.transforms.Transforms;
 import org.apache.xml.security.utils.Constants;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,7 +37,7 @@ public class SignatureService {
 	/**
 	 * Prefiks imenskog prostora SOAP poruke.
 	 */
-	private static final String SOAP_ENV_NS_PREFIX = "SOAP-ENV";
+	private static final String SOAP_ENV_NS_PREFIX = "soapenv";
 	
 	/**
 	 * Tag zaglavlja SOAP poruke.
@@ -52,7 +54,7 @@ public class SignatureService {
 	 */
 	private static final String SOAP_BODY = "Body";
 	
-	public MySigningUtility() {
+	public SignatureService() {
 		Security.addProvider(new BouncyCastleProvider());
 		org.apache.xml.security.Init.init();
 	}
@@ -77,11 +79,10 @@ public class SignatureService {
 			signature.sign(privateKey);
 			return document;
 		} catch (XMLSecurityException e) {
-			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error ocurred while signing the document.");
 		} catch (DOMException e) {
-			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "An error ocurred while modifying the DOM tree! Please check your XML file.");
 		}
-		return null;
 	}	
 
 	/**
@@ -115,7 +116,8 @@ public class SignatureService {
 	
 
 	/**
-	 * Proverava digitalni potpis prosleđenog dokumenta.
+	 * Proverava digitalni potpis prosleđenog dokumenta. Pošiljalac se sam navodi unutar same SOAP poruke, te ga je iz nje
+	 * moguće pročitati radi validacije digitalnog potpisa.
 	 * @param document - dokument
 	 * @return <code>True</code> ukoliko je potpis ispravan, <code>False</code> ukoliko nije
 	 */
@@ -125,14 +127,16 @@ public class SignatureService {
 			XMLSignature signature = new XMLSignature(signatureElement, null);
 			KeyInfo keyInfo = signature.getKeyInfo();
 			if(keyInfo != null) {
-				keyInfo = this.registerResolvers(keyInfo);
+				keyInfo.registerInternalKeyResolver(new RSAKeyValueResolver());
+				keyInfo.registerInternalKeyResolver(new X509CertificateResolver());
 				Certificate certificate = this.getCertificateFromKeyInfo(keyInfo);
 				return signature.checkSignatureValue((X509Certificate) certificate);
+			} else {
+				return false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An error ocurred while verifying digital signature.");
 		}
-		return false;
 	}
 
 	/**
@@ -164,21 +168,8 @@ public class SignatureService {
 	}
 
 	/**
-	 * Registruje potrebne <code>Resolver</code>-e neophodne za izvlačenje sertifikata.
-	 * @param keyInfo
-	 * @return <code>KeyInfo</code> kod koga su registrovani <code>Resolver</code>-i
-	 */
-	private KeyInfo registerResolvers(KeyInfo keyInfo) {
-		keyInfo.registerInternalKeyResolver(new RSAKeyValueResolver());
-		keyInfo.registerInternalKeyResolver(new X509CertificateResolver());
-		return keyInfo;
-	}
-
-
-
-	/**
 	 * Priprema neophodne transformacije.
-	 * @param transforms - omotač koraka transformacija
+	 * @param document - dokument koji se priprema
 	 * @return Pripremljeni omotač
 	 */
 	private Transforms prepareTransforms(Document document) {

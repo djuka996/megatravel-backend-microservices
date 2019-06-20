@@ -16,6 +16,7 @@ public class StringUtilities {
 	public static final String SOAP_PREFIX = "/services";
 	public static final String WSDL_PORT = "soap:address location";
 	public static final String WSDL_SUFFIX = "?wsdl";
+	public static final String XSD_SUFFIX = "?xsd";
 	public static final String INT_PREFIX = "<int:";
 	
 	@Autowired
@@ -65,10 +66,26 @@ public class StringUtilities {
 	}
 	
 	public String returnSoapAction(String url, String soap) {
-		int elementIndex = soap.indexOf(INT_PREFIX);
+		int elementIndex = soap.indexOf("Body");
 		int locationBeginIndex = soap.indexOf(':', elementIndex);
-		int locationEndIndex = soap.indexOf('>', elementIndex);
-		return url + "#" + soap.substring(locationBeginIndex + 1, locationEndIndex);
+		int locationEndIndex = soap.indexOf(' ', locationBeginIndex);
+		String result = url + "#" + soap.substring(locationBeginIndex + 1, locationEndIndex);
+		return this.fixQuotesAroundSoapAction(result);
+	}
+	
+	private String fixQuotesAroundSoapAction(String soapAction) {
+	    if(soapAction == null || soapAction.startsWith("\"") && soapAction.endsWith("\"")) {
+	        return soapAction;
+	    } else {
+	        String fixedSoapAction = soapAction;
+	        if(!soapAction.startsWith("\"")) {
+	            fixedSoapAction = "\"" + soapAction;
+	        }
+	        if(!soapAction.endsWith("\"")) {
+	            fixedSoapAction = fixedSoapAction + "\"";
+	        }
+	        return fixedSoapAction;
+	    }
 	}
 	
 }
