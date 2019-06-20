@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.model.system_user_info.Chat;
+import com.megatravel.model.system_user_info.Message;
 
 public class ChatDTO {
 
@@ -25,10 +26,12 @@ public class ChatDTO {
     }
     
     public ChatDTO(Chat chat) {
-    	HotelDTO hotelDTO = new HotelDTO();
-    	hotelDTO.setId(chat.getChatsHotel().getId());
+    	HotelDTO hotelDTO = new HotelDTO(chat.getChatsHotel());
+    	this.messages = new ArrayList<>();
     	this.hotelDTO = hotelDTO;
     	this.id = chat.getId();
+    	for(Message message : chat.getMessages())
+			this.messages.add(new MessageDTO(message));
     }
     
     /**
