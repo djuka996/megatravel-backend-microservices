@@ -32,6 +32,10 @@ public class UnitPriceInformation {
     @ManyToOne()
     protected PriceList priceList;
     
+    public UnitPriceInformation() {
+    	super();
+    }   	
+    
     public UnitPriceInformation(UnitPriceInformationDTO unitPriceInformationDTO) {
 		this.id = unitPriceInformationDTO.getId();
 		this.price = unitPriceInformationDTO.getPrice() != null ? new CurrencyPrice(unitPriceInformationDTO.getPrice()) : null;

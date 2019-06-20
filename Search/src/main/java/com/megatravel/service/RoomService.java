@@ -14,9 +14,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configuration.MyLogger;
 import com.megatravel.model.global_parameters.Address;
+import com.megatravel.model.global_parameters.AmountType;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.repository.AdressRepository;
+import com.megatravel.repository.AmountTypeRepository;
 import com.megatravel.repository.RoomRepository;
+import com.netflix.discovery.converters.Auto;
 
 @Service
 public class RoomService {
@@ -26,6 +29,9 @@ public class RoomService {
 
 	@Autowired
 	AdressRepository adressRepository;
+	
+	@Autowired
+	private AmountTypeRepository amountTypeRepository;
 
 	public final double degreToKilometers = 111.32;
 
@@ -74,8 +80,10 @@ public class RoomService {
 		Page<Room> rooms = null;
 		if (orderByValue.equals("NONE")) 
 		{
-			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
-					accomodationtype, category, pageable);
+			//TODO Stefan FIX IT
+			//rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
+					//accomodationtype, category, pageable);
+			rooms = roomRepository.findAll(pageable);
 		} 
 		else if (orderByValue.equals("PRICE")) 
 		{
@@ -107,7 +115,12 @@ public class RoomService {
 		if (rooms.hasContent()) 
 		{
 			MyLogger.info("findAll findAllAdvanceSearch", true, null, null, "All Room returned");
-
+			for (Room room : rooms) {
+				
+				AmountType found = amountTypeRepository.findCurrentlyPriced(room.getId());
+				if(found != null)
+					room.setCurrentlyPrice(found.getPrice().doubleValue());
+			}
 			return calculateDistanceFromCity(rooms.getContent(), distance, city);
 		} 
 		else 
