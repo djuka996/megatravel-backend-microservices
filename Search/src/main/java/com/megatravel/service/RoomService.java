@@ -18,8 +18,8 @@ import com.megatravel.model.global_parameters.AmountType;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.repository.AdressRepository;
 import com.megatravel.repository.AmountTypeRepository;
+import com.megatravel.repository.ExtraOptionsRepository;
 import com.megatravel.repository.RoomRepository;
-import com.netflix.discovery.converters.Auto;
 
 @Service
 public class RoomService {
@@ -29,6 +29,9 @@ public class RoomService {
 
 	@Autowired
 	AdressRepository adressRepository;
+	
+	@Autowired
+	ExtraOptionsRepository extraOptionsRepository;
 	
 	@Autowired
 	private AmountTypeRepository amountTypeRepository;
@@ -77,12 +80,18 @@ public class RoomService {
 	public List<Room> findAllAdvanceSearch(String city, Date beginDate, Date endDate, int numberOfPeople,
 			String accomodationtype, double category, List<String> additionalService, double distance,
 			String orderByValue, Pageable pageable) {
+		if(additionalService.isEmpty()) {
+			extraOptionsRepository.findAll().forEach(extraOption -> {
+				additionalService.add(extraOption.getName());
+			});
+		}
+		
 		Page<Room> rooms = null;
 		if (orderByValue.equals("NONE")) 
 		{
 			//TODO Stefan FIX IT
-			//rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
-					//accomodationtype, category, pageable);
+			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
 			rooms = roomRepository.findAll(pageable);
 		} 
 		else if (orderByValue.equals("PRICE")) 
