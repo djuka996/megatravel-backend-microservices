@@ -1,9 +1,6 @@
 package com.megatravel.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 
 import javax.jws.WebService;
 
@@ -14,7 +11,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.megatravel.configurations.WebApplicationContextLocator;
-import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserLoginDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserRegistrationDTO;
 import com.megatravel.interfaces.LoginAndRegistrationService;
@@ -109,19 +105,7 @@ public class LoginAndRegistrationImpl implements LoginAndRegistrationService {
 		
 		System.out.println("Uspesno dodat korisnik:" + user.getEmail());
 		//uspeo
-	}
-
-
-	@Override
-	public List<SystemUserInfoDTO> getUsersForSync(Date start, Date end) {
-		List<User> users = this.userService.getUsersForSync(start, end);
-		List<SystemUserInfoDTO> result = new ArrayList<SystemUserInfoDTO>();
-		for(User user : users)
-			result.add(new SystemUserInfoDTO(user));
-		return result;
-	}
-	
-	
+	}	
 	
 	/*
 	 @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")

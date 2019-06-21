@@ -10,6 +10,7 @@ import javax.xml.ws.Endpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.megatravel.services.MessagesDatabaseSyncingServiceImpl;
 import com.megatravel.services.MessageServiceImpl;
 import com.netflix.appinfo.ApplicationInfoManager;
 
@@ -27,6 +28,7 @@ public class DynamicEndpointPublisher {
 		int port = this.getEmptyPort();
 		map.put(SOAP_PORT, Integer.toString(port));
 		publishEndpoint(port, MessageServiceImpl.ENDPOINT, MessageServiceImpl.class);
+		publishEndpoint(port, MessagesDatabaseSyncingServiceImpl.ENDPOINT, MessagesDatabaseSyncingServiceImpl.class);
 	}
 	
 	private int getEmptyPort() {

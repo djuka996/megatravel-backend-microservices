@@ -1,5 +1,6 @@
 package com.megatravel.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +20,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	@Query("SELECT AVG(r.rating) FROM UserReview r WHERE r.room.id = ?1 AND r.approved = true")
 	double updateRating(Long id);
+
+	List<Room> findAllByLastChangedTimeBetween(Date start, Date end);
 	
 }

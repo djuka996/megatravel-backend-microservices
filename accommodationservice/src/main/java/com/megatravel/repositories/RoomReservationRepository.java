@@ -24,4 +24,6 @@ public interface RoomReservationRepository extends JpaRepository<RoomReservation
 			+ "(Select rr.id from RoomReservation rr where rr.roomReservation.id = r.roomReservation.id AND "
 			+ "((rr.beginDate >= ?2 AND rr.endDate <= ?3) OR (rr.beginDate >= ?2 AND rr.beginDate <= ?3) OR (rr.endDate >= ?2 AND rr.endDate <= ?3) ))")
 	List<RoomReservation> findOverlapsingReservations(Long roomId,Date beginDate,Date endDate);
+
+	List<RoomReservation> findAllByLastChangedTimeBetween(Date start, Date end);
 }
