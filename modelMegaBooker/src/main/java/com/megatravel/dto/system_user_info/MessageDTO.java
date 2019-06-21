@@ -72,6 +72,8 @@ public class MessageDTO {
     protected SystemUserInfoDTO sender;
     @XmlElement(name = "System_user_infoDTO", required = true)
     protected SystemUserInfoDTO receiver;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.
@@ -224,5 +226,13 @@ public class MessageDTO {
     public void setReceiver(SystemUserInfoDTO value) {
         this.receiver = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

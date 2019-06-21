@@ -1,5 +1,6 @@
 package com.megatravel.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +20,7 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
 	List<Message> findAllByChat_IdOrderByDateDesc(Long chatId);
 	
 	Message findFirstByChat_IdOrderByDateDesc(Long chatId);
+
+	List<Message> findAllByLastChangedTimeBetween(Date start, Date end);
 
 }

@@ -8,6 +8,8 @@
 
 package com.megatravel.dtosoap.global_parameters;
 
+import java.util.Date;
+
 import com.megatravel.model.global_parameters.Address;
 
 public class AddressDTO {
@@ -18,6 +20,7 @@ public class AddressDTO {
     protected double coordinateX;
     protected double coordinateY;
     protected long id;
+    protected Date lastChangedTime;
     
     public AddressDTO() {
     	
@@ -31,6 +34,7 @@ public class AddressDTO {
     	this.streetNumber = address.getStreetNumber();
     	this.coordinateX = address.getCoordinateX();
     	this.coordinateY = address.getCoordinateY();
+    	this.lastChangedTime = address.getLastChangedTime();
     }
     
     public AddressDTO(com.megatravel.dtosoap.global_parameters.AddressDTO address) {

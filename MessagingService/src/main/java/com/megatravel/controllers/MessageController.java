@@ -49,5 +49,11 @@ public class MessageController {
 	public ResponseEntity<Boolean> markReadChat(@PathVariable("id") Long chatId) {
 		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(chatId), HttpStatus.ACCEPTED);
 	}
-		
+	
+	@RequestMapping(value = "/users/{user-id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<ChatDTO>> getChatsOfUser(@PathVariable("user-id") Long userId) {
+		// TODO : Implementirati tako da vrati listu četova nekog korisnika
+		return null;
+	}
+	
 }

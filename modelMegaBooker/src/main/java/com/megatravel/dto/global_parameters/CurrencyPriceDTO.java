@@ -8,6 +8,8 @@
 
 package com.megatravel.dto.global_parameters;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -45,6 +47,8 @@ public class CurrencyPriceDTO {
     protected long id;
     @XmlElement(name = "Amount", required = true)
     protected AmountTypeDTO amount;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.
@@ -85,5 +89,13 @@ public class CurrencyPriceDTO {
     public void setAmount(AmountTypeDTO value) {
         this.amount = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

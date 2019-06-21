@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.megatravel.dto.room_reservation.RoomReservationDTO;
@@ -48,6 +49,9 @@ public class RoomReservation {
     protected UserReview userReview;
     @ManyToOne()
     protected User usersReservation;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
     
     public RoomReservation() {
     	
@@ -130,5 +134,13 @@ public class RoomReservation {
 	}
 	public void setUsersReservation(User usersReservation) {
 		this.usersReservation = usersReservation;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

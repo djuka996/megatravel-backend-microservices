@@ -9,6 +9,7 @@
 package com.megatravel.dto.system_user_info;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -83,6 +84,8 @@ public class SystemUserInfoDTO {
     protected String email;
     @XmlElement(name = "Active")
     protected boolean active;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
     @XmlElement(name = "Adress", required = true)
     protected AddressDTO adress;
     @XmlElement(name = "Work_certificate_number", required = true)

@@ -2,6 +2,7 @@ package com.megatravel.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -165,4 +166,9 @@ public class UserService {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested role with id " + roleId + " doesn't exist.");
 		}	
 	}
+	
+	public List<User> getUsersForSync(Date start, Date end) {
+		return this.userRepository.findAllByLastChangedTimeBetween(start, end);
+	}
+	
 }

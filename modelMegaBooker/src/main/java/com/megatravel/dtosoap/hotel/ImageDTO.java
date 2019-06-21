@@ -8,12 +8,15 @@
 
 package com.megatravel.dtosoap.hotel;
 
+import java.util.Date;
+
 import com.megatravel.model.hotel.Image;
 
 public class ImageDTO {
 
     protected long id;
     protected String filePath;
+    protected Date lastChangedTime;
     
     public ImageDTO() {
     	
@@ -22,6 +25,7 @@ public class ImageDTO {
     public ImageDTO(Image image) {
 		this.id = image.getId();
 		this.filePath = image.getFilePath();
+		this.lastChangedTime = image.getLastChangedTime();
 	}
 
 	/**

@@ -9,7 +9,9 @@
 package com.megatravel.dto.system_user_info;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -55,7 +57,9 @@ public class ChatDTO {
     protected HotelDTO hotelDTO;
     @XmlElement(name = "MessageDTO", required = true)
     protected List<MessageDTO> messages;
-
+    // TODO : Anotacija mozda?
+	protected Date lastChangedTime;
+    
     /**
      * Gets the value of the id property.
      * 
@@ -124,5 +128,13 @@ public class ChatDTO {
         }
         return this.messages;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

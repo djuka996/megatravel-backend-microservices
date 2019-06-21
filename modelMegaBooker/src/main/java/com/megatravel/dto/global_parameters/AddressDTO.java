@@ -8,6 +8,8 @@
 
 package com.megatravel.dto.global_parameters;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -81,6 +83,8 @@ public class AddressDTO {
     protected double coordinateY;
     @XmlElement(name = "Id")
     protected long id;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
     
     public AddressDTO() {
     	
@@ -94,6 +98,7 @@ public class AddressDTO {
     	this.streetNumber = address.getStreetNumber();
     	this.coordinateX = address.getCoordinateX();
     	this.coordinateY = address.getCoordinateY();
+    	this.lastChangedTime = address.getLastChangedTime();
     }
 
     /**
@@ -231,5 +236,13 @@ public class AddressDTO {
     public void setId(long value) {
         this.id = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

@@ -9,6 +9,7 @@
 package com.megatravel.dtosoap.system_user_info;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.megatravel.dtosoap.hotel.HotelDTO;
@@ -20,6 +21,7 @@ public class ChatDTO {
     protected long id;
     protected HotelDTO hotelDTO;
     protected List<MessageDTO> messages;
+    protected Date lastChangedTime;
 
     public ChatDTO() {
     	super();
@@ -30,6 +32,7 @@ public class ChatDTO {
     	this.messages = new ArrayList<>();
     	this.hotelDTO = hotelDTO;
     	this.id = chat.getId();
+    	this.lastChangedTime = chat.getLastChangedTime();
     	for(Message message : chat.getMessages())
 			this.messages.add(new MessageDTO(message));
     }

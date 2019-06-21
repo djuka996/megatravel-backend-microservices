@@ -9,6 +9,7 @@
 package com.megatravel.dto.global_parameters;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -55,6 +56,8 @@ public class RoleDTO {
     protected String roleName;
     @XmlElement(required = true)
     protected List<PrivilegeDTO> privileges;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
 
 public RoleDTO() {
     	
@@ -63,6 +66,7 @@ public RoleDTO() {
     public RoleDTO(Role tempRole) {
 		this.id = tempRole.getId();
 		this.roleName = tempRole.getRoleName();
+		this.lastChangedTime = tempRole.getLastChangedTime();
 		this.privileges = new ArrayList<>();
 		if(tempRole.getPrivileges() != null) {
 			for (Privilege tempPrivilege: tempRole.getPrivileges()) {
@@ -139,5 +143,13 @@ public RoleDTO() {
         }
         return this.privileges;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

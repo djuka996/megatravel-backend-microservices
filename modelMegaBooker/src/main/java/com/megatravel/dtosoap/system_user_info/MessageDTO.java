@@ -20,6 +20,7 @@ public class MessageDTO {
     protected Date date;
     protected SystemUserInfoDTO sender;
     protected SystemUserInfoDTO receiver;
+    protected Date lastChangedTime;
 
     
     public MessageDTO() {
@@ -32,6 +33,7 @@ public class MessageDTO {
     	this.text = message.getText();
     	this.opened = message.isOpened();
     	this.date = message.getDate();
+    	this.lastChangedTime = message.getLastChangedTime();
     	
     	this.sender = new SystemUserInfoDTO();
     	this.sender.id = message.getSender().getId();

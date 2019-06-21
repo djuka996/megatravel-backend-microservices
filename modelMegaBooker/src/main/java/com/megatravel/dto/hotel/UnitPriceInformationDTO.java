@@ -8,6 +8,8 @@
 
 package com.megatravel.dto.hotel;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -53,7 +55,9 @@ public class UnitPriceInformationDTO {
     protected CurrencyPriceDTO price;
     @XmlElement(name = "Room")
     protected long room;
-
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
+    
     /**
      * Gets the value of the id property.
      * 
@@ -109,5 +113,13 @@ public class UnitPriceInformationDTO {
     public void setRoom(long value) {
         this.room = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

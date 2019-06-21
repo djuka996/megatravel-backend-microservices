@@ -14,6 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.system_user_info.UserReviewDTO;
 import com.megatravel.model.hotel.Room;
@@ -32,6 +35,9 @@ public class UserReview {
 	@OneToOne()
 	protected User user;
 	protected boolean approved;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
 	public UserReview() {
 
 	}
@@ -111,6 +117,14 @@ public class UserReview {
 
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 	
 

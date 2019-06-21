@@ -61,6 +61,8 @@ public class PriceListDTO {
     protected Date endDate;
     @XmlElement(name = "Unit_price_informationDTO")
     protected List<UnitPriceInformationDTO> unitPriceInformationDTO;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.
@@ -154,5 +156,13 @@ public class PriceListDTO {
         }
         return this.unitPriceInformationDTO;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }
