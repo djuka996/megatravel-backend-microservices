@@ -157,5 +157,26 @@ public class MessageServiceImpl implements MessageService {
 		else 
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Invalid chatId sent to mark read");
 	}
+
+
+	@Override
+	@WebMethod
+	public List<ChatDTO> getChatsForSync(Date start, Date end) {
+		List<Chat> chats = chatRepository.findAllByLastChangedTimeBetween(start, end);
+		List<ChatDTO> result = new ArrayList<ChatDTO>();
+		for(Chat chat : chats)
+			result.add(new ChatDTO(chat));
+		return result;
+	}
+
+
+	@Override
+	public List<MessageDTO> getMessagesForSync(Date start, Date end) {
+		List<Message> messages = this.messageRepository.findAllByLastChangedTimeBetween(start, end);
+		List<MessageDTO> result = new ArrayList<MessageDTO>();
+		for(Message message : messages)
+			result.add(new MessageDTO(message));
+		return result;
+	}
 	
 }

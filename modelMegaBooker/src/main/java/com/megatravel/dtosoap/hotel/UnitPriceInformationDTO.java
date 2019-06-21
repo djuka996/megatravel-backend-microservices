@@ -8,6 +8,8 @@
 
 package com.megatravel.dtosoap.hotel;
 
+import java.util.Date;
+
 import com.megatravel.dtosoap.global_parameters.CurrencyPriceDTO;
 
 public class UnitPriceInformationDTO {
@@ -15,6 +17,7 @@ public class UnitPriceInformationDTO {
     protected long id;
     protected CurrencyPriceDTO price;
     protected long room;
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.

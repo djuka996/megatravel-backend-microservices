@@ -14,6 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.system_user_info.MessageDTO;
 
@@ -26,6 +29,9 @@ public class Message {
 	protected String caption;
 	protected String text;
 	protected boolean opened;
+	@Temporal(TemporalType.TIMESTAMP)
+	@NotNull
+	protected Date lastChangedTime;
 	protected Date date;
 	@ManyToOne()
 	protected User sender;
@@ -133,5 +139,13 @@ public class Message {
 
 	public void setChat(Chat chat) {
 		this.chat = chat;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

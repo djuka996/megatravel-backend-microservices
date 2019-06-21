@@ -8,6 +8,8 @@
 
 package com.megatravel.dto.hotel;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -48,6 +50,8 @@ public class ImageDTO {
     protected long id;
     @XmlElement(required = true)
     protected String filePath;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
     
     public ImageDTO() {
     	
@@ -56,6 +60,7 @@ public class ImageDTO {
     public ImageDTO(Image image) {
 		this.id = image.getId();
 		this.filePath = image.getFilePath();
+		this.lastChangedTime = image.getLastChangedTime();
 	}
 
 	/**
@@ -97,5 +102,13 @@ public class ImageDTO {
     public void setFilePath(String value) {
         this.filePath = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

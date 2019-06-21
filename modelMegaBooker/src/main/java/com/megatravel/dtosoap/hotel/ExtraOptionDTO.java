@@ -8,12 +8,15 @@
 
 package com.megatravel.dtosoap.hotel;
 
+import java.util.Date;
+
 import com.megatravel.model.hotel.ExtraOption;
 
 public class ExtraOptionDTO {
 
     protected long id;
     protected String name;
+    protected Date lastChangedTime;
     
     public ExtraOptionDTO() {
     	
@@ -22,6 +25,7 @@ public class ExtraOptionDTO {
     public ExtraOptionDTO(ExtraOption option) {
     	this.id = option.getId();
     	this.name = option.getName();
+    	this.lastChangedTime = option.getLastChangedTime();
 	}
 
 	/**

@@ -24,7 +24,8 @@ public class RoomReservationDTO {
     protected RoomDTO roomDTO;
     protected BigDecimal price;
     protected boolean allowedCancel;
-
+    protected Date lastChangedTime;
+    
 	public RoomReservationDTO(){
     	super();
     }
@@ -34,6 +35,7 @@ public class RoomReservationDTO {
     	this.endDate = reservation.getEndDate();
     	this.realised = reservation.isRealised();
     	this.price = reservation.getPrice();
+    	this.lastChangedTime = reservation.getLastChangedTime();
     	this.roomDTO = (reservation.getRoomReservation()==null)?null: new RoomDTO(reservation.getRoomReservation());
     }
     

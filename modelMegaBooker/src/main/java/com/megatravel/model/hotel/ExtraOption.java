@@ -8,6 +8,7 @@
 
 package com.megatravel.model.hotel;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -15,6 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.hotel.ExtraOptionDTO;
 
@@ -27,6 +31,9 @@ public class ExtraOption {
     protected String name;
     @OneToMany(mappedBy = "extraOption")
     protected Set<HotelExtraOption> hotelExtraOptions;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
     
     public ExtraOption() {
     	
@@ -59,6 +66,14 @@ public class ExtraOption {
 	}
 	public void setHotelExtraOptions(Set<HotelExtraOption> hotelExtraOptions) {
 		this.hotelExtraOptions = hotelExtraOptions;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 
 }

@@ -8,6 +8,8 @@
 
 package com.megatravel.dto.hotel;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -49,6 +51,8 @@ public class ExtraOptionDTO {
     protected long id;
     @XmlElement(name = "Name", required = true)
     protected String name;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
     
     public ExtraOptionDTO() {
     	
@@ -57,6 +61,7 @@ public class ExtraOptionDTO {
     public ExtraOptionDTO(ExtraOption option) {
     	this.id = option.getId();
     	this.name = option.getName();
+    	this.lastChangedTime = option.getLastChangedTime();
 	}
 
 	/**
@@ -98,5 +103,13 @@ public class ExtraOptionDTO {
     public void setName(String value) {
         this.name = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

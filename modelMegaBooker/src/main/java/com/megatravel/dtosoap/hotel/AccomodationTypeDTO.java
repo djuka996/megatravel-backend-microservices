@@ -8,12 +8,15 @@
 
 package com.megatravel.dtosoap.hotel;
 
+import java.util.Date;
+
 import com.megatravel.model.hotel.AccomodationType;
 
 public class AccomodationTypeDTO {
 
     protected long id;
     protected String name;
+    protected Date lastChangedTime;
     
     public AccomodationTypeDTO() {
     	
@@ -22,6 +25,7 @@ public class AccomodationTypeDTO {
     public AccomodationTypeDTO(AccomodationType accomodationType) {
     	this.id = accomodationType.getId();
     	this.name = accomodationType.getName();
+    	this.lastChangedTime = accomodationType.getLastChangedTime();
     }
 
     /**

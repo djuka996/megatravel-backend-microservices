@@ -9,6 +9,7 @@
 package com.megatravel.dto.hotel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -70,6 +71,8 @@ public class HotelDTO {
     protected List<ImageDTO> imageDTO;
     @XmlElement(name = "Price_listDTO")
     protected List<PriceListDTO> priceListDTO;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
     
     public HotelDTO() {
     	
@@ -83,6 +86,7 @@ public class HotelDTO {
 		for (Image image : hotel.getImage()) {
 			this.imageDTO.add(new ImageDTO(image));
 		}
+		this.lastChangedTime = hotel.getLastChangedTime();
     }
 
     /**
@@ -227,5 +231,13 @@ public class HotelDTO {
         }
         return this.priceListDTO;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

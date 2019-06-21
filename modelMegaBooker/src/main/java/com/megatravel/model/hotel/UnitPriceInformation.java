@@ -8,12 +8,17 @@
 
 package com.megatravel.model.hotel;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.hotel.UnitPriceInformationDTO;
 import com.megatravel.model.global_parameters.CurrencyPrice;
@@ -31,6 +36,9 @@ public class UnitPriceInformation {
     protected Room room;
     @ManyToOne()
     protected PriceList priceList;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
     
     public UnitPriceInformation() {
     	super();
@@ -79,5 +87,13 @@ public class UnitPriceInformation {
 
 	public void setPriceList(PriceList priceList) {
 		this.priceList = priceList;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

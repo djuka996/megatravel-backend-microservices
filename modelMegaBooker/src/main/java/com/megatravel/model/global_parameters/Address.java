@@ -7,10 +7,15 @@
 
 package com.megatravel.model.global_parameters;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.global_parameters.AddressDTO;
 
@@ -25,7 +30,10 @@ public class Address {
 	protected int streetNumber;
 	protected double coordinateX;
 	protected double coordinateY;
-
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
+	
 	public Address() {
 
 	}
@@ -117,6 +125,14 @@ public class Address {
 
 	public void setCoordinateY(double coordinateY) {
 		this.coordinateY = coordinateY;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 
 }

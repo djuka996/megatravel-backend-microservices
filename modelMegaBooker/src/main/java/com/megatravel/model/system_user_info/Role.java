@@ -1,6 +1,7 @@
 package com.megatravel.model.system_user_info;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -26,6 +29,10 @@ public class Role {
 	@NotNull
 	@Size(min=StaticData.minLength, max=StaticData.lengthValue)
 	private String roleName;
+	
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
 	
 	@ManyToMany(mappedBy = "roles")
     private Collection<User> users;
@@ -97,5 +104,13 @@ public class Role {
 
 	public void setPrivileges(Set<Privilege> privileges) {
 		this.privileges = privileges;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

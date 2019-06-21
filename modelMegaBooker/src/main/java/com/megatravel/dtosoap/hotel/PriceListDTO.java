@@ -18,7 +18,8 @@ public class PriceListDTO {
     protected Date beginDate;
     protected Date endDate;
     protected List<UnitPriceInformationDTO> unitPriceInformationDTO;
-
+    protected Date lastChangedTime;
+    
     /**
      * Gets the value of the id property.
      * 

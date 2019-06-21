@@ -16,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.hotel.PriceListDTO;
 
@@ -31,7 +34,10 @@ public class PriceList {
 	protected Set<UnitPriceInformation> unitPriceInformation;
 	@ManyToOne()
 	protected Hotel hotelPriceList;
-
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
+	
 	public PriceList() {
 
 	}
@@ -87,5 +93,13 @@ public class PriceList {
 
 	public void setHotelPriceList(Hotel hotelPriceList) {
 		this.hotelPriceList = hotelPriceList;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

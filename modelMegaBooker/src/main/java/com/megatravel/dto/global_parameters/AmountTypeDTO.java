@@ -9,6 +9,8 @@
 package com.megatravel.dto.global_parameters;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -50,6 +52,8 @@ public class AmountTypeDTO {
     protected BigDecimal price;
     @XmlElement(required = true)
     protected String currency;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.
@@ -114,5 +118,13 @@ public class AmountTypeDTO {
     public void setCurrency(String value) {
         this.currency = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

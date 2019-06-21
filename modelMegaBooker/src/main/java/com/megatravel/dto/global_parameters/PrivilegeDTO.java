@@ -8,6 +8,8 @@
 
 package com.megatravel.dto.global_parameters;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -47,6 +49,8 @@ public class PrivilegeDTO {
     protected long id;
     @XmlElement(required = true)
     protected String name;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
 
     public PrivilegeDTO() {
     	
@@ -55,6 +59,7 @@ public class PrivilegeDTO {
 	public PrivilegeDTO(Privilege tempPrivilege) {
     	this.id = tempPrivilege.getId();
     	this.name = tempPrivilege.getName();
+    	this.lastChangedTime = tempPrivilege.getLastChangedTime();
 	}
 
 	/**
@@ -92,6 +97,14 @@ public class PrivilegeDTO {
 	 */
 	public void setName(String value) {
 		this.name = value;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 
 }

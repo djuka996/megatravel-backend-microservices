@@ -8,12 +8,15 @@
 
 package com.megatravel.dtosoap.global_parameters;
 
+import java.util.Date;
+
 import com.megatravel.model.system_user_info.Privilege;
 
 public class PrivilegeDTO {
 
     protected long id;
     protected String name;
+    protected Date lastChangedTime;
 
     public PrivilegeDTO() {
     	
@@ -22,6 +25,7 @@ public class PrivilegeDTO {
 	public PrivilegeDTO(Privilege tempPrivilege) {
     	this.id = tempPrivilege.getId();
     	this.name = tempPrivilege.getName();
+    	this.lastChangedTime = tempPrivilege.getLastChangedTime();
 	}
 
 	/**

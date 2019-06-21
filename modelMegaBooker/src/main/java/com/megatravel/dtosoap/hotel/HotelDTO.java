@@ -9,6 +9,7 @@
 package com.megatravel.dtosoap.hotel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
@@ -23,6 +24,7 @@ public class HotelDTO {
     protected List<ExtraOptionDTO> extraOptionDTO;
     protected List<ImageDTO> imageDTO;
     protected List<PriceListDTO> priceListDTO;
+    protected Date lastChangedTime;
     
     public HotelDTO() {
     	
@@ -31,6 +33,7 @@ public class HotelDTO {
     public HotelDTO(Hotel hotel) {
     	this.id = hotel.getId();
     	this.rating = hotel.getRating();
+    	this.lastChangedTime = hotel.getLastChangedTime();
     	this.address = hotel.getAddress() != null ? new AddressDTO(hotel.getAddress()) : null;
 		this.imageDTO = new ArrayList<>();
 		for (Image image : hotel.getImage()) {

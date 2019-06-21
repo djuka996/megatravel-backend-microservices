@@ -9,6 +9,7 @@
 package com.megatravel.dtosoap.hotel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class RoomDTO {
     protected HotelDTO hotelDTO;
     protected AccomodationTypeDTO accomodationTypeDTO;
     protected List<ImageDTO> imagesDTO;
+    protected Date lastChangedTime;
     
     public RoomDTO(Room room) {
 		this.id = room.getId();
@@ -37,6 +39,7 @@ public class RoomDTO {
 		this.capacity = room.getCapacity();
 		this.numberOfBeds = room.getNumberOfBeds();
 		this.currentlyPrice = room.getCurrentlyPrice();
+		this.lastChangedTime = room.getLastChangedTime();
 		this.hotelDTO = room.getRoomsHotel() != null ? new HotelDTO(room.getRoomsHotel()) : null;
 		this.imagesDTO = new ArrayList<>();
 		for (Image image : room.getImages()) {

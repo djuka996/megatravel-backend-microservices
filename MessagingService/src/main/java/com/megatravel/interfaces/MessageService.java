@@ -1,5 +1,6 @@
 package com.megatravel.interfaces;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -25,5 +26,10 @@ public interface MessageService {
 	@WebMethod
 	Boolean markRead(@WebParam(name="ChatId")Long chatId);
 		
+	@WebMethod
+	List<ChatDTO> getChatsForSync(@WebParam(name = "start") Date start, @WebParam(name = "end") Date end);
+	
+	@WebMethod
+	List<MessageDTO> getMessagesForSync(@WebParam(name = "start") Date start, @WebParam(name = "end") Date end);
 	
 }

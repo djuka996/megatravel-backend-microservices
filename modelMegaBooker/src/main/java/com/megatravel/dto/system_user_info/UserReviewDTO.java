@@ -69,7 +69,9 @@ public class UserReviewDTO {
     protected RoomDTO roomDTO;
     @XmlElement(name = "System_user_infoDTO")
     protected SystemUserInfoDTO systemUserInfoDTO;
-
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
+    
     /**
      * Gets the value of the id property.
      * 
@@ -197,5 +199,13 @@ public class UserReviewDTO {
     public void setSystemUserInfoDTO(SystemUserInfoDTO value) {
         this.systemUserInfoDTO = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 }

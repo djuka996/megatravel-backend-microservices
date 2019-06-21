@@ -21,6 +21,7 @@ public class UserReviewDTO {
     protected RoomDTO roomDTO;
     protected SystemUserInfoDTO systemUserInfoDTO;
     protected boolean approved;
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.

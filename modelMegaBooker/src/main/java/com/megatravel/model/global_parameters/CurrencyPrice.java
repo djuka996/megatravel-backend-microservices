@@ -7,11 +7,16 @@
 
 package com.megatravel.model.global_parameters;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.global_parameters.CurrencyPriceDTO;
 
@@ -23,6 +28,9 @@ public class CurrencyPrice {
 	protected Long id;
 	@OneToOne()
 	protected AmountType amount;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
 
 	public CurrencyPrice() {
 
@@ -53,6 +61,14 @@ public class CurrencyPrice {
 
 	public void setAmount(AmountType amount) {
 		this.amount = amount;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 
 }

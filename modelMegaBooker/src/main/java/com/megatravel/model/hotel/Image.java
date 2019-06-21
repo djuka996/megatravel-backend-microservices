@@ -8,11 +8,16 @@
 
 package com.megatravel.model.hotel;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.hotel.ImageDTO;
 
@@ -27,6 +32,9 @@ public class Image {
     protected Room roomImage;
     @ManyToOne()
     protected Hotel hotel;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastChangedTime;
     
     public Image() {
     	
@@ -68,5 +76,13 @@ public class Image {
 	}
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
+	}
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
 	}
 }

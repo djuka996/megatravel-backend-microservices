@@ -74,6 +74,9 @@ public class RoomReservationDTO {
     protected BigDecimal price;
     @XmlElement(name = "AllowedCancel", defaultValue = "0")
     protected boolean allowedCancel;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
+    
     /**
      * Gets the value of the id property.
      * 
@@ -217,4 +220,12 @@ public class RoomReservationDTO {
     public void setAllowedCancel(boolean value) {
         this.allowedCancel = value;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 }

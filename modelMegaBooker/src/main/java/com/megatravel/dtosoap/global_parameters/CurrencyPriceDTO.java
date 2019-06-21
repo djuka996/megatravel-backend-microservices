@@ -8,11 +8,13 @@
 
 package com.megatravel.dtosoap.global_parameters;
 
+import java.util.Date;
 
 public class CurrencyPriceDTO {
 
     protected long id;
     protected AmountTypeDTO amount;
+    protected Date lastChangedTime;
 
     /**
      * Gets the value of the id property.

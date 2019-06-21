@@ -9,9 +9,8 @@
 package com.megatravel.dto.hotel;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -96,6 +95,8 @@ public class RoomDTO {
     protected AccomodationTypeDTO accomodationTypeDTO;
     @XmlElement(name = "ImageDTO")
     protected List<ImageDTO> imageDTO;
+    // TODO : Anotacija mozda?
+    protected Date lastChangedTime;
     
     public RoomDTO(Room room) {
 		this.id = room.getId();
@@ -111,6 +112,7 @@ public class RoomDTO {
 		for (Image image : room.getImages()) {
 			this.imageDTO.add(new ImageDTO(image));
 		}
+		this.lastChangedTime = room.getLastChangedTime();
     }
     
     public RoomDTO() {
@@ -304,6 +306,14 @@ public class RoomDTO {
         }
         return this.imageDTO;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
 
 }
