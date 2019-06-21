@@ -55,6 +55,15 @@ public class ImageController {
 		return null;
 	}
 	
+	@RequestMapping(value="/default",method= RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<ImageDTO> getDefaultImage() {
+		ImageDTO images = new ImageDTO(imageService.findDefault());
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("X-Total-Count", String.valueOf(1));
+		return new ResponseEntity<ImageDTO>(images, headers, HttpStatus.OK);
+	}
+	
+	
 	//vide svi
 	@RequestMapping( method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<ImageDTO>> getAllImages() {

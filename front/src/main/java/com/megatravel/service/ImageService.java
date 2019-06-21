@@ -21,4 +21,8 @@ public class ImageService {
 	public Image save(Image image) {
 		return imageRepository.save(image);
 	}
+	
+	public Image findDefault() {
+		return imageRepository.findFirstByHotelIsNull();
+	}
 }

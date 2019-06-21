@@ -6,4 +6,5 @@ import com.megatravel.model.hotel.Image;
 
 public interface ImageRepository extends JpaRepository<Image, Long>{
 
+	Image findFirstByHotelIsNull();
 }
