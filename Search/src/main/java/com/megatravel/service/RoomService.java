@@ -81,9 +81,9 @@ public class RoomService {
 		if (orderByValue.equals("NONE")) 
 		{
 			//TODO Stefan FIX IT
-			//rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
-					//accomodationtype, category, pageable);
-			rooms = roomRepository.findAll(pageable);
+			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, pageable);
+			//rooms = roomRepository.findAll(pageable);
 		} 
 		else if (orderByValue.equals("PRICE")) 
 		{

@@ -23,8 +23,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.megatravel.dto.system_user_info.SystemUserInfoDTO;
 import com.megatravel.dto.system_user_info.SystemUserLoginDTO;
 import com.megatravel.dto.system_user_info.SystemUserRegistrationDTO;
+import com.megatravel.model.global_parameters.Address;
+import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.system_user_info.Role;
 import com.megatravel.model.system_user_info.User;
+import com.megatravel.repository.AddressRepository;
+import com.megatravel.repository.HotelRepository;
 import com.megatravel.service.RoleService;
 import com.megatravel.service.UserService;
 import com.megatravel.validation.CheckPassword;
@@ -44,6 +48,10 @@ public class UserController {
 	
 	@Autowired
 	CheckPassword checkPassword;
+	@Autowired
+	HotelRepository hotelRepository;
+	@Autowired 
+	AddressRepository addressRepository;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
@@ -147,17 +155,28 @@ public class UserController {
 		if(user.getRoles() == null) {
 			user.setRoles(new HashSet<Role>());
 		}
+		boolean isAgent = false;
 		if(registrationDTO.getWorkCertificateNumber() != null)
 			if(registrationDTO.getWorkCertificateNumber().length()>0)
 			{
-				//Role roleAgent = roleService.findByRoleName("Role_AGENT");
-				//user.getRoles().add(roleAgent);
-				//TODO ANDRIJA ZAVRSI
+				Role roleAgent = roleService.findByRoleName("ROLE_AGENT");
+				user.getRoles().add(roleAgent);
+				isAgent = true;
 			}
-				
+		
 		user.getRoles().add(role);
-		userService.signup(user);
+		User savedUser = userService.signup(user);
 
+		if(isAgent)
+		{
+			Hotel newHotel = new Hotel();
+			Address newAddress = new Address(registrationDTO.getAdress());
+			Address saved = addressRepository.save(newAddress);
+			newHotel.setAddress(saved);
+			newHotel.setUsersHotel(savedUser);
+			hotelRepository.save(newHotel);
+		}
+		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
