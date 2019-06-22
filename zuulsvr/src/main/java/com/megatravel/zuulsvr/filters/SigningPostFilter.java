@@ -17,9 +17,9 @@ public class SigningPostFilter extends ZuulFilter {
 	
 	@Override
 	public boolean shouldFilter() {
-		return false;
-		//return !utilites.getFullURL(RequestContext.getCurrentContext().getRequest()).contains(StringUtilities.WSDL_SUFFIX)
-		//		&& utilites.getFullURL(RequestContext.getCurrentContext().getRequest()).contains(StringUtilities.SOAP_PREFIX);
+		return !utilites.getFullURL(RequestContext.getCurrentContext().getRequest()).contains(StringUtilities.WSDL_SUFFIX)
+				&& !utilites.getFullURL(RequestContext.getCurrentContext().getRequest()).contains(StringUtilities.XSD_SUFFIX)
+				&& utilites.getFullURL(RequestContext.getCurrentContext().getRequest()).contains(StringUtilities.SOAP_PREFIX);
 	}
 
 	@Override
@@ -36,9 +36,11 @@ public class SigningPostFilter extends ZuulFilter {
 	public Object run() {
 		RequestContext context = RequestContext.getCurrentContext();
 		String body = context.getResponseBody();
-		String url = utilites.getFullURL(context.getRequest());
-		String microserviceName = utilites.getServiceNameFromRoute(url);
-		//context.setResponseBody(service.signAndEncode(body, ?, microserviceName));
+		String agentSerialNumber = context.getZuulRequestHeaders().get(StringUtilities.SERIAL_NUMBER_HEADER);
+		String routeWithPrefix = context.getZuulRequestHeaders().get(StringUtilities.FORWARDED);
+		String zuulRoute = "/" + routeWithPrefix.substring(routeWithPrefix.lastIndexOf('/') + 1) + "/**";
+		String microserviceName = this.utilites.getMicroserviceNameFromRoute(zuulRoute);
+		context.setResponseBody(service.signAndEncode(body, agentSerialNumber, microserviceName).getBody());
 		return null;
 	}
 

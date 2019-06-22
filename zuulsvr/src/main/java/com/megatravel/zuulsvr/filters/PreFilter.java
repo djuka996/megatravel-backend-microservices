@@ -47,7 +47,7 @@ public class PreFilter extends ZuulFilter {
 		HttpServletRequest request = context.getRequest();
 		String requestURL = utilites.getFullURL(request);
 		String path = utilites.getZuulPathFromURL(requestURL);
-		String microserviceName = utilites.getServiceNameFromRoute(path);
+		String microserviceName = utilites.getMicroserviceNameFromRoute(path);
 		List<ServiceInstance> microserviceInstances = discoveryClient.getInstances(microserviceName);
 		int numberOfInstances = microserviceInstances.size();
 		if(numberOfInstances > 0) {

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.megatravel.zuulsvr.filters.PostFilter;
 import com.megatravel.zuulsvr.filters.PreFilter;
+import com.megatravel.zuulsvr.filters.SigningPostFilter;
 
 
 @SpringBootApplication
@@ -30,6 +31,11 @@ public class ZuulServerApplication {
     @Bean
     public PostFilter postFilter() {
         return new PostFilter();
+    }
+    
+    @Bean
+    public SigningPostFilter signingPostFilter() {
+    	return new SigningPostFilter();
     }
 
 }
