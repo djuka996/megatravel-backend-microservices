@@ -85,7 +85,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
     }
 	
 	@Override
-	public List<AddressDTO> getAddressesForSync(Date start, Date end) {
+	public List<AddressDTO> getAddressesForSync(java.sql.Date start, java.sql.Date end) {
 		List<Address> addresses = this.addressesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<AddressDTO> result = new ArrayList<AddressDTO>();
 		for(Address address : addresses)
@@ -94,7 +94,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<HotelDTO> getHotelsForSync(Date start, Date end) {
+	public List<HotelDTO> getHotelsForSync(java.sql.Date start, java.sql.Date end) {
 		List<Hotel> hotels = this.hotelsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<HotelDTO> result = new ArrayList<HotelDTO>();
 		for(Hotel hotel : hotels)
@@ -103,7 +103,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<AccomodationTypeDTO> getAccomodationsForSync(Date start, Date end) {
+	public List<AccomodationTypeDTO> getAccomodationsForSync(java.sql.Date start, java.sql.Date end) {
 		List<AccomodationType> types = this.accommodationTypesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<AccomodationTypeDTO> result = new ArrayList<AccomodationTypeDTO>();
 		for(AccomodationType type : types)
@@ -112,7 +112,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<ExtraOptionDTO> getExtraOptionsForSync(Date start, Date end) {
+	public List<ExtraOptionDTO> getExtraOptionsForSync(java.sql.Date start, java.sql.Date end) {
 		List<ExtraOption> extraOptions = this.extraOptionsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<ExtraOptionDTO> result = new ArrayList<ExtraOptionDTO>();
 		for(ExtraOption extraOption : extraOptions)
@@ -121,7 +121,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<ImageDTO> getImagesForSync(Date start, Date end) {
+	public List<ImageDTO> getImagesForSync(java.sql.Date start, java.sql.Date end) {
 		List<Image> images = this.imagesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<ImageDTO> result = new ArrayList<ImageDTO>();
 		for(Image image : images)
@@ -130,7 +130,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<PriceListDTO> getPriceListsForSync(Date start, Date end) {
+	public List<PriceListDTO> getPriceListsForSync(java.sql.Date start, java.sql.Date end) {
 		List<PriceList> priceLists = this.priceListsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<PriceListDTO> result = new ArrayList<PriceListDTO>();
 		for(PriceList priceList : priceLists)
@@ -139,7 +139,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<RoomDTO> getRoomsForSync(Date start, Date end) {
+	public List<RoomDTO> getRoomsForSync(java.sql.Date start, java.sql.Date end) {
 		List<Room> rooms = this.roomsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<RoomDTO> result = new ArrayList<RoomDTO>();
 		for(Room room : rooms)
@@ -148,7 +148,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<UnitPriceInformationDTO> getUnitPriceInformationsForSync(Date start, Date end) {
+	public List<UnitPriceInformationDTO> getUnitPriceInformationsForSync(java.sql.Date start, java.sql.Date end) {
 		List<UnitPriceInformation> informations = this.unitPricesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<UnitPriceInformationDTO> result = new ArrayList<UnitPriceInformationDTO>();
 		for(UnitPriceInformation information : informations)
@@ -157,7 +157,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
-	public List<RoomReservationDTO> getRoomReservationsForSync(Date start, Date end) {
+	public List<RoomReservationDTO> getRoomReservationsForSync(java.sql.Date start, java.sql.Date end) {
 		List<RoomReservation> reservations = this.roomReservationsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<RoomReservationDTO> result = new ArrayList<RoomReservationDTO>();
 		for(RoomReservation reservation : reservations)

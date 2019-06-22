@@ -18,7 +18,7 @@ import com.megatravel.model.system_user_info.Role;
 import com.megatravel.model.system_user_info.User;
 import com.megatravel.validation.CheckPassword;
 
-@WebService(portName="LoginAndRegistrationPort",
+@WebService(portName="LoginAndRegistrationServicePort",
 	serviceName="LoginAndRegistrationService",
 	targetNamespace="http://interfaces.megatravel.com/",
 	endpointInterface = "com.megatravel.interfaces.LoginAndRegistrationService")

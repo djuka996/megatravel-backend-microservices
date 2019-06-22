@@ -1,6 +1,6 @@
 package com.megatravel.interfaces;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.jws.WebMethod;
