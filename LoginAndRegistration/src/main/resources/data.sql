@@ -325,10 +325,10 @@ DROP TABLE IF EXISTS `privilege`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `privilege` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
   `last_changed_time` datetime NOT NULL,
+  `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -337,7 +337,7 @@ CREATE TABLE `privilege` (
 
 LOCK TABLES `privilege` WRITE;
 /*!40000 ALTER TABLE `privilege` DISABLE KEYS */;
-INSERT INTO `privilege` VALUES (1,'getAllUsers','1111-11-11 11:11:11'),(2,'getUser','1111-11-11 11:11:11'),(3,'getUserByEmail','1111-11-11 11:11:11'),(4,'addRoleToUser','1111-11-11 11:11:11'),(5,'deleteRoleFromUser','1111-11-11 11:11:11'),(6,'getAllRoles','1111-11-11 11:11:11'),(7,'getRole','1111-11-11 11:11:11'),(8,'createRole','1111-11-11 11:11:11'),(9,'updateRole','1111-11-11 11:11:11'),(10,'deleteRole','1111-11-11 11:11:11'),(11,'addPrivilegeToRole','1111-11-11 11:11:11'),(12,'deletePrivilegeFromRole','1111-11-11 11:11:11'),(13,'getAllPrivileges','1111-11-11 11:11:11'),(14,'getPrivilege','1111-11-11 11:11:11'),(15,'createPrivilege','1111-11-11 11:11:11'),(16,'updatePrivilege','1111-11-11 11:11:11'),(17,'deletePrivilege','1111-11-11 11:11:11');
+INSERT INTO `privilege` VALUES (1,'2019-06-23 01:25:37','getAllUsers'),(2,'2019-06-23 01:25:37','getUser'),(3,'2019-06-23 01:25:37','getUserByEmail'),(4,'2019-06-23 01:25:37','addRoleToUser'),(5,'2019-06-23 01:25:37','deleteRoleFromUser'),(6,'2019-06-23 01:25:37','getAllRoles'),(7,'2019-06-23 01:25:37','getRole'),(8,'2019-06-23 01:25:37','createRole'),(9,'2019-06-23 01:25:37','updateRole'),(10,'2019-06-23 01:25:37','deleteRole'),(11,'2019-06-23 01:25:37','addPrivilegeToRole'),(12,'2019-06-23 01:25:37','deletePrivilegeFromRole'),(13,'2019-06-23 01:25:37','getAllPrivileges'),(14,'2019-06-23 01:25:37','getPrivilege'),(15,'2019-06-23 01:25:37','createPrivilege'),(16,'2019-06-23 01:25:37','updatePrivilege'),(17,'2019-06-23 01:25:37','deletePrivilege'),(18,'2019-06-23 01:25:37','getInbox'),(19,'2019-06-23 01:25:37','getChat'),(20,'2019-06-23 01:25:37','sendMessage'),(21,'2019-06-23 01:25:37','markReadChat'),(22,'2019-06-23 01:25:37','getReview'),(23,'2019-06-23 01:25:37','getUserReviews'),(24,'2019-06-23 01:25:37','getUnreviewedReviews'),(25,'2019-06-23 01:25:37','getReviewsForRoom'),(26,'2019-06-23 01:25:37','createReview'),(27,'2019-06-23 01:25:37','updateReview'),(28,'2019-06-23 01:25:37','deleteReview'),(29,'2019-06-23 01:25:37','getChatRating'),(30,'2019-06-23 01:25:37','getRoomType'),(31,'2019-06-23 01:25:37','createAccommodationType'),(32,'2019-06-23 01:25:37','updateAccommodationType'),(33,'2019-06-23 01:25:37','removeAccommodationType'),(34,'2019-06-23 01:25:37','getHotelsAddress'),(35,'2019-06-23 01:25:37','createAddress'),(36,'2019-06-23 01:25:37','updateAddress'),(37,'2019-06-23 01:25:37','removeAddress'),(38,'2019-06-23 01:25:37','getRoomExtraOptionsWithHotelId'),(39,'2019-06-23 01:25:37','getRoomExtraOptionsWithRoomId'),(40,'2019-06-23 01:25:37','getRoomExtraOption'),(41,'2019-06-23 01:25:37','createExtraOption'),(42,'2019-06-23 01:25:37','updateRoom'),(43,'2019-06-23 01:25:37','removeRoom'),(44,'2019-06-23 01:25:37','getAllHotels'),(45,'2019-06-23 01:25:37','getHotel'),(46,'2019-06-23 01:25:37','createHotel'),(47,'2019-06-23 01:25:37','updateHotel'),(48,'2019-06-23 01:25:37','removeHotel'),(49,'2019-06-23 01:25:37','getAllReservations'),(50,'2019-06-23 01:25:37','getAllReservationsForUser'),(51,'2019-06-23 01:25:37','getReservation'),(52,'2019-06-23 01:25:37','getRoomReservations'),(53,'2019-06-23 01:25:37','getHotelReservations'),(54,'2019-06-23 01:25:37','createReservation'),(55,'2019-06-23 01:25:37','updateReservation'),(56,'2019-06-23 01:25:37','removeReservation'),(57,'2019-06-23 01:25:37','getHotelRooms'),(58,'2019-06-23 01:25:37','getHotelRoom'),(59,'2019-06-23 01:25:37','createRoom'),(60,'2019-06-23 01:25:37','updateRoomRoom'),(61,'2019-06-23 01:25:37','removeRoomRoom'),(62,'2019-06-23 01:25:37','updateRating');
 /*!40000 ALTER TABLE `privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -350,10 +350,10 @@ DROP TABLE IF EXISTS `role`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(30) NOT NULL,
   `last_changed_time` datetime NOT NULL,
+  `role_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -362,7 +362,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'ROLE_FullAccessUser','1111-11-11 11:11:11'),(2,'ROLE_LowAccessUser','1111-11-11 11:11:11'),(3,'ROLE_FullAccessRole','1111-11-11 11:11:11'),(4,'ROLE_LowAccessRole','1111-11-11 11:11:11'),(5,'ROLE_FullAccessPrivilege','1111-11-11 11:11:11'),(6,'ROLE_LowAccessPrivilege','1111-11-11 11:11:11');
+INSERT INTO `role` VALUES (1,'2019-06-23 01:25:37','ROLE_LOGGED'),(2,'2019-06-23 01:25:37','ROLE_ADMIN'),(3,'2019-06-23 01:25:37','ROLE_AGENT');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +387,7 @@ CREATE TABLE `roles_privileges` (
 
 LOCK TABLES `roles_privileges` WRITE;
 /*!40000 ALTER TABLE `roles_privileges` DISABLE KEYS */;
-INSERT INTO `roles_privileges` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(2,1),(2,2),(2,3),(3,6),(3,7),(3,8),(3,9),(3,10),(3,11),(3,12),(4,6),(4,7),(5,6),(5,13),(5,15),(5,16),(5,17),(6,6),(6,13);
+INSERT INTO `roles_privileges` VALUES (1,2),(1,3),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,25),(1,26),(1,27),(1,29),(1,30),(1,34),(1,38),(1,39),(1,40),(1,44),(1,45),(1,50),(1,51),(1,52),(1,57),(1,58),(2,1),(2,2),(2,3),(2,4),(2,5),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,39),(2,40),(2,41),(2,42),(2,43),(2,44),(2,45),(2,46),(2,47),(2,48),(2,49),(2,50),(2,51),(2,52),(2,53),(2,54),(2,55),(2,56),(2,57),(2,58),(2,59),(2,60),(2,61),(2,62),(3,2),(3,3),(3,18),(3,19),(3,20),(3,21),(3,22),(3,23),(3,24),(3,25),(3,28),(3,29),(3,30),(3,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(3,39),(3,40),(3,41),(3,42),(3,43),(3,44),(3,45),(3,49),(3,51),(3,52),(3,53),(3,54),(3,55),(3,56),(3,57),(3,58),(3,59),(3,60),(3,61),(3,62);
 /*!40000 ALTER TABLE `roles_privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -498,13 +498,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
+  `last_changed_time` datetime NOT NULL,
   `last_name` varchar(30) NOT NULL,
   `name` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
-  `last_changed_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -513,7 +513,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==','1111-11-11 11:11:11'),(2,'andrija@gmail.com','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw==','1111-11-11 11:11:11'),(3,'katarina@gmail.com','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==','1111-11-11 11:11:11'),(4,'novi.mail@yahoo.com','ne znam','stefan','b0xW2dZOc7xJnPSDbgcqqAcwMjHWx8xV','F2aQDJ2Q9a1ryhr2XcFQSA==','1111-11-11 11:11:11');
+INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','2019-06-23 01:25:37','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(2,'andrija@gmail.com','2019-06-23 01:25:37','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw=='),(3,'katarina@gmail.com','2019-06-23 01:25:37','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -569,7 +569,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(2,2),(2,4),(2,6),(3,1),(3,3),(3,5);
+INSERT INTO `users_roles` VALUES (1,2),(2,1),(3,3);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -582,4 +582,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-21 20:57:28
+-- Dump completed on 2019-06-23  1:32:58

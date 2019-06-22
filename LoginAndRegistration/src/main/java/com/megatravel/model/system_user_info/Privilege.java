@@ -41,6 +41,7 @@ public class Privilege {
 	public Privilege(Long id, String name) {
 		this.id = id;
 		this.name = name;
+		this.lastChangedTime = new Date();
 	}
 
 

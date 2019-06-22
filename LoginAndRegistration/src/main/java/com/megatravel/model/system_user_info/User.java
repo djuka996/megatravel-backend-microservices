@@ -78,6 +78,7 @@ public class User {
 		this.password = password;
 		this.salt = salt;
 		this.email = email;
+		this.lastChangedTime = new Date();
 	}
 
 	public User(SystemUserInfoDTO systemUserInfoDTO) {

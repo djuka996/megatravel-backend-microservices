@@ -2,6 +2,8 @@ package com.megatravel.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.services.RoomService;
 
@@ -25,32 +28,56 @@ public class RoomController {
 	private RoomService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<RoomDTO>> getHotelRooms(@PathVariable("hotel-id") Long id) {
+	public ResponseEntity<List<RoomDTO>> getHotelRooms(@PathVariable("hotel-id") Long id, HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("getHotelRooms", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<List<RoomDTO>>(service.getHotelRooms(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<RoomDTO> getHotelRoom(@PathVariable("id") Long id) {
+	public ResponseEntity<RoomDTO> getHotelRoom(@PathVariable("id") Long id, HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("getHotelRoom", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<RoomDTO>(service.getRoom(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<RoomDTO> createRoom(@RequestBody RoomDTO room, @PathVariable("hotel-id") Long id) {
+	public ResponseEntity<RoomDTO> createRoom(@RequestBody RoomDTO room, @PathVariable("hotel-id") Long id, HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("createRoom", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<RoomDTO>(service.createRoom(room, id), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<RoomDTO> updateRoom(@RequestBody RoomDTO room, @PathVariable("hotel-id") Long id) {
+	public ResponseEntity<RoomDTO> updateRoomRoom(@RequestBody RoomDTO room, @PathVariable("hotel-id") Long id, HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("updateRoomRoom", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<RoomDTO>(service.updateRoom(room, id), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Boolean> removeRoom(@PathVariable("id") Long id) {
+	public ResponseEntity<Boolean> removeRoomRoom(@PathVariable("id") Long id, HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("removeRoomRoom", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<Boolean>(service.removeRoom(id),HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value="/updateRoom/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<Boolean> updateRating(@PathVariable("id") Long id) {
+	public ResponseEntity<Boolean> updateRating(@PathVariable("id") Long id, HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("updateRating", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
 		return new ResponseEntity<Boolean>(service.updateRating(id), HttpStatus.OK);
 	}
 	
