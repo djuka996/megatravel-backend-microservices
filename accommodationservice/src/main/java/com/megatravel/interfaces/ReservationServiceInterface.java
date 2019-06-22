@@ -30,7 +30,7 @@ public interface ReservationServiceInterface {
 	@WebMethod
 	RoomReservationDTO createReservation(@XmlElement(name = "reservation", nillable = false, required = true) RoomReservationDTO roomReservation, 
 										 @XmlElement(name = "room-id", nillable = false, required = true) Long roomId,
-										 @XmlElement(name = "room-id", nillable = false, required = true) Long userId);
+										 @XmlElement(name = "user-id", nillable = false, required = true) Long userId);
 	
 	@WebMethod
 	RoomReservationDTO updateReservation(@XmlElement(name = "reservation", nillable = false, required = true) RoomReservationDTO roomReservation);

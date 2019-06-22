@@ -106,7 +106,7 @@ public class RoomServiceImpl implements RoomServiceInterface {
 		toSave.setAccomodationType(foundAccommodation.get());
 		toSave.setRoomsHotel(found.get());
 		Room saved = roomRepository.save(toSave);	
-		List<ImageDTO> receivedImages = room.getImagesDTO();
+		List<ImageDTO> receivedImages = room.getImageDTO();
 		for (ImageDTO imageDTO : receivedImages) {
 			Image foundImg = imageRepository.findImageByFilePathEquals(imageDTO.getFilePath());
 			foundImg.setRoomImage(saved);
