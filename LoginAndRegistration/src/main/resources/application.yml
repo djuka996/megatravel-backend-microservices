@@ -1,0 +1,66 @@
+server:
+  port: ${PORT:8555}
+
+spring:
+  application:
+    name: containerized-login
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #2. konekcija ka bazi koja se nalazi u dockeru
+    #url: jdbc:mysql://megabooker-mysql:3306/db_megabooker
+    
+    #2. konekcija ka lokalnoj bazi u MySql
+    url: jdbc:mysql://localhost:3306/db_megabooker
+    
+    username: root
+    password: stefan
+    initialization-mode: always
+    continue-on-error: true
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLDialect
+      ddl-auto: update
+      
+#  cloud:
+#    client:
+#      hostname: ${HOSTNAME}
+  
+#logging:
+#    level:
+#      com.netflix: WARN
+#      org.springframework.web: WARN
+#      com.megatravel: DEBUG
+
+#eureka:
+#  instance:
+##    hostname: ${HOSTNAME}
+##    preferIpAddress: true
+##    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+#    leaseRenewalIntervalInSeconds: 1
+#    leaseExpirationDurationInSeconds: 2
+#  client:
+##    registerWithEureka: true
+##    fetchRegistry: true
+#    serviceUrl:
+#        defaultZone: http://localhost:8761/eureka/
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      #3. konekcija ka dockeru
+      #defaultZone: http://discovery:8761/eureka/
+      
+      #3. konekcija ka eclipsu
+      defaultZone: http://localhost:8761/eureka/
+      
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+
+ribbon:
+  eureka:
+    enabled: true

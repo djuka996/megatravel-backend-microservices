@@ -51,12 +51,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.16</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.megatravel</groupId>
 			<artifactId>modelMegaTravelBooker</artifactId>
 			<version>1.0</version>
 			<scope>compile</scope>
-		</dependency> 
+		</dependency>  -->
 	</dependencies>
 
 	<dependencyManagement>

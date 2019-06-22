@@ -1,0 +1,131 @@
+version: '3'
+services:
+  megabooker-mysql:
+    image: mysql
+    container_name: megabooker-mysql
+    # restart: always
+    environment:
+      MYSQL_DATABASE: 'db_megabooker'
+      # MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'stefan'
+      MYSQL_ROOT_PASSWORD: 'stefan'
+    ports:
+      - '6603:3306'
+    expose:
+      - '3306'
+    # volumes:
+    #    - ./sql:/data.sql
+
+  discovery:
+    image: service-discovery
+    container_name: service-discovery
+    build:
+      context: ./eurekasvr
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
+  gateway:
+    image: service-gateway
+    container_name: service-gateway
+    build:
+      context: ./zuulsvr
+      dockerfile: Dockerfile
+    ports:
+      - "5555:5555"
+    depends_on:
+      - discovery
+    links:
+      - discovery:discovery
+
+  login:
+    image: login
+    build:
+      context: ./LoginAndRegistration
+      dockerfile: Dockerfile
+    ports:
+      - "8555"
+    depends_on:
+      - discovery
+    links:
+      - discovery:discovery
+      - megabooker-mysql:mysql
+
+  # search:
+  #   image: search
+  #   build:
+  #     context: ./Search
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "4444"
+  #   depends_on:
+  #     - discovery
+  #   links:
+  #     - discovery:discovery
+  #     - megabooker-mysql:mysql
+
+  # message:
+  #   image: message
+  #   build:
+  #     context: ./MessagingService
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "7777"
+  #   depends_on:
+  #     - discovery
+  #   links:
+  #     - discovery:discovery
+  #     - megabooker-mysql:mysql
+
+  # rating:
+  #   image: rating
+  #   build:
+  #     context: ./Rating
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8888"
+  #   depends_on:
+  #     - discovery
+  #   links:
+  #     - discovery:discovery
+  #     - megabooker-mysql:mysql
+
+  # accommodation:
+  #   image: accommodation
+  #   build:
+  #     context: ./accommodationservice
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "6666"
+  #   depends_on:
+  #     - discovery
+  #   links:
+  #     - discovery:discovery
+  #     - megabooker-mysql:mysql
+
+  front:
+    image: front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "4567:4567"
+    depends_on:
+      - discovery
+    links:
+      - discovery:discovery
+      - megabooker-mysql:mysql
+
+#//ne znam zasto puca accomodation
+
+  # service2:
+  #   image: service2
+  #   build:
+  #     context: ./casual
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "2222"
+  #   depends_on:
+  #     - discovery
+  #   links:
+  #     - discovery:discovery

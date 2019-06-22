@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.configuration.WebApplicationContextLocator;
 import com.megatravel.dtosoap.hotel.ImageDTO;
 import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.interfaces.RoomServiceInterface;

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.configuration.WebApplicationContextLocator;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.interfaces.MessageService;

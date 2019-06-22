@@ -139,12 +139,12 @@
 			<version>27.1-jre</version>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.megatravel</groupId>
 			<artifactId>modelMegaTravelBooker</artifactId>
 			<version>1.0</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<dependencyManagement>

@@ -1,0 +1,76 @@
+server:
+  port: ${PORT:5555}
+
+spring:
+  application:
+    name: containerized-gateway
+#  profiles:
+#    active:
+#      default
+#  cloud:
+#    config:
+#      enabled: true
+    
+zuul:
+  sensitiveHeaders: Cookie, Set-Cookie
+#  ignored-services: stefanservice, demoservice, converterservice, loginAndRegistration, front, demosarservice, search, MessagingService, Rating
+  prefix:  /api
+#  host:
+#    socket-timeout-millis: 30000
+  routes:
+    containerized-main:
+        path: /login/**
+        serviceId: containerized-login
+    containerized-one:
+        path: /search/**
+        serviceId: containerized-search
+    containerized-two:
+        path: /rating/**
+        serviceId: containerized-rating
+    containerized-three:
+        path: /message/**
+        serviceId: containerized-message
+    containerized-four:
+        path: /accommodationservice/**
+        serviceId: containerized-accommodation
+    containerized-five:
+        path: /front/**
+        serviceId: containerized-front
+#    demoservice: /demo/**
+#    stefanservice: /stefanPutanja/**
+#    loginAndRegistration: /login/**
+#    converterservice: /convert/**
+#    front: /front/**
+#    search: /search/**
+#    Rating: /rating/**
+#    MessagingService: /message/**
+#    demosarservice: /demosoapandrest/**
+    
+
+logging:
+    level:
+      com.netflix: WARN
+      org.springframework.web: WARN
+      com.megatravel: DEBUG
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      #1. konekcija na dockeru
+      #defaultZone: http://discovery:8761/eureka/
+      
+      #1. konekcija na eclipse
+      defaultZone: http://localhost:8761/eureka/  
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 60000
+   

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.megatravel.configurations.WebApplicationContextLocator;
+import com.megatravel.configuration.WebApplicationContextLocator;
 import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserLoginDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserRegistrationDTO;
