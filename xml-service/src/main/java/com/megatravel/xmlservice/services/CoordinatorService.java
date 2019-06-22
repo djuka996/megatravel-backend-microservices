@@ -6,7 +6,9 @@ import java.security.cert.Certificate;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.w3c.dom.Document;
 
 @Service
@@ -24,13 +26,14 @@ public class CoordinatorService {
 	@Autowired
 	private KeyStoreReaderService reader;
 	
-	public String verifySignatureAndDecode(String message, String recipient) {
+	public String verifySignatureAndDecode(String message, String recipient, String webServiceName) {
 		Document document = this.utilService.loadXMLFromString(message);
-		/*if(!this.signatureService.verifySignature(document)) {
+		if(!this.signatureService.verifySignature(document)) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Digital signature is invalid! Try again.");
-		}*/
+		}
 		PrivateKey recipientPrivateKey = this.reader.readPrivateKey(recipient);
 		document = this.encryptionService.decrypt(document, recipientPrivateKey);
+		this.utilService.validate(document, webServiceName);
 		return this.utilService.getStringFromDocument(document);
 	}
 	

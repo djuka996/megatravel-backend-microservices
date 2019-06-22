@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.megatravel.zuulsvr.interfaces.XmlServiceFeignClient;
+import com.netflix.zuul.context.RequestContext;
 
 @Component
 public class SoapRequestCaller {
@@ -25,7 +26,7 @@ public class SoapRequestCaller {
 	private static final String POST = "POST";
 	
 	private static final String INTERNAL_SERVER_ERROR = "Internal Server Error";
-
+	
 	@Autowired
 	private StringUtilities utilites;
 	
@@ -44,9 +45,11 @@ public class SoapRequestCaller {
 				connection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
 				connection.setRequestProperty("SOAPAction", utilites.returnSoapAction(fullUrl, message));
 				connection.setDoOutput(true);
-				boolean test = false;
-				if(test)
-					message = this.service.verifySignatureAndDecode(message, recipient).getBody();
+				//ResponseEntity<String> response = this.service.verifySignatureAndDecode(message, recipient, this.utilites.getWebServiceNameFromRoute(fullUrl));
+				//message = response.getBody();
+				//String serialNumber = response.getHeaders().getFirst("X-Serial-number");
+				String serialNumber = "124324";
+				RequestContext.getCurrentContext().addZuulRequestHeader(StringUtilities.SERIAL_NUMBER_HEADER, serialNumber);
 				OutputStream outStream = connection.getOutputStream();
 				OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream);
 				outStreamWriter.write(message);

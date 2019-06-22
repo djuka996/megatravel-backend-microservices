@@ -160,7 +160,6 @@ public class MessageServiceImpl implements MessageService {
 
 
 	@Override
-	@WebMethod
 	public List<ChatDTO> getChatsForSync(Date start, Date end) {
 		List<Chat> chats = chatRepository.findAllByLastChangedTimeBetween(start, end);
 		List<ChatDTO> result = new ArrayList<ChatDTO>();

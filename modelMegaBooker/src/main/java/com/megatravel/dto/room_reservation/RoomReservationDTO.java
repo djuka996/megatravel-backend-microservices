@@ -53,7 +53,9 @@ import com.megatravel.dto.hotel.RoomDTO;
     "endDate",
     "realised",
     "roomDTO",
-    "price"
+    "price",
+    "allowedCancel",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "Room_reservationDTO")
 public class RoomReservationDTO {
@@ -75,6 +77,7 @@ public class RoomReservationDTO {
     @XmlElement(name = "AllowedCancel", defaultValue = "0")
     protected boolean allowedCancel;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     /**

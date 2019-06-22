@@ -28,7 +28,7 @@ public class RoomDTO {
     protected double currentlyPrice;
     protected HotelDTO hotelDTO;
     protected AccomodationTypeDTO accomodationTypeDTO;
-    protected List<ImageDTO> imagesDTO;
+    protected List<ImageDTO> imageDTO;
     protected Date lastChangedTime;
     
     public RoomDTO(Room room) {
@@ -41,9 +41,9 @@ public class RoomDTO {
 		this.currentlyPrice = room.getCurrentlyPrice();
 		this.lastChangedTime = room.getLastChangedTime();
 		this.hotelDTO = room.getRoomsHotel() != null ? new HotelDTO(room.getRoomsHotel()) : null;
-		this.imagesDTO = new ArrayList<>();
+		this.imageDTO = new ArrayList<>();
 		for (Image image : room.getImages()) {
-			this.imagesDTO.add(new ImageDTO(image));
+			this.imageDTO.add(new ImageDTO(image));
 		}
 		
 		this.accomodationTypeDTO = room.getAccomodationType() != null ? new AccomodationTypeDTO(room.getAccomodationType()) : null;
@@ -212,21 +212,20 @@ public class RoomDTO {
     public void setAccomodationTypeDTO(AccomodationTypeDTO value) {
         this.accomodationTypeDTO = value;
     }
-    
-    
+
     /**
-     * Gets the value of the imagesDTO property.
+     * Gets the value of the imageDTO property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the imagesDTO property.
+     * This is why there is not a <CODE>set</CODE> method for the imageDTO property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getImagesDTO().add(newItem);
+     *    getImageDTO().add(newItem);
      * </pre>
      * 
      * 
@@ -236,10 +235,19 @@ public class RoomDTO {
      * 
      * 
      */
-    public List<ImageDTO> getImagesDTO() {
-        if (imagesDTO == null) {
-        	imagesDTO = new ArrayList<ImageDTO>();
+    public List<ImageDTO> getImageDTO() {
+        if (imageDTO == null) {
+            imageDTO = new ArrayList<ImageDTO>();
         }
-        return this.imagesDTO;
+        return this.imageDTO;
     }
+
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+    
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WsdlPairs>
+    <WsdlPair>
+        <WebServiceName>Mikroservis1</WebServiceName>
+        <Wsdl>ws1-wsdl</Wsdl>
+    </WsdlPair>
+    <WsdlPair>
+        <WebServiceName>Mikroservis2</WebServiceName>
+        <Wsdl>ws2-wsdl</Wsdl>
+    </WsdlPair>
+</WsdlPairs>

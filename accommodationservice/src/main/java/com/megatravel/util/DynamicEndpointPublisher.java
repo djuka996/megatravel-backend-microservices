@@ -14,6 +14,7 @@ import com.megatravel.webservices.AccommodationTypeServiceImpl;
 import com.megatravel.webservices.AddressServiceImpl;
 import com.megatravel.webservices.ExtraOptionServiceImpl;
 import com.megatravel.webservices.HotelServiceImpl;
+import com.megatravel.webservices.HotelsDatabaseSyncingServiceImpl;
 import com.megatravel.webservices.ReservationServiceImpl;
 import com.megatravel.webservices.RoomServiceImpl;
 import com.netflix.appinfo.ApplicationInfoManager;
@@ -38,6 +39,7 @@ public class DynamicEndpointPublisher {
 		publishEndpoint(port, HotelServiceImpl.ENDPOINT, HotelServiceImpl.class);
 		publishEndpoint(port, ReservationServiceImpl.ENDPOINT, ReservationServiceImpl.class);
 		publishEndpoint(port, RoomServiceImpl.ENDPOINT, RoomServiceImpl.class);
+		publishEndpoint(port, HotelsDatabaseSyncingServiceImpl.ENDPOINT, HotelsDatabaseSyncingServiceImpl.class);
 	}
 	
 	private int getEmptyPort() {

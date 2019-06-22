@@ -1,5 +1,6 @@
 package com.megatravel.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,5 +20,7 @@ public interface RatingRepository extends JpaRepository<UserReview, Long> {
 	
 	@Query("SELECT r FROM UserReview r WHERE r.room.id = ?1 AND r.approved = true")
 	Page<UserReview> getReviewsForRoom(Long id, Pageable pageable);
+
+	List<UserReview> findAllByLastChangedTimeBetween(Date start, Date end);
 
 }

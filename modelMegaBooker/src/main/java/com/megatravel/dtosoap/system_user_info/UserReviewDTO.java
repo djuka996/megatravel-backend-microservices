@@ -159,4 +159,13 @@ public class UserReviewDTO {
 		this.approved = approved;
 	}
 
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+
+	
 }

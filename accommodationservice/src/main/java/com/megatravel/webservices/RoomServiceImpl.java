@@ -25,8 +25,8 @@ import com.megatravel.repositories.HotelRepository;
 import com.megatravel.repositories.ImageRepository;
 import com.megatravel.repositories.RoomRepository;
 
-@WebService(portName="RoomServiceInterface",
-serviceName="RoomServiceInterface",
+@WebService(portName="RoomServicePort",
+serviceName="RoomService",
 targetNamespace="http://interfaces.megatravel.com/",
 endpointInterface = "com.megatravel.interfaces.RoomServiceInterface")
 public class RoomServiceImpl implements RoomServiceInterface {

@@ -21,8 +21,9 @@ public class XmlConverterController {
 	
 	@RequestMapping(value = "/verify", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
 	public ResponseEntity<String> verifySignatureAndDecode(@RequestBody String message, 
-														   @RequestParam("recipient") String recipient) {
-		return new ResponseEntity<String>(this.service.verifySignatureAndDecode(message, recipient), HttpStatus.OK);
+														   @RequestParam("recipient") String recipient,
+														   @RequestParam("service") String serviceName) {
+		return new ResponseEntity<String>(this.service.verifySignatureAndDecode(message, recipient, serviceName), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/sign", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)

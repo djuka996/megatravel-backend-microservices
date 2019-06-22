@@ -21,8 +21,8 @@ import com.megatravel.repositories.AddressRepository;
 import com.megatravel.repositories.ExtraOptionRepository;
 import com.megatravel.repositories.HotelRepository;
 
-@WebService(portName="ExtraOptionServicePort",
-serviceName="ExtraOptionService",
+@WebService(portName="HotelServicePort",
+serviceName="HotelService",
 targetNamespace="http://interfaces.megatravel.com/",
 endpointInterface = "com.megatravel.interfaces.HotelServiceInterface")
 public class HotelServiceImpl implements HotelServiceInterface {

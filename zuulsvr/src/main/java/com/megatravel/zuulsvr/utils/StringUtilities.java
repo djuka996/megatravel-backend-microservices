@@ -18,6 +18,8 @@ public class StringUtilities {
 	public static final String WSDL_SUFFIX = "?wsdl";
 	public static final String XSD_SUFFIX = "?xsd";
 	public static final String INT_PREFIX = "<int:";
+	public static final String SERIAL_NUMBER_HEADER = "x-serial-number";
+	public static final String FORWARDED = "x-forwarded-prefix";
 	
 	@Autowired
 	private ZuulProperties properties;
@@ -33,7 +35,7 @@ public class StringUtilities {
 		return "/" + route + "/**";
 	}
 
-	public String getServiceNameFromRoute(String path) {
+	public String getMicroserviceNameFromRoute(String path) {
 		Collection<ZuulRoute> routes = properties.getRoutes().values();
 		for(ZuulRoute route : routes) {
 			if(route.getPath().equals(path)) {
@@ -41,6 +43,10 @@ public class StringUtilities {
 			}
 		}
 		return null;
+	}
+	
+	public String getWebServiceNameFromRoute(String path) {
+		return path.substring(path.lastIndexOf('/') + 1);
 	}
 
 	public String getFullURL(HttpServletRequest request) {

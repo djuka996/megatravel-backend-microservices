@@ -183,5 +183,12 @@ public class RoomReservationDTO {
 	public void setAllowedCancel(boolean allowedCancel) {
 		this.allowedCancel = allowedCancel;
 	}
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
+	
 }

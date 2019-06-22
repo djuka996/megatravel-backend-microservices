@@ -112,5 +112,17 @@ public class PriceListDTO {
         }
         return this.unitPriceInformationDTO;
     }
+    
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+
+
+    
+    
 
 }

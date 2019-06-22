@@ -13,7 +13,8 @@ public interface XmlServiceFeignClient {
 
 	@RequestMapping(value = "/verify", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
 	public ResponseEntity<String> verifySignatureAndDecode(@RequestBody String message, 
-			   											   @RequestParam("recipient") String recipient);
+			   											   @RequestParam("recipient") String recipient,
+			   											   @RequestParam("service") String serviceName);
 	
 	@RequestMapping(value = "/sign", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
 	public ResponseEntity<String> signAndEncode(@RequestBody String message,
