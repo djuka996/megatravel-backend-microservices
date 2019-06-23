@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.megatravel.configuration.MyLogger;
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 import com.megatravel.services.AccommodationTypeService;
+
 
 
 @RestController
@@ -31,8 +33,7 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("getRoomType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<AccomodationTypeDTO>(service.getRoomType(id), HttpStatus.OK);
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(service.getRoomType(id)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -41,8 +42,15 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("createAccommodationType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<AccomodationTypeDTO>(service.createAccommodationType(type), HttpStatus.CREATED);
+		ResponseEntity<AccomodationTypeDTO> toRet;
+		try {
+			toRet = new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(service.createAccommodationType(type)), HttpStatus.CREATED);
+			MyLogger.info("Create AccommodationType", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
+		}catch(Exception E) {
+			MyLogger.info("Create AccommodationType", false, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
+			throw E;
+		}
+		return toRet;
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -51,8 +59,15 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("updateAccommodationType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<AccomodationTypeDTO>(service.updateAccommodationType(type), HttpStatus.ACCEPTED);
+		ResponseEntity<AccomodationTypeDTO> toRet;
+		try {
+			toRet = new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(service.updateAccommodationType(type)), HttpStatus.ACCEPTED);
+			MyLogger.info("Update AccommodationType", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
+		} catch (Exception e) {
+			MyLogger.info("Update AccommodationType", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), e.getMessage());
+			throw e;
+		}
+		return toRet;
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -60,8 +75,15 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("removeAccommodationType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<Boolean>(service.removeAccommodationType(id),HttpStatus.ACCEPTED);
+		ResponseEntity<Boolean> toRet;
+		try {
+			toRet = new ResponseEntity<Boolean>(service.removeAccommodationType(id),HttpStatus.ACCEPTED);
+			MyLogger.info("Remove AccommodationType", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
+		} catch (Exception e) {
+			MyLogger.info("Remove AccommodationType", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), e.getMessage());
+			throw e;
+		}
+		return toRet;
 	}
 	
 }

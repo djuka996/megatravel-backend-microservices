@@ -1,25 +1,19 @@
 package com.megatravel.webservices;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configuration.WebApplicationContextLocator;
 import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 import com.megatravel.interfaces.ExtraOptionServiceInterface;
 import com.megatravel.model.hotel.ExtraOption;
-import com.megatravel.model.hotel.Room;
-import com.megatravel.repositories.ExtraOptionRepository;
-import com.megatravel.repositories.RoomRepository;
+import com.megatravel.services.ExtraOptionService;
 
 @WebService(portName="ExtraOptionServicePort",
 serviceName="ExtraOptionService",
@@ -30,9 +24,7 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	public static final String ENDPOINT = "/services/extra-options";
 	
 	@Autowired
-	private ExtraOptionRepository extraOptionRepository;
-	@Autowired
-	private RoomRepository roomRepository;
+	private ExtraOptionService extraOptionService;
 	
 	public ExtraOptionServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -43,73 +35,47 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	
 	@Override
 	public List<ExtraOptionDTO> getAllExtraOptions() {
-		List<ExtraOption> found = extraOptionRepository.findAll();
-		if(found.size() == 0)
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No extra options yet.");
-		List<ExtraOptionDTO> returning = new ArrayList<>();
-		for (ExtraOption extraOption : found) 
-			returning.add(new ExtraOptionDTO(extraOption));
-		return returning;
+		List<ExtraOption> got = extraOptionService.getAllExtraOptions();
+		return convertToListDTO(got);
 	}
 
 	@Override
 	public List<ExtraOptionDTO> getHotelExtraOptions(Long hotelId) {
-		List<ExtraOption> found = extraOptionRepository.findAllForHotel(hotelId);
-		if(found.size()==0)
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested hotel extra options don't exist.");
-		List<ExtraOptionDTO> returning = new ArrayList<>();
-		for (ExtraOption extraOption : found) {
-			returning.add(new ExtraOptionDTO(extraOption));
-		}
-		return returning;
+		List<ExtraOption> got = extraOptionService.getHotelExtraOption(hotelId);
+		return convertToListDTO(got);
 	}
 	
 	@Override
 	public List<ExtraOptionDTO> getRoomExtraOptions(Long roomId) {
-		Optional<Room> found = roomRepository.findById(roomId);
-		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room does not exist.");
-		return getHotelExtraOptions(found.get().getRoomsHotel().getId());
+		List<ExtraOption> got = extraOptionService.getRoomExtraOptions(roomId);
+		return convertToListDTO(got);
 	}
 
 	@Override
 	public ExtraOptionDTO getRoomExtraOption(Long id) {
-		Optional<ExtraOption> found = extraOptionRepository.findById(id);
-		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room does not exist.");
-		return new ExtraOptionDTO(found.get());
+		return new ExtraOptionDTO(extraOptionService.getExtraOption(id));
 	}
 
 	@Override
 	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption) {
-		if(extraOption == null)
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent room does not exist.");
-		ExtraOption newExtra = new ExtraOption();
-		newExtra.setName(extraOption.getName());
-		newExtra.setLastChangedTime(new Date());
-		ExtraOption saved = extraOptionRepository.save(newExtra);
-		return new ExtraOptionDTO(saved);
+		return new ExtraOptionDTO(extraOptionService.createRoomExtraOption(extraOption));
 	}
 
 	@Override
 	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption) {
-		Optional<ExtraOption> found = extraOptionRepository.findById(extraOption.getId());
-		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent extra option does not exist.");
-		ExtraOption got = found.get();
-		got.setName(extraOption.getName());
-		ExtraOption saved = extraOptionRepository.save(got);
-		return new ExtraOptionDTO(saved);
+		return new ExtraOptionDTO(extraOptionService.updateRoomExtraOption(extraOption));
 	}
 
 	@Override
 	public boolean removeExtraOption(Long id) {
-		Optional<ExtraOption> found = extraOptionRepository.findById(id);
-		if(!found.isPresent())
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent extra option does not exist.");
-		extraOptionRepository.delete(found.get());
-		return true;
+		return extraOptionService.removeExtraOption(id);
 	}
 
-
+	private List<ExtraOptionDTO> convertToListDTO(List<ExtraOption> got) {
+		List<ExtraOptionDTO> ret = new ArrayList<>();
+		for (ExtraOption extraOption : got) {
+			ret.add(new ExtraOptionDTO(extraOption));
+		}
+		return ret;
+	}
 }
