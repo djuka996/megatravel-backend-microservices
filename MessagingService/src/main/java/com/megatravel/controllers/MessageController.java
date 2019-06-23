@@ -31,7 +31,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<ChatDTO>> getInbox(@PathVariable("id") Long id, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("getInbox", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("getInbox", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -40,7 +40,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/{userId}/chat/{chatId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<MessageDTO>> getChat(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("getChat", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("getChat", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -54,7 +54,7 @@ public class MessageController {
 	@RequestMapping(value ="/{chatId}/hotel/{hotelId}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("chatId") Long chatId, 
 			@PathVariable(name = "hotelId") Long hotelId, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("sendMessage", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("sendMessage", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -63,7 +63,7 @@ public class MessageController {
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Boolean> markReadChat(@PathVariable("id") Long chatId, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("markReadChat", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("markReadChat", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		

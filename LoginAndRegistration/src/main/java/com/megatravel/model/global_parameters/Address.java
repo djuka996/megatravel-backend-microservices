@@ -46,6 +46,7 @@ public class Address {
 		this.streetNumber = adressDTO.getStreetNumber();
 		this.coordinateX = adressDTO.getCoordinateX();
 		this.coordinateY = adressDTO.getCoordinateY();
+		this.lastChangedTime = new Date();
 	}
 
 	public Address(com.megatravel.dtosoap.global_parameters.AddressDTO adressDTO) {
@@ -56,6 +57,7 @@ public class Address {
 		this.streetNumber = adressDTO.getStreetNumber();
 		this.coordinateX = adressDTO.getCoordinateX();
 		this.coordinateY = adressDTO.getCoordinateY();
+		this.lastChangedTime = new Date();
 	}
 	
 	

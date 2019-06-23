@@ -1,6 +1,7 @@
 package com.megatravel.webservices;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -81,6 +82,7 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
 		AccomodationType found = accommodation.get();
 		found.setId(accommodationType.getId());
 		found.setName(accommodationType.getName());
+		found.setLastChangedTime(new Date());
 		AccomodationType saved = accommodationTypeRepository.save(found);
 		return new AccomodationTypeDTO(saved);
 	}

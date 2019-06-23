@@ -1,6 +1,7 @@
 package com.megatravel.webservices;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,6 +86,7 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent room does not exist.");
 		ExtraOption newExtra = new ExtraOption();
 		newExtra.setName(extraOption.getName());
+		newExtra.setLastChangedTime(new Date());
 		ExtraOption saved = extraOptionRepository.save(newExtra);
 		return new ExtraOptionDTO(saved);
 	}

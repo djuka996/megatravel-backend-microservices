@@ -1,5 +1,6 @@
 package com.megatravel.webservices;
 
+import java.util.Date;
 import java.util.Optional;
 
 import javax.jws.WebService;
@@ -79,6 +80,7 @@ public class AddressServiceImpl implements AddressServiceInterface {
 		got.setCountry(address.getCountry());
 		got.setStreet(address.getStreet());
 		got.setStreetNumber(address.getStreetNumber());
+		got.setLastChangedTime(new Date());
 		Address saved = addressRepository.save(got);
 		return new AddressDTO(saved);
 	}

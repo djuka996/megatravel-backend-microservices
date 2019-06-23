@@ -13,11 +13,13 @@ import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.configuration.WebApplicationContextLocator;
+import com.megatravel.controllers.feign.FeignUser;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.interfaces.MessageService;
@@ -51,6 +53,9 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private FeignUser feignUser;
 	
     public MessageServiceImpl() {
         AutowiredAnnotationBeanPostProcessor bpp = new AutowiredAnnotationBeanPostProcessor();
@@ -106,7 +111,7 @@ public class MessageServiceImpl implements MessageService {
 		
 		Message sending = new Message(message);
 
-		Optional<User> sender = userRepository.findById(message.getSender().getId());
+		Optional<User> sender =  userRepository.findById(message.getSender().getId());  //feignUser.getUserFeign(message.getSender().getId()); 
 		Optional<Chat> chat = chatRepository.findById(chatId);
 		Optional<Hotel> hotel = hotelRepository.findById(hotelId);
 		
