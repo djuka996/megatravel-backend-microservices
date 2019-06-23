@@ -7,6 +7,7 @@ import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configuration.WebApplicationContextLocator;
@@ -19,6 +20,7 @@ import com.megatravel.services.HotelService;
 serviceName="HotelService",
 targetNamespace="http://interfaces.megatravel.com/",
 endpointInterface = "com.megatravel.interfaces.HotelServiceInterface")
+@Component
 public class HotelServiceImpl implements HotelServiceInterface {
 
 	public static final String ENDPOINT = "/services/hotels";

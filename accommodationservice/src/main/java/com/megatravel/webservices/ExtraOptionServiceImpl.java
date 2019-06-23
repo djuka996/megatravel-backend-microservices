@@ -7,6 +7,7 @@ import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configuration.WebApplicationContextLocator;
@@ -19,6 +20,7 @@ import com.megatravel.services.ExtraOptionService;
 serviceName="ExtraOptionService",
 targetNamespace="http://interfaces.megatravel.com/",
 endpointInterface = "com.megatravel.interfaces.ExtraOptionServiceInterface")
+@Component
 public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 
 	public static final String ENDPOINT = "/services/extra-options";
