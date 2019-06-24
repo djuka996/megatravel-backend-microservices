@@ -189,5 +189,13 @@ public class HotelDTO {
 		this.priceListDTO = priceListDTO;
 	}
 
+	public void setExtraOptionDTO(List<ExtraOptionDTO> extraOptionDTO) {
+		this.extraOptionDTO = extraOptionDTO;
+	}
+
+	public void setImageDTO(List<ImageDTO> imageDTO) {
+		this.imageDTO = imageDTO;
+	}
+
     
 }

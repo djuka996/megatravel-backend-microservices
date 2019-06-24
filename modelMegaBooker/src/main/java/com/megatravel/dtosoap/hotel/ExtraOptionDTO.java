@@ -83,5 +83,13 @@ public class ExtraOptionDTO {
 		this.lastChangedTime = lastChangedTime;
 	}
 
+	public List<HotelDTO> getHotelsDTO() {
+		return hotelsDTO;
+	}
+
+	public void setHotelsDTO(List<HotelDTO> hotelsDTO) {
+		this.hotelsDTO = hotelsDTO;
+	}
+
     
 }

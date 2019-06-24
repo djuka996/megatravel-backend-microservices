@@ -84,5 +84,9 @@ public class PrivilegeDTO {
 		return rolesDTO;
 	}
 
+	public void setRolesDTO(List<RoleDTO> rolesDTO) {
+		this.rolesDTO = rolesDTO;
+	}
+
 	
 }
