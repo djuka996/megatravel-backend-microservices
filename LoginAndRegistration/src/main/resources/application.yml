@@ -1,6 +1,7 @@
 server:
   port: ${PORT:8555}
 
+
 spring:
   application:
     name: containerized-login
@@ -12,17 +13,28 @@ spring:
     #2. konekcija ka lokalnoj bazi u MySql
     url: jdbc:mysql://localhost:3306/db_megabooker
     
+    #2. konekcija ka google cloud bazi u MySql
+    #url: jdbc:mysql://google/db_megabooker?cloudSqlInstance=loginandregistration-244623:us-central1:megabooker&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=stefan
+
     username: root
     password: stefan
     initialization-mode: always
     continue-on-error: true
+#konekcija ka cloudu
+#  cloud:
+#    gcp:
+#      sql:
+#        database-name: db_megabooker
+#        instance-connection-name: loginandregistration-244623:us-central1:megabooker
   jpa:
     show-sql: true
     generate-ddl: true
     hibernate:
       dialect: org.hibernate.dialect.MySQLDialect
       ddl-auto: update
+      #ddl-auto: none
       
+  
 #  cloud:
 #    client:
 #      hostname: ${HOSTNAME}
@@ -56,6 +68,9 @@ eureka:
       
       #3. konekcija ka eclipsu
       defaultZone: http://localhost:8761/eureka/
+      
+      #3. konekcija na google cloud
+      #defaultZone: http://35.239.99.194:8761/eureka/
       
   instance:
     leaseRenewalIntervalInSeconds: 1

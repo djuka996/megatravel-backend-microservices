@@ -10,13 +10,15 @@ spring:
 #  cloud:
 #    config:
 #      enabled: true
-    
+ 
+ 
 zuul:
   sensitiveHeaders: Cookie, Set-Cookie
 #  ignored-services: stefanservice, demoservice, converterservice, loginAndRegistration, front, demosarservice, search, MessagingService, Rating
   prefix:  /api
 #  host:
-#    socket-timeout-millis: 30000
+#    socket-timeout-millis: 60000000
+#    connect-timeout-millis: 60000000
   routes:
     containerized-main:
         path: /login/**
@@ -38,7 +40,7 @@ zuul:
         serviceId: containerized-front
 #    demoservice: /demo/**
 #    stefanservice: /stefanPutanja/**
-#    loginAndRegistration: /login/**
+    #containerized-login: /login/**
 #    converterservice: /convert/**
 #    front: /front/**
 #    search: /search/**
@@ -64,7 +66,10 @@ eureka:
       #defaultZone: http://discovery:8761/eureka/
       
       #1. konekcija na eclipse
-      defaultZone: http://localhost:8761/eureka/  
+      defaultZone: http://localhost:8761/eureka/
+      
+      #1. konekcija na google cloud
+      #defaultZone: http://35.239.99.194:8761/eureka/ 
 #
 #hystrix:
 #  command:
@@ -73,4 +78,4 @@ eureka:
 #        isolation:
 #          thread:
 #            timeoutInMilliseconds: 60000
-   
+
