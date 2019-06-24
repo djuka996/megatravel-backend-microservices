@@ -75,11 +75,22 @@
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-aop</artifactId>
     	</dependency> -->
-		 <dependency>
+    	
+    	<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjtools</artifactId>
+		</dependency>
+    	
+		<!-- <dependency>
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjweaver</artifactId>
 		    <version>1.9.4</version>
-		</dependency>
+		</dependency> -->
 		<!-- <dependency>
 			<groupId>com.megatravel</groupId>
 			<artifactId>modelMegaTravelBooker</artifactId>

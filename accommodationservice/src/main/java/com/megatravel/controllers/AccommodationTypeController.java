@@ -26,6 +26,7 @@ public class AccommodationTypeController {
 	@Autowired
 	private AccommodationTypeService service;
 	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<AccomodationTypeDTO> getRoomType(@PathVariable("id") Long id, @PathVariable("room-id") Long room,
 			HttpServletRequest request) {

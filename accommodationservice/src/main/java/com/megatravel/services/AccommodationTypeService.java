@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.megatravel.aspect.annotation.LogService;
 import com.megatravel.configuration.MyLogger;
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
@@ -27,20 +28,14 @@ public class AccommodationTypeService{
 	
 	
 	public AccomodationType getRoomType(Long id,HttpServletRequest request) {		
-		try {
 			Optional<AccomodationType> accommodation = accommodationTypeRepository.findById(id);
 			if(accommodation.isPresent())
 				return accommodation.get();
 			else 
 				throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation does not exist.");
-		} catch (Exception e) {
-			
-			throw e;
-		}
 	}
-	
+	@LogService
 	public AccomodationType createAccommodationType(AccomodationTypeDTO accommodationType,HttpServletRequest request) {
-		try {
 			if(accommodationType==null)
 				throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
 			if(accommodationType.getName().length()<=0)
@@ -48,14 +43,8 @@ public class AccommodationTypeService{
 			AccomodationType toSave = new AccomodationType(accommodationType);
 			toSave.setRooms(new HashSet<>());
 			toSave.setLastChangedTime(new Date());
-			AccomodationType saved = accommodationTypeRepository.save(toSave);
-			MyLogger.info("Create AccommodationType", false, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
+			AccomodationType saved = accommodationTypeRepository.save(toSave);			
 			return saved;
-		}catch(Exception e) {
-			MyLogger.warn("Create AccommodationType", false, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
-			throw e;
-		}
-
 	}
 
 	public AccomodationType updateAccommodationType(AccomodationTypeDTO accommodationType,HttpServletRequest request) {

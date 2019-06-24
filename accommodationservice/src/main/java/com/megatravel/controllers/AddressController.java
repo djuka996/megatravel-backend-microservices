@@ -30,15 +30,7 @@ public class AddressController {
 		if(!DecodeJwtToken.canAccessMethod("getHotelsAddress", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		ResponseEntity<AddressDTO> toRet;
-		try {
-			toRet = new ResponseEntity<AddressDTO>(new AddressDTO(service.getHotelsAddress(id)), HttpStatus.OK);
-			MyLogger.info("GetHotelsAddress ", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
-		} catch (Exception e) {
-			MyLogger.warn("Remove AccommodationType", true, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), e.getMessage());
-			throw e;
-		}
-		return toRet;
+		return new ResponseEntity<AddressDTO>(new AddressDTO(service.getHotelsAddress(id)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
