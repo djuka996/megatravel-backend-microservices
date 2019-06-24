@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.decodeJWT.DecodeJwtToken;
-import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
-import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.room_reservation.RoomReservation;
 import com.megatravel.services.ReservationService;
 

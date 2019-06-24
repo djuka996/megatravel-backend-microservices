@@ -38,7 +38,7 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
 
 	@Override
 	public List<AccomodationTypeDTO> getAll() {
-		List<AccomodationType> got =  accommodationTypeService.getAll();
+		List<AccomodationType> got =  accommodationTypeService.getAll(null);
 		List<AccomodationTypeDTO> ret = new ArrayList<>();
 		for (AccomodationType accomodationType : got) {
 			ret.add(new AccomodationTypeDTO(accomodationType));
@@ -48,21 +48,21 @@ public class AccommodationTypeServiceImpl implements AccommodationTypeServiceInt
 	
 	@Override
 	public AccomodationTypeDTO getRoomType(Long id) {
-		return new AccomodationTypeDTO(accommodationTypeService.getRoomType(id));
+		return new AccomodationTypeDTO(accommodationTypeService.getRoomType(id,null));
 	}
 
 	@Override
 	public AccomodationTypeDTO createAccommodationType(AccomodationTypeDTO accommodationType) {		
-		return new AccomodationTypeDTO(accommodationTypeService.createAccommodationType(accommodationType));
+		return new AccomodationTypeDTO(accommodationTypeService.createAccommodationType(accommodationType,null));
 	}
 
 	@Override
 	public AccomodationTypeDTO updateAccommodationType(AccomodationTypeDTO accommodationType) {
-		return new AccomodationTypeDTO(accommodationTypeService.updateAccommodationType(accommodationType));
+		return new AccomodationTypeDTO(accommodationTypeService.updateAccommodationType(accommodationType,null));
 	}
 
 	@Override
 	public boolean removeAccommodationType(Long id) {
-		return accommodationTypeService.removeAccommodationType(id);
+		return accommodationTypeService.removeAccommodationType(id,null);
 	}
 }

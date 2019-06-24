@@ -24,9 +24,15 @@ public class DecodeJwtToken {
 	}
 	
 	public static String getUsername(String jwtToken) {
-		String pureJwtToken = jwtToken.substring(7, jwtToken.length());
-		String userEmail = decodeJwt(pureJwtToken).getSub();
-		return userEmail;
+		try {
+			String pureJwtToken = jwtToken.substring(7, jwtToken.length());
+			String userEmail = "";
+			userEmail = decodeJwt(pureJwtToken).getSub();
+			return userEmail;
+		}catch(Exception e) {
+			return "";
+		}
+
 	}
 	
 	public static Boolean canAccessMethod(String permissionInMethod, String jwtToken) {
