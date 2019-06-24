@@ -17,37 +17,41 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.megatravel.dto.system_user_info.SystemUserInfoDTO;
 import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.room_reservation.RoomReservation;
 import com.megatravel.validation.EmailValidation;
 import com.megatravel.validation.StaticData;
 
-
 @Entity
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	protected Date lastChangedTime;
+	private Date lastChangedTime;
+	
 	@NotNull
     @Size(min=StaticData.minLength, max=StaticData.lengthValue)
 	private String name;
+	
 	@NotNull
     @Size(min=StaticData.minLength, max=StaticData.lengthValue)
 	private String lastName;
+	
 	@NotNull
 	private String password;
+	
 	@NotNull
 	private String salt;
+	
 	@EmailValidation
 	@NotNull
     @Size(min=StaticData.minLengthEmail, max=StaticData.maxLengthEmail)
 	private String email;
-	
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 
         name = "users_roles", 
@@ -62,25 +66,26 @@ public class User {
 	
 	@OneToMany(mappedBy = "usersHotel")
 	private Set<Hotel> hotels;
+	
 	@OneToMany(mappedBy = "sender")
 	private Set<Message> senders;
+	
 	@OneToMany(mappedBy = "receiver")
 	private Set<Message> receivers;
 		
-	public User() {
-		
-	}
+	public User() { }
 
-	public User(Long id, String name, String lastName, String password, String salt, String email) {
+	public User(Long id, String name, String lastName, String password, String salt, String email, Date lastChangedTime) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.password = password;
 		this.salt = salt;
 		this.email = email;
+		this.lastChangedTime = lastChangedTime;
 	}
 
-	public User(SystemUserInfoDTO systemUserInfoDTO) {
+	public User(com.megatravel.dto.system_user_info.SystemUserInfoDTO systemUserInfoDTO) {
 		this.id = systemUserInfoDTO.getId();
 		this.name = systemUserInfoDTO.getFirstName();
 		this.lastName = systemUserInfoDTO.getLastName();

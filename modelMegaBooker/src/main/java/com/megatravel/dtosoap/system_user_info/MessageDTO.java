@@ -13,19 +13,18 @@ import java.util.Date;
 import com.megatravel.model.system_user_info.Message;
 
 public class MessageDTO {
+	
     protected long id;
     protected String caption;
     protected String text;
     protected boolean opened;
     protected Date date;
-    protected SystemUserInfoDTO sender;
-    protected SystemUserInfoDTO receiver;
+    protected ChatDTO chatDTO;
+    protected SystemUserInfoDTO senderDTO;
+    protected SystemUserInfoDTO receiverDTO;
     protected Date lastChangedTime;
 
-    
-    public MessageDTO() {
-    	super();
-    }
+    public MessageDTO() { }
     
     public MessageDTO(Message message) {
     	this.id = message.getId();
@@ -34,16 +33,9 @@ public class MessageDTO {
     	this.opened = message.isOpened();
     	this.date = message.getDate();
     	this.lastChangedTime = message.getLastChangedTime();
-    	
-    	this.sender = new SystemUserInfoDTO();
-    	this.sender.id = message.getSender().getId();
-    	this.sender.firstName = message.getSender().getName();
-       	this.sender.lastName = message.getSender().getLastName();
-   
-      	this.receiver = new SystemUserInfoDTO();
-    	this.receiver.id = message.getReceiver().getId();
-    	this.receiver.firstName = message.getReceiver().getName();
-       	this.receiver.lastName = message.getReceiver().getLastName();
+    	this.senderDTO = (message.getSender() == null) ? null : new SystemUserInfoDTO(message.getSender());
+    	this.receiverDTO = (message.getReceiver() == null) ? null : new SystemUserInfoDTO(message.getReceiver());
+    	this.chatDTO = (message.getChat() == null) ? null : new ChatDTO(message.getChat());
     }
     
     
@@ -159,8 +151,8 @@ public class MessageDTO {
      *     {@link SystemUserInfoDTO }
      *     
      */
-    public SystemUserInfoDTO getSender() {
-        return sender;
+    public SystemUserInfoDTO getSenderDTO() {
+        return senderDTO;
     }
 
     /**
@@ -171,8 +163,8 @@ public class MessageDTO {
      *     {@link SystemUserInfoDTO }
      *     
      */
-    public void setSender(SystemUserInfoDTO value) {
-        this.sender = value;
+    public void setSenderDTO(SystemUserInfoDTO value) {
+        this.senderDTO = value;
     }
 
     /**
@@ -183,8 +175,8 @@ public class MessageDTO {
      *     {@link SystemUserInfoDTO }
      *     
      */
-    public SystemUserInfoDTO getReceiver() {
-        return receiver;
+    public SystemUserInfoDTO getReceiverDTO() {
+        return receiverDTO;
     }
 
     /**
@@ -195,8 +187,8 @@ public class MessageDTO {
      *     {@link SystemUserInfoDTO }
      *     
      */
-    public void setReceiver(SystemUserInfoDTO value) {
-        this.receiver = value;
+    public void setReceiverDTO(SystemUserInfoDTO value) {
+        this.receiverDTO = value;
     }
 
 	public Date getLastChangedTime() {
@@ -205,6 +197,14 @@ public class MessageDTO {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public ChatDTO getChatDTO() {
+		return chatDTO;
+	}
+
+	public void setChatDTO(ChatDTO chat) {
+		this.chatDTO = chat;
 	}
 
     

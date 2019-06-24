@@ -13,7 +13,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.megatravel.dto.global_parameters.PrivilegeDTO;
 import com.megatravel.validation.StaticData;
 
 @Entity
@@ -34,19 +33,24 @@ public class Privilege {
     @ManyToMany(mappedBy = "privileges")
     private Collection<Role> roles;
     
-    public Privilege() {
-    	
-    }
+    public Privilege() { }
 
-	public Privilege(Long id, String name) {
+    public Privilege(com.megatravel.dto.global_parameters.PrivilegeDTO privilegeDTO) {
+    	this.id = privilegeDTO.getId();
+    	this.name = privilegeDTO.getName();
+    	this.lastChangedTime = privilegeDTO.getLastChangedTime();
+    }
+    
+    public Privilege(com.megatravel.dtosoap.global_parameters.PrivilegeDTO privilegeDTO) {
+    	this.id = privilegeDTO.getId();
+    	this.name = privilegeDTO.getName();
+    	this.lastChangedTime = privilegeDTO.getLastChangedTime();
+    }
+    
+	public Privilege(Long id, String name, Date lastChangedTime) {
 		this.id = id;
 		this.name = name;
-	}
-
-
-	public Privilege(PrivilegeDTO privilegeDTO) {
-		this.id = privilegeDTO.getId();
-		this.name = privilegeDTO.getName();
+		this.lastChangedTime = lastChangedTime;
 	}
 
 	public String getName() {

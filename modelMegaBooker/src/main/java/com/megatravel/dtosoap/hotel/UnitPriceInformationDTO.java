@@ -11,14 +11,26 @@ package com.megatravel.dtosoap.hotel;
 import java.util.Date;
 
 import com.megatravel.dtosoap.global_parameters.CurrencyPriceDTO;
+import com.megatravel.model.hotel.UnitPriceInformation;
 
 public class UnitPriceInformationDTO {
 
     protected long id;
     protected CurrencyPriceDTO price;
-    protected long room;
+    protected RoomDTO roomDTO;
     protected Date lastChangedTime;
-
+    protected PriceListDTO priceListDTO;
+    
+    public UnitPriceInformationDTO() { }
+    
+    public UnitPriceInformationDTO(UnitPriceInformation unitPriceInformation) {
+    	this.id = unitPriceInformation.getId();
+    	this.price = (unitPriceInformation.getPrice() == null) ? null : new CurrencyPriceDTO(unitPriceInformation.getPrice());
+    	this.roomDTO = (unitPriceInformation.getRoom() == null) ? null : new RoomDTO(unitPriceInformation.getRoom());
+    	this.lastChangedTime = unitPriceInformation.getLastChangedTime();
+    	this.priceListDTO = (unitPriceInformation.getPriceList() == null) ? null : new PriceListDTO(unitPriceInformation.getPriceList());
+    }
+    
     /**
      * Gets the value of the id property.
      * 
@@ -59,28 +71,28 @@ public class UnitPriceInformationDTO {
         this.price = value;
     }
 
-    /**
-     * Gets the value of the room property.
-     * 
-     */
-    public long getRoom() {
-        return room;
-    }
-
-    /**
-     * Sets the value of the room property.
-     * 
-     */
-    public void setRoom(long value) {
-        this.room = value;
-    }
-
 	public Date getLastChangedTime() {
 		return lastChangedTime;
 	}
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public RoomDTO getRoomDTO() {
+		return roomDTO;
+	}
+
+	public void setRoomDTO(RoomDTO roomDTO) {
+		this.roomDTO = roomDTO;
+	}
+
+	public PriceListDTO getPriceListDTO() {
+		return priceListDTO;
+	}
+
+	public void setPriceListDTO(PriceListDTO priceListDTO) {
+		this.priceListDTO = priceListDTO;
 	}
 
 }

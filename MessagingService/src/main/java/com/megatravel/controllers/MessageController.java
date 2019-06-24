@@ -1,5 +1,6 @@
 package com.megatravel.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
-import com.megatravel.services.MessageServiceImpl;
+import com.megatravel.model.system_user_info.Chat;
+import com.megatravel.model.system_user_info.Message;
+import com.megatravel.webservice.MessageServiceImpl;
 
 
 @RestController
@@ -68,6 +71,25 @@ public class MessageController {
 		}
 		
 		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(chatId), HttpStatus.ACCEPTED);
+	}
+	
+	private List<MessageDTO> convertMessageToListDTO(List<Message> got){
+		List<MessageDTO> returning = new ArrayList<>();
+		for (Message iter : got) {
+			MessageDTO toAdd = new MessageDTO(iter);
+			returning.add(toAdd);
+		}
+		return returning;
+	}
+	
+	
+	private List<ChatDTO> convertChatToListDTO(List<Chat> got){
+		List<ChatDTO> returning = new ArrayList<>();
+		for (Chat iter : got) {
+			ChatDTO toAdd = new ChatDTO(iter);
+			returning.add(toAdd);
+		}
+		return returning;
 	}
 	
 }

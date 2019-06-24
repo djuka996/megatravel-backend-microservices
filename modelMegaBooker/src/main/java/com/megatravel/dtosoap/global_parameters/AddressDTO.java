@@ -13,6 +13,7 @@ import java.util.Date;
 import com.megatravel.model.global_parameters.Address;
 
 public class AddressDTO {
+	
     protected String country;
     protected String city;
     protected String street;
@@ -22,9 +23,7 @@ public class AddressDTO {
     protected long id;
     protected Date lastChangedTime;
     
-    public AddressDTO() {
-    	
-    }
+    public AddressDTO() { }
     
     public AddressDTO(Address address) {
     	this.id = address.getId();

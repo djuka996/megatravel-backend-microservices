@@ -8,24 +8,31 @@
 
 package com.megatravel.dtosoap.hotel;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.megatravel.model.hotel.ExtraOption;
+import com.megatravel.model.hotel.HotelExtraOption;
 
 public class ExtraOptionDTO {
 
     protected long id;
     protected String name;
     protected Date lastChangedTime;
+    protected List<HotelDTO> hotelsDTO = new ArrayList<HotelDTO>();
     
-    public ExtraOptionDTO() {
-    	
-    }
+    public ExtraOptionDTO() { }
 
     public ExtraOptionDTO(ExtraOption option) {
     	this.id = option.getId();
     	this.name = option.getName();
     	this.lastChangedTime = option.getLastChangedTime();
+    	if(option.getHotelExtraOptions() != null) {
+    		for(HotelExtraOption hotelExtraOption : option.getHotelExtraOptions()) {
+    			this.hotelsDTO.add(new HotelDTO(hotelExtraOption.getHotelExtraOption()));
+    		}
+    	}
 	}
 
 	/**

@@ -18,31 +18,35 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import com.megatravel.dto.system_user_info.MessageDTO;
-
 @Entity
 public class Message {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+
 	protected String caption;
+	
 	protected String text;
+	
 	protected boolean opened;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	protected Date lastChangedTime;
+	
 	protected Date date;
+	
 	@ManyToOne()
 	protected User sender;
+	
 	@ManyToOne()
 	protected User receiver;
+	
 	@ManyToOne()
 	protected Chat chat;
 
-	public Message() {
-
-	}
+	public Message() { }
 
 	public Message(com.megatravel.dtosoap.system_user_info.MessageDTO messageDTO ) {
 		this.id = messageDTO.getId();
@@ -50,18 +54,14 @@ public class Message {
 		this.text = messageDTO.getText();
 		this.opened = messageDTO.isOpened();
 		this.date = messageDTO.getDate();
-		//this.sender = messageDTO.getSender() != null ? new User(messageDTO.getSender()) : null;
-		//this.receiver = messageDTO.getReceiver() != null ? new User(messageDTO.getReceiver()) : null;
 	}
 	
-	public Message(MessageDTO messageDTO) {
+	public Message(com.megatravel.dto.system_user_info.MessageDTO messageDTO) {
 		this.id = messageDTO.getId();
 		this.caption = messageDTO.getCaption();
 		this.text = messageDTO.getText();
 		this.opened = messageDTO.isOpened();
 		this.date = messageDTO.getDate();
-		this.sender = messageDTO.getSender() != null ? new User(messageDTO.getSender()) : null;
-		this.receiver = messageDTO.getReceiver() != null ? new User(messageDTO.getReceiver()) : null;
 	}
 
 	public Message(Long id, String caption, String text, boolean opened, Date date, User sender, User receiver,
