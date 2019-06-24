@@ -23,7 +23,7 @@ public class CurrencyPriceDTO {
     public CurrencyPriceDTO(CurrencyPrice currencyPrice) {
     	this.id = currencyPrice.getId();
     	this.lastChangedTime = currencyPrice.getLastChangedTime();
-    	this.amountDTO = new AmountTypeDTO(currencyPrice.getAmount());
+    	this.amountDTO = currencyPrice.getAmount() != null ? new AmountTypeDTO(currencyPrice.getAmount()) : null;
     }
     
     /**

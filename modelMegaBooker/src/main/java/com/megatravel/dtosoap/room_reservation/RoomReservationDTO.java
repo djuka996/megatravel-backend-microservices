@@ -37,8 +37,8 @@ public class RoomReservationDTO {
     	this.realised = reservation.isRealised();
     	this.price = reservation.getPrice();
     	this.lastChangedTime = reservation.getLastChangedTime();
-    	this.roomDTO = (reservation.getRoomReservation()==null)?null: new RoomDTO(reservation.getRoomReservation());
-    	this.userDTO = new SystemUserInfoDTO(reservation.getUsersReservation());
+    	this.roomDTO = (reservation.getRoomReservation() == null) ? null: new RoomDTO(reservation.getRoomReservation());
+    	this.userDTO = (reservation.getUsersReservation() == null) ? null : new SystemUserInfoDTO(reservation.getUsersReservation());
     }
     
     

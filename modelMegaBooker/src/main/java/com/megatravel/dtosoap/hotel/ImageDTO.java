@@ -26,8 +26,8 @@ public class ImageDTO {
 		this.id = image.getId();
 		this.filePath = image.getFilePath();
 		this.lastChangedTime = image.getLastChangedTime();
-		this.roomDTO = new RoomDTO(image.getRoomImage());
-		this.hotelDTO = new HotelDTO(image.getHotel());
+		this.roomDTO = (image.getRoomImage() == null) ? null : new RoomDTO(image.getRoomImage());
+		this.hotelDTO = (image.getHotel() == null) ? null : new HotelDTO(image.getHotel());
 	}
 
 	/**

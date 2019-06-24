@@ -26,7 +26,7 @@ public class ChatDTO {
     public ChatDTO() { }
     
     public ChatDTO(Chat chat) {
-    	this.hotelDTO = new HotelDTO(chat.getChatsHotel());
+    	this.hotelDTO = (chat.getChatsHotel() == null) ? null : new HotelDTO(chat.getChatsHotel());
     	this.id = chat.getId();
     	this.lastChangedTime = chat.getLastChangedTime();
     	for(Message message : chat.getMessages())

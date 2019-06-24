@@ -11,6 +11,7 @@ package com.megatravel.dtosoap.system_user_info;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.dtosoap.global_parameters.RoleDTO;
@@ -31,7 +32,7 @@ public class SystemUserInfoDTO {
     protected Date lastChangedTime;
     protected AddressDTO adress;
     protected String workCertificateNumber;
-    protected Collection<RoleDTO> role = new ArrayList<RoleDTO>();
+    protected List<RoleDTO> role = new ArrayList<RoleDTO>();
     protected HotelDTO hotelDTO;
     protected Collection<RoomReservationDTO> roomReservationDTO = new ArrayList<RoomReservationDTO>();
 
@@ -246,7 +247,7 @@ public class SystemUserInfoDTO {
      * 
      * 
      */
-    public Collection<RoleDTO> getRole() {
+    public List<RoleDTO> getRole() {
         if (role == null) {
             role = new ArrayList<RoleDTO>();
         }

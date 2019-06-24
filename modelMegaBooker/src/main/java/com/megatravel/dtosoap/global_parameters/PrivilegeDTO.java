@@ -9,8 +9,8 @@
 package com.megatravel.dtosoap.global_parameters;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import com.megatravel.model.system_user_info.Privilege;
 import com.megatravel.model.system_user_info.Role;
@@ -20,7 +20,7 @@ public class PrivilegeDTO {
     protected long id;
     protected String name;
     protected Date lastChangedTime;
-    protected Collection<RoleDTO> rolesDTO = new ArrayList<RoleDTO>();
+    protected List<RoleDTO> rolesDTO = new ArrayList<RoleDTO>();
     
     public PrivilegeDTO() { }
 
@@ -80,7 +80,7 @@ public class PrivilegeDTO {
 		this.lastChangedTime = lastChangedTime;
 	}
 
-	public Collection<RoleDTO> getRolesDTO() {
+	public List<RoleDTO> getRolesDTO() {
 		return rolesDTO;
 	}
 

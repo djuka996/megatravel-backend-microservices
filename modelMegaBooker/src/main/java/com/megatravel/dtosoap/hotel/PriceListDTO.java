@@ -29,7 +29,7 @@ public class PriceListDTO {
     	this.id = priceList.getId();
     	this.beginDate = priceList.getBeginDate();
     	this.endDate = priceList.getEndDate();
-    	this.hotelDTO = new HotelDTO(priceList.getHotelPriceList());
+    	this.hotelDTO = (priceList.getHotelPriceList() == null) ? null : new HotelDTO(priceList.getHotelPriceList());
     	this.lastChangedTime = priceList.getLastChangedTime();
     }
     

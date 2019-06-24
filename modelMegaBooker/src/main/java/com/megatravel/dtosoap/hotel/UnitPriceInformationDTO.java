@@ -25,10 +25,10 @@ public class UnitPriceInformationDTO {
     
     public UnitPriceInformationDTO(UnitPriceInformation unitPriceInformation) {
     	this.id = unitPriceInformation.getId();
-    	this.price = new CurrencyPriceDTO(unitPriceInformation.getPrice());
-    	this.roomDTO = new RoomDTO(unitPriceInformation.getRoom());
+    	this.price = (unitPriceInformation.getPrice() == null) ? null : new CurrencyPriceDTO(unitPriceInformation.getPrice());
+    	this.roomDTO = (unitPriceInformation.getRoom() == null) ? null : new RoomDTO(unitPriceInformation.getRoom());
     	this.lastChangedTime = unitPriceInformation.getLastChangedTime();
-    	this.priceListDTO = new PriceListDTO(unitPriceInformation.getPriceList());
+    	this.priceListDTO = (unitPriceInformation.getPriceList() == null) ? null : new PriceListDTO(unitPriceInformation.getPriceList());
     }
     
     /**
