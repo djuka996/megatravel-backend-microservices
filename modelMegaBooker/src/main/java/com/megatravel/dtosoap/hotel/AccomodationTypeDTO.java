@@ -18,9 +18,7 @@ public class AccomodationTypeDTO {
     protected String name;
     protected Date lastChangedTime;
     
-    public AccomodationTypeDTO() {
-    	
-    }
+    public AccomodationTypeDTO() { }
     
     public AccomodationTypeDTO(AccomodationType accomodationType) {
     	this.id = accomodationType.getId();

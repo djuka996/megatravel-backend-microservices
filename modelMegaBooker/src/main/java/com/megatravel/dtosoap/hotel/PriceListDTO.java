@@ -12,13 +12,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.megatravel.model.hotel.PriceList;
+
 public class PriceListDTO {
 
     protected long id;
     protected Date beginDate;
     protected Date endDate;
-    protected List<UnitPriceInformationDTO> unitPriceInformationDTO;
+    protected List<UnitPriceInformationDTO> unitPriceInformationDTO = new ArrayList<UnitPriceInformationDTO>();
+    protected HotelDTO hotelDTO;
     protected Date lastChangedTime;
+    
+    public PriceListDTO() { }
+    
+    public PriceListDTO(PriceList priceList) {
+    	this.id = priceList.getId();
+    	this.beginDate = priceList.getBeginDate();
+    	this.endDate = priceList.getEndDate();
+    	this.hotelDTO = (priceList.getHotelPriceList() == null) ? null : new HotelDTO(priceList.getHotelPriceList());
+    	this.lastChangedTime = priceList.getLastChangedTime();
+    }
     
     /**
      * Gets the value of the id property.
@@ -119,6 +132,18 @@ public class PriceListDTO {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public HotelDTO getHotelDTO() {
+		return hotelDTO;
+	}
+
+	public void setHotelDTO(HotelDTO hotelDTO) {
+		this.hotelDTO = hotelDTO;
+	}
+
+	public void setUnitPriceInformationDTO(List<UnitPriceInformationDTO> unitPriceInformationDTO) {
+		this.unitPriceInformationDTO = unitPriceInformationDTO;
 	}
 
 

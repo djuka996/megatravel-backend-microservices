@@ -17,6 +17,7 @@ import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 import com.megatravel.services.AccommodationTypeService;
 
 
+
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/types")
@@ -25,14 +26,14 @@ public class AccommodationTypeController {
 	@Autowired
 	private AccommodationTypeService service;
 	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<AccomodationTypeDTO> getRoomType(@PathVariable("id") Long id, @PathVariable("room-id") Long room,
 			HttpServletRequest request) {
 		if(!DecodeJwtToken.canAccessMethod("getRoomType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<AccomodationTypeDTO>(service.getRoomType(id), HttpStatus.OK);
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(service.getRoomType(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -41,8 +42,7 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("createAccommodationType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<AccomodationTypeDTO>(service.createAccommodationType(type), HttpStatus.CREATED);
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(service.createAccommodationType(type,request)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -51,8 +51,7 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("updateAccommodationType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<AccomodationTypeDTO>(service.updateAccommodationType(type), HttpStatus.ACCEPTED);
+		return new ResponseEntity<AccomodationTypeDTO>(new AccomodationTypeDTO(service.updateAccommodationType(type,request)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -60,8 +59,7 @@ public class AccommodationTypeController {
 		if(!DecodeJwtToken.canAccessMethod("removeAccommodationType", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		
-		return new ResponseEntity<Boolean>(service.removeAccommodationType(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.removeAccommodationType(id,request),HttpStatus.ACCEPTED);
 	}
 	
 }

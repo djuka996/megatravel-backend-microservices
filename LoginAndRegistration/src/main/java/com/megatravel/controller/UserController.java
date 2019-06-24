@@ -1,5 +1,6 @@
 package com.megatravel.controller;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -78,6 +79,12 @@ public class UserController {
 		return new ResponseEntity<>(userService.findOne(id), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/feign/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('getUser')")
+	public ResponseEntity<User> getUserFeign(@PathVariable Long id) {
+		return new ResponseEntity<User>(userService.findOneUser(id), HttpStatus.OK);
+	}
+	
 	/*@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasAnyAuthority('deleteSomething')")
 	public ResponseEntity<SystemUserInfoDTO> getUserAAA(@PathVariable Long id) {
@@ -151,20 +158,23 @@ public class UserController {
 		user.setPassword(registrationDTO.getPassword());
 		user.setName(registrationDTO.getFirstName());
 		user.setLastName(registrationDTO.getLastName());
-		Role role = roleService.findByRoleName("Role_ReadAll");
+		user.setLastChangedTime(new Date());
+		Role role = roleService.findByRoleName("ROLE_LOGGED");
 		if(user.getRoles() == null) {
 			user.setRoles(new HashSet<Role>());
 		}
 		boolean isAgent = false;
 		if(registrationDTO.getWorkCertificateNumber() != null)
-			if(registrationDTO.getWorkCertificateNumber().length()>0)
-			{
-				Role roleAgent = roleService.findByRoleName("ROLE_AGENT");
-				user.getRoles().add(roleAgent);
-				isAgent = true;
-			}
-		
-		user.getRoles().add(role);
+		{
+				if(registrationDTO.getWorkCertificateNumber().length()>0)
+				{
+					Role roleAgent = roleService.findByRoleName("ROLE_AGENT");
+					user.getRoles().add(roleAgent);
+					isAgent = true;
+				}
+		}else{
+			user.getRoles().add(role);	
+		}
 		User savedUser = userService.signup(user);
 
 		if(isAgent)
@@ -174,6 +184,7 @@ public class UserController {
 			Address saved = addressRepository.save(newAddress);
 			newHotel.setAddress(saved);
 			newHotel.setUsersHotel(savedUser);
+			newHotel.setLastChangedTime(new Date());
 			hotelRepository.save(newHotel);
 		}
 		

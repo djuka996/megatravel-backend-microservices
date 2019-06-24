@@ -17,50 +17,57 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import com.megatravel.dto.global_parameters.AddressDTO;
-
 @Entity
 public class Address {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	
 	protected String country;
+	
 	protected String city;
+	
 	protected String street;
+	
 	protected int streetNumber;
+	
 	protected double coordinateX;
+	
 	protected double coordinateY;
+	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastChangedTime;
+	protected Date lastChangedTime;
 	
-	public Address() {
+	public Address() { }
 
+	public Address(com.megatravel.dto.global_parameters.AddressDTO addressDTO) {
+		super();
+		this.id = addressDTO.getId();
+		this.country = addressDTO.getCountry();
+		this.city = addressDTO.getCity();
+		this.street = addressDTO.getStreet();
+		this.streetNumber = addressDTO.getStreetNumber();
+		this.coordinateX = addressDTO.getCoordinateX();
+		this.coordinateY = addressDTO.getCoordinateY();
+		this.lastChangedTime = addressDTO.getLastChangedTime();
 	}
 
-	public Address(AddressDTO adressDTO) {
-		this.id = adressDTO.getId();
-		this.country = adressDTO.getCountry();
-		this.city = adressDTO.getCity();
-		this.street = adressDTO.getStreet();
-		this.streetNumber = adressDTO.getStreetNumber();
-		this.coordinateX = adressDTO.getCoordinateX();
-		this.coordinateY = adressDTO.getCoordinateY();
+	public Address(com.megatravel.dtosoap.global_parameters.AddressDTO addressDTO) {
+		super();
+		this.id = addressDTO.getId();
+		this.country = addressDTO.getCountry();
+		this.city = addressDTO.getCity();
+		this.street = addressDTO.getStreet();
+		this.streetNumber = addressDTO.getStreetNumber();
+		this.coordinateX = addressDTO.getCoordinateX();
+		this.coordinateY = addressDTO.getCoordinateY();
+		this.lastChangedTime = addressDTO.getLastChangedTime();
 	}
 
-	public Address(com.megatravel.dtosoap.global_parameters.AddressDTO adressDTO) {
-		this.id = adressDTO.getId();
-		this.country = adressDTO.getCountry();
-		this.city = adressDTO.getCity();
-		this.street = adressDTO.getStreet();
-		this.streetNumber = adressDTO.getStreetNumber();
-		this.coordinateX = adressDTO.getCoordinateX();
-		this.coordinateY = adressDTO.getCoordinateY();
-	}
-	
-	
-	public Address(Long id, String country, String city, String street, int streetNumber, double coordinateX,
-			double coordinateY) {
+	public Address(Long id, String country, String city, String street, int streetNumber, 
+				   double coordinateX, double coordinateY, Date lastChangedTime) {
 		super();
 		this.id = id;
 		this.country = country;
@@ -69,6 +76,7 @@ public class Address {
 		this.streetNumber = streetNumber;
 		this.coordinateX = coordinateX;
 		this.coordinateY = coordinateY;
+		this.lastChangedTime = lastChangedTime;
 	}
 
 	public Long getId() {

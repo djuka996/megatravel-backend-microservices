@@ -42,6 +42,7 @@ public class AccomodationType {
     public AccomodationType(AccomodationTypeDTO accomodationTypeDTO) {
 		this.id = accomodationTypeDTO.getId();
 		this.name = accomodationTypeDTO.getName();
+		this.lastChangedTime = new Date();
 	}
     
     public AccomodationType(com.megatravel.dtosoap.hotel.AccomodationTypeDTO accomodationTypeDTO) {

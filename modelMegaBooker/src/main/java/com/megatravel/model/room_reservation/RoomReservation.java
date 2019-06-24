@@ -23,7 +23,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.megatravel.dto.room_reservation.RoomReservationDTO;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.model.system_user_info.User;
 import com.megatravel.model.system_user_info.UserReview;
@@ -34,36 +33,42 @@ public class RoomReservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
+	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	@Basic
 	@Temporal(TemporalType.DATE)
     protected Date beginDate;
+	
 	@Basic
 	@Temporal(TemporalType.DATE)
     protected Date endDate;
+	
     protected boolean realised;
+    
     @ManyToOne()
     protected Room roomReservation;
+    
     protected BigDecimal price;
+    
     @OneToOne()
     protected UserReview userReview;
+    
     @ManyToOne()
     protected User usersReservation;
+    
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastChangedTime;
     
-    public RoomReservation() {
-    	
-    }
+    public RoomReservation() { }
     
-    public RoomReservation(RoomReservationDTO roomReservationDTO) {
+    public RoomReservation(com.megatravel.dto.room_reservation.RoomReservationDTO roomReservationDTO) {
     	this.id = roomReservationDTO.getId();
 		this.beginDate = roomReservationDTO.getBeginDate();
 		this.endDate = roomReservationDTO.getEndDate();
 		this.realised = roomReservationDTO.isRealised();
-		this.roomReservation = roomReservationDTO.getRoomDTO() != null ? new Room(roomReservationDTO.getRoomDTO()) : null;
 		this.price = roomReservationDTO.getPrice();
+		this.lastChangedTime = roomReservationDTO.getLastChangedTime();
     }
     
     public RoomReservation(com.megatravel.dtosoap.room_reservation.RoomReservationDTO roomReservationDTO) {
@@ -71,12 +76,12 @@ public class RoomReservation {
 		this.beginDate = roomReservationDTO.getBeginDate();
 		this.endDate = roomReservationDTO.getEndDate();
 		this.realised = roomReservationDTO.isRealised();
-		this.roomReservation = roomReservationDTO.getRoomDTO() != null ? new Room(roomReservationDTO.getRoomDTO()) : null;
 		this.price = roomReservationDTO.getPrice();
+		this.lastChangedTime = roomReservationDTO.getLastChangedTime();
     }
     
 	public RoomReservation(Long id, Date beginDate, Date endDate, boolean realised, Room roomReservation,
-			BigDecimal price, UserReview userReview, User usersReservation) {
+			BigDecimal price, UserReview userReview, User usersReservation, Date lastChangedTime) {
 		super();
 		this.id = id;
 		this.beginDate = beginDate;
@@ -86,52 +91,69 @@ public class RoomReservation {
 		this.price = price;
 		this.userReview = userReview;
 		this.usersReservation = usersReservation;
+		this.lastChangedTime = lastChangedTime;
 	}
+	
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public Date getBeginDate() {
 		return beginDate;
 	}
+	
 	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
+	
 	public Date getEndDate() {
 		return endDate;
 	}
+	
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
 	public boolean isRealised() {
 		return realised;
 	}
+	
 	public void setRealised(boolean realised) {
 		this.realised = realised;
 	}
+	
 	public Room getRoomReservation() {
 		return roomReservation;
 	}
+	
 	public void setRoomReservation(Room roomReservation) {
 		this.roomReservation = roomReservation;
 	}
+	
 	public BigDecimal getPrice() {
 		return price;
 	}
+	
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
 	public UserReview getUserReview() {
 		return userReview;
 	}
+	
 	public void setUserReview(UserReview userReview) {
 		this.userReview = userReview;
 	}
+	
 	public User getUsersReservation() {
 		return usersReservation;
 	}
+	
 	public void setUsersReservation(User usersReservation) {
 		this.usersReservation = usersReservation;
 	}

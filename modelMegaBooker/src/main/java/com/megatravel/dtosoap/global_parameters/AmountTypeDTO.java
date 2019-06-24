@@ -11,6 +11,8 @@ package com.megatravel.dtosoap.global_parameters;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.megatravel.model.global_parameters.AmountType;
+
 
 public class AmountTypeDTO {
 
@@ -18,6 +20,15 @@ public class AmountTypeDTO {
     protected BigDecimal price;
     protected String currency;
     protected Date lastChangedTime;
+    
+    public AmountTypeDTO() { }
+    
+    public AmountTypeDTO(AmountType amountType) {
+    	this.id = amountType.getId();
+    	this.price = amountType.getPrice();
+    	this.currency = amountType.getCurrency();
+    	this.lastChangedTime = amountType.getLastChangedTime();
+    }
     
     /**
      * Gets the value of the id property.

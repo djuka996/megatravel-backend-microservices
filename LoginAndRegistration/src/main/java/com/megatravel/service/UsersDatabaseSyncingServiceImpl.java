@@ -1,6 +1,7 @@
 package com.megatravel.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebService;
@@ -48,7 +49,7 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
     }
 	
 	@Override
-	public List<SystemUserInfoDTO> getUsersForSync(java.sql.Date start, java.sql.Date end) {
+	public List<SystemUserInfoDTO> getUsersForSync(Date start, Date end) {
 		List<User> users = this.usersRepository.findAllByLastChangedTimeBetween(start, end);
 		List<SystemUserInfoDTO> result = new ArrayList<SystemUserInfoDTO>();
 		for(User user : users)
@@ -57,7 +58,7 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 	}
 
 	@Override
-	public List<PrivilegeDTO> getPrivilegesForSync(java.sql.Date start, java.sql.Date end) {
+	public List<PrivilegeDTO> getPrivilegesForSync(Date start, Date end) {
 		List<Privilege> privileges = this.privilegesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<PrivilegeDTO> result = new ArrayList<PrivilegeDTO>();
 		for(Privilege privilege : privileges)
@@ -66,7 +67,7 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 	}
 
 	@Override
-	public List<RoleDTO> getRolesForSync(java.sql.Date start, java.sql.Date end) {
+	public List<RoleDTO> getRolesForSync(Date start, Date end) {
 		List<Role> roles = this.rolesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<RoleDTO> result = new ArrayList<RoleDTO>();
 		for(Role role : roles)

@@ -8,24 +8,31 @@
 
 package com.megatravel.dtosoap.global_parameters;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.megatravel.model.system_user_info.Privilege;
+import com.megatravel.model.system_user_info.Role;
 
 public class PrivilegeDTO {
 
     protected long id;
     protected String name;
     protected Date lastChangedTime;
+    protected List<RoleDTO> rolesDTO = new ArrayList<RoleDTO>();
+    
+    public PrivilegeDTO() { }
 
-    public PrivilegeDTO() {
-    	
-	}
-
-	public PrivilegeDTO(Privilege tempPrivilege) {
-    	this.id = tempPrivilege.getId();
-    	this.name = tempPrivilege.getName();
-    	this.lastChangedTime = tempPrivilege.getLastChangedTime();
+	public PrivilegeDTO(Privilege newPrivilege) {
+    	this.id = newPrivilege.getId();
+    	this.name = newPrivilege.getName();
+    	this.lastChangedTime = newPrivilege.getLastChangedTime();
+    	if(newPrivilege.getRoles() != null) {
+    		for(Role current : newPrivilege.getRoles()) {
+    			this.rolesDTO.add(new RoleDTO(current));
+    		}
+    	}
 	}
 
 	/**
@@ -71,6 +78,14 @@ public class PrivilegeDTO {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public List<RoleDTO> getRolesDTO() {
+		return rolesDTO;
+	}
+
+	public void setRolesDTO(List<RoleDTO> rolesDTO) {
+		this.rolesDTO = rolesDTO;
 	}
 
 	

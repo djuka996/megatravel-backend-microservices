@@ -40,7 +40,7 @@ public class SigningPostFilter extends ZuulFilter {
 		String routeWithPrefix = context.getZuulRequestHeaders().get(StringUtilities.FORWARDED);
 		String zuulRoute = "/" + routeWithPrefix.substring(routeWithPrefix.lastIndexOf('/') + 1) + "/**";
 		String microserviceName = this.utilites.getMicroserviceNameFromRoute(zuulRoute);
-		context.setResponseBody(service.signAndEncode(body, agentSerialNumber, microserviceName).getBody());
+		//context.setResponseBody(service.signAndEncode(body, agentSerialNumber, microserviceName).getBody());
 		return null;
 	}
 

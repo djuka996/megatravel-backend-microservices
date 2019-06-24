@@ -18,7 +18,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import com.megatravel.dto.system_user_info.UserReviewDTO;
 import com.megatravel.model.hotel.Room;
 
 @Entity
@@ -27,29 +26,41 @@ public class UserReview {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	
 	protected int rating;
+	
 	protected String comment;
+	
 	protected Date timeStamp;
+	
 	@OneToOne()
 	protected Room room;
+	
 	@OneToOne()
 	protected User user;
+	
 	protected boolean approved;
+	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastChangedTime;
-	public UserReview() {
+	
+	public UserReview() { }
 
-	}
-
-	public UserReview(UserReviewDTO userReviewDTO) {
+	public UserReview(com.megatravel.dto.system_user_info.UserReviewDTO userReviewDTO) {
 		this.id = userReviewDTO.getId();
 		this.rating = userReviewDTO.getRating();
 		this.comment = userReviewDTO.getComment();
 		this.timeStamp = userReviewDTO.getTimeStamp();
 		this.approved = false;
-		this.room = userReviewDTO.getRoomDTO() != null ? new Room(userReviewDTO.getRoomDTO()) : null;
-		this.user = userReviewDTO.getSystemUserInfoDTO() != null ? new User(userReviewDTO.getSystemUserInfoDTO()) : null;
+	}
+	
+	public UserReview(com.megatravel.dtosoap.system_user_info.UserReviewDTO userReviewDTO) {
+		this.id = userReviewDTO.getId();
+		this.rating = userReviewDTO.getRating();
+		this.comment = userReviewDTO.getComment();
+		this.timeStamp = userReviewDTO.getTimeStamp();
+		this.approved = false;
 	}
 
 	public UserReview(Long id, int rating, String comment, Date timeStamp, Room room, User user) {
@@ -126,6 +137,5 @@ public class UserReview {
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
 	}
-	
 
 }

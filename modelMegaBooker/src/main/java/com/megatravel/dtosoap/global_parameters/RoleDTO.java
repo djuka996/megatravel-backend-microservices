@@ -12,101 +12,70 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.megatravel.model.system_user_info.Privilege;
+import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.model.system_user_info.Role;
+import com.megatravel.model.system_user_info.User;
 
 
 public class RoleDTO {
 
-    protected long id;
-    protected String roleName;
-    protected List<PrivilegeDTO> privileges;
-    protected Date lastChangedTime;
+	protected long id;
+	protected String roleName;
+	protected Date lastChangedTime;
+	protected List<SystemUserInfoDTO> usersDTO = new ArrayList<SystemUserInfoDTO>();
+	
+	public RoleDTO() { }
 
-public RoleDTO() {
-    	
-    }
-
-    public RoleDTO(Role tempRole) {
-		this.id = tempRole.getId();
-		this.roleName = tempRole.getRoleName();
-		this.lastChangedTime = tempRole.getLastChangedTime();
-		this.privileges = new ArrayList<>();
-		if(tempRole.getPrivileges() != null) {
-			for (Privilege tempPrivilege: tempRole.getPrivileges()) {
-				this.privileges.add(new PrivilegeDTO(tempPrivilege));
+	public RoleDTO(Role newRole) {
+		this.id = newRole.getId();
+		this.roleName = newRole.getRoleName();
+		this.lastChangedTime = newRole.getLastChangedTime();
+		if(newRole.getUsers() != null) {
+			for (User current: newRole.getUsers()) {
+				this.usersDTO.add(new SystemUserInfoDTO(current));
 			}
 		}
 	}
 
-    /**
-     * Gets the value of the id property.
-     * 
-     */
-    public long getId() {
-        return id;
-    }
+	/**
+	 * Gets the value of the id property.
+	 * 
+	 */
+	public long getId() {
+		return id;
+	}
 
-    /**
-     * Sets the value of the id property.
-     * 
-     */
-    public void setId(long value) {
-        this.id = value;
-    }
+	/**
+	 * Sets the value of the id property.
+	 * 
+	 */
+	public void setId(long value) {
+		this.id = value;
+	}
 
-    /**
-     * Gets the value of the roleName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getRoleName() {
-        return roleName;
-    }
+	/**
+	 * Gets the value of the roleName property.
+	 * 
+	 * @return
+	 *     possible object is
+	 *     {@link String }
+	 *     
+	 */
+	public String getRoleName() {
+		return roleName;
+	}
 
-    /**
-     * Sets the value of the roleName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setRoleName(String value) {
-        this.roleName = value;
-    }
-
-    /**
-     * Gets the value of the privileges property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the privileges property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPrivileges().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PrivilegeDTO }
-     * 
-     * 
-     */
-    public List<PrivilegeDTO> getPrivileges() {
-        if (privileges == null) {
-            privileges = new ArrayList<PrivilegeDTO>();
-        }
-        return this.privileges;
-    }
+	/**
+	 * Sets the value of the roleName property.
+	 * 
+	 * @param value
+	 *     allowed object is
+	 *     {@link String }
+	 *     
+	 */
+	public void setRoleName(String value) {
+		this.roleName = value;
+	}
 
 	public Date getLastChangedTime() {
 		return lastChangedTime;
@@ -115,7 +84,14 @@ public RoleDTO() {
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
 	}
-    
-    
 
+	public List<SystemUserInfoDTO> getUsersDTO() {
+		return usersDTO;
+	}
+
+	public void setUsersDTO(List<SystemUserInfoDTO> usersDTO) {
+		this.usersDTO = usersDTO;
+	}
+
+	
 }

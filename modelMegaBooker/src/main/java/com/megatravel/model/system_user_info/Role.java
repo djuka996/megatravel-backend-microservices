@@ -17,11 +17,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.megatravel.dto.global_parameters.RoleDTO;
 import com.megatravel.validation.StaticData;
 
 @Entity
 public class Role {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -46,29 +46,36 @@ public class Role {
           name = "privilege_id", referencedColumnName = "id"))
     private Set<Privilege> privileges;  
 	
-	public Role() {
-		
-	}
-	
-	public Role(Long id, String roleName) {
-		this.id = id;
-		this.roleName = roleName;
-	}
-	
-	public Role(RoleDTO roleDTO) {
+	public Role() { }
+
+	public Role(com.megatravel.dto.global_parameters.RoleDTO roleDTO) {
 		this.id = roleDTO.getId();
 		this.roleName = roleDTO.getRoleName();
+	}
+	
+	public Role(com.megatravel.dtosoap.global_parameters.RoleDTO roleDTO) {
+		this.id = roleDTO.getId();
+		this.roleName = roleDTO.getRoleName();		
+	}
+	
+	public Role(Long id, String roleName, Date lastChangedTime) {
+		this.id = id;
+		this.roleName = roleName;
+		this.lastChangedTime = lastChangedTime;
 	}
 	
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getRoleName() {
 		return roleName;
 	}
+	
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
