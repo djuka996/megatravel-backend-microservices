@@ -48,6 +48,7 @@ public class Privilege {
 	public Privilege(PrivilegeDTO privilegeDTO) {
 		this.id = privilegeDTO.getId();
 		this.name = privilegeDTO.getName();
+		this.lastChangedTime = new Date();
 	}
 
 	public String getName() {
