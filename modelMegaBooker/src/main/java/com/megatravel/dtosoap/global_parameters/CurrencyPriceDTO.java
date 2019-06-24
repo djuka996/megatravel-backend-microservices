@@ -10,12 +10,22 @@ package com.megatravel.dtosoap.global_parameters;
 
 import java.util.Date;
 
+import com.megatravel.model.global_parameters.CurrencyPrice;
+
 public class CurrencyPriceDTO {
 
     protected long id;
-    protected AmountTypeDTO amount;
+    protected AmountTypeDTO amountDTO;
     protected Date lastChangedTime;
 
+    public CurrencyPriceDTO() { }
+
+    public CurrencyPriceDTO(CurrencyPrice currencyPrice) {
+    	this.id = currencyPrice.getId();
+    	this.lastChangedTime = currencyPrice.getLastChangedTime();
+    	this.amountDTO = new AmountTypeDTO(currencyPrice.getAmount());
+    }
+    
     /**
      * Gets the value of the id property.
      * 
@@ -40,8 +50,8 @@ public class CurrencyPriceDTO {
      *     {@link AmountTypeDTO }
      *     
      */
-    public AmountTypeDTO getAmount() {
-        return amount;
+    public AmountTypeDTO getAmountDTO() {
+        return amountDTO;
     }
 
     /**
@@ -52,8 +62,8 @@ public class CurrencyPriceDTO {
      *     {@link AmountTypeDTO }
      *     
      */
-    public void setAmount(AmountTypeDTO value) {
-        this.amount = value;
+    public void setAmountDTO(AmountTypeDTO value) {
+        this.amountDTO = value;
     }
 
 	public Date getLastChangedTime() {
