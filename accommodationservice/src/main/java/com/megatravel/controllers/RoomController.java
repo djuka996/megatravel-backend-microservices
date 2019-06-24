@@ -1,5 +1,6 @@
 package com.megatravel.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.hotel.RoomDTO;
+import com.megatravel.model.hotel.Room;
 import com.megatravel.services.RoomService;
 
 @RestController
@@ -33,7 +35,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<RoomDTO>>(service.getHotelRooms(id), HttpStatus.OK);
+		return new ResponseEntity<List<RoomDTO>>(convertToListDTO(service.getHotelRooms(id)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -42,7 +44,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomDTO>(service.getRoom(id), HttpStatus.OK);
+		return new ResponseEntity<RoomDTO>(new RoomDTO(service.getRoom(id)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -51,7 +53,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomDTO>(service.createRoom(room, id), HttpStatus.CREATED);
+		return new ResponseEntity<RoomDTO>(new RoomDTO(service.createRoom(room, id)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -60,7 +62,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomDTO>(service.updateRoom(room, id), HttpStatus.ACCEPTED);
+		return new ResponseEntity<RoomDTO>(new RoomDTO(service.updateRoom(room, id)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -81,4 +83,11 @@ public class RoomController {
 		return new ResponseEntity<Boolean>(service.updateRating(id), HttpStatus.OK);
 	}
 	
+	private List<RoomDTO> convertToListDTO(List<Room> got) {
+		List<RoomDTO> ret = new ArrayList<>();
+		for (Room iter : got) {
+			ret.add(new RoomDTO(iter));			
+		}
+		return ret;
+	}
 }

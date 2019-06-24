@@ -12,7 +12,7 @@ import com.megatravel.dtosoap.system_user_info.MessageDTO;
 
 
 @WebService
-public interface MessageService {
+public interface MessageServiceInterface {
 
 	@WebMethod
 	List<ChatDTO> getInbox(@WebParam(name="UserId") Long userId); 

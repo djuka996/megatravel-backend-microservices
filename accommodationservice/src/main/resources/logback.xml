@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+    <property name="LOGS" value="./logs" />
+ 
+    <appender name="Console"
+        class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	   <level>INFO</level>
+     	   <onMatch>ACCEPT</onMatch>
+    	    <onMismatch>NEUTRAL</onMismatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	   <level>WARN</level>
+     	   <onMatch>ACCEPT</onMatch>
+    	    <onMismatch>NEUTRAL</onMismatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	   <level>ERROR</level>
+     	   <onMatch>ACCEPT</onMatch>
+    	    <onMismatch>NEUTRAL</onMismatch>
+    	</filter>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	   <level>FATAL</level>
+     	   <onMatch>ACCEPT</onMatch>
+    	    <onMismatch>DENY</onMismatch>
+    	</filter>
+    	<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} | [%p] - %m%n%throwable</Pattern>
+        </encoder>
+    </appender>
+ 
+    <appender name="InfoWorking" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/logInfo.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	   <level>INFO</level>
+     	   <onMatch>ACCEPT</onMatch>
+    	    <onMismatch>DENY</onMismatch>
+    	</filter>
+        <encoder
+            class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} | [%p] - %m%n</Pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/info/infoLog-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+			<maxFileSize>25MB</maxFileSize>    
+       		<totalSizeCap>20GB</totalSizeCap>
+            <maxHistory>730</maxHistory>
+        </rollingPolicy>
+    </appender>
+    
+     <appender name="WarningWorking" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/logWarning.log</file>
+    	<filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	   <level>WARN</level>
+     	   <onMatch>ACCEPT</onMatch>
+    	    <onMismatch>DENY</onMismatch>
+    	</filter>
+  	   <encoder
+            class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} | [%p] - %m%n%throwable</Pattern>
+        </encoder>
+ 
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/warn/warnLog-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+			<maxFileSize>25MB</maxFileSize>    
+       		<totalSizeCap>20GB</totalSizeCap>
+            <maxHistory>730</maxHistory>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="ErrorWorking" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/logError.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+     	<level>ERROR</level>
+     	<onMatch>ACCEPT</onMatch>
+    	<onMismatch>DENY</onMismatch>
+    	</filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss} | [%p] - %m%n%throwable</Pattern>
+        </encoder>
+ 
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS}/archived/error/errorLog-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+			<maxFileSize>25MB</maxFileSize>    
+       		<totalSizeCap>20GB</totalSizeCap>
+            <maxHistory>730</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+	<appender name="DebugWorking" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	        <file>${LOGS}/debugError.log</file>
+	        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+	     	<level>DEBUG</level>
+	     	<onMatch>ACCEPT</onMatch>
+	    	<onMismatch>DENY</onMismatch>
+	    	</filter>
+	        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+	            <Pattern>%d{yyyy-MM-dd HH:mm:ss} | [%p] - %m%n%throwable</Pattern>
+	        </encoder>
+	 
+	        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+	            <fileNamePattern>${LOGS}/archived/debug/debugLog-%d{yyyy-MM-dd}.%i.log
+	            </fileNamePattern>
+				<maxFileSize>25MB</maxFileSize>    
+	       		<totalSizeCap>20GB</totalSizeCap>
+	            <maxHistory>730</maxHistory>
+	        </rollingPolicy>
+	    </appender>
+
+    <!-- Default log if not found -->
+    <root level="info">
+        <appender-ref ref="InfoWorking" />   <!-- Calling info that only filters INFO logs -->
+        <appender-ref ref="WarningWorking" />  <!-- Calling info that only filters WARN logs -->
+        <appender-ref ref="ErrorWorking" />  <!-- Calling info that only filters ERROR logs -->
+        <appender-ref ref="DebugWorking" />  <!-- Calling info that only filters ERROR logs -->
+        <appender-ref ref="Console" />  <!-- Calling info that only filters INFO|WARN|ERROR|DEBUG logs -->
+    </root>
+    
+
+</configuration>

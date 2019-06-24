@@ -1,5 +1,6 @@
 package com.megatravel.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
-import com.megatravel.services.MessageServiceImpl;
+import com.megatravel.model.system_user_info.Chat;
+import com.megatravel.model.system_user_info.Message;
+import com.megatravel.webservice.MessageServiceImpl;
 
 
 @RestController
@@ -31,7 +34,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<ChatDTO>> getInbox(@PathVariable("id") Long id, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("getInbox", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("getInbox", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -40,7 +43,7 @@ public class MessageController {
 	
 	@RequestMapping(value = "/{userId}/chat/{chatId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<MessageDTO>> getChat(@PathVariable("userId") Long userId, @PathVariable("chatId") Long chatId, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("getChat", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("getChat", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -54,7 +57,7 @@ public class MessageController {
 	@RequestMapping(value ="/{chatId}/hotel/{hotelId}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Boolean> sendMessage(@RequestBody MessageDTO messageDTO,@PathVariable("chatId") Long chatId, 
 			@PathVariable(name = "hotelId") Long hotelId, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("sendMessage", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("sendMessage", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
@@ -63,11 +66,30 @@ public class MessageController {
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<Boolean> markReadChat(@PathVariable("id") Long chatId, HttpServletRequest request) {
-		if(DecodeJwtToken.canAccessMethod("markReadChat", request.getHeader("Authorization"))) {
+		if(!DecodeJwtToken.canAccessMethod("markReadChat", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
 		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(chatId), HttpStatus.ACCEPTED);
+	}
+	
+	private List<MessageDTO> convertMessageToListDTO(List<Message> got){
+		List<MessageDTO> returning = new ArrayList<>();
+		for (Message iter : got) {
+			MessageDTO toAdd = new MessageDTO(iter);
+			returning.add(toAdd);
+		}
+		return returning;
+	}
+	
+	
+	private List<ChatDTO> convertChatToListDTO(List<Chat> got){
+		List<ChatDTO> returning = new ArrayList<>();
+		for (Chat iter : got) {
+			ChatDTO toAdd = new ChatDTO(iter);
+			returning.add(toAdd);
+		}
+		return returning;
 	}
 	
 }

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class DecodeJwtToken {
 	
-	public static List<JwtAuthorization> decodeJwt(String pureJwtToken) {
+	public static JwtToken decodeJwt(String pureJwtToken) {
 		java.util.Base64.Decoder decoder = java.util.Base64.getUrlDecoder();
         String[] parts = pureJwtToken.split("\\."); // split out the "parts" (header, payload and signature)
         @SuppressWarnings("unused")
@@ -20,12 +20,18 @@ public class DecodeJwtToken {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        return tokenObject.getAuth();
+        return tokenObject;
+	}
+	
+	public static String getUsername(String jwtToken) {
+		String pureJwtToken = jwtToken.substring(7, jwtToken.length());
+		String userEmail = decodeJwt(pureJwtToken).getSub();
+		return userEmail;
 	}
 	
 	public static Boolean canAccessMethod(String permissionInMethod, String jwtToken) {
 		String pureJwtToken = jwtToken.substring(7, jwtToken.length());
-		List<JwtAuthorization> listOfPermission = decodeJwt(pureJwtToken);
+		List<JwtAuthorization> listOfPermission = decodeJwt(pureJwtToken).getAuth();
 		for (JwtAuthorization jwtAuthorization : listOfPermission) {
 			if(jwtAuthorization.getAuthority().equals(permissionInMethod)) {
 				return true;

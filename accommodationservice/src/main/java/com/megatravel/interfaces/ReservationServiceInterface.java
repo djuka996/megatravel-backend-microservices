@@ -38,4 +38,6 @@ public interface ReservationServiceInterface {
 	@WebMethod
 	boolean deleteReservation(@XmlElement(name = "reservation-id", nillable = false, required = true) Long id);
 	
+	@WebMethod
+	boolean cancelReservation(@XmlElement(name="reservation-id", nillable = false, required = true) Long id);
 }

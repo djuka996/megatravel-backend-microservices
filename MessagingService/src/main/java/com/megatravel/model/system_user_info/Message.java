@@ -50,6 +50,7 @@ public class Message {
 		this.text = messageDTO.getText();
 		this.opened = messageDTO.isOpened();
 		this.date = messageDTO.getDate();
+		this.lastChangedTime = new Date();
 		//this.sender = messageDTO.getSender() != null ? new User(messageDTO.getSender()) : null;
 		//this.receiver = messageDTO.getReceiver() != null ? new User(messageDTO.getReceiver()) : null;
 	}
@@ -60,6 +61,7 @@ public class Message {
 		this.text = messageDTO.getText();
 		this.opened = messageDTO.isOpened();
 		this.date = messageDTO.getDate();
+		this.lastChangedTime = new Date();
 		this.sender = messageDTO.getSender() != null ? new User(messageDTO.getSender()) : null;
 		this.receiver = messageDTO.getReceiver() != null ? new User(messageDTO.getReceiver()) : null;
 	}

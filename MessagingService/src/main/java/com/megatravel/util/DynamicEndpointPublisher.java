@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.megatravel.services.MessagesDatabaseSyncingServiceImpl;
-import com.megatravel.services.MessageServiceImpl;
+import com.megatravel.webservice.MessageServiceImpl;
 import com.netflix.appinfo.ApplicationInfoManager;
 
 @Component
