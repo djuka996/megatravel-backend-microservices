@@ -18,33 +18,37 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import com.megatravel.dto.global_parameters.CurrencyPriceDTO;
-
 @Entity
 public class CurrencyPrice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	
 	@OneToOne()
 	protected AmountType amount;
+	
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastChangedTime;
 
-	public CurrencyPrice() {
+	public CurrencyPrice() { }
 
-	}
-
-	public CurrencyPrice(CurrencyPriceDTO currencyPriceDTO) {
+	public CurrencyPrice(com.megatravel.dto.global_parameters.CurrencyPriceDTO currencyPriceDTO) {
 		this.id = currencyPriceDTO.getId();
-		this.amount = currencyPriceDTO.getAmount() != null ? new AmountType(currencyPriceDTO.getAmount()) : null;
+		this.lastChangedTime = currencyPriceDTO.getLastChangedTime();
+	}
+	
+	public CurrencyPrice(com.megatravel.dtosoap.global_parameters.CurrencyPriceDTO currencyPriceDTO) {
+		this.id = currencyPriceDTO.getId();
+		this.lastChangedTime = currencyPriceDTO.getLastChangedTime();
 	}
 
-	public CurrencyPrice(Long id, AmountType amount) {
+	public CurrencyPrice(Long id, AmountType amount, Date lastChangedTime) {
 		super();
 		this.id = id;
 		this.amount = amount;
+		this.lastChangedTime = lastChangedTime; 
 	}
 
 	public Long getId() {

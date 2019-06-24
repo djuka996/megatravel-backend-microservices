@@ -76,7 +76,6 @@ public class RoomReservationDTO {
     protected BigDecimal price;
     @XmlElement(name = "AllowedCancel", defaultValue = "0")
     protected boolean allowedCancel;
-    // TODO : Anotacija mozda?
     @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     

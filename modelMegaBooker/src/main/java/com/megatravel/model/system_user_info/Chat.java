@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import com.megatravel.dto.system_user_info.ChatDTO;
 import com.megatravel.model.hotel.Hotel;
 
 @Entity
@@ -29,27 +28,34 @@ public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	protected Date lastChangedTime;
+	
 	@ManyToOne()
 	protected Hotel chatsHotel;
+	
 	@OneToMany(mappedBy = "chat")
 	protected Set<Message> messages;
 
-	public Chat() {
+	public Chat() { }
 
-	}
-
-	public Chat(ChatDTO chatDTO) {
+	public Chat(com.megatravel.dto.system_user_info.ChatDTO chatDTO) {
 		this.id = chatDTO.getId();
-		this.chatsHotel = chatDTO.getHotelDTO() != null ? new Hotel(chatDTO.getHotelDTO()) : null; 
+		this.lastChangedTime = chatDTO.getLastChangedTime();
+	}
+	
+	public Chat(com.megatravel.dtosoap.system_user_info.ChatDTO chatDTO) {
+		this.id = chatDTO.getId();
+		this.lastChangedTime = chatDTO.getLastChangedTime();
 	}
 
-	public Chat(Long id, Hotel chatsHotel) {
+	public Chat(Long id, Hotel chatsHotel, Date lastChangedTime) {
 		super();
 		this.id = id;
 		this.chatsHotel = chatsHotel;
+		this.lastChangedTime = lastChangedTime;
 	}
 
 	public Long getId() {
