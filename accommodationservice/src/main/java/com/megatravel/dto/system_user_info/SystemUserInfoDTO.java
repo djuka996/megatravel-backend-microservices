@@ -96,7 +96,7 @@ public class SystemUserInfoDTO {
     protected HotelDTO hotelDTO;
     @XmlElement(name = "Room_reservationDTO", namespace = "http://www.megatravel.com/room_reservation", required = true)
     protected List<RoomReservationDTO> roomReservationDTO;
-
+    
     
     public SystemUserInfoDTO() {
    	}
@@ -107,6 +107,7 @@ public class SystemUserInfoDTO {
    		this.firstName = user.getName();
    		this.lastName = user.getLastName();
    		this.role = new ArrayList<>();
+   		this.active = user.isActive();
    		for (Role tempRole : user.getRoles()) {
    			this.role.add(new RoleDTO(tempRole));
    		}

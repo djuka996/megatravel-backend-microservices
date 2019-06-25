@@ -3,6 +3,7 @@ package com.megatravel.controller;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.megatravel.dto.system_user_info.SystemUserInfoDTO;
 import com.megatravel.dto.system_user_info.SystemUserLoginDTO;
 import com.megatravel.dto.system_user_info.SystemUserRegistrationDTO;
+import com.megatravel.jwt.JwtTokenUtils;
 import com.megatravel.model.global_parameters.Address;
 import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.system_user_info.Role;
@@ -53,6 +55,8 @@ public class UserController {
 	HotelRepository hotelRepository;
 	@Autowired 
 	AddressRepository addressRepository;
+	@Autowired
+	JwtTokenUtils jwtTokenUtils;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
@@ -85,6 +89,27 @@ public class UserController {
 		return new ResponseEntity<User>(userService.findOneUser(id), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/{id}/state/{boolState}", method = RequestMethod.GET)
+	@PreAuthorize("hasAnyAuthority('getUser')")
+	public ResponseEntity<SystemUserInfoDTO> changeStateOfUser(@PathVariable Long id, @PathVariable boolean boolState, 
+			HttpServletRequest req) {
+		String token = jwtTokenUtils.resolveToken(req);
+		User korisnik = null;
+		
+		if(token != null) {
+			String email = jwtTokenUtils.getUsername(token);
+			korisnik = userService.findByEmail(email);
+		}
+		
+		if(korisnik.isActive()) {
+			return new ResponseEntity<>(userService.changeState(id, boolState), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.LOCKED);
+		}
+		
+	}
+	
 	/*@RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasAnyAuthority('deleteSomething')")
 	public ResponseEntity<SystemUserInfoDTO> getUserAAA(@PathVariable Long id) {
@@ -94,6 +119,39 @@ public class UserController {
 	@RequestMapping(value = "/email/{email}", method = RequestMethod.GET)
 	public ResponseEntity<SystemUserInfoDTO> getUserByEmail(@PathVariable String email) {
 		return new ResponseEntity<>(new SystemUserInfoDTO(userService.findByEmail(email)), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasAnyAuthority('getUser')")
+	public ResponseEntity<SystemUserInfoDTO> deleteUser(@PathVariable Long id, HttpServletRequest req) {
+		String token = jwtTokenUtils.resolveToken(req);
+		User korisnik = null;
+		
+		if(token != null) {
+			String email = jwtTokenUtils.getUsername(token);
+			korisnik = userService.findByEmail(email);
+		}
+		
+		if(containtsRole("ROLE_ADMIN", korisnik.getRoles()) && korisnik.isActive()) {
+			System.out.println("usao ADMIN");
+			
+			User user = userService.findOneUser(id);
+			
+			if(!containtsRole("ROLE_LOGGED", user.getRoles())) {
+				System.out.println("usao LOGGED");
+				return new ResponseEntity<>(HttpStatus.LOCKED);
+			}
+			
+			boolean flag = userService.deleteUser(id);
+			if(flag) {
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
+			
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}
+		else {
+			return new ResponseEntity<>(HttpStatus.LOCKED);
+		}
 	}
 	
 	//@PreAuthorize("@permissionAccess.canAccessCheckPermission(#userId)")
@@ -158,6 +216,7 @@ public class UserController {
 		user.setPassword(registrationDTO.getPassword());
 		user.setName(registrationDTO.getFirstName());
 		user.setLastName(registrationDTO.getLastName());
+		user.setActive(false);
 		user.setLastChangedTime(new Date());
 		Role role = roleService.findByRoleName("ROLE_LOGGED");
 		if(user.getRoles() == null) {
@@ -207,5 +266,15 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}*/
+	
+	private boolean containtsRole(String roleName, Set<Role> roles) {
+		for (Role role : roles) {
+			if(role.getRoleName().equals(roleName)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 }
