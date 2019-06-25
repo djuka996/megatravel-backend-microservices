@@ -3,6 +3,8 @@ package com.megatravel.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -31,14 +33,14 @@ public class RoomService{
 	@Autowired
 	private ImageRepository imageRepository;
 	
-	public List<Room> getHotelRooms(Long hotelId) {
+	public List<Room> getHotelRooms(Long hotelId,HttpServletRequest request) {
 		List<Room> rooms = roomRepository.findAllByRoomsHotel_IdOrderByCurrentlyPriceAsc(hotelId);
 		if(rooms.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested accommodation dont exist.");
 		return rooms;
 	}
 	 
-	public Room getRoom(Long id) {
+	public Room getRoom(Long id,HttpServletRequest request) {
 		if(id == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested null room.");
 		Optional<Room> room = roomRepository.findById(id);
@@ -47,7 +49,7 @@ public class RoomService{
 		return room.get();
 	}
 
-	public Room createRoom(RoomDTO room, Long hotelId) {
+	public Room createRoom(RoomDTO room, Long hotelId,HttpServletRequest request) {
 		if(room == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain room data");
 		Optional<Hotel> found = hotelRepository.findById(hotelId);
@@ -63,20 +65,20 @@ public class RoomService{
 		toSave.setRoomsHotel(found.get());
 		toSave.setRoomsHotel(gotHotel);
 		Room saved = roomRepository.save(toSave);	
-		List<ImageDTO> receivedImages = room.getImagesDTO();
+		/*List<ImageDTO> receivedImages = room.getImagesDTO();
 		for (ImageDTO imageDTO : receivedImages) {
 			Image foundImg = imageRepository.findImageByFilePathEquals(imageDTO.getFilePath());
 			foundImg.setRoomImage(saved);
 			imageRepository.save(foundImg);
-		}	
+		}*/	
 		return saved;
 	}
 
-	public Room updateRoom(RoomDTO room, Long hotelId) {
+	public Room updateRoom(RoomDTO room, Long hotelId,HttpServletRequest request) {
 		if(room == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Request doesn't contain accommodation data");
 	
-		Room gotRoom =  this.getRoom(room.getId());
+		Room gotRoom =  this.getRoom(room.getId(),request);
 		gotRoom.setCancellationAllowed(room.isCancellationAllowed()); 
 		gotRoom.setCancellationDays(room.getCancellationDays());
 		gotRoom.setCapacity(room.getCapacity());
@@ -99,15 +101,15 @@ public class RoomService{
 		return savedRoom; 
 	}
 
-	public boolean removeRoom(Long id) {
-		Room found = this.getRoom(id);
+	public boolean removeRoom(Long id,HttpServletRequest request) {
+		Room found = this.getRoom(id,request);
 		roomRepository.delete(found);
 		return true;
 	}
 	
-	public Boolean updateRating(Long id) {
+	public Boolean updateRating(Long id,HttpServletRequest request) {
 		double rating =  roomRepository.updateRating(id);
-		Room room = this.getRoom(id);
+		Room room = this.getRoom(id,request);
 		room.getRoomsHotel().setRating(rating);
 		hotelRepository.save(room.getRoomsHotel());
 		return true;

@@ -21,7 +21,7 @@ import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.model.system_user_info.Chat;
 import com.megatravel.model.system_user_info.Message;
-import com.megatravel.webservice.MessageServiceImpl;
+import com.megatravel.services.MessageService;
 
 
 @RestController
@@ -30,7 +30,7 @@ import com.megatravel.webservice.MessageServiceImpl;
 public class MessageController {
 
 	@Autowired
-	private MessageServiceImpl messageServiceImpl;
+	private MessageService messageService;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<ChatDTO>> getInbox(@PathVariable("id") Long id, HttpServletRequest request) {
@@ -38,7 +38,7 @@ public class MessageController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<ChatDTO>>(this.messageServiceImpl.getInbox(id), HttpStatus.OK);
+		return new ResponseEntity<List<ChatDTO>>(convertChatToListDTO(this.messageService.getInbox(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{userId}/chat/{chatId}", method = RequestMethod.GET,produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -47,7 +47,7 @@ public class MessageController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<MessageDTO>>(this.messageServiceImpl.getMessages(userId,chatId), HttpStatus.OK);
+		return new ResponseEntity<List<MessageDTO>>(convertMessageToListDTO(this.messageService.getMessages(userId,chatId,request)), HttpStatus.OK);
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class MessageController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(messageServiceImpl.sendMessage(chatId, hotelId, messageDTO), HttpStatus.CREATED);
+		return new ResponseEntity<Boolean>(messageService.sendMessage(chatId, hotelId, messageDTO,request), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -70,7 +70,7 @@ public class MessageController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(messageServiceImpl.markRead(chatId), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(messageService.markRead(chatId,request), HttpStatus.ACCEPTED);
 	}
 	
 	private List<MessageDTO> convertMessageToListDTO(List<Message> got){

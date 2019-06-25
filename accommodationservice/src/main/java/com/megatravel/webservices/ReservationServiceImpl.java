@@ -38,47 +38,47 @@ public class ReservationServiceImpl implements ReservationServiceInterface {
 	
 	@Override
 	public List<RoomReservationDTO> getAllReservationsForUser(Long userId) {
-		return convertToListDTO(reservationService.getAllReservationsForUser(userId));
+		return convertToListDTO(reservationService.getAllReservationsForUser(userId,null));
 	}
 	
 	@Override
 	public List<RoomReservationDTO> getAllReservations() {
-		return convertToListDTO(reservationService.getAllReservations());
+		return convertToListDTO(reservationService.getAllReservations(null));
 	}
 
 	@Override
 	public RoomReservationDTO getReservation(Long id) {
-		return new RoomReservationDTO(reservationService.getReservation(id));
+		return new RoomReservationDTO(reservationService.getReservation(id,null));
 	}
 
 	@Override
 	public List<RoomReservationDTO> getRoomReservations(Long roomId) {
-		return convertToListDTO(reservationService.getRoomReservations(roomId));
+		return convertToListDTO(reservationService.getRoomReservations(roomId,null));
 	}
 
 	@Override
 	public List<RoomReservationDTO> getHotelReservations(Long hotelId) {
-		return convertToListDTO(reservationService.getHotelReservations(hotelId));
+		return convertToListDTO(reservationService.getHotelReservations(hotelId,null));
 	}
 
 	@Override
 	public RoomReservationDTO createReservation(RoomReservationDTO roomReservation, Long roomId,Long userId) {
-		return new RoomReservationDTO(reservationService.createReservation(roomReservation, roomId, userId));
+		return new RoomReservationDTO(reservationService.createReservation(roomReservation, roomId, userId,null));
 	}
 
 	@Override //TODO Proveriti da li samo "realisation" se menja?
 	public RoomReservationDTO updateReservation(RoomReservationDTO roomReservation) {
-		return new RoomReservationDTO(reservationService.updateReservation(roomReservation));
+		return new RoomReservationDTO(reservationService.updateReservation(roomReservation,null));
 	}
 
 	@Override
 	public boolean deleteReservation(Long id) {
-		return reservationService.deleteReservation(id);
+		return reservationService.deleteReservation(id,null);
 	}
 
 	@Override
 	public boolean cancelReservation(Long id) {
-		return reservationService.cancelReservation(id);
+		return reservationService.cancelReservation(id,null);
 	}
 	
 	public List<RoomReservationDTO> convertToListDTO(List<RoomReservation> got) {

@@ -46,7 +46,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "id",
     "beginDate",
     "endDate",
-    "unitPriceInformationDTO"
+    "unitPriceInformationDTO",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "Price_listDTO")
 public class PriceListDTO {
@@ -62,6 +63,7 @@ public class PriceListDTO {
     @XmlElement(name = "Unit_price_informationDTO")
     protected List<UnitPriceInformationDTO> unitPriceInformationDTO;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
 
     /**

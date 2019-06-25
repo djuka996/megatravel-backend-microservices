@@ -42,15 +42,18 @@ import com.megatravel.model.hotel.Image;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
-    "filePath"
+    "filePath",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "ImageDTO")
 public class ImageDTO {
 
+    @XmlElement(name = "Id")
     protected long id;
-    @XmlElement(required = true)
+    @XmlElement(name="FilePath",required = true)
     protected String filePath;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     public ImageDTO() {

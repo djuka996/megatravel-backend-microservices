@@ -37,32 +37,32 @@ public class RoomServiceImpl implements RoomServiceInterface {
 	
 	@Override
 	public List<RoomDTO> getHotelRooms(Long hotelId) {
-		return convertToListDTO(roomService.getHotelRooms(hotelId));
+		return convertToListDTO(roomService.getHotelRooms(hotelId,null));
 	}
 
 	@Override
 	public RoomDTO getRoom(Long id) {
-		return new RoomDTO(roomService.getRoom(id));
+		return new RoomDTO(roomService.getRoom(id,null));
 	}
 
 	@Override
 	public Boolean updateRating(Long id) {
-		return roomService.updateRating(id);
+		return roomService.updateRating(id,null);
 	}
 	
 	@Override
 	public RoomDTO createRoom(RoomDTO room, Long hotelId) {
-		return new RoomDTO(roomService.createRoom(room, hotelId));
+		return new RoomDTO(roomService.createRoom(room, hotelId,null));
 	}
 
 	@Override
 	public RoomDTO updateRoom(RoomDTO room, Long hotelId) {
-		return new RoomDTO(roomService.updateRoom(room, hotelId));
+		return new RoomDTO(roomService.updateRoom(room, hotelId,null));
 	}
 
 	@Override
 	public boolean removeRoom(Long id) {
-		return roomService.removeRoom(id);
+		return roomService.removeRoom(id,null);
 	}
 
 	public List<RoomDTO> convertToListDTO(List<Room> got) {
