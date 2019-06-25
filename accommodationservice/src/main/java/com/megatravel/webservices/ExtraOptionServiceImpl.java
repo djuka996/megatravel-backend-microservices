@@ -37,40 +37,40 @@ public class ExtraOptionServiceImpl implements ExtraOptionServiceInterface {
 	
 	@Override
 	public List<ExtraOptionDTO> getAllExtraOptions() {
-		List<ExtraOption> got = extraOptionService.getAllExtraOptions();
+		List<ExtraOption> got = extraOptionService.getAllExtraOptions(null);
 		return convertToListDTO(got);
 	}
 
 	@Override
 	public List<ExtraOptionDTO> getHotelExtraOptions(Long hotelId) {
-		List<ExtraOption> got = extraOptionService.getHotelExtraOption(hotelId);
+		List<ExtraOption> got = extraOptionService.getHotelExtraOption(hotelId,null);
 		return convertToListDTO(got);
 	}
 	
 	@Override
 	public List<ExtraOptionDTO> getRoomExtraOptions(Long roomId) {
-		List<ExtraOption> got = extraOptionService.getRoomExtraOptions(roomId);
+		List<ExtraOption> got = extraOptionService.getRoomExtraOptions(roomId,null);
 		return convertToListDTO(got);
 	}
 
 	@Override
 	public ExtraOptionDTO getRoomExtraOption(Long id) {
-		return new ExtraOptionDTO(extraOptionService.getExtraOption(id));
+		return new ExtraOptionDTO(extraOptionService.getExtraOption(id,null));
 	}
 
 	@Override
 	public ExtraOptionDTO createRoomExtraOption(ExtraOptionDTO extraOption) {
-		return new ExtraOptionDTO(extraOptionService.createRoomExtraOption(extraOption));
+		return new ExtraOptionDTO(extraOptionService.createRoomExtraOption(extraOption,null));
 	}
 
 	@Override
 	public ExtraOptionDTO updateRoomExtraOption(ExtraOptionDTO extraOption) {
-		return new ExtraOptionDTO(extraOptionService.updateRoomExtraOption(extraOption));
+		return new ExtraOptionDTO(extraOptionService.updateRoomExtraOption(extraOption,null));
 	}
 
 	@Override
 	public boolean removeExtraOption(Long id) {
-		return extraOptionService.removeExtraOption(id);
+		return extraOptionService.removeExtraOption(id,null);
 	}
 
 	private List<ExtraOptionDTO> convertToListDTO(List<ExtraOption> got) {

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostP
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.megatravel.aspect.annotation.LogService;
 import com.megatravel.configuration.WebApplicationContextLocator;
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
@@ -85,6 +86,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
     }
 	
 	@Override
+	@LogService
 	public List<AddressDTO> getAddressesForSync(Date start, Date end) {
 		List<Address> addresses = this.addressesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<AddressDTO> result = new ArrayList<AddressDTO>();
@@ -94,6 +96,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<HotelDTO> getHotelsForSync(Date start, Date end) {
 		List<Hotel> hotels = this.hotelsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<HotelDTO> result = new ArrayList<HotelDTO>();
@@ -103,6 +106,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<AccomodationTypeDTO> getAccomodationsForSync(Date start, Date end) {
 		List<AccomodationType> types = this.accommodationTypesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<AccomodationTypeDTO> result = new ArrayList<AccomodationTypeDTO>();
@@ -112,6 +116,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<ExtraOptionDTO> getExtraOptionsForSync(Date start, Date end) {
 		List<ExtraOption> extraOptions = this.extraOptionsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<ExtraOptionDTO> result = new ArrayList<ExtraOptionDTO>();
@@ -121,6 +126,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<ImageDTO> getImagesForSync(Date start, Date end) {
 		List<Image> images = this.imagesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<ImageDTO> result = new ArrayList<ImageDTO>();
@@ -130,6 +136,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<PriceListDTO> getPriceListsForSync(Date start, Date end) {
 		List<PriceList> priceLists = this.priceListsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<PriceListDTO> result = new ArrayList<PriceListDTO>();
@@ -139,6 +146,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<RoomDTO> getRoomsForSync(Date start, Date end) {
 		List<Room> rooms = this.roomsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<RoomDTO> result = new ArrayList<RoomDTO>();
@@ -148,6 +156,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<UnitPriceInformationDTO> getUnitPriceInformationsForSync(Date start, Date end) {
 		List<UnitPriceInformation> informations = this.unitPricesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<UnitPriceInformationDTO> result = new ArrayList<UnitPriceInformationDTO>();
@@ -157,6 +166,7 @@ public class HotelsDatabaseSyncingServiceImpl implements HotelsDatabaseSyncingSe
 	}
 
 	@Override
+	@LogService
 	public List<RoomReservationDTO> getRoomReservationsForSync(Date start, Date end) {
 		List<RoomReservation> reservations = this.roomReservationsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<RoomReservationDTO> result = new ArrayList<RoomReservationDTO>();

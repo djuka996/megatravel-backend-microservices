@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.CodeSignature;
 import org.springframework.stereotype.Component;
 
-import com.megatravel.configuration.MyLogger;
+import com.megatravel.configurations.MyLogger;
 import com.megatravel.decodeJWT.DecodeJwtToken;
 
 @Aspect

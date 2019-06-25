@@ -12620,18 +12620,18 @@ var AuthService = /** @class */ (function () {
         var jwtData = token.split('.')[1];
         var decodedJwtJsonData = window.atob(jwtData);
         var decodedJwtData = JSON.parse(decodedJwtJsonData);
-        console.log(decodedJwtData);
-        console.log(decodedJwtData.auth[0].authority);
-        console.log(decodedJwtData.sub); //username
+        //console.log(decodedJwtData);
+        //console.log(decodedJwtData.auth[0].authority);
+        //console.log(decodedJwtData.sub); //username
         return decodedJwtData.auth[0].authority; //you can access role or username
     };
     AuthService.prototype.getUsername = function (token) {
         var jwtData = token.split('.')[1];
         var decodedJwtJsonData = window.atob(jwtData);
         var decodedJwtData = JSON.parse(decodedJwtJsonData);
-        console.log(decodedJwtData);
-        console.log(decodedJwtData.auth[0].authority);
-        console.log(decodedJwtData.sub); //username
+        //console.log(decodedJwtData);
+        //console.log(decodedJwtData.auth[0].authority);
+        //console.log(decodedJwtData.sub); //username
         return decodedJwtData.sub; //you can access role or username
     };
     AuthService.prototype.login = function (email, password) {

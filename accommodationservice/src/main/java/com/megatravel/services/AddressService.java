@@ -3,6 +3,8 @@ package com.megatravel.services;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ public class AddressService{
 	@Autowired
 	private HotelRepository hotelRepository;
 	
-	public Address getHotelsAddress(Long id) {
+	public Address getHotelsAddress(Long id,HttpServletRequest request) {
 		Optional<Hotel> found = hotelRepository.findById(id);
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested hotel does not exist.");
@@ -31,17 +33,18 @@ public class AddressService{
 		return found.get().getAddress();
 	}
 	 
-	public Address createAddress(AddressDTO address) {
+	public Address createAddress(AddressDTO address,HttpServletRequest request) {
 		if(address == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
 		if(address.getStreetNumber() <=0 || address.getCity().length()<=1 || address.getStreet().length()<=1)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No valid data sent.");
 		Address toSave = new Address(address);
+		toSave.setLastChangedTime(new Date());
 		Address saved = addressRepository.save(toSave);
 		return saved;
 	}
 	 
-	public Address updateAddress(AddressDTO address) {
+	public Address updateAddress(AddressDTO address,HttpServletRequest request) {
 		if(address == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
 		if(address.getStreetNumber() <=0 || address.getCity().length()<=1 || address.getStreet().length()<=1)
@@ -61,7 +64,7 @@ public class AddressService{
 		return saved;
 	}
 	 
-	public boolean removeAddress(Long id) {
+	public boolean removeAddress(Long id,HttpServletRequest request) {
 		Optional<Address> found = addressRepository.findById(id);
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Address does not exist.");

@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.aspect.annotation.LogService;
-import com.megatravel.configuration.MyLogger;
-import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 import com.megatravel.model.hotel.AccomodationType;
 import com.megatravel.repositories.AccommodationTypeRepository;
