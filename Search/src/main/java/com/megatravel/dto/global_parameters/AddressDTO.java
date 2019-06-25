@@ -49,6 +49,7 @@ import com.megatravel.model.global_parameters.Address;
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="Id" type="{http://www.megatravel.com/global_parameters}Id"/>
+ *         &lt;element name="lastChangedTime" type="{http://www.megatravel.com/global_parameters}Date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -65,7 +66,8 @@ import com.megatravel.model.global_parameters.Address;
     "streetNumber",
     "coordinateX",
     "coordinateY",
-    "id"
+    "id",
+    "lastChangedTime"
 })
 public class AddressDTO {
 
@@ -84,6 +86,7 @@ public class AddressDTO {
     @XmlElement(name = "Id")
     protected long id;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     public AddressDTO() {

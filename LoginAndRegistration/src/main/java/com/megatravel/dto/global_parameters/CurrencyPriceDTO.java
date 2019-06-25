@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="Id" type="{http://www.megatravel.com/global_parameters}Id"/>
  *         &lt;element name="Amount" type="{http://www.megatravel.com/global_parameters}Amount_typeDTO"/>
+ *         &lt;element name="lastChangedTime" type="{http://www.megatravel.com/global_parameters}Date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,7 +40,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Currency_priceDTO", propOrder = {
     "id",
-    "amount"
+    "amount",
+    "lastChangedTime"
 })
 public class CurrencyPriceDTO {
 
@@ -48,6 +50,7 @@ public class CurrencyPriceDTO {
     @XmlElement(name = "Amount", required = true)
     protected AmountTypeDTO amount;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
 
     /**

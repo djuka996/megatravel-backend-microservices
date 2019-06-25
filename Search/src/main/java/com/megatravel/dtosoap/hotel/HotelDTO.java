@@ -14,31 +14,24 @@ import java.util.List;
 
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.model.hotel.Hotel;
-import com.megatravel.model.hotel.Image;
 
 public class HotelDTO {
 
     protected long id;
     protected double rating;
     protected AddressDTO address;
-    protected List<ExtraOptionDTO> extraOptionDTO;
-    protected List<ImageDTO> imageDTO;
-    protected List<PriceListDTO> priceListDTO;
+    protected List<ExtraOptionDTO> extraOptionDTO = new ArrayList<>();
+    protected List<ImageDTO> imageDTO = new ArrayList<>();
+    protected List<PriceListDTO> priceListDTO = new ArrayList<>();
     protected Date lastChangedTime;
     
-    public HotelDTO() {
-    	
-    }
+    public HotelDTO() { }
     
     public HotelDTO(Hotel hotel) {
     	this.id = hotel.getId();
     	this.rating = hotel.getRating();
     	this.lastChangedTime = hotel.getLastChangedTime();
     	this.address = hotel.getAddress() != null ? new AddressDTO(hotel.getAddress()) : null;
-		this.imageDTO = new ArrayList<>();
-		for (Image image : hotel.getImage()) {
-			this.imageDTO.add(new ImageDTO(image));
-		}
     }
 
     /**
@@ -184,4 +177,25 @@ public class HotelDTO {
         return this.priceListDTO;
     }
 
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+
+	public void setPriceListDTO(List<PriceListDTO> priceListDTO) {
+		this.priceListDTO = priceListDTO;
+	}
+
+	public void setExtraOptionDTO(List<ExtraOptionDTO> extraOptionDTO) {
+		this.extraOptionDTO = extraOptionDTO;
+	}
+
+	public void setImageDTO(List<ImageDTO> imageDTO) {
+		this.imageDTO = imageDTO;
+	}
+
+    
 }

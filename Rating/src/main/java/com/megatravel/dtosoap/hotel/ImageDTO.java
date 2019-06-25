@@ -17,15 +17,17 @@ public class ImageDTO {
     protected long id;
     protected String filePath;
     protected Date lastChangedTime;
+    protected RoomDTO roomDTO;
+    protected HotelDTO hotelDTO;
     
-    public ImageDTO() {
-    	
-    }
+    public ImageDTO() { }
 
     public ImageDTO(Image image) {
 		this.id = image.getId();
 		this.filePath = image.getFilePath();
 		this.lastChangedTime = image.getLastChangedTime();
+		this.roomDTO = (image.getRoomImage() == null) ? null : new RoomDTO(image.getRoomImage());
+		this.hotelDTO = (image.getHotel() == null) ? null : new HotelDTO(image.getHotel());
 	}
 
 	/**
@@ -68,4 +70,29 @@ public class ImageDTO {
         this.filePath = value;
     }
 
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+
+	public RoomDTO getRoomDTO() {
+		return roomDTO;
+	}
+
+	public void setRoomDTO(RoomDTO roomDTO) {
+		this.roomDTO = roomDTO;
+	}
+
+	public HotelDTO getHotelDTO() {
+		return hotelDTO;
+	}
+
+	public void setHotelDTO(HotelDTO hotelDTO) {
+		this.hotelDTO = hotelDTO;
+	}
+
+    
 }

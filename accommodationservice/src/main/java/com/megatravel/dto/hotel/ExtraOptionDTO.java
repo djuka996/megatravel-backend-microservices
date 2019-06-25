@@ -42,7 +42,8 @@ import com.megatravel.model.hotel.ExtraOption;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
-    "name"
+    "name",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "Extra_optionDTO")
 public class ExtraOptionDTO {
@@ -52,6 +53,7 @@ public class ExtraOptionDTO {
     @XmlElement(name = "Name", required = true)
     protected String name;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     public ExtraOptionDTO() {

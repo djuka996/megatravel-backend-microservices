@@ -46,7 +46,8 @@ import com.megatravel.dto.hotel.HotelDTO;
 @XmlType(name = "", propOrder = {
     "id",
     "hotelDTO",
-    "messages"
+    "messages",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "ChatDTO")
 public class ChatDTO {
@@ -58,6 +59,7 @@ public class ChatDTO {
     @XmlElement(name = "MessageDTO", required = true)
     protected List<MessageDTO> messages;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
 	protected Date lastChangedTime;
     
     /**

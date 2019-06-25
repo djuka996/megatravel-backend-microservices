@@ -9,6 +9,7 @@
 package com.megatravel.dtosoap.system_user_info;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.dtosoap.global_parameters.RoleDTO;
 import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
-import com.megatravel.model.system_user_info.Role;
 import com.megatravel.model.system_user_info.User;
 
 public class SystemUserInfoDTO {
@@ -26,28 +26,27 @@ public class SystemUserInfoDTO {
     protected String lastName;
     protected String username;
     protected String email;
+    protected String password;
+    protected String salt;
     protected boolean active;
     protected Date lastChangedTime;
     protected AddressDTO adress;
     protected String workCertificateNumber;
-    protected List<RoleDTO> role;
+    protected List<RoleDTO> role = new ArrayList<RoleDTO>();
     protected HotelDTO hotelDTO;
-    protected List<RoomReservationDTO> roomReservationDTO;
+    protected Collection<RoomReservationDTO> roomReservationDTO = new ArrayList<RoomReservationDTO>();
 
     
-    public SystemUserInfoDTO() {
-   	}
+    public SystemUserInfoDTO() { }
 
    	public SystemUserInfoDTO(User user) {
    		this.id = user.getId();
    		this.email = user.getEmail();
    		this.firstName = user.getName();
    		this.lastName = user.getLastName();
+   		this.password = user.getPassword();
+   		this.salt = user.getSalt();
    		this.lastChangedTime = user.getLastChangedTime();
-   		this.role = new ArrayList<>();
-   		for (Role tempRole : user.getRoles()) {
-   			this.role.add(new RoleDTO(tempRole));
-   		}
    	}
     
     /**
@@ -301,7 +300,7 @@ public class SystemUserInfoDTO {
      * 
      * 
      */
-    public List<RoomReservationDTO> getRoomReservationDTO() {
+    public Collection<RoomReservationDTO> getRoomReservationDTO() {
         if (roomReservationDTO == null) {
             roomReservationDTO = new ArrayList<RoomReservationDTO>();
         }
@@ -316,4 +315,29 @@ public class SystemUserInfoDTO {
 		this.lastChangedTime = lastChangedTime;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public void setRole(List<RoleDTO> role) {
+		this.role = role;
+	}
+
+	public void setRoomReservationDTO(Collection<RoomReservationDTO> roomReservationDTO) {
+		this.roomReservationDTO = roomReservationDTO;
+	}
+
+	
 }

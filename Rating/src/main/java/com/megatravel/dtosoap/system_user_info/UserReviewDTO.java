@@ -11,6 +11,7 @@ package com.megatravel.dtosoap.system_user_info;
 import java.util.Date;
 
 import com.megatravel.dtosoap.hotel.RoomDTO;
+import com.megatravel.model.system_user_info.UserReview;
 
 public class UserReviewDTO {
 
@@ -23,6 +24,19 @@ public class UserReviewDTO {
     protected boolean approved;
     protected Date lastChangedTime;
 
+    public UserReviewDTO() { }
+    
+    public UserReviewDTO(UserReview userReview) {
+    	this.id = userReview.getId();
+    	this.rating = userReview.getRating();
+    	this.comment = userReview.getComment();
+    	this.timeStamp = userReview.getTimeStamp();
+    	this.roomDTO = (userReview.getRoom() == null) ? null : new RoomDTO(userReview.getRoom());
+    	this.systemUserInfoDTO = (userReview.getUser() == null) ? null : new SystemUserInfoDTO(userReview.getUser());
+    	this.approved = userReview.isApproved();
+    	this.lastChangedTime = userReview.getLastChangedTime();
+    }
+    
     /**
      * Gets the value of the id property.
      * 
@@ -159,4 +173,13 @@ public class UserReviewDTO {
 		this.approved = approved;
 	}
 
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+
+	
 }

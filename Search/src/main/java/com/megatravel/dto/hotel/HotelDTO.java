@@ -56,7 +56,8 @@ import com.megatravel.model.hotel.Image;
     "address",
     "extraOptionDTO",
     "imageDTO",
-    "priceListDTO"
+    "priceListDTO",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "HotelDTO")
 public class HotelDTO {
@@ -72,6 +73,7 @@ public class HotelDTO {
     @XmlElement(name = "Price_listDTO")
     protected List<PriceListDTO> priceListDTO;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     public HotelDTO() {

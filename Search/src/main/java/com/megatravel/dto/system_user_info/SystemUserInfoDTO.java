@@ -63,6 +63,7 @@ import com.megatravel.model.system_user_info.User;
     "username",
     "email",
     "active",
+    "lastChangedTime",
     "adress",
     "workCertificateNumber",
     "role",
@@ -85,6 +86,7 @@ public class SystemUserInfoDTO {
     @XmlElement(name = "Active")
     protected boolean active;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     @XmlElement(name = "Adress", required = true)
     protected AddressDTO adress;

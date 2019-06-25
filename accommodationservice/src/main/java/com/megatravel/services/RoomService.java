@@ -65,12 +65,12 @@ public class RoomService{
 		toSave.setRoomsHotel(found.get());
 		toSave.setRoomsHotel(gotHotel);
 		Room saved = roomRepository.save(toSave);	
-		List<ImageDTO> receivedImages = room.getImagesDTO();
+		/*List<ImageDTO> receivedImages = room.getImagesDTO();
 		for (ImageDTO imageDTO : receivedImages) {
 			Image foundImg = imageRepository.findImageByFilePathEquals(imageDTO.getFilePath());
 			foundImg.setRoomImage(saved);
 			imageRepository.save(foundImg);
-		}	
+		}*/	
 		return saved;
 	}
 

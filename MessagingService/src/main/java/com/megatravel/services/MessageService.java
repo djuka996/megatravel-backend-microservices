@@ -72,13 +72,13 @@ public class MessageService {
 			
 			if(message == null)
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No MessageDTO payload sent");
-			if(message.getText().length()==0 || message.getSender() == null)
+			if(message.getText().length()==0 || message.getSenderDTO() == null)
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid MessageDTO payload sent");
 				
 			
 			Message sending = new Message(message);
 
-			Optional<User> sender =  userRepository.findById(message.getSender().getId());  //feignUser.getUserFeign(message.getSender().getId()); 
+			Optional<User> sender =  userRepository.findById(message.getSenderDTO().getId());  //feignUser.getUserFeign(message.getSender().getId()); 
 			Optional<Chat> chat = chatRepository.findById(chatId);
 			Optional<Hotel> hotel = hotelRepository.findById(hotelId);
 			
