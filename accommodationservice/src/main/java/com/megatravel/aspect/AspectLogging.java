@@ -26,7 +26,7 @@ public class AspectLogging {
 	
 	private static final String expresion = "execution(* com.megatravel.services..*..*(..))";
 	
-    @After(expresion)
+    @After(value = expresion)
     public void checkIfGoesIn(JoinPoint jpoinPoint) {
     	System.out.println(">>>>>Logging");
     	CodeSignature codeSignature = (CodeSignature) jpoinPoint.getSignature();
@@ -34,7 +34,7 @@ public class AspectLogging {
 	      Object[] argumentValues = jpoinPoint.getArgs();
 	      System.out.println("First parameter's name: " + parameterNames[0]);
 		  System.out.println("First argument's value: " + argumentValues[0].toString());
-		  HttpServletRequest request = findHttpSevletRequest(parameterNames);
+		  HttpServletRequest request = findHttpSevletRequest(argumentValues);
 		  if(request != null)
 		  {
 		  	MyLogger.warn(codeSignature.getName(), false, DecodeJwtToken.getUsername(request.getHeader("Authorization")), request.getRemoteAddr(), "");
