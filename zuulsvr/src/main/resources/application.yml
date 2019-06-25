@@ -66,10 +66,10 @@ eureka:
       #defaultZone: http://discovery:8761/eureka/
       
       #1. konekcija na eclipse
-      defaultZone: http://localhost:8761/eureka/
+      #defaultZone: http://localhost:8761/eureka/
       
       #1. konekcija na google cloud
-      #defaultZone: http://35.239.99.194:8761/eureka/ 
+      defaultZone: http://35.239.99.194:8761/eureka/ 
 #
 #hystrix:
 #  command:
