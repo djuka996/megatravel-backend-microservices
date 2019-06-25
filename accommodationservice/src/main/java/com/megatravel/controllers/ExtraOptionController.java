@@ -34,7 +34,7 @@ public class ExtraOptionController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<ExtraOptionDTO>>(convertToListDTO(service.getHotelExtraOption(id)), HttpStatus.OK);
+		return new ResponseEntity<List<ExtraOptionDTO>>(convertToListDTO(service.getHotelExtraOption(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/room/{room-id}",method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class ExtraOptionController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<ExtraOptionDTO>>(convertToListDTO(service.getRoomExtraOptions(id)), HttpStatus.OK);
+		return new ResponseEntity<List<ExtraOptionDTO>>(convertToListDTO(service.getRoomExtraOptions(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -52,7 +52,7 @@ public class ExtraOptionController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.getExtraOption(id)), HttpStatus.OK);
+		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.getExtraOption(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/room/{room-id}", method = RequestMethod.POST)
@@ -62,7 +62,7 @@ public class ExtraOptionController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.createRoomExtraOption(extraOption)), HttpStatus.CREATED);
+		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.createRoomExtraOption(extraOption,request)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "room/{room-id}",method = RequestMethod.PUT)
@@ -72,7 +72,7 @@ public class ExtraOptionController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.updateRoomExtraOption(extraOption)), HttpStatus.ACCEPTED);
+		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.updateRoomExtraOption(extraOption,request)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -81,7 +81,7 @@ public class ExtraOptionController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(service.removeExtraOption(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.removeExtraOption(id,request),HttpStatus.ACCEPTED);
 	}
 	
 	private List<ExtraOptionDTO> convertToListDTO(List<ExtraOption> got) {

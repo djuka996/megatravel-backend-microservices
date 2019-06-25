@@ -110,5 +110,13 @@ public class ChatDTO {
 		this.lastChangedTime = lastChangedTime;
 	}
 
+	public List<MessageDTO> getMessagesDTO() {
+		return messagesDTO;
+	}
+
+	public void setMessagesDTO(List<MessageDTO> messagesDTO) {
+		this.messagesDTO = messagesDTO;
+	}
+
     
 }

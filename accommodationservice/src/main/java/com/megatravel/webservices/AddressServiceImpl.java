@@ -34,22 +34,22 @@ public class AddressServiceImpl implements AddressServiceInterface {
 	
 	@Override
 	public AddressDTO getHotelsAddress(Long id) {
-		return new AddressDTO(addressService.getHotelsAddress(id));
+		return new AddressDTO(addressService.getHotelsAddress(id,null));
 	}
 
 	@Override
 	public AddressDTO createAddress(AddressDTO address) {
-		return new AddressDTO(addressService.createAddress(address));
+		return new AddressDTO(addressService.createAddress(address,null));
 	}
 
 	@Override
 	public AddressDTO updateAddress(AddressDTO address) {
-		return new AddressDTO(addressService.updateAddress(address));
+		return new AddressDTO(addressService.updateAddress(address,null));
 	}
 
 	@Override
 	public boolean removeAddress(Long id) {
-		return addressService.removeAddress(id);
+		return addressService.removeAddress(id,null);
 	}
 
 }

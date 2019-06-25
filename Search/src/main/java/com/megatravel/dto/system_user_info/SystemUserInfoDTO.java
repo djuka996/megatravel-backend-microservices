@@ -108,6 +108,7 @@ public class SystemUserInfoDTO {
    		this.email = user.getEmail();
    		this.firstName = user.getName();
    		this.lastName = user.getLastName();
+   		this.active = user.isActive();
    		this.role = new ArrayList<>();
    		for (Role tempRole : user.getRoles()) {
    			this.role.add(new RoleDTO(tempRole));

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class ExtraOptionService{
 	@Autowired
 	private RoomRepository roomRepository;
 	
-	public List<ExtraOption> getAllExtraOptions() {
+	public List<ExtraOption> getAllExtraOptions(HttpServletRequest request) {
 		List<ExtraOption> found = extraOptionRepository.findAll();
 		if(found.size() == 0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No extra options yet.");
@@ -34,21 +36,21 @@ public class ExtraOptionService{
 		return returning;
 	}
 	 
-	public List<ExtraOption> getRoomExtraOptions(Long roomId) {
+	public List<ExtraOption> getRoomExtraOptions(Long roomId,HttpServletRequest request) {
 		Optional<Room> found = roomRepository.findById(roomId);
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room does not exist.");
-		return this.getHotelExtraOption(found.get().getRoomsHotel().getId());
+		return this.getHotelExtraOption(found.get().getRoomsHotel().getId(),request);
 	}
 	 
-	public ExtraOption getExtraOption(Long id) {
+	public ExtraOption getExtraOption(Long id,HttpServletRequest request) {
 		Optional<ExtraOption> found = extraOptionRepository.findById(id);
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested room does not exist.");
 		return found.get();
 	}
 
-	public List<ExtraOption> getHotelExtraOption(Long hotelId) {
+	public List<ExtraOption> getHotelExtraOption(Long hotelId,HttpServletRequest request) {
 		List<ExtraOption> found = extraOptionRepository.findAllForHotel(hotelId);
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested hotel extra options don't exist.");
@@ -59,7 +61,7 @@ public class ExtraOptionService{
 		return returning;
 	}
 	 
-	public ExtraOption createRoomExtraOption(ExtraOptionDTO extraOption) {
+	public ExtraOption createRoomExtraOption(ExtraOptionDTO extraOption,HttpServletRequest request) {
 		if(extraOption == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent room does not exist.");
 		ExtraOption newExtra = new ExtraOption();
@@ -70,7 +72,7 @@ public class ExtraOptionService{
 	}
 
 	 
-	public ExtraOption updateRoomExtraOption(ExtraOptionDTO extraOption) {
+	public ExtraOption updateRoomExtraOption(ExtraOptionDTO extraOption,HttpServletRequest request) {
 		Optional<ExtraOption> found = extraOptionRepository.findById(extraOption.getId());
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent extra option does not exist.");
@@ -81,7 +83,7 @@ public class ExtraOptionService{
 	}
 
 	 
-	public boolean removeExtraOption(Long id) {
+	public boolean removeExtraOption(Long id,HttpServletRequest request) {
 		Optional<ExtraOption> found = extraOptionRepository.findById(id);
 		if(!found.isPresent())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Sent extra option does not exist.");

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.megatravel.configuration.MyLogger;
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
 import com.megatravel.services.AddressService;
@@ -30,7 +29,7 @@ public class AddressController {
 		if(!DecodeJwtToken.canAccessMethod("getHotelsAddress", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<AddressDTO>(new AddressDTO(service.getHotelsAddress(id)), HttpStatus.OK);
+		return new ResponseEntity<AddressDTO>(new AddressDTO(service.getHotelsAddress(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -39,7 +38,7 @@ public class AddressController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<AddressDTO>(new AddressDTO(service.createAddress(address)), HttpStatus.CREATED);
+		return new ResponseEntity<AddressDTO>(new AddressDTO(service.createAddress(address,request)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -48,7 +47,7 @@ public class AddressController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<AddressDTO>(new AddressDTO(service.updateAddress(address)), HttpStatus.ACCEPTED);
+		return new ResponseEntity<AddressDTO>(new AddressDTO(service.updateAddress(address,request)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -57,7 +56,7 @@ public class AddressController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(service.removeAddress(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.removeAddress(id,request),HttpStatus.ACCEPTED);
 	}
 	
 }

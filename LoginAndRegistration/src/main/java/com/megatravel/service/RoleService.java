@@ -1,6 +1,7 @@
 package com.megatravel.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,6 +83,7 @@ public class RoleService {
 		if(foundRole.isPresent()) {
 			Role tempRole = foundRole.get();
 			tempRole.setRoleName(role.getRoleName());
+			tempRole.setLastChangedTime(new Date());
 			logger.info("Role with id = " + id + " updated");
 			return roleRepository.save(tempRole);
 		}

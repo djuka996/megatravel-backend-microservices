@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,7 @@ public class MessageService {
 		@Autowired
 		private FeignUser feignUser;		   
 	    
-		public List<Chat> getInbox(Long userId) {
+		public List<Chat> getInbox(Long userId,HttpServletRequest request) {
 			if(userId == null)
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Requested null");
 			List<Chat> chats = chatRepository.allChats(userId);
@@ -49,14 +51,14 @@ public class MessageService {
 		}
 
 		
-		public List<Message> getMessages(Long userId,Long chatId) {
+		public List<Message> getMessages(Long userId,Long chatId,HttpServletRequest request) {
 			if(chatId == null)
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Requested null");
 			List<Message> got = messageRepository.findAllByChat_IdOrderByDateDesc(chatId);
 			if(got.size()>0)
 				if(got.get(0).getReceiver().getId().equals(userId))
 				{
-					markRead(chatId);
+					markRead(chatId,request);
 				}
 			return got;
 		}
@@ -66,7 +68,7 @@ public class MessageService {
 		 * Stari chat => ChatId proslediti, HotelId = -1
 		 * Novi chat => ChatId= -1, HotelId proslediti
 		 */
-		public Boolean sendMessage(Long chatId, Long hotelId, MessageDTO message) {
+		public Boolean sendMessage(Long chatId, Long hotelId, MessageDTO message,HttpServletRequest request) {
 			
 			if(message == null)
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No MessageDTO payload sent");
@@ -114,7 +116,7 @@ public class MessageService {
 			return true;
 		}
 
-		public Boolean markRead(Long chatId) {
+		public Boolean markRead(Long chatId,HttpServletRequest request) {
 			Message found = messageRepository.findFirstByChat_IdOrderByDateDesc(chatId);
 			if(found == null)
 				throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Invalid chatId sent to mark read");
@@ -123,12 +125,12 @@ public class MessageService {
 			return true;				
 		}
 
-		public List<Chat> getChatsForSync(Date start, Date end) {
+		public List<Chat> getChatsForSync(Date start, Date end,HttpServletRequest request) {
 			List<Chat> chats = chatRepository.findAllByLastChangedTimeBetween(start, end);
 			return chats;
 		}
 
-		public List<Message> getMessagesForSync(Date start, Date end) {
+		public List<Message> getMessagesForSync(Date start, Date end,HttpServletRequest request) {
 			List<Message> messages = this.messageRepository.findAllByLastChangedTimeBetween(start, end);
 			return messages;
 		}

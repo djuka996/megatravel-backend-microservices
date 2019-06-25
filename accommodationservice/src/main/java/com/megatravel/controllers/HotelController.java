@@ -34,7 +34,7 @@ public class HotelController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<HotelDTO>>(convertToListDTO(service.getAllHotels()), HttpStatus.OK);
+		return new ResponseEntity<List<HotelDTO>>(convertToListDTO(service.getAllHotels(request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -43,7 +43,7 @@ public class HotelController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<HotelDTO>(new HotelDTO(service.getHotel(id)), HttpStatus.OK);
+		return new ResponseEntity<HotelDTO>(new HotelDTO(service.getHotel(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -52,7 +52,7 @@ public class HotelController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<HotelDTO>(new HotelDTO(service.createHotel(hotel)), HttpStatus.CREATED);
+		return new ResponseEntity<HotelDTO>(new HotelDTO(service.createHotel(hotel,request)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -61,7 +61,7 @@ public class HotelController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<HotelDTO>(new HotelDTO(service.updateHotel(hotel)), HttpStatus.ACCEPTED);
+		return new ResponseEntity<HotelDTO>(new HotelDTO(service.updateHotel(hotel,request)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -70,7 +70,7 @@ public class HotelController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(service.removeHotel(id), HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.removeHotel(id,request), HttpStatus.ACCEPTED);
 	}
 	
 	private List<HotelDTO> convertToListDTO(List<Hotel> got) {

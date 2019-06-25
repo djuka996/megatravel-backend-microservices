@@ -59,6 +59,7 @@ public class Role {
 	public Role(RoleDTO roleDTO) {
 		this.id = roleDTO.getId();
 		this.roleName = roleDTO.getRoleName();
+		this.lastChangedTime = new Date();
 	}
 	
 	public Long getId() {
