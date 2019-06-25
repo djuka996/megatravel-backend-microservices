@@ -51,7 +51,8 @@ import com.megatravel.dto.hotel.RoomDTO;
     "comment",
     "timeStamp",
     "roomDTO",
-    "systemUserInfoDTO"
+    "systemUserInfoDTO",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "User_reviewDTO")
 public class UserReviewDTO {
@@ -70,6 +71,7 @@ public class UserReviewDTO {
     @XmlElement(name = "System_user_infoDTO")
     protected SystemUserInfoDTO systemUserInfoDTO;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     /**

@@ -34,6 +34,7 @@ import com.megatravel.model.system_user_info.Role;
  *         &lt;element name="Id" type="{http://www.megatravel.com/global_parameters}Id"/>
  *         &lt;element name="role_name" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="privileges" type="{http://www.megatravel.com/global_parameters}PrivilegeDTO" maxOccurs="unbounded"/>
+ *         &lt;element name="lastChangedTime" type="{http://www.megatravel.com/global_parameters}Date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,7 +47,8 @@ import com.megatravel.model.system_user_info.Role;
 @XmlType(name = "RoleDTO", propOrder = {
     "id",
     "roleName",
-    "privileges"
+    "privileges",
+    "lastChangedTime"
 })
 public class RoleDTO {
 
@@ -57,6 +59,7 @@ public class RoleDTO {
     @XmlElement(required = true)
     protected List<PrivilegeDTO> privileges;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
 
 public RoleDTO() {

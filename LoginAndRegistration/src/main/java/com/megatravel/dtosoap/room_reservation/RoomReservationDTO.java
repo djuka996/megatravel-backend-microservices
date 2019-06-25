@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import com.megatravel.dtosoap.hotel.RoomDTO;
+import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.model.room_reservation.RoomReservation;
 
 
@@ -22,13 +23,13 @@ public class RoomReservationDTO {
     protected Date endDate;
     protected boolean realised;
     protected RoomDTO roomDTO;
+    protected SystemUserInfoDTO userDTO;
     protected BigDecimal price;
     protected boolean allowedCancel;
     protected Date lastChangedTime;
     
-	public RoomReservationDTO(){
-    	super();
-    }
+	public RoomReservationDTO(){ }
+	
     public RoomReservationDTO(RoomReservation reservation) {
     	this.id = reservation.getId();
     	this.beginDate = reservation.getBeginDate();
@@ -36,7 +37,8 @@ public class RoomReservationDTO {
     	this.realised = reservation.isRealised();
     	this.price = reservation.getPrice();
     	this.lastChangedTime = reservation.getLastChangedTime();
-    	this.roomDTO = (reservation.getRoomReservation()==null)?null: new RoomDTO(reservation.getRoomReservation());
+    	this.roomDTO = (reservation.getRoomReservation() == null) ? null: new RoomDTO(reservation.getRoomReservation());
+    	this.userDTO = (reservation.getUsersReservation() == null) ? null : new SystemUserInfoDTO(reservation.getUsersReservation());
     }
     
     
@@ -183,5 +185,20 @@ public class RoomReservationDTO {
 	public void setAllowedCancel(boolean allowedCancel) {
 		this.allowedCancel = allowedCancel;
 	}
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
 
+	public SystemUserInfoDTO getUserDTO() {
+		return userDTO;
+	}
+
+	public void setUserDTO(SystemUserInfoDTO userDTO) {
+		this.userDTO = userDTO;
+	}
+
+	
 }

@@ -58,6 +58,7 @@ import com.megatravel.model.hotel.Room;
  *           &lt;/simpleType>
  *         &lt;/element>
  *         &lt;element name="currentlyPrice" type="{http://www.w3.org/2001/XMLSchema}double"/>
+ *         &lt;element ref="{http://www.megatravel.com/hotel}ImageDTO" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -76,7 +77,9 @@ import com.megatravel.model.hotel.Room;
     "numberOfBeds",
     "currentlyPrice",
     "hotelDTO",
-    "accomodationTypeDTO"
+    "accomodationTypeDTO",
+    "imageDTO",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "RoomDTO")
 public class RoomDTO {
@@ -96,6 +99,7 @@ public class RoomDTO {
     @XmlElement(name = "ImageDTO")
     protected List<ImageDTO> imageDTO;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     public RoomDTO(Room room) {

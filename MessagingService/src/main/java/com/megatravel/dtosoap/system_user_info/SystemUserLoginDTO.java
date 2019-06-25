@@ -60,5 +60,7 @@ public class SystemUserLoginDTO {
     public void setPassword(String value) {
         this.password = value;
     }
+    
+    
 
 }

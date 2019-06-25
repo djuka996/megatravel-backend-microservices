@@ -32,6 +32,7 @@ import com.megatravel.model.hotel.AccomodationType;
  *         &lt;element name="Id" type="{http://www.megatravel.com/global_parameters}Id"/>
  *         &lt;element name="Name" type="{http://www.megatravel.com/global_parameters}Name"/>
  *         &lt;element ref="{http://www.megatravel.com/hotel}RoomDTO" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="lastChangedTime" type="{http://www.megatravel.com/global_parameters}Date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -43,7 +44,8 @@ import com.megatravel.model.hotel.AccomodationType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "id",
-    "name"
+    "name",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "Accomodation_typeDTO")
 public class AccomodationTypeDTO {
@@ -53,6 +55,7 @@ public class AccomodationTypeDTO {
     @XmlElement(name = "Name", required = true)
     protected String name;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "lastChangedTime")
     protected Date lastChangedTime;
     
     public AccomodationTypeDTO() {
