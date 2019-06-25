@@ -16,8 +16,13 @@ spring:
     #2. konekcija ka google cloud bazi u MySql
     #url: jdbc:mysql://google/db_megabooker?cloudSqlInstance=loginandregistration-244623:us-central1:megabooker&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=root&password=stefan
 
+    #2. konekcija ka remoteMysql
+    #url: jdbc:mysql://remotemysql.com/Zn8xZQY55z?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    
     username: root
     password: stefan
+#    username: Zn8xZQY55z
+#    password: Qy8KqZ0jAI
     initialization-mode: always
     continue-on-error: true
 #konekcija ka cloudu

@@ -76,6 +76,20 @@ public class UserService {
 		}
 	}
 	
+	public SystemUserInfoDTO changeState(Long id, boolean boolState) {
+		Optional<User> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			logger.info("User with id = " + id + " returned");
+			user.get().setActive(boolState);
+			userRepository.save(user.get());
+			return new SystemUserInfoDTO(user.get());
+		}
+		else {
+			logger.error("Error when returning user - error: " + "Requested user with id " + id + " doesn't exist.");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested user with id " + id + " doesn't exist.");
+		}
+	}
+	
 	public User findOneUser(Long id) {
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
@@ -165,6 +179,18 @@ public class UserService {
 			logger.error("Error when deleting role from user - error: " + "Requested role with id " + roleId + " doesn't exist.");
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested role with id " + roleId + " doesn't exist.");
 		}	
+	}
+	
+	public boolean deleteUser(Long userId) {
+		try {
+			userRepository.deleteById(userId);
+			logger.info(" deleted user with id = " + userId);
+			return true;
+		} catch (Exception e) {
+			logger.info(" unable to deleted user with id = " + userId);
+			return false;
+		}
+			
 	}
 	
 	public List<User> getUsersForSync(Date start, Date end) {
