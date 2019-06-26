@@ -94,6 +94,7 @@ public class ReservationService{
 		newRoom.setUserReview(null);
 		newRoom.setUsersReservation(foundUser.get());
 		newRoom.setId(null);
+		newRoom.setLastChangedTime(new Date());
 		RoomReservation saved = reservationRepository.save(newRoom);
 		return saved;
 	}

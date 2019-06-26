@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Room {
 	protected int numberOfBeds;
 	@OneToMany(mappedBy = "room")
 	protected Set<UnitPriceInformation> unitPriceInformations;
-	@OneToMany(mappedBy = "roomImage")
+	@OneToMany(mappedBy = "roomImage", fetch=FetchType.EAGER)
 	protected Set<Image> images;
 	@OneToMany(mappedBy = "roomReservation")
 	protected Set<RoomReservation> roomReservations;
