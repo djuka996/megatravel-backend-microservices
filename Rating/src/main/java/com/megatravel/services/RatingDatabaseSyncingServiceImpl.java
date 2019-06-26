@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.jws.WebService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
@@ -25,6 +26,7 @@ public class RatingDatabaseSyncingServiceImpl implements RatingDatabaseSyncingSe
 
 	public static final String ENDPOINT = "/services/sync";
 	
+	@Autowired
 	private RatingRepository ratingsRepository;
 	
     public RatingDatabaseSyncingServiceImpl() {
@@ -39,7 +41,7 @@ public class RatingDatabaseSyncingServiceImpl implements RatingDatabaseSyncingSe
 		List<UserReview> reviews = this.ratingsRepository.findAllByLastChangedTimeBetween(start, end);
 		List<UserReviewDTO> result = new ArrayList<UserReviewDTO>();
 		for(UserReview review : reviews)
-			result.add(new UserReviewDTO());
+			result.add(new UserReviewDTO(review));
 		return result;
 	}
 

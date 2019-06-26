@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
+import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.model.hotel.Hotel;
 
 public class HotelDTO {
@@ -24,6 +25,7 @@ public class HotelDTO {
     protected List<ImageDTO> imageDTO = new ArrayList<>();
     protected List<PriceListDTO> priceListDTO = new ArrayList<>();
     protected Date lastChangedTime;
+    protected SystemUserInfoDTO user;
     
     public HotelDTO() { }
     
@@ -32,6 +34,7 @@ public class HotelDTO {
     	this.rating = hotel.getRating();
     	this.lastChangedTime = hotel.getLastChangedTime();
     	this.address = hotel.getAddress() != null ? new AddressDTO(hotel.getAddress()) : null;
+    	this.user = hotel.getUsersHotel() != null ? new SystemUserInfoDTO(hotel.getUsersHotel()) : null;
     }
 
     /**
@@ -195,6 +198,14 @@ public class HotelDTO {
 
 	public void setImageDTO(List<ImageDTO> imageDTO) {
 		this.imageDTO = imageDTO;
+	}
+
+	public SystemUserInfoDTO getUser() {
+		return user;
+	}
+
+	public void setUser(SystemUserInfoDTO user) {
+		this.user = user;
 	}
 
     
