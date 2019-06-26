@@ -225,7 +225,8 @@
 //		tempPriviliges1.add(getRoomReservations);
 //		tempPriviliges1.add(getHotelRooms);
 //		tempPriviliges1.add(getHotelRoom);
-//tempPriviliges1.add(createReservation);
+//		tempPriviliges1.add(createReservation);
+//		tempPriviliges1.add(updateRating);
 //		
 //		//dodati privilegije
 //		roleRegistered.setPrivileges(tempPriviliges1);
@@ -356,6 +357,7 @@
 //		Set<Role> tempRoles1 = new HashSet<Role>();
 //		tempRoles1.add(roleAdmin);
 //		userAll.setRoles(tempRoles1);
+//		userAll.setActive(true);
 //		userRepository.save(userAll);
 //
 //		// sifra = andrija
@@ -364,6 +366,7 @@
 //		Set<Role> tempRoles2 = new HashSet<Role>();
 //		tempRoles2.add(roleRegistered);
 //		userDeleteUpdate.setRoles(tempRoles2);
+//		userDeleteUpdate.setActive(true);
 //		userRepository.save(userDeleteUpdate);
 //
 //		// sifra = 123
@@ -372,6 +375,7 @@
 //		Set<Role> tempRoles3 = new HashSet<Role>();
 //		tempRoles3.add(roleAgent);
 //		userReadWrite.setRoles(tempRoles3);
+//		userReadWrite.setActive(true);
 //		userRepository.save(userReadWrite);
 //
 //		//sifra 123
@@ -380,6 +384,7 @@
 //		Set<Role> tmpRoles4 = new HashSet<Role>();
 //		tmpRoles4.add(roleAgent);
 //		newAgent.setRoles(tmpRoles4);
+//		newAgent.setActive(true);
 //		userRepository.save(newAgent);
 //
 //	}
