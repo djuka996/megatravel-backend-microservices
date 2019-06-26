@@ -77,6 +77,7 @@ public class MessageService {
 				
 			
 			Message sending = new Message(message);
+			sending.setLastChangedTime(new Date());
 
 			Optional<User> sender =  userRepository.findById(message.getSenderDTO().getId());  //feignUser.getUserFeign(message.getSender().getId()); 
 			Optional<Chat> chat = chatRepository.findById(chatId);
@@ -99,6 +100,7 @@ public class MessageService {
 				Set<Message> newMessages = new HashSet<>();
 				newMessages.add(sending);
 				newChat.setMessages(newMessages);
+				newChat.setLastChangedTime(new Date());
 				chatRepository.save(newChat);
 				sending.setChat(newChat);
 				receiver = hotel.get().getUsersHotel();

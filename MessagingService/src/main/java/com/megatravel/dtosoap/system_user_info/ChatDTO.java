@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.model.system_user_info.Chat;
+import com.megatravel.model.system_user_info.Message;
 
 public class ChatDTO {
 
@@ -28,6 +29,8 @@ public class ChatDTO {
     	this.hotelDTO = (chat.getChatsHotel() == null) ? null : new HotelDTO(chat.getChatsHotel());
     	this.id = chat.getId();
     	this.lastChangedTime = chat.getLastChangedTime();
+    	for(Message message : chat.getMessages())
+			this.messagesDTO.add(new MessageDTO(message));
     }
     
     /**

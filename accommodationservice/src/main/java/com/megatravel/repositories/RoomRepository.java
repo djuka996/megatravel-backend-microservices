@@ -24,6 +24,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
 	List<Room> findAllByLastChangedTimeBetween(Date start, Date end);
 	
+	@Query("SELECT r.images FROM Room r where r.id = ?1")
 	List<Image> findAllImagesByRoomId(Long RoomId);
 	
 }
