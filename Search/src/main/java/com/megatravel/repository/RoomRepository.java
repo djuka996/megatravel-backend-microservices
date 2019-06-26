@@ -47,6 +47,18 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	public Page<Room> findResultAdvance(List<String> additionalService, Date beginDate, Date endDate, int numberOfPeople, String accomodationtype,
 			double category,  Pageable pageable);
 	
+	@Query("SELECT r FROM Room r WHERE r.capacity >= ?4 AND r.cancellationAllowed = ?7 AND r.cancellationDays >= ?8 AND "
+			+ "LOWER(r.accomodationType.name) LIKE LOWER(CONCAT('%',?5,'%')) AND r.roomsHotel.rating >= ?6 AND "
+			+ "r.roomsHotel.id in (SELECT heo.hotelExtraOption.id FROM HotelExtraOption heo WHERE heo.extraOption.name IN ?1 ) AND "
+			+ "r.id NOT IN "
+			+ "(SELECT res.roomReservation.id FROM RoomReservation res WHERE "
+			+ "((res.beginDate >= ?2 AND res.endDate <= ?3) OR "
+			+ "(res.beginDate >= ?2 AND res.beginDate <= ?3) OR "
+			+ "(res.endDate >= ?2 AND res.endDate <= ?3) OR "
+			+ "(res.beginDate <= ?2 AND res.endDate >= ?3)) )")
+	public Page<Room> findResultAdvanceCancelation(List<String> additionalService, Date beginDate, Date endDate, int numberOfPeople, String accomodationtype,
+			double category,  boolean cancelationAlloweed, int cancelationDays, Pageable pageable);
+	
 	@Query("SELECT r FROM Room r WHERE r.capacity >= ?4 AND "
 			+ "LOWER(r.accomodationType.name) LIKE LOWER(CONCAT('%',?5,'%')) AND r.roomsHotel.rating >= ?6 AND "
 			+ "r.roomsHotel.id in (SELECT heo.hotelExtraOption.id FROM HotelExtraOption heo WHERE heo.extraOption.name IN ?1 ) AND "

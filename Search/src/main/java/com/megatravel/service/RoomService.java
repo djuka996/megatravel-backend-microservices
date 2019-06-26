@@ -56,7 +56,17 @@ public class RoomService {
 
 		if (rooms.hasContent()) {
 			MyLogger.info("findAll findAllSearch", true, null, null, "All Room returned");
-			return rooms.getContent();
+				List<Room> newRooms = rooms.getContent();
+				for (Room room : newRooms) {
+				
+				AmountType found = amountTypeRepository.findCurrentlyPriced(room.getId());
+				if(found != null)
+					room.setCurrentlyPrice(found.getPrice().doubleValue());
+				System.out.println(room.getCurrentlyPrice());
+				System.err.println(room.getCurrentlyPrice());
+			}
+			
+			return newRooms;
 		} else {
 			MyLogger.error("findAll findAllSearch", false, null, null,
 					"Error when returning all Room - error: \" + \"Requested page is empty.", null);
@@ -124,13 +134,16 @@ public class RoomService {
 		if (rooms.hasContent()) 
 		{
 			MyLogger.info("findAll findAllAdvanceSearch", true, null, null, "All Room returned");
-			for (Room room : rooms) {
+			List<Room> newRooms = rooms.getContent();
+			for (Room room : newRooms) {
 				
 				AmountType found = amountTypeRepository.findCurrentlyPriced(room.getId());
 				if(found != null)
 					room.setCurrentlyPrice(found.getPrice().doubleValue());
+				System.out.println(room.getCurrentlyPrice());
+				System.err.println(room.getCurrentlyPrice());
 			}
-			return calculateDistanceFromCity(rooms.getContent(), distance, city);
+			return calculateDistanceFromCity(newRooms, distance, city);
 		} 
 		else 
 		{

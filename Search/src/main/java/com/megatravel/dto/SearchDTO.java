@@ -18,6 +18,8 @@ public class SearchDTO {
 	private List<String> additionalService;
 	private double distance;
 	private String orderByValue; //NONE, PRICE, LOCATION, MARK, CATEGORY
+	private boolean cancelationAllowed;
+	private int cancellationDays;
 	
 	public SearchDTO() {
 		
@@ -91,5 +93,21 @@ public class SearchDTO {
 
 	public void setOrderByValue(String orderByValue) {
 		this.orderByValue = orderByValue;
+	}
+
+	public boolean isCancelationAllowed() {
+		return cancelationAllowed;
+	}
+
+	public void setCancelationAllowed(boolean cancelationAllowed) {
+		this.cancelationAllowed = cancelationAllowed;
+	}
+
+	public int getCancellationDays() {
+		return cancellationDays;
+	}
+
+	public void setCancellationDays(int cancellationDays) {
+		this.cancellationDays = cancellationDays;
 	}
 }
