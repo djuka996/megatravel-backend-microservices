@@ -1,5 +1,6 @@
 package com.megatravel.services;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
+import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
 import com.megatravel.model.room_reservation.RoomReservation;
 import com.megatravel.model.system_user_info.User;
@@ -70,6 +72,20 @@ public class ReservationService{
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No requested content.");
 		return found;
+	}
+	
+	public List<com.megatravel.dto.hotel.ImageDTO> getImagesForRoom(Long roomId) {
+		List<com.megatravel.model.hotel.Image> found = roomRepository.findAllImagesByRoomId(roomId);
+		if(found.size()==0)
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No requested content.");
+		
+		List<com.megatravel.dto.hotel.ImageDTO> imagesDTO = new ArrayList<com.megatravel.dto.hotel.ImageDTO>();
+		
+		for (Image image : found) {
+			imagesDTO.add(new com.megatravel.dto.hotel.ImageDTO(image));
+		}
+		
+		return imagesDTO;
 	}
 
 
