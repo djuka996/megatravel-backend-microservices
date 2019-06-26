@@ -60,8 +60,11 @@ public class RoomService {
 				for (Room room : newRooms) {
 				
 				AmountType found = amountTypeRepository.findCurrentlyPriced(room.getId());
-				if(found != null)
+				if(found != null) {
 					room.setCurrentlyPrice(found.getPrice().doubleValue());
+					roomRepository.save(room);
+				}
+					
 				System.out.println(room.getCurrentlyPrice());
 				System.err.println(room.getCurrentlyPrice());
 			}
@@ -138,8 +141,11 @@ public class RoomService {
 			for (Room room : newRooms) {
 				
 				AmountType found = amountTypeRepository.findCurrentlyPriced(room.getId());
-				if(found != null)
+				if(found != null) {
 					room.setCurrentlyPrice(found.getPrice().doubleValue());
+					roomRepository.save(room);
+				}
+					
 				System.out.println(room.getCurrentlyPrice());
 				System.err.println(room.getCurrentlyPrice());
 			}

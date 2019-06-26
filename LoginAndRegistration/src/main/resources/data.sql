@@ -490,7 +490,7 @@ CREATE TABLE `unit_price_information` (
 
 LOCK TABLES `unit_price_information` WRITE;
 /*!40000 ALTER TABLE `unit_price_information` DISABLE KEYS */;
-INSERT INTO `unit_price_information` VALUES (1,1,1,1,'2017-01-01 00:00:00'),(2,2,2,1,'2017-01-01 00:00:00'),(3,3,3,2,'2017-01-01 00:00:00'),(4,4,5,3,'2017-01-01 00:00:00'),(5,5,3,4,'2017-01-01 00:00:00'),(6,6,5,5,'2017-01-01 00:00:00');
+INSERT INTO `unit_price_information` VALUES (1,1,1,1,'2017-01-01 00:00:00'),(2,2,2,1,'2017-01-01 00:00:00'),(3,3,3,2,'2017-01-01 00:00:00'),(4,4,4,3,'2017-01-01 00:00:00'),(5,5,3,4,'2017-01-01 00:00:00'),(6,6,5,5,'2017-01-01 00:00:00');
 /*!40000 ALTER TABLE `unit_price_information` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -590,4 +590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-25 23:55:27
+-- Dump completed on 2019-06-26 17:42:25
