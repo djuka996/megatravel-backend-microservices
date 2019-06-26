@@ -77,8 +77,8 @@ public class RoomController {
 			
 			double currentPrice = 0;
 			
-			for (UnitPriceInformation unitPrice: maxPriceList.getUnitPriceInformation()) {
-				if(unitPrice.getId().equals(room.getId())) {
+			for (UnitPriceInformation unitPrice: maxPriceList.getUnitPriceInformation() ) {
+				if(unitPrice.getRoom().getId().equals(room.getId()) &&  unitPrice.getPriceList().getId().equals(maxPriceList.getId())) {
 					currentPrice = unitPrice.getPrice().getAmount().getPrice().doubleValue();
 				}
 			}

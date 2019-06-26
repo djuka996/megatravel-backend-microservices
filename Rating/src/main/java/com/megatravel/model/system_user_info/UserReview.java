@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.system_user_info.UserReviewDTO;
 import com.megatravel.model.hotel.Room;
+import com.megatravel.model.room_reservation.RoomReservation;
 
 @Entity
 public class UserReview {
@@ -32,6 +33,8 @@ public class UserReview {
 	protected Date timeStamp;
 	@OneToOne()
 	protected Room room;
+	@OneToOne()
+	protected RoomReservation roomReservation;
 	@OneToOne()
 	protected User user;
 	protected boolean approved;
@@ -125,6 +128,14 @@ public class UserReview {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public RoomReservation getRoomReservation() {
+		return roomReservation;
+	}
+
+	public void setRoomReservation(RoomReservation roomReservation) {
+		this.roomReservation = roomReservation;
 	}
 	
 
