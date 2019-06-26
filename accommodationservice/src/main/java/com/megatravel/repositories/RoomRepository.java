@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
 
 @Repository
@@ -22,5 +23,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	double updateRating(Long id);
 
 	List<Room> findAllByLastChangedTimeBetween(Date start, Date end);
+	
+	List<Image> findAllImagesByRoomId(Long RoomId);
 	
 }
