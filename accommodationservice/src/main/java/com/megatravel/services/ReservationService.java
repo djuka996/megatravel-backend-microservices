@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,7 +32,7 @@ public class ReservationService{
 	
 	
 	
-	public List<RoomReservation> getAllReservations() {
+	public List<RoomReservation> getAllReservations(HttpServletRequest request) {
 		List<RoomReservation> found = reservationRepository.findAll();
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data.");
@@ -38,14 +40,14 @@ public class ReservationService{
 	}
 
 
-	public List<RoomReservation> getAllReservationsForUser(Long id){
+	public List<RoomReservation> getAllReservationsForUser(Long id,HttpServletRequest request){
 		List<RoomReservation> found = reservationRepository.findAll();
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data.");
 		return found;
 	}
 	
-	public RoomReservation getReservation(Long id) {
+	public RoomReservation getReservation(Long id,HttpServletRequest request) {
 		if(id == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Null requested content.");
 		Optional<RoomReservation> found = reservationRepository.findById(id);
@@ -55,7 +57,7 @@ public class ReservationService{
 	}
 
 
-	public List<RoomReservation> getRoomReservations(Long roomId) {
+	public List<RoomReservation> getRoomReservations(Long roomId,HttpServletRequest request) {
 		List<RoomReservation> found = reservationRepository.findAllByRoomReservation_Id(roomId);
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No requested content.");
@@ -63,7 +65,7 @@ public class ReservationService{
 	}
 
 
-	public List<RoomReservation> getHotelReservations(Long hotelId) {
+	public List<RoomReservation> getHotelReservations(Long hotelId,HttpServletRequest request) {
 		List<RoomReservation> found = reservationRepository.findAllForHotel(hotelId);
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No requested content.");
@@ -71,7 +73,7 @@ public class ReservationService{
 	}
 
 
-	public RoomReservation createReservation(RoomReservationDTO roomReservation, Long roomId,Long userId) {
+	public RoomReservation createReservation(RoomReservationDTO roomReservation, Long roomId,Long userId,HttpServletRequest request) {
 		if(roomReservation == null || roomId == null || userId == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
 		Optional<User> foundUser = userRepository.findById(userId);
@@ -97,10 +99,10 @@ public class ReservationService{
 	}
 
 
-	public RoomReservation updateReservation(RoomReservationDTO roomReservation) {
+	public RoomReservation updateReservation(RoomReservationDTO roomReservation,HttpServletRequest request) {
 		if(roomReservation == null)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data sent.");
-		RoomReservation found = this.getReservation(roomReservation.getId());
+		RoomReservation found = this.getReservation(roomReservation.getId(),request);
 		RoomReservation got = found;
 		got.setRealised(roomReservation.isRealised());
 		RoomReservation saved = reservationRepository.save(got);
@@ -108,14 +110,14 @@ public class ReservationService{
 	}
 
 
-	public boolean deleteReservation(Long id) {
-		RoomReservation found = this.getReservation(id);
+	public boolean deleteReservation(Long id, HttpServletRequest request) {
+		RoomReservation found = this.getReservation(id,request);
 		reservationRepository.delete(found);
 		return true;
 	}
 
-	public boolean cancelReservation(Long id) {
-		RoomReservation found = this.getReservation(id);
+	public boolean cancelReservation(Long id,HttpServletRequest request) {
+		RoomReservation found = this.getReservation(id,request);
 		if(!found.getRoomReservation().isCancellationAllowed())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Not allowed to cancel.");
 		if(!checkIfOkayToCancel(found))

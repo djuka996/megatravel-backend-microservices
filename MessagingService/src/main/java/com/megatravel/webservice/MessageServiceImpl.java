@@ -42,13 +42,13 @@ public class MessageServiceImpl implements MessageServiceInterface {
     
 	@Override
 	public List<ChatDTO> getInbox(Long userId) {
-		return convertChatToListDTO(messageService.getInbox(userId));
+		return convertChatToListDTO(messageService.getInbox(userId,null));
 	}
 
 	
 	@Override
 	public List<MessageDTO> getMessages(Long userId,Long chatId) {
-		return convertMessageToListDTO(messageService.getMessages(userId, chatId));
+		return convertMessageToListDTO(messageService.getMessages(userId, chatId,null));
 	}
 
 	@Override
@@ -58,24 +58,24 @@ public class MessageServiceImpl implements MessageServiceInterface {
 	 * Novi chat => ChatId= -1, HotelId proslediti
 	 */
 	public Boolean sendMessage(Long chatId, Long hotelId, MessageDTO message) {
-		return messageService.sendMessage(chatId, hotelId, message);
+		return messageService.sendMessage(chatId, hotelId, message,null);
 	}
 
 	@Override
 	public Boolean markRead(Long chatId) {
-		return messageService.markRead(chatId);
+		return messageService.markRead(chatId,null);
 	}
 
 
 	@Override
 	public List<ChatDTO> getChatsForSync(Date start, Date end) {
-		return convertChatToListDTO(messageService.getChatsForSync(start, end));
+		return convertChatToListDTO(messageService.getChatsForSync(start, end,null));
 	}
 
 
 	@Override
 	public List<MessageDTO> getMessagesForSync(Date start, Date end) {
-		return convertMessageToListDTO(messageService.getMessagesForSync(start, end));
+		return convertMessageToListDTO(messageService.getMessagesForSync(start, end,null));
 	}
 	
 	private List<MessageDTO> convertMessageToListDTO(List<Message> got){

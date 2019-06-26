@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.decodeJWT.DecodeJwtToken;
-import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
-import com.megatravel.model.hotel.Hotel;
 import com.megatravel.model.room_reservation.RoomReservation;
 import com.megatravel.services.ReservationService;
 
@@ -35,7 +33,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getAllReservations()), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getAllReservations(request)), HttpStatus.OK);
 	}
 	
 	
@@ -45,7 +43,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getAllReservationsForUser(id)), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getAllReservationsForUser(id,request)), HttpStatus.OK);
 	}
 	
 	
@@ -55,7 +53,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(service.getReservation(id)), HttpStatus.OK);
+		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(service.getReservation(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/reservations", method = RequestMethod.GET)
@@ -64,7 +62,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getRoomReservations(id)), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getRoomReservations(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/hotels/{hotel-id}/reservations", method = RequestMethod.GET)
@@ -73,7 +71,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getHotelReservations(id)), HttpStatus.OK);
+		return new ResponseEntity<List<RoomReservationDTO>>(convertToListDTO(service.getHotelReservations(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/hotels/{hotel-id}/rooms/{room-id}/reservations/{user-id}", method = RequestMethod.POST)
@@ -83,7 +81,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(service.createReservation(reservation, roomId, userId)), HttpStatus.CREATED);
+		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(service.createReservation(reservation, roomId, userId,request)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/reservations", method = RequestMethod.PUT)
@@ -92,7 +90,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(service.updateReservation(reservation)), HttpStatus.ACCEPTED);
+		return new ResponseEntity<RoomReservationDTO>(new RoomReservationDTO(service.updateReservation(reservation,request)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/reservations/{id}", method = RequestMethod.DELETE)
@@ -100,7 +98,7 @@ public class ReservationController {
 		if(!DecodeJwtToken.canAccessMethod("cancelReservation", request.getHeader("Authorization"))) {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<Boolean>(service.cancelReservation(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.cancelReservation(id,request),HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/reservations/del/{id}", method = RequestMethod.DELETE)
@@ -109,7 +107,7 @@ public class ReservationController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(service.deleteReservation(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.deleteReservation(id,request),HttpStatus.ACCEPTED);
 	}
 	
 	private List<RoomReservationDTO> convertToListDTO(List<RoomReservation> got) {

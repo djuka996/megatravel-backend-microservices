@@ -3,6 +3,7 @@ package com.megatravel.model.system_user_info;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ public class Privilege {
 	@Size(min=StaticData.minLength, max=StaticData.lengthValue)
     private String name;
  
-    @ManyToMany(mappedBy = "privileges")
+    @ManyToMany(mappedBy = "privileges", cascade = CascadeType.MERGE)
     private Collection<Role> roles;
     
     public Privilege() {

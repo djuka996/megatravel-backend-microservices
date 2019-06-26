@@ -1,6 +1,7 @@
 package com.megatravel.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.megatravel.configuration.WebApplicationContextLocator;
@@ -27,7 +28,7 @@ import com.megatravel.repository.UserRepository;
 			serviceName="UsersDatabaseSyncingService",
 			targetNamespace="http://interfaces.megatravel.com/",
 			endpointInterface = "com.megatravel.interfaces.UsersDatabaseSyncingService")
-@Component
+@Service
 public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingService {
 
 	public static final String ENDPOINT = "/services/sync";
@@ -61,8 +62,13 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 	public List<PrivilegeDTO> getPrivilegesForSync(Date start, Date end) {
 		List<Privilege> privileges = this.privilegesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<PrivilegeDTO> result = new ArrayList<PrivilegeDTO>();
-		for(Privilege privilege : privileges)
-			result.add(new PrivilegeDTO(privilege));
+		for(Privilege privilege : privileges) {
+			PrivilegeDTO privilegeDTO = new PrivilegeDTO(privilege);
+			privilegeDTO.setRolesDTO(this.getRolesDTO(this.rolesRepository.findAllByPrivileges(privilege)));
+			result.add(privilegeDTO);
+		}
+			
+			
 		return result;
 	}
 
@@ -70,9 +76,28 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 	public List<RoleDTO> getRolesForSync(Date start, Date end) {
 		List<Role> roles = this.rolesRepository.findAllByLastChangedTimeBetween(start, end);
 		List<RoleDTO> result = new ArrayList<RoleDTO>();
-		for(Role role : roles)
-			result.add(new RoleDTO(role));
+		for(Role role : roles) {
+			RoleDTO roleDTO = new RoleDTO(role);
+			roleDTO.setUsersDTO(this.getUsersDTO(this.usersRepository.findAllByRoles(role)));
+			result.add(roleDTO);
+		}
 		return result;
 	}
 
+	private List<SystemUserInfoDTO> getUsersDTO(Collection<User> users) {
+		ArrayList<SystemUserInfoDTO> result = new ArrayList<SystemUserInfoDTO>();
+		for (User current : users) {
+			result.add(new SystemUserInfoDTO(current));
+		}
+		return result;
+	}
+	
+	private List<RoleDTO> getRolesDTO(Collection<Role> roles) {
+		ArrayList<RoleDTO> result = new ArrayList<RoleDTO>();
+		for(Role current : roles) {
+			result.add(new RoleDTO(current));
+		}
+    	return result;
+	}
+	
 }

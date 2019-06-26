@@ -66,6 +66,8 @@ public class User {
 	private Set<Message> senders;
 	@OneToMany(mappedBy = "receiver")
 	private Set<Message> receivers;
+	
+	private boolean active = false;
 		
 	public User() {
 		
@@ -79,6 +81,7 @@ public class User {
 		this.salt = salt;
 		this.email = email;
 		this.lastChangedTime = new Date();
+		this.setActive(false);
 	}
 
 	public User(SystemUserInfoDTO systemUserInfoDTO) {
@@ -86,6 +89,7 @@ public class User {
 		this.name = systemUserInfoDTO.getFirstName();
 		this.lastName = systemUserInfoDTO.getLastName();
 		this.email = systemUserInfoDTO.getEmail();
+		this.setActive(systemUserInfoDTO.isActive());
 	}
 	
 	public User(com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO systemUserInfoDTO) {
@@ -93,6 +97,7 @@ public class User {
 		this.name = systemUserInfoDTO.getFirstName();
 		this.lastName = systemUserInfoDTO.getLastName();
 		this.email = systemUserInfoDTO.getEmail();
+		this.setActive(systemUserInfoDTO.isActive());
 	}
 
 	public Long getId() {
@@ -174,5 +179,13 @@ public class User {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 }

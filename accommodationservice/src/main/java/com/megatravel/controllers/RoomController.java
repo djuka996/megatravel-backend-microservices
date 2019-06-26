@@ -35,7 +35,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<List<RoomDTO>>(convertToListDTO(service.getHotelRooms(id)), HttpStatus.OK);
+		return new ResponseEntity<List<RoomDTO>>(convertToListDTO(service.getHotelRooms(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -44,7 +44,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomDTO>(new RoomDTO(service.getRoom(id)), HttpStatus.OK);
+		return new ResponseEntity<RoomDTO>(new RoomDTO(service.getRoom(id,request)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomDTO>(new RoomDTO(service.createRoom(room, id)), HttpStatus.CREATED);
+		return new ResponseEntity<RoomDTO>(new RoomDTO(service.createRoom(room, id,request)), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
@@ -62,7 +62,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<RoomDTO>(new RoomDTO(service.updateRoom(room, id)), HttpStatus.ACCEPTED);
+		return new ResponseEntity<RoomDTO>(new RoomDTO(service.updateRoom(room, id,request)), HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -71,7 +71,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(service.removeRoom(id),HttpStatus.ACCEPTED);
+		return new ResponseEntity<Boolean>(service.removeRoom(id,request),HttpStatus.ACCEPTED);
 	}
 	
 	@RequestMapping(value="/updateRoom/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -80,7 +80,7 @@ public class RoomController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		
-		return new ResponseEntity<Boolean>(service.updateRating(id), HttpStatus.OK);
+		return new ResponseEntity<Boolean>(service.updateRating(id,request), HttpStatus.OK);
 	}
 	
 	private List<RoomDTO> convertToListDTO(List<Room> got) {

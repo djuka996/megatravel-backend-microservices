@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +32,7 @@ public class Privilege {
 	@Size(min=StaticData.minLength, max=StaticData.lengthValue)
     private String name;
  
-    @ManyToMany(mappedBy = "privileges")
+    @ManyToMany(mappedBy = "privileges", fetch = FetchType.LAZY)
     private Collection<Role> roles;
     
     public Privilege() {
@@ -48,6 +49,7 @@ public class Privilege {
 	public Privilege(PrivilegeDTO privilegeDTO) {
 		this.id = privilegeDTO.getId();
 		this.name = privilegeDTO.getName();
+		this.lastChangedTime = new Date();
 	}
 
 	public String getName() {

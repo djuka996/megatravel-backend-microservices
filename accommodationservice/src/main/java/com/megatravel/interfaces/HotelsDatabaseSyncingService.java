@@ -8,9 +8,12 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.megatravel.dtosoap.global_parameters.AddressDTO;
+import com.megatravel.dtosoap.global_parameters.AmountTypeDTO;
+import com.megatravel.dtosoap.global_parameters.CurrencyPriceDTO;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
 import com.megatravel.dtosoap.hotel.ExtraOptionDTO;
 import com.megatravel.dtosoap.hotel.HotelDTO;
+import com.megatravel.dtosoap.hotel.HotelExtraOptionDTO;
 import com.megatravel.dtosoap.hotel.ImageDTO;
 import com.megatravel.dtosoap.hotel.PriceListDTO;
 import com.megatravel.dtosoap.hotel.RoomDTO;
@@ -46,5 +49,14 @@ public interface HotelsDatabaseSyncingService {
 	
 	@WebMethod(operationName = "roomReservationChanges")
 	List<RoomReservationDTO> getRoomReservationsForSync(@WebParam(name = "start") Date start, @WebParam(name = "end") Date end);
+	
+	@WebMethod(operationName = "currencyPricesChanges")
+	List<CurrencyPriceDTO> getCurrencyPricesForSync(@WebParam(name = "start") Date start, @WebParam(name = "end") Date end);
+	
+	@WebMethod(operationName = "amountTypesChanges")
+	List<AmountTypeDTO> getAmountTypesForSync(@WebParam(name = "start") Date start, @WebParam(name = "end") Date end);
+	
+	@WebMethod(operationName = "hotelExtraOptionChanges")
+	List<HotelExtraOptionDTO> getHotelExtraOptionsForSync(@WebParam(name = "start") Date start, @WebParam(name = "end") Date end);
 	
 }

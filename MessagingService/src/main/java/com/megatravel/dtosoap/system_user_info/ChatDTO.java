@@ -14,27 +14,20 @@ import java.util.List;
 
 import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.model.system_user_info.Chat;
-import com.megatravel.model.system_user_info.Message;
 
 public class ChatDTO {
 
     protected long id;
     protected HotelDTO hotelDTO;
-    protected List<MessageDTO> messages;
+    protected List<MessageDTO> messagesDTO = new ArrayList<MessageDTO>();
     protected Date lastChangedTime;
 
-    public ChatDTO() {
-    	super();
-    }
+    public ChatDTO() { }
     
     public ChatDTO(Chat chat) {
-    	HotelDTO hotelDTO = new HotelDTO(chat.getChatsHotel());
-    	this.messages = new ArrayList<>();
-    	this.hotelDTO = hotelDTO;
+    	this.hotelDTO = (chat.getChatsHotel() == null) ? null : new HotelDTO(chat.getChatsHotel());
     	this.id = chat.getId();
     	this.lastChangedTime = chat.getLastChangedTime();
-    	for(Message message : chat.getMessages())
-			this.messages.add(new MessageDTO(message));
     }
     
     /**
@@ -100,10 +93,19 @@ public class ChatDTO {
      * 
      */
     public List<MessageDTO> getMessages() {
-        if (messages == null) {
-            messages = new ArrayList<MessageDTO>();
+        if (messagesDTO == null) {
+            messagesDTO = new ArrayList<MessageDTO>();
         }
-        return this.messages;
+        return this.messagesDTO;
     }
 
+	public Date getLastChangedTime() {
+		return lastChangedTime;
+	}
+
+	public void setLastChangedTime(Date lastChangedTime) {
+		this.lastChangedTime = lastChangedTime;
+	}
+
+    
 }

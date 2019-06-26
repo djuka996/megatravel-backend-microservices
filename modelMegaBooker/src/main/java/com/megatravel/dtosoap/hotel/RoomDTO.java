@@ -241,5 +241,9 @@ public class RoomDTO {
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
 	}
+
+	public void setImageDTO(List<ImageDTO> imageDTO) {
+		this.imageDTO = imageDTO;
+	}
     
 }

@@ -89,4 +89,9 @@ public class RoleDTO {
 		return usersDTO;
 	}
 
+	public void setUsersDTO(List<SystemUserInfoDTO> usersDTO) {
+		this.usersDTO = usersDTO;
+	}
+
+	
 }

@@ -30,6 +30,7 @@ import com.megatravel.model.system_user_info.Privilege;
  *       &lt;sequence>
  *         &lt;element name="Id" type="{http://www.megatravel.com/global_parameters}Id"/>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="lastChangedTime" type="{http://www.megatravel.com/global_parameters}Date"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -41,7 +42,8 @@ import com.megatravel.model.system_user_info.Privilege;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PrivilegeDTO", propOrder = {
     "id",
-    "name"
+    "name",
+    "lastChangedTime"
 })
 public class PrivilegeDTO {
 
@@ -50,6 +52,7 @@ public class PrivilegeDTO {
     @XmlElement(required = true)
     protected String name;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
 
     public PrivilegeDTO() {

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
 --
--- Host: localhost    Database: db_megabooker
+-- Host: 127.0.0.1    Database: db_megabooker
 -- ------------------------------------------------------
 -- Server version	8.0.16
 
@@ -333,7 +333,7 @@ CREATE TABLE `privilege` (
   `last_changed_time` datetime NOT NULL,
   `name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +342,7 @@ CREATE TABLE `privilege` (
 
 LOCK TABLES `privilege` WRITE;
 /*!40000 ALTER TABLE `privilege` DISABLE KEYS */;
-INSERT INTO `privilege` VALUES (1,'2019-06-23 16:27:06','getAllUsers'),(2,'2019-06-23 16:27:06','getUser'),(3,'2019-06-23 16:27:06','getUserByEmail'),(4,'2019-06-23 16:27:06','addRoleToUser'),(5,'2019-06-23 16:27:06','deleteRoleFromUser'),(6,'2019-06-23 16:27:06','getAllRoles'),(7,'2019-06-23 16:27:06','getRole'),(8,'2019-06-23 16:27:06','createRole'),(9,'2019-06-23 16:27:06','updateRole'),(10,'2019-06-23 16:27:06','deleteRole'),(11,'2019-06-23 16:27:06','addPrivilegeToRole'),(12,'2019-06-23 16:27:06','deletePrivilegeFromRole'),(13,'2019-06-23 16:27:06','getAllPrivileges'),(14,'2019-06-23 16:27:06','getPrivilege'),(15,'2019-06-23 16:27:06','createPrivilege'),(16,'2019-06-23 16:27:06','updatePrivilege'),(17,'2019-06-23 16:27:06','deletePrivilege'),(18,'2019-06-23 16:27:06','getInbox'),(19,'2019-06-23 16:27:06','getChat'),(20,'2019-06-23 16:27:06','sendMessage'),(21,'2019-06-23 16:27:06','markReadChat'),(22,'2019-06-23 16:27:06','getReview'),(23,'2019-06-23 16:27:06','getUserReviews'),(24,'2019-06-23 16:27:06','getUnreviewedReviews'),(25,'2019-06-23 16:27:06','getReviewsForRoom'),(26,'2019-06-23 16:27:06','createReview'),(27,'2019-06-23 16:27:06','updateReview'),(28,'2019-06-23 16:27:06','deleteReview'),(29,'2019-06-23 16:27:06','getChatRating'),(30,'2019-06-23 16:27:06','getRoomType'),(31,'2019-06-23 16:27:06','createAccommodationType'),(32,'2019-06-23 16:27:06','updateAccommodationType'),(33,'2019-06-23 16:27:06','removeAccommodationType'),(34,'2019-06-23 16:27:06','getHotelsAddress'),(35,'2019-06-23 16:27:06','createAddress'),(36,'2019-06-23 16:27:06','updateAddress'),(37,'2019-06-23 16:27:06','removeAddress'),(38,'2019-06-23 16:27:06','getRoomExtraOptionsWithHotelId'),(39,'2019-06-23 16:27:06','getRoomExtraOptionsWithRoomId'),(40,'2019-06-23 16:27:06','getRoomExtraOption'),(41,'2019-06-23 16:27:06','createExtraOption'),(42,'2019-06-23 16:27:06','updateRoom'),(43,'2019-06-23 16:27:06','removeRoom'),(44,'2019-06-23 16:27:06','getAllHotels'),(45,'2019-06-23 16:27:06','getHotel'),(46,'2019-06-23 16:27:06','createHotel'),(47,'2019-06-23 16:27:06','updateHotel'),(48,'2019-06-23 16:27:06','removeHotel'),(49,'2019-06-23 16:27:06','getAllReservations'),(50,'2019-06-23 16:27:06','getAllReservationsForUser'),(51,'2019-06-23 16:27:06','getReservation'),(52,'2019-06-23 16:27:06','getRoomReservations'),(53,'2019-06-23 16:27:06','getHotelReservations'),(54,'2019-06-23 16:27:06','createReservation'),(55,'2019-06-23 16:27:06','updateReservation'),(56,'2019-06-23 16:27:06','removeReservation'),(57,'2019-06-23 16:27:06','getHotelRooms'),(58,'2019-06-23 16:27:06','getHotelRoom'),(59,'2019-06-23 16:27:06','createRoom'),(60,'2019-06-23 16:27:06','updateRoomRoom'),(61,'2019-06-23 16:27:06','removeRoomRoom'),(62,'2019-06-23 16:27:06','updateRating');
+INSERT INTO `privilege` VALUES (1,'2019-06-25 21:48:20','getAllUsers'),(2,'2019-06-25 21:48:20','getUser'),(3,'2019-06-25 21:48:20','getUserByEmail'),(4,'2019-06-25 21:48:20','addRoleToUser'),(5,'2019-06-25 21:48:20','deleteRoleFromUser'),(6,'2019-06-25 21:48:20','getAllRoles'),(7,'2019-06-25 21:48:20','getRole'),(8,'2019-06-25 21:48:20','createRole'),(9,'2019-06-25 21:48:20','updateRole'),(10,'2019-06-25 21:48:20','deleteRole'),(11,'2019-06-25 21:48:20','addPrivilegeToRole'),(12,'2019-06-25 21:48:20','deletePrivilegeFromRole'),(13,'2019-06-25 21:48:20','getAllPrivileges'),(14,'2019-06-25 21:48:20','getPrivilege'),(15,'2019-06-25 21:48:20','createPrivilege'),(16,'2019-06-25 21:48:20','updatePrivilege'),(17,'2019-06-25 21:48:20','deletePrivilege'),(18,'2019-06-25 21:48:20','getInbox'),(19,'2019-06-25 21:48:20','getChat'),(20,'2019-06-25 21:48:20','sendMessage'),(21,'2019-06-25 21:48:20','markReadChat'),(22,'2019-06-25 21:48:20','getReview'),(23,'2019-06-25 21:48:20','getUserReviews'),(24,'2019-06-25 21:48:20','getUnreviewedReviews'),(25,'2019-06-25 21:48:20','getReviewsForRoom'),(26,'2019-06-25 21:48:20','createReview'),(27,'2019-06-25 21:48:20','updateReview'),(28,'2019-06-25 21:48:20','deleteReview'),(29,'2019-06-25 21:48:20','getChatRating'),(30,'2019-06-25 21:48:20','getRoomType'),(31,'2019-06-25 21:48:20','createAccommodationType'),(32,'2019-06-25 21:48:20','updateAccommodationType'),(33,'2019-06-25 21:48:20','removeAccommodationType'),(34,'2019-06-25 21:48:20','getHotelsAddress'),(35,'2019-06-25 21:48:20','createAddress'),(36,'2019-06-25 21:48:20','updateAddress'),(37,'2019-06-25 21:48:20','removeAddress'),(38,'2019-06-25 21:48:20','getRoomExtraOptionsWithHotelId'),(39,'2019-06-25 21:48:20','getRoomExtraOptionsWithRoomId'),(40,'2019-06-25 21:48:20','getRoomExtraOption'),(41,'2019-06-25 21:48:20','createExtraOption'),(42,'2019-06-25 21:48:20','updateRoom'),(43,'2019-06-25 21:48:20','removeRoom'),(44,'2019-06-25 21:48:20','getAllHotels'),(45,'2019-06-25 21:48:20','getHotel'),(46,'2019-06-25 21:48:20','createHotel'),(47,'2019-06-25 21:48:20','updateHotel'),(48,'2019-06-25 21:48:20','removeHotel'),(49,'2019-06-25 21:48:20','getAllReservations'),(50,'2019-06-25 21:48:20','getAllReservationsForUser'),(51,'2019-06-25 21:48:20','getReservation'),(52,'2019-06-25 21:48:20','getRoomReservations'),(53,'2019-06-25 21:48:20','getHotelReservations'),(54,'2019-06-25 21:48:20','createReservation'),(55,'2019-06-25 21:48:20','updateReservation'),(56,'2019-06-25 21:48:20','removeReservation'),(57,'2019-06-25 21:48:20','cancelReservation'),(58,'2019-06-25 21:48:20','getHotelRooms'),(59,'2019-06-25 21:48:20','getHotelRoom'),(60,'2019-06-25 21:48:20','createRoom'),(61,'2019-06-25 21:48:20','updateRoomRoom'),(62,'2019-06-25 21:48:20','removeRoomRoom'),(63,'2019-06-25 21:48:20','updateRating');
 /*!40000 ALTER TABLE `privilege` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +367,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'2019-06-23 16:27:07','ROLE_LOGGED'),(2,'2019-06-23 16:27:07','ROLE_ADMIN'),(3,'2019-06-23 16:27:07','ROLE_AGENT');
+INSERT INTO `role` VALUES (1,'2019-06-25 21:48:20','ROLE_LOGGED'),(2,'2019-06-25 21:48:20','ROLE_ADMIN'),(3,'2019-06-25 21:48:20','ROLE_AGENT');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +392,7 @@ CREATE TABLE `roles_privileges` (
 
 LOCK TABLES `roles_privileges` WRITE;
 /*!40000 ALTER TABLE `roles_privileges` DISABLE KEYS */;
-INSERT INTO `roles_privileges` VALUES (1,2),(1,3),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,25),(1,26),(1,27),(1,29),(1,30),(1,34),(1,38),(1,39),(1,40),(1,44),(1,45),(1,50),(1,51),(1,52),(1,57),(1,58),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,39),(2,40),(2,41),(2,42),(2,43),(2,44),(2,45),(2,46),(2,47),(2,48),(2,49),(2,50),(2,51),(2,52),(2,53),(2,54),(2,55),(2,56),(2,57),(2,58),(2,59),(2,60),(2,61),(2,62),(3,2),(3,3),(3,18),(3,19),(3,20),(3,21),(3,22),(3,23),(3,24),(3,25),(3,28),(3,29),(3,30),(3,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(3,39),(3,40),(3,41),(3,42),(3,43),(3,44),(3,45),(3,49),(3,51),(3,52),(3,53),(3,54),(3,55),(3,56),(3,57),(3,58),(3,59),(3,60),(3,61),(3,62);
+INSERT INTO `roles_privileges` VALUES (1,2),(1,3),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,25),(1,26),(1,27),(1,29),(1,30),(1,34),(1,38),(1,39),(1,40),(1,44),(1,45),(1,50),(1,51),(1,52),(1,57),(1,58),(1,59),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,39),(2,40),(2,41),(2,42),(2,43),(2,44),(2,45),(2,46),(2,47),(2,48),(2,49),(2,50),(2,51),(2,52),(2,53),(2,54),(2,55),(2,56),(2,58),(2,59),(2,60),(2,61),(2,62),(2,63),(3,2),(3,3),(3,18),(3,19),(3,20),(3,21),(3,22),(3,23),(3,24),(3,25),(3,28),(3,29),(3,30),(3,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(3,39),(3,40),(3,41),(3,42),(3,43),(3,44),(3,45),(3,49),(3,51),(3,52),(3,53),(3,54),(3,55),(3,56),(3,58),(3,59),(3,60),(3,61),(3,62),(3,63);
 /*!40000 ALTER TABLE `roles_privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,7 +426,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,_binary '',5,5,'Budite u nasem najlepsem hotelu u evropi',5,1,1,0,'1111-11-11 11:11:11'),(2,_binary '',5,5,'Prirodan vazduh i opustajuca atomosfera u okolini',5,2,1,0,'1111-11-11 11:11:11'),(3,_binary '',2,3,'Najbolji smestaji za cenu koju trazimo',5,3,2,0,'1111-11-11 11:11:11'),(4,_binary '',3,4,'Jednostavno najbolje mesto za zurke',4,4,4,0,'1111-11-11 11:11:11'),(5,_binary '\0',0,6,'Savrseno za bracne parove',4,2,3,0,'1111-11-11 11:11:11');
+INSERT INTO `room` VALUES (1,_binary '',5,5,'Budite u nasem najlepsem hotelu u evropi',5,1,1,500,'1111-11-11 11:11:11'),(2,_binary '',5,5,'Prirodan vazduh i opustajuca atomosfera u okolini',5,2,1,600,'1111-11-11 11:11:11'),(3,_binary '',2,3,'Najbolji smestaji za cenu koju trazimo',5,3,2,700,'1111-11-11 11:11:11'),(4,_binary '',3,4,'Jednostavno najbolje mesto za zurke',4,4,4,800,'1111-11-11 11:11:11'),(5,_binary '\0',0,6,'Savrseno za bracne parove',4,2,3,900,'1111-11-11 11:11:11');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -509,6 +509,7 @@ CREATE TABLE `user` (
   `name` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
+  `active` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -519,7 +520,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','2019-06-23 16:27:07','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(2,'andrija@gmail.com','2019-06-23 16:27:07','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw=='),(3,'katarina@gmail.com','2019-06-23 16:27:07','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(4,'marko@gmail.com','2019-06-23 16:27:07','Markovic','Marko','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==');
+INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','2019-06-25 21:48:20','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',_binary '\0'),(2,'andrija@gmail.com','2019-06-25 21:48:20','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw==',_binary '\0'),(3,'katarina@gmail.com','2019-06-25 21:48:20','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',_binary '\0'),(4,'marko@gmail.com','2019-06-25 21:48:20','Markovic','Marko','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',_binary '\0');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -589,4 +590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-23 18:07:11
+-- Dump completed on 2019-06-25 23:55:27

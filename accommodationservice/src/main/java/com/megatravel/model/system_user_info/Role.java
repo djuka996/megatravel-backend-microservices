@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Role {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastChangedTime;
 	
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles", cascade = CascadeType.MERGE)
     private Collection<User> users;
  
     @ManyToMany(fetch = FetchType.EAGER)

@@ -110,14 +110,16 @@ public class InitUserRolePrivilege{
 		Privilege createReservation = new Privilege(54L, "createReservation");
 		Privilege updateReservation = new Privilege(55L, "updateReservation");
 		Privilege removeReservation = new Privilege(56L, "removeReservation");
+		Privilege cancelReservation = new Privilege(57L, "cancelReservation");
+		
 		
 		//RoomController
-		Privilege getHotelRooms = new Privilege(57L, "getHotelRooms");
-		Privilege getHotelRoom = new Privilege(58L, "getHotelRoom");
-		Privilege createRoom = new Privilege(59L, "createRoom");
-		Privilege updateRoomRoom = new Privilege(60L, "updateRoomRoom");
-		Privilege removeRoomRoom = new Privilege(61L, "removeRoomRoom");
-		Privilege updateRating = new Privilege(62L, "updateRating");
+		Privilege getHotelRooms = new Privilege(58L, "getHotelRooms");
+		Privilege getHotelRoom = new Privilege(59L, "getHotelRoom");
+		Privilege createRoom = new Privilege(60L, "createRoom");
+		Privilege updateRoomRoom = new Privilege(61L, "updateRoomRoom");
+		Privilege removeRoomRoom = new Privilege(62L, "removeRoomRoom");
+		Privilege updateRating = new Privilege(63L, "updateRating");
 		
 		// save privileges
 		privilegeRepository.save(getAllUsers);
@@ -185,6 +187,7 @@ public class InitUserRolePrivilege{
 		privilegeRepository.save(createReservation);
 		privilegeRepository.save(updateReservation);
 		privilegeRepository.save(removeReservation);
+		privilegeRepository.save(cancelReservation);
 		
 		privilegeRepository.save(getHotelRooms);
 		privilegeRepository.save(getHotelRoom);
@@ -218,6 +221,7 @@ public class InitUserRolePrivilege{
 		tempPriviliges1.add(getHotel);
 		tempPriviliges1.add(getAllReservationsForUser);
 		tempPriviliges1.add(getReservation);
+		tempPriviliges1.add(cancelReservation);
 		tempPriviliges1.add(getRoomReservations);
 		tempPriviliges1.add(getHotelRooms);
 		tempPriviliges1.add(getHotelRoom);

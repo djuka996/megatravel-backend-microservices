@@ -134,6 +134,18 @@ public class PriceListDTO {
 		this.lastChangedTime = lastChangedTime;
 	}
 
+	public HotelDTO getHotelDTO() {
+		return hotelDTO;
+	}
+
+	public void setHotelDTO(HotelDTO hotelDTO) {
+		this.hotelDTO = hotelDTO;
+	}
+
+	public void setUnitPriceInformationDTO(List<UnitPriceInformationDTO> unitPriceInformationDTO) {
+		this.unitPriceInformationDTO = unitPriceInformationDTO;
+	}
+
 
     
     

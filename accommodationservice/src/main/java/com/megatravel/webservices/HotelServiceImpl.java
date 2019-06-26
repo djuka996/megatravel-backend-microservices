@@ -38,27 +38,27 @@ public class HotelServiceImpl implements HotelServiceInterface {
 	
 	@Override
 	public List<HotelDTO> getAllHotels() {
-		return convertToListDTO(hotelService.getAllHotels());
+		return convertToListDTO(hotelService.getAllHotels(null));
 	}
 
 	@Override
 	public HotelDTO getHotel(Long id) {
-		return new HotelDTO(hotelService.getHotel(id));
+		return new HotelDTO(hotelService.getHotel(id,null));
 	}
 
 	@Override
 	public HotelDTO createHotel(HotelDTO hotel) {
-		return new HotelDTO(hotelService.createHotel(hotel));
+		return new HotelDTO(hotelService.createHotel(hotel,null));
 	}
 
 	@Override
 	public HotelDTO updateHotel(HotelDTO hotel) {
-		return new HotelDTO(hotelService.updateHotel(hotel));
+		return new HotelDTO(hotelService.updateHotel(hotel,null));
 	}
 
 	@Override
 	public boolean removeHotel(Long id) {
-		return hotelService.removeHotel(id);
+		return hotelService.removeHotel(id,null);
 	}
 
 	

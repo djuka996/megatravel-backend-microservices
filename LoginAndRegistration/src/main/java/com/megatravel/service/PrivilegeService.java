@@ -1,6 +1,7 @@
 package com.megatravel.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,7 @@ public class PrivilegeService {
 		if(foundPrivilege.isPresent()) {
 			Privilege tempPrivilege = foundPrivilege.get();
 			tempPrivilege.setName(privilege.getName());
+			tempPrivilege.setLastChangedTime(new Date());
 			logger.info("Privilege with id = " + id + " updated");
 			return privilegeRepository.save(tempPrivilege);
 		}

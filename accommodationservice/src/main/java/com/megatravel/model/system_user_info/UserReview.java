@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.system_user_info.UserReviewDTO;
-import com.megatravel.model.hotel.Room;
+import com.megatravel.model.room_reservation.RoomReservation;
 
 @Entity
 public class UserReview {
@@ -31,7 +31,7 @@ public class UserReview {
 	protected String comment;
 	protected Date timeStamp;
 	@OneToOne()
-	protected Room room;
+	protected RoomReservation roomReservation;
 	@OneToOne()
 	protected User user;
 	protected boolean approved;
@@ -48,18 +48,16 @@ public class UserReview {
 		this.comment = userReviewDTO.getComment();
 		this.timeStamp = userReviewDTO.getTimeStamp();
 		this.approved = false;
-		this.room = userReviewDTO.getRoomDTO() != null ? new Room(userReviewDTO.getRoomDTO()) : null;
 		this.user = userReviewDTO.getSystemUserInfoDTO() != null ? new User(userReviewDTO.getSystemUserInfoDTO()) : null;
 	}
 
-	public UserReview(Long id, int rating, String comment, Date timeStamp, Room room, User user) {
+	public UserReview(Long id, int rating, String comment, Date timeStamp, User user) {
 		super();
 		this.id = id;
 		this.rating = rating;
 		this.comment = comment;
 		this.timeStamp = timeStamp;
 		this.approved = false;
-		this.room = room;
 		this.user = user;
 	}
 
@@ -93,14 +91,6 @@ public class UserReview {
 
 	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
-	}
-
-	public Room getRoom() {
-		return room;
-	}
-
-	public void setRoom(Room room) {
-		this.room = room;
 	}
 
 	public User getUser() {

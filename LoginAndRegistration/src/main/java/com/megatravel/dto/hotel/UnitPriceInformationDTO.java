@@ -44,7 +44,8 @@ import com.megatravel.dto.global_parameters.CurrencyPriceDTO;
 @XmlType(name = "", propOrder = {
     "id",
     "price",
-    "room"
+    "room",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "Unit_price_informationDTO")
 public class UnitPriceInformationDTO {
@@ -56,6 +57,7 @@ public class UnitPriceInformationDTO {
     @XmlElement(name = "Room")
     protected long room;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
     
     /**

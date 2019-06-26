@@ -52,7 +52,8 @@ import com.megatravel.dto.hotel.Adapter1;
     "opened",
     "date",
     "sender",
-    "receiver"
+    "receiver",
+    "lastChangedTime"
 })
 @XmlRootElement(name = "MessageDTO")
 public class MessageDTO {
@@ -73,6 +74,7 @@ public class MessageDTO {
     @XmlElement(name = "System_user_infoDTO", required = true)
     protected SystemUserInfoDTO receiver;
     // TODO : Anotacija mozda?
+    @XmlElement(name = "LastChangedTime")
     protected Date lastChangedTime;
 
     /**
