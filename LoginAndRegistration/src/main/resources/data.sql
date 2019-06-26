@@ -355,10 +355,10 @@ DROP TABLE IF EXISTS `role`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `last_changed_time` datetime NOT NULL,
   `role_name` varchar(30) NOT NULL,
+  `last_changed_time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -367,7 +367,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'2019-06-25 21:48:20','ROLE_LOGGED'),(2,'2019-06-25 21:48:20','ROLE_ADMIN'),(3,'2019-06-25 21:48:20','ROLE_AGENT');
+INSERT INTO `role` VALUES (1,'ROLE_USER','0000-00-00 00:00:00'),(2,'ROLE_ADMIN','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -392,7 +392,7 @@ CREATE TABLE `roles_privileges` (
 
 LOCK TABLES `roles_privileges` WRITE;
 /*!40000 ALTER TABLE `roles_privileges` DISABLE KEYS */;
-INSERT INTO `roles_privileges` VALUES (1,2),(1,3),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,25),(1,26),(1,27),(1,29),(1,30),(1,34),(1,38),(1,39),(1,40),(1,44),(1,45),(1,50),(1,51),(1,52),(1,57),(1,58),(1,59),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,39),(2,40),(2,41),(2,42),(2,43),(2,44),(2,45),(2,46),(2,47),(2,48),(2,49),(2,50),(2,51),(2,52),(2,53),(2,54),(2,55),(2,56),(2,58),(2,59),(2,60),(2,61),(2,62),(2,63),(3,2),(3,3),(3,18),(3,19),(3,20),(3,21),(3,22),(3,23),(3,24),(3,25),(3,28),(3,29),(3,30),(3,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(3,39),(3,40),(3,41),(3,42),(3,43),(3,44),(3,45),(3,49),(3,51),(3,52),(3,53),(3,54),(3,55),(3,56),(3,58),(3,59),(3,60),(3,61),(3,62),(3,63);
+INSERT INTO `roles_privileges` VALUES (1,2),(1,3),(1,18),(1,19),(1,20),(1,21),(1,22),(1,23),(1,25),(1,26),(1,27),(1,29),(1,30),(1,34),(1,38),(1,39),(1,40),(1,44),(1,45),(1,50),(1,51),(1,52),(1,54),(1,57),(1,58),(1,59),(1,63),(2,1),(2,2),(2,3),(2,4),(2,5),(2,6),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),(2,15),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37),(2,38),(2,39),(2,40),(2,41),(2,42),(2,43),(2,44),(2,45),(2,46),(2,47),(2,48),(2,49),(2,50),(2,51),(2,52),(2,53),(2,54),(2,55),(2,56),(2,58),(2,59),(2,60),(2,61),(2,62),(2,63),(3,2),(3,3),(3,18),(3,19),(3,20),(3,21),(3,22),(3,23),(3,24),(3,25),(3,28),(3,29),(3,30),(3,31),(3,32),(3,33),(3,34),(3,35),(3,36),(3,37),(3,38),(3,39),(3,40),(3,41),(3,42),(3,43),(3,44),(3,45),(3,49),(3,51),(3,52),(3,53),(3,54),(3,55),(3,56),(3,58),(3,59),(3,60),(3,61),(3,62),(3,63);
 /*!40000 ALTER TABLE `roles_privileges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,7 +426,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,_binary '',5,5,'Budite u nasem najlepsem hotelu u evropi',5,1,1,500,'1111-11-11 11:11:11'),(2,_binary '',5,5,'Prirodan vazduh i opustajuca atomosfera u okolini',5,2,1,600,'1111-11-11 11:11:11'),(3,_binary '',2,3,'Najbolji smestaji za cenu koju trazimo',5,3,2,700,'1111-11-11 11:11:11'),(4,_binary '',3,4,'Jednostavno najbolje mesto za zurke',4,4,4,800,'1111-11-11 11:11:11'),(5,_binary '\0',0,6,'Savrseno za bracne parove',4,2,3,900,'1111-11-11 11:11:11');
+INSERT INTO `room` VALUES (1,_binary '',5,5,'Budite u nasem najlepsem hotelu u evropi',5,1,1,200,'1111-11-11 11:11:11'),(2,_binary '',5,5,'Prirodan vazduh i opustajuca atomosfera u okolini',5,2,1,600,'1111-11-11 11:11:11'),(3,_binary '',2,3,'Najbolji smestaji za cenu koju trazimo',5,3,2,700,'1111-11-11 11:11:11'),(4,_binary '',3,4,'Jednostavno najbolje mesto za zurke',4,4,4,800,'1111-11-11 11:11:11'),(5,_binary '\0',0,6,'Savrseno za bracne parove',4,2,3,750,'1111-11-11 11:11:11');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,7 +451,7 @@ CREATE TABLE `room_reservation` (
   KEY `FK6dq3w3lmmmg7ju4pnf427quu7` (`room_reservation_id`),
   KEY `FKtm6wlkvl6xm9xph27afb1r1ku` (`user_review_id`),
   KEY `FK8cby3h2f54kex06d3octwnau1` (`users_reservation_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -460,7 +460,7 @@ CREATE TABLE `room_reservation` (
 
 LOCK TABLES `room_reservation` WRITE;
 /*!40000 ALTER TABLE `room_reservation` DISABLE KEYS */;
-INSERT INTO `room_reservation` VALUES (1,'2017-11-15 00:00:00','2017-11-25 00:00:00',500.00,_binary '',1,1,2,'1111-11-11 11:11:11'),(2,'2017-10-15 00:00:00','2017-11-25 00:00:00',200.00,_binary '',2,NULL,2,'1111-11-11 11:11:11'),(3,'2019-10-10 00:00:00','2019-10-20 00:00:00',1500.00,_binary '\0',3,NULL,2,'1111-11-11 11:11:11'),(4,'2019-10-10 00:00:00','2019-10-30 00:00:00',2500.00,_binary '\0',3,NULL,NULL,'1111-11-11 11:11:11'),(5,'2019-11-15 00:00:00','2019-11-25 00:00:00',3500.00,_binary '\0',4,NULL,NULL,'1111-11-11 11:11:11');
+INSERT INTO `room_reservation` VALUES (1,'2017-11-15 00:00:00','2017-11-25 00:00:00',500.00,_binary '',1,1,2,'1111-11-11 11:11:11'),(2,'2017-10-15 00:00:00','2017-11-25 00:00:00',200.00,_binary '',2,NULL,2,'1111-11-11 11:11:11'),(3,'2019-10-10 00:00:00','2019-10-20 00:00:00',1500.00,_binary '\0',3,NULL,2,'1111-11-11 11:11:11'),(4,'2019-10-10 00:00:00','2019-10-30 00:00:00',2500.00,_binary '\0',3,NULL,NULL,'1111-11-11 11:11:11'),(5,'2019-11-15 00:00:00','2019-11-25 00:00:00',3500.00,_binary '\0',4,NULL,NULL,'1111-11-11 11:11:11'),(6,'2019-06-26 00:00:00','2019-06-28 00:00:00',0.00,_binary '\0',5,NULL,2,'2019-06-26 16:34:43'),(7,'2019-06-27 00:00:00','2019-06-28 00:00:00',0.00,_binary '\0',3,NULL,2,'2019-06-26 17:57:06'),(8,'2019-07-11 00:00:00','2019-09-15 00:00:00',0.00,_binary '\0',3,NULL,6,'2019-06-26 18:04:41');
 /*!40000 ALTER TABLE `room_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -504,14 +504,18 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `email` varchar(60) NOT NULL,
-  `last_changed_time` datetime NOT NULL,
+  `failed_attempts` int(11) NOT NULL DEFAULT '0',
+  `failed_date_attempt` datetime DEFAULT NULL,
   `last_name` varchar(30) NOT NULL,
   `name` varchar(30) NOT NULL,
   `password` varchar(255) NOT NULL,
   `salt` varchar(255) NOT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
   `active` bit(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `last_changed_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKn82ha3ccdebhokx3a8fgdqeyy` (`role_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -520,7 +524,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com','2019-06-25 21:48:20','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',_binary '\0'),(2,'andrija@gmail.com','2019-06-25 21:48:20','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw==',_binary '\0'),(3,'katarina@gmail.com','2019-06-25 21:48:20','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',_binary '\0'),(4,'marko@gmail.com','2019-06-25 21:48:20','Markovic','Marko','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',_binary '\0');
+INSERT INTO `user` VALUES (1,'s.bokic@yahoo.com',0,NULL,'bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==',2,_binary '\0','0000-00-00 00:00:00'),(2,'andrija@gmail.com',0,NULL,'cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw==',2,_binary '\0','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,9 +544,11 @@ CREATE TABLE `user_review` (
   `user_id` bigint(20) DEFAULT NULL,
   `approved` bit(1) NOT NULL,
   `last_changed_time` datetime NOT NULL,
+  `room_reservation_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKedv0q78kn4goiywahm7hqehr` (`room_id`),
-  KEY `FKk4378yigvs29qpwh8ughgs4gk` (`user_id`)
+  KEY `FKk4378yigvs29qpwh8ughgs4gk` (`user_id`),
+  KEY `FKha3pme57ltquuxc07spwknkdj` (`room_reservation_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -552,7 +558,7 @@ CREATE TABLE `user_review` (
 
 LOCK TABLES `user_review` WRITE;
 /*!40000 ALTER TABLE `user_review` DISABLE KEYS */;
-INSERT INTO `user_review` VALUES (1,'Super bilo',5,'2017-01-01 00:00:00',1,2,_binary '','2017-01-01 00:00:00'),(2,'Moglo je biti bolje na bazenima',5,'2018-02-02 00:00:00',1,2,_binary '\0','2018-01-01 00:00:00');
+INSERT INTO `user_review` VALUES (1,'Super bilo',5,'2017-01-01 00:00:00',1,2,_binary '','2017-01-01 00:00:00',NULL),(2,'Moglo je biti bolje na bazenima',5,'2018-02-02 00:00:00',1,2,_binary '\0','2018-01-01 00:00:00',NULL);
 /*!40000 ALTER TABLE `user_review` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,7 +583,7 @@ CREATE TABLE `users_roles` (
 
 LOCK TABLES `users_roles` WRITE;
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (1,2),(2,1),(3,3),(4,3);
+INSERT INTO `users_roles` VALUES (1,2),(2,1),(3,3),(4,3),(5,1),(6,1);
 /*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -590,4 +596,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-26 17:42:25
+-- Dump completed on 2019-06-26 21:02:43
