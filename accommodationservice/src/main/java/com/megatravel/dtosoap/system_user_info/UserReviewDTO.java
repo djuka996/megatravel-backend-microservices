@@ -31,7 +31,6 @@ public class UserReviewDTO {
     	this.rating = userReview.getRating();
     	this.comment = userReview.getComment();
     	this.timeStamp = userReview.getTimeStamp();
-    	this.roomDTO = (userReview.getRoom() == null) ? null : new RoomDTO(userReview.getRoom());
     	this.systemUserInfoDTO = (userReview.getUser() == null) ? null : new SystemUserInfoDTO(userReview.getUser());
     	this.approved = userReview.isApproved();
     	this.lastChangedTime = userReview.getLastChangedTime();
