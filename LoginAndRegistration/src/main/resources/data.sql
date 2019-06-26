@@ -490,7 +490,7 @@ CREATE TABLE `unit_price_information` (
 
 LOCK TABLES `unit_price_information` WRITE;
 /*!40000 ALTER TABLE `unit_price_information` DISABLE KEYS */;
-INSERT INTO `unit_price_information` VALUES (1,'2017-01-01 00:00:00',1,1,1),(2,'2017-01-01 00:00:00',2,2,1),(3,'2017-01-01 00:00:00',3,3,2),(4,'2017-01-01 00:00:00',4,4,3),(5,'2017-01-01 00:00:00',5,3,4),(6,'2017-01-01 00:00:00',6,5,5);
+INSERT INTO `unit_price_information` VALUES (1,'2017-01-01 00:00:00',1,1,1),(2,'2017-01-01 00:00:00',2,2,2),(3,'2017-01-01 00:00:00',3,3,2),(4,'2017-01-01 00:00:00',4,4,3),(5,'2017-01-01 00:00:00',5,3,4),(6,'2017-01-01 00:00:00',6,5,5);
 /*!40000 ALTER TABLE `unit_price_information` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -554,6 +554,7 @@ CREATE TABLE `user_review` (
 
 LOCK TABLES `user_review` WRITE;
 /*!40000 ALTER TABLE `user_review` DISABLE KEYS */;
+INSERT INTO `user_review` VALUES (1,_binary '','Super bilo','2018-02-02 00:00:00',5,'2018-02-02 00:00:00',1,2,1),(2,_binary '\0','Moglo je biti bolje na bazenima','2018-02-02 00:00:00',2,'2018-02-02 00:00:00',1,2,2);
 /*!40000 ALTER TABLE `user_review` ENABLE KEYS */;
 UNLOCK TABLES;
 

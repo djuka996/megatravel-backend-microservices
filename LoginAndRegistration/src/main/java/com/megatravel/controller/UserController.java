@@ -231,8 +231,9 @@ public class UserController {
 					user.getRoles().add(roleAgent);
 					isAgent = true;
 				}
-		}else{
-			user.getRoles().add(role);	
+				else{
+					user.getRoles().add(role);	
+				}
 		}
 		User savedUser = userService.signup(user);
 
