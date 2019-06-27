@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.jws.WebService;
 
@@ -53,8 +54,17 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 	public List<SystemUserInfoDTO> getUsersForSync(Date start, Date end) {
 		List<User> users = this.usersRepository.findAllByLastChangedTimeBetween(start, end);
 		List<SystemUserInfoDTO> result = new ArrayList<SystemUserInfoDTO>();
-		for(User user : users)
-			result.add(new SystemUserInfoDTO(user));
+		for(User user : users) {
+			if(this.containsRole("ROLE_AGENT", user.getRoles())){
+				user.setActive(true);
+			}
+			else {
+				user.setActive(false);
+			}
+			
+			result.add(new SystemUserInfoDTO(user));		
+		}
+			
 		return result;
 	}
 
@@ -98,6 +108,16 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 			result.add(new RoleDTO(current));
 		}
     	return result;
+	}
+	
+	private boolean containsRole(String roleName, Set<Role> roles) {
+		for (Role role : roles) {
+			if(role.getRoleName().equals(roleName)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 }
