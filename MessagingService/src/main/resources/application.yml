@@ -5,7 +5,7 @@ server:
    key-store: classpath:message.p12
    key-store-password: sifra
    key-store-type: PKCS12
-   key-store-alies: message
+   key-store-alies: message(pki)
    trust-store: classpath:messageTrust.p12
    trust-store-password: sifra
    trust-store-type: PKCS12
@@ -42,8 +42,14 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
       
   instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
+    secureVirtualHostName: ${spring.application.name}
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${server.port}
+    homePageUrl: https://${eureka.instance.hostname}:${server.port}/
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    
 
 ribbon:
   eureka:

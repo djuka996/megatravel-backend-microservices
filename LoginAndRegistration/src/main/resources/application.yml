@@ -2,11 +2,11 @@ server:
   port: ${PORT:8555}
   ssl:
    enabled: true
-   key-store: classpath:message.p12
+   key-store: classpath:auth.p12
    key-store-password: sifra
    key-store-type: PKCS12
-   key-store-alies: message (pki)
-   trust-store: classpath:messageTrust.p12
+   key-store-alies: auth(pki)
+   trust-store: classpath:authTrust.p12
    trust-store-password: sifra
    trust-store-type: PKCS12
 
@@ -75,6 +75,11 @@ spring:
 
 eureka:
   client:
+    register-with-eureka: true
+    fetch-registry: true
+    securePortEnabled: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
     serviceUrl:
       #3. konekcija ka dockeru
       #defaultZone: http://discovery:8761/eureka/
@@ -86,8 +91,13 @@ eureka:
       #defaultZone: http://35.239.99.194:8761/eureka/
       
   instance:
-    leaseRenewalIntervalInSeconds: 1
-    leaseExpirationDurationInSeconds: 2
+    secureVirtualHostName: ${spring.application.name}
+    nonSecurePortEnabled: false #TRUE
+    securePortEnabled: true #true
+    securePort: ${server.port}
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    homePageUrl: https://localhost:${server.port}
 
 ribbon:
   eureka:

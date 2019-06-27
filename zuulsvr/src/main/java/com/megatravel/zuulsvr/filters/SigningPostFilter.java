@@ -34,6 +34,7 @@ public class SigningPostFilter extends ZuulFilter {
 	
 	@Override
 	public Object run() {
+		System.out.println("Usao u SignignFilterPost");
 		RequestContext context = RequestContext.getCurrentContext();
 		String body = context.getResponseBody();
 		String agentSerialNumber = context.getZuulRequestHeaders().get(StringUtilities.SERIAL_NUMBER_HEADER);
@@ -41,6 +42,7 @@ public class SigningPostFilter extends ZuulFilter {
 		String zuulRoute = "/" + routeWithPrefix.substring(routeWithPrefix.lastIndexOf('/') + 1) + "/**";
 		String microserviceName = this.utilites.getMicroserviceNameFromRoute(zuulRoute);
 		//context.setResponseBody(service.signAndEncode(body, agentSerialNumber, microserviceName).getBody());
+		System.out.println("Izasao u SignignFilterPost");
 		return null;
 	}
 
