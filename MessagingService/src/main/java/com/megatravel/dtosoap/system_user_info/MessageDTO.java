@@ -35,6 +35,7 @@ public class MessageDTO {
     	this.lastChangedTime = message.getLastChangedTime();
     	this.senderDTO = (message.getSender() == null) ? null : new SystemUserInfoDTO(message.getSender());
     	this.receiverDTO = (message.getReceiver() == null) ? null : new SystemUserInfoDTO(message.getReceiver());
+    	this.chatDTO = (message.getChat() == null) ? null : new ChatDTO(message.getChat());
     }
     
     
