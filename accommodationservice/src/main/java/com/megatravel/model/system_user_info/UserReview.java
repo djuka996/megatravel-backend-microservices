@@ -119,6 +119,22 @@ public class UserReview {
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
 	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public RoomReservation getRoomReservation() {
+		return roomReservation;
+	}
+
+	public void setRoomReservation(RoomReservation roomReservation) {
+		this.roomReservation = roomReservation;
+	}
 	
 
 }

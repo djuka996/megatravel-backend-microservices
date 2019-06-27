@@ -11,6 +11,7 @@ package com.megatravel.dtosoap.system_user_info;
 import java.util.Date;
 
 import com.megatravel.dtosoap.hotel.RoomDTO;
+import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
 import com.megatravel.model.system_user_info.UserReview;
 
 public class UserReviewDTO {
@@ -20,6 +21,7 @@ public class UserReviewDTO {
     protected String comment;
     protected Date timeStamp;
     protected RoomDTO roomDTO;
+    protected RoomReservationDTO roomReservationDTO;
     protected SystemUserInfoDTO systemUserInfoDTO;
     protected boolean approved;
     protected Date lastChangedTime;
@@ -32,6 +34,8 @@ public class UserReviewDTO {
     	this.comment = userReview.getComment();
     	this.timeStamp = userReview.getTimeStamp();
     	this.systemUserInfoDTO = (userReview.getUser() == null) ? null : new SystemUserInfoDTO(userReview.getUser());
+    	this.roomReservationDTO = (userReview.getRoomReservation() == null) ? null : new RoomReservationDTO(userReview.getRoomReservation());
+    	this.roomDTO = (userReview.getRoom() == null) ? null : new RoomDTO(userReview.getRoom());
     	this.approved = userReview.isApproved();
     	this.lastChangedTime = userReview.getLastChangedTime();
     }
@@ -178,6 +182,14 @@ public class UserReviewDTO {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public RoomReservationDTO getRoomReservationDTO() {
+		return roomReservationDTO;
+	}
+
+	public void setRoomReservationDTO(RoomReservationDTO roomReservationDTO) {
+		this.roomReservationDTO = roomReservationDTO;
 	}
 
 	
