@@ -37,7 +37,7 @@ public class Role {
 	@ManyToMany(mappedBy = "roles")
     private Collection<User> users;
  
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "roles_privileges", 
         joinColumns = @JoinColumn(

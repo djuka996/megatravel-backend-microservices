@@ -1,8 +1,8 @@
 package com.megatravel.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -107,6 +107,7 @@ public class RatingServiceImpl implements RatingService {
 		userReview.setComment(userReviewDTO.getComment());
 		userReview.setRating(userReviewDTO.getRating());
 		userReview.setApproved(userReviewDTO.isApproved());
+		userReview.setLastChangedTime(new Date());
 		ratingRepository.save(userReview);
 		return userReviewDTO;
 	}
@@ -117,6 +118,7 @@ public class RatingServiceImpl implements RatingService {
 		userReview.setComment(userReviewDTO.getComment());
 		userReview.setRating(userReviewDTO.getRating());
 		userReview.setApproved(false);
+		userReview.setLastChangedTime(new Date());
 		userReview.setRoom(new Room(userReviewDTO.getRoomDTO()));
 		userReview.setUser(new User(userReviewDTO.getSystemUserInfoDTO()));
 		ratingRepository.save(userReview);
