@@ -1,7 +1,7 @@
 server:
   port: ${PORT:7777}
   ssl:
-   enabled: true
+   enabled: false
    key-store: classpath:message.p12
    key-store-password: sifra
    key-store-type: PKCS12
@@ -43,7 +43,7 @@ eureka:
       
   instance:
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: false
+    nonSecurePortEnabled: true
     securePortEnabled: true
     securePort: ${server.port}
     homePageUrl: https://${eureka.instance.hostname}:${server.port}/

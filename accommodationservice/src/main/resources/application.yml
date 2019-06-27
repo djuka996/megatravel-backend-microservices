@@ -1,7 +1,7 @@
 server:
   port: ${PORT:6666}
   ssl:
-   enabled: true
+   enabled: false #Kada se ukljuci HTTPS staviti true
    key-store: classpath:accommodation.p12
    key-store-password: sifra
    key-store-type: PKCS12
@@ -44,7 +44,7 @@ eureka:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: false
+    nonSecurePortEnabled: true #Kada se ukljuci HTTPS iskljuciti nonesecure
     securePortEnabled: true 
     securePort: ${server.port}
     statusPageUrl: https://localhost:${server.port}/info
