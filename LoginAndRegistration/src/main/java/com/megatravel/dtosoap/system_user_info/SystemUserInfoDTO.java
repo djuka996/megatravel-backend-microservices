@@ -47,6 +47,7 @@ public class SystemUserInfoDTO {
    		this.password = user.getPassword();
    		this.salt = user.getSalt();
    		this.lastChangedTime = user.getLastChangedTime();
+   		this.active = user.isActive();
    	}
     
     /**

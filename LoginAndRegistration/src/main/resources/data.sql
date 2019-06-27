@@ -66,7 +66,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (1,'Maglic',10,10,'Srbija','2019-06-26 20:01:56','marsala tita',88),(2,'Novi sad',15,15,'Srbija','2019-06-26 20:01:56','bulevar evrope',55),(3,'Novi sad',20,20,'Srbija','2019-06-26 20:01:56','bulevar oslobodjenja',45),(4,'Beograd',30,30,'Srbija','2019-06-26 20:01:56','beogradska ulica',12);
+INSERT INTO `address` VALUES (1,'Maglic',10,10,'Srbija','2019-06-26 20:01:56','marsala tita',88),(2,'Novi sad',15,15,'Srbija','2019-06-26 20:01:56','bulevar evrope',55),(3,'Novi sad',20,20,'Srbija','2019-06-26 20:01:56','bulevar oslobodjenja',45),(4,'Beograd',30,30,'Srbija','2019-06-26 20:01:56','beogradska ulica',12), (5,'Novi grad',17,17,'Srbija','2019-06-26 20:01:56','Neka ulica',19);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
