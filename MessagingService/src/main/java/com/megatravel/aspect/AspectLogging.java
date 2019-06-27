@@ -54,7 +54,7 @@ public class AspectLogging {
 		  }
 		  else
 		  {
-		  	MyLogger.warn(codeSignature.getName(), false,"SOAP", "SOAP", ex.getMessage().substring(0, 100));
+		  	MyLogger.warn(codeSignature.getName(), false,"SOAP", "SOAP", ex.getMessage().substring(0, Math.min(100, ex.getMessage().length())));
 		  }    	
     }
     
