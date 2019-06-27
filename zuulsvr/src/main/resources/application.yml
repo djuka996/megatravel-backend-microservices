@@ -29,8 +29,11 @@ spring:
 
 ribbon:
     IsSecure: false #Kada https ukljuci staviti TRUE
+    ReadTimeout: 60000
 
 zuul:
+  host:
+    socket-timeout-millis: 600000
   sensitiveHeaders: Cookie, Set-Cookie
 #  ignored-services: stefanservice, demoservice, converterservice, loginAndRegistration, front, demosarservice, search, MessagingService, Rating
   prefix:  /api
@@ -96,12 +99,12 @@ eureka:
       
       #1. konekcija na google cloud
       #defaultZone: http://35.239.99.194:8761/eureka/ 
-#
-#hystrix:
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 122000
 
