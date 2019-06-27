@@ -1,7 +1,7 @@
 server:
   port: ${PORT:8555}
   ssl:
-   enabled: false # A1 ovde menjati https
+   enabled: true # A1 ovde menjati https
    key-store: classpath:auth.p12
    key-store-password: sifra
    key-store-type: PKCS12
