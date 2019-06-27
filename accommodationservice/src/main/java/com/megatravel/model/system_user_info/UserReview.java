@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.megatravel.dto.system_user_info.UserReviewDTO;
+import com.megatravel.model.hotel.Room;
 import com.megatravel.model.room_reservation.RoomReservation;
 
 @Entity
@@ -30,6 +31,8 @@ public class UserReview {
 	protected int rating;
 	protected String comment;
 	protected Date timeStamp;
+	@OneToOne()
+	protected Room room;
 	@OneToOne()
 	protected RoomReservation roomReservation;
 	@OneToOne()
@@ -115,6 +118,22 @@ public class UserReview {
 
 	public void setLastChangedTime(Date lastChangedTime) {
 		this.lastChangedTime = lastChangedTime;
+	}
+
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
+	public RoomReservation getRoomReservation() {
+		return roomReservation;
+	}
+
+	public void setRoomReservation(RoomReservation roomReservation) {
+		this.roomReservation = roomReservation;
 	}
 	
 
