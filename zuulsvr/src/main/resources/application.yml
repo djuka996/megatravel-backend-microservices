@@ -1,7 +1,7 @@
 server:
   port: ${PORT:5555}
   ssl:
-   enabled: false #Kada https ukljuci staviti TRUE
+   enabled: true #Kada https ukljuci staviti TRUE
    key-store: classpath:zuul.p12
    key-store-password: sifra
    key-store-type: PKCS12
@@ -28,7 +28,7 @@ spring:
 #      enabled: true
 
 ribbon:
-    IsSecure: false #Kada https ukljuci staviti TRUE
+    IsSecure: true #Kada https ukljuci staviti TRUE
     ReadTimeout: 60000
 
 zuul:
