@@ -24,7 +24,7 @@ public class AspectLogging {
     @AfterReturning(value = expresion + " || " + annotation, returning = "result")
     public void logAfterAllServiceMethods(JoinPoint jpoinPoint, Object result) {
     	CodeSignature codeSignature = (CodeSignature) jpoinPoint.getSignature();
-    	  Object check = jpoinPoint.getThis();
+    	  //Object check = jpoinPoint.getThis();
 		  String[] parameterNames = codeSignature.getParameterNames();
 	      Object[] argumentValues = jpoinPoint.getArgs();
 		  int requestIter = findHttpSevletRequest(parameterNames);
@@ -43,7 +43,7 @@ public class AspectLogging {
     public void logAfterThrowingAllMethods(JoinPoint jpoinPoint,Exception ex) throws Throwable
     {
     	CodeSignature codeSignature = (CodeSignature) jpoinPoint.getSignature();
-    	Object check = jpoinPoint.getThis();
+    	//Object check = jpoinPoint.getThis();
 		  String[] parameterNames = codeSignature.getParameterNames();
 	      Object[] argumentValues = jpoinPoint.getArgs();
 		  int requestIter = findHttpSevletRequest(parameterNames);
@@ -54,7 +54,7 @@ public class AspectLogging {
 		  }
 		  else
 		  {
-		  	MyLogger.warn(codeSignature.getName(), false,"SOAP", "SOAP", ex.getMessage().substring(0, 100));
+		  	MyLogger.warn(codeSignature.getName(), false,"SOAP", "SOAP", ex.getMessage().substring(0, Math.min(100, ex.getMessage().length())));
 		  }    	
     }
     
