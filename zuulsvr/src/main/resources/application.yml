@@ -1,7 +1,7 @@
 server:
   port: ${PORT:5555}
   ssl:
-   enabled: true
+   enabled: false # A1 ovde menjati https
    key-store: classpath:zuul.p12
    key-store-password: sifra
    key-store-type: PKCS12
@@ -28,7 +28,7 @@ spring:
 #      enabled: true
 
 ribbon:
-    IsSecure: true
+    IsSecure: false # A2 ovde menjati https
 
 zuul:
   sensitiveHeaders: Cookie, Set-Cookie

@@ -1,7 +1,7 @@
 server:
   port: ${PORT:8555}
   ssl:
-   enabled: true
+   enabled: false # A1 ovde menjati https
    key-store: classpath:auth.p12
    key-store-password: sifra
    key-store-type: PKCS12
@@ -92,7 +92,7 @@ eureka:
       
   instance:
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: false #TRUE
+    nonSecurePortEnabled: true #TRUE # A2 ovde menjati https
     securePortEnabled: true #true
     securePort: ${server.port}
     statusPageUrl: https://localhost:${server.port}/info
