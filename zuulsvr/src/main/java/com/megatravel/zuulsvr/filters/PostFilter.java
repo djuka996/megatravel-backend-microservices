@@ -28,11 +28,13 @@ public class PostFilter extends ZuulFilter {
 
 	@Override
 	public Object run() {
+		System.out.println("Usao post filter");
 		RequestContext context = RequestContext.getCurrentContext();
 		String body = context.getResponseBody();
 		String url = utilites.getFullURL(context.getRequest());
 		String location = utilites.createLocationFromURL(url);
 		context.setResponseBody(utilites.replaceWebServicePort(body, location));
+		System.out.println("Izasao post filter");
 		return null;
 	}
 

@@ -55,6 +55,15 @@ public class ExtraOptionController {
 		return new ResponseEntity<ExtraOptionDTO>(new ExtraOptionDTO(service.getExtraOption(id,request)), HttpStatus.OK);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<ExtraOptionDTO>> getAllExtraOptions(HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("getRoomExtraOption", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		
+		return new ResponseEntity<List<ExtraOptionDTO>>(convertToListDTO(service.getAllExtraOptions(request)), HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/room/{room-id}", method = RequestMethod.POST)
 	public ResponseEntity<ExtraOptionDTO> createExtraOption(@RequestBody ExtraOptionDTO extraOption, 
 			@PathVariable("room-id") Long id, HttpServletRequest request) {

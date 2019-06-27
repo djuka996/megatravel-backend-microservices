@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.decodeJWT.DecodeJwtToken;
+import com.megatravel.dto.hotel.ImageDTO;
 import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
 import com.megatravel.model.room_reservation.RoomReservation;
 import com.megatravel.services.ReservationService;
@@ -108,6 +109,11 @@ public class ReservationController {
 		}
 		
 		return new ResponseEntity<Boolean>(service.deleteReservation(id,request),HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/reservations/room/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<ImageDTO>> getImagesForRoom(@PathVariable("id") Long id) {
+		return new ResponseEntity<List<ImageDTO>>(service.getImagesForRoom(id), HttpStatus.OK);
 	}
 	
 	private List<RoomReservationDTO> convertToListDTO(List<RoomReservation> got) {

@@ -4,6 +4,14 @@ spring:
     
 server:
   port: ${PORT:8761}
+#   ssl:
+#   enabled: true
+#   key-store: classpath:eureka.p12
+#   key-store-password: sifra
+#   key-alias: eureka(pki)
+#   trust-store: classpath:eurekaTrust.p12
+#   trust-store-password: sifra
+
 
 eureka:
   instance:
@@ -11,8 +19,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-#  server:
-#    waitTimeInMsWhenSyncEmpty: 30
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
 #  serviceUrl:
 #    defaultZone: http://localhost:8761  
 

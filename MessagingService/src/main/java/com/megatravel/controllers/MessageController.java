@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.decodeJWT.DecodeJwtToken;
+import com.megatravel.dtosoap.hotel.HotelDTO;
 import com.megatravel.dtosoap.system_user_info.ChatDTO;
 import com.megatravel.dtosoap.system_user_info.MessageDTO;
 import com.megatravel.model.system_user_info.Chat;
@@ -86,10 +87,21 @@ public class MessageController {
 	private List<ChatDTO> convertChatToListDTO(List<Chat> got){
 		List<ChatDTO> returning = new ArrayList<>();
 		for (Chat iter : got) {
-			ChatDTO toAdd = new ChatDTO(iter);
+			ChatDTO toAdd = convertToChatDTO(iter);
 			returning.add(toAdd);
 		}
 		return returning;
+	}
+	
+	private ChatDTO convertToChatDTO(Chat chat) {
+		ChatDTO newChat = new ChatDTO();
+		newChat.setId(chat.getId());
+		newChat.setHotelDTO((chat.getChatsHotel() == null) ? null : new HotelDTO(chat.getChatsHotel()));
+    	newChat.setLastChangedTime(chat.getLastChangedTime());
+    	for (Message messsage : chat.getMessages()) {
+    	 	newChat.getMessages().add(new MessageDTO(messsage));
+		}
+    	return newChat;
 	}
 	
 }

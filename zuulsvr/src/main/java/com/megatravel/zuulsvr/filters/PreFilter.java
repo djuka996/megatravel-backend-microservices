@@ -43,6 +43,7 @@ public class PreFilter extends ZuulFilter {
 
 	@Override
 	public Object run() {
+		System.out.println("Usao u pre Filter");
 		RequestContext context = RequestContext.getCurrentContext();
 		HttpServletRequest request = context.getRequest();
 		String requestURL = utilites.getFullURL(request);
@@ -63,6 +64,7 @@ public class PreFilter extends ZuulFilter {
 			context.setResponseBody(response.getBody());
 			context.addZuulResponseHeader("Content-Type", "text/xml; charset=utf-8");
 		}
+		System.out.println("izasao iz pre Filter");
 		return null;
 	}
 

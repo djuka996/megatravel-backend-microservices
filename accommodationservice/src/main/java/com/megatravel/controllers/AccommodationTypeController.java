@@ -1,5 +1,8 @@
 package com.megatravel.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.hotel.AccomodationTypeDTO;
+import com.megatravel.model.hotel.AccomodationType;
 import com.megatravel.services.AccommodationTypeService;
 
 
@@ -26,7 +30,15 @@ public class AccommodationTypeController {
 	@Autowired
 	private AccommodationTypeService service;
 	
-
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<AccomodationTypeDTO>> getAllRoomTypes(HttpServletRequest request) {
+		if(!DecodeJwtToken.canAccessMethod("getRoomType", request.getHeader("Authorization"))) {
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		}
+		return new ResponseEntity<List<AccomodationTypeDTO>>(convertToAtListDTO(service.getAll(request)), HttpStatus.OK);
+	}
+	
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<AccomodationTypeDTO> getRoomType(@PathVariable("id") Long id, @PathVariable("room-id") Long room,
 			HttpServletRequest request) {
@@ -60,6 +72,14 @@ public class AccommodationTypeController {
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		}
 		return new ResponseEntity<Boolean>(service.removeAccommodationType(id,request),HttpStatus.ACCEPTED);
+	}
+	
+	public static List<AccomodationTypeDTO> convertToAtListDTO(List<AccomodationType> old) {
+		List<AccomodationTypeDTO> newList = new ArrayList<>();
+		for (AccomodationType iter : old) {
+			newList.add(new AccomodationTypeDTO(iter));
+		}
+		return newList;
 	}
 	
 }

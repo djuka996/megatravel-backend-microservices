@@ -1,6 +1,22 @@
 server:
   port: ${PORT:5555}
-
+  ssl:
+   enabled: false #Kada https ukljuci staviti TRUE
+   key-store: classpath:zuul.p12
+   key-store-password: sifra
+   key-store-type: PKCS12
+   key-alias: zuul gateway (pki)
+   trust-store: classpath:zuulTrust.p12
+   trust-store-password: sifra
+   trust-store-type: PKCS12
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+    
 spring:
   application:
     name: containerized-gateway
@@ -10,8 +26,10 @@ spring:
 #  cloud:
 #    config:
 #      enabled: true
- 
- 
+
+ribbon:
+    IsSecure: false #Kada https ukljuci staviti TRUE
+
 zuul:
   sensitiveHeaders: Cookie, Set-Cookie
 #  ignored-services: stefanservice, demoservice, converterservice, loginAndRegistration, front, demosarservice, search, MessagingService, Rating
@@ -57,10 +75,18 @@ logging:
 
 eureka:
   instance:
+    secureVirtualHostName: ${spring.application.name}
     prefer-ip-address: true
+    nonSecurePortEnabled: true #Kada https ukljuci staviti false
+    securePortEnabled: true
+    securePort: ${server.port}
+    statusPageUrl: http://localhost:${server.port}/info
+    healthCheckUrl: http://localhost:${server.port}/health
+    homePageUrl: http://localhost:${server.port}
   client:
     register-with-eureka: true
     fetch-registry: true
+    #securePortEnabled: true
     serviceUrl:
       #1. konekcija na dockeru
       #defaultZone: http://discovery:8761/eureka/
