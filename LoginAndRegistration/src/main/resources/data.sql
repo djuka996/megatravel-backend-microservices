@@ -198,7 +198,7 @@ CREATE TABLE `hotel` (
 
 LOCK TABLES `hotel` WRITE;
 /*!40000 ALTER TABLE `hotel` DISABLE KEYS */;
-INSERT INTO `hotel` VALUES (1,'2017-01-01 00:00:00',3,1,3),(2,'2017-01-01 00:00:00',4,2,4),(3,'2017-01-01 00:00:00',5,3,3),(4,'2017-01-01 00:00:00',2,4,NULL),(5,'2017-01-01 00:00:00',1,5,NULL);
+INSERT INTO `hotel` VALUES (1,'2017-01-01 00:00:00',3,1,3),(2,'2017-01-01 00:00:00',4,2,4),(3,'2017-01-01 00:00:00',5,3,3),(4,'2017-01-01 00:00:00',2,4,3),(5,'2017-01-01 00:00:00',1,5,3);
 /*!40000 ALTER TABLE `hotel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -460,7 +460,7 @@ CREATE TABLE `room_reservation` (
 
 LOCK TABLES `room_reservation` WRITE;
 /*!40000 ALTER TABLE `room_reservation` DISABLE KEYS */;
-INSERT INTO `room_reservation` VALUES (1,'2019-10-10','2019-10-30','2017-11-15 00:00:00',1.00,_binary '',1,1,2),(2,'2019-10-10','2019-11-25','2017-11-15 00:00:00',2.00,_binary '',2,NULL,2),(3,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2),(4,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,NULL),(5,'2019-10-10','2019-11-25','2017-11-15 00:00:00',4.00,_binary '\0',4,NULL,NULL),(6,'2019-10-10','2019-11-25','2017-11-15 00:00:00',5.00,_binary '\0',5,NULL,2),(7,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2),(8,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2);
+INSERT INTO `room_reservation` VALUES (1,'2019-10-10','2019-10-30','2017-11-15 00:00:00',1.00,_binary '',1,1,2),(2,'2019-10-10','2019-11-25','2017-11-15 00:00:00',2.00,_binary '',2,NULL,2),(3,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2),(4,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2),(5,'2019-10-10','2019-11-25','2017-11-15 00:00:00',4.00,_binary '\0',4,NULL,2),(6,'2019-10-10','2019-11-25','2017-11-15 00:00:00',5.00,_binary '\0',5,NULL,2),(7,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2),(8,'2019-10-10','2019-11-25','2017-11-15 00:00:00',3.00,_binary '\0',3,NULL,2);
 /*!40000 ALTER TABLE `room_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -520,7 +520,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,_binary '','s.bokic@yahoo.com','2019-06-26 20:01:56','bokic','stefan','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(2,_binary '','andrija@gmail.com','2019-06-26 20:01:56','cvejic','andrija','Qa5mzjfzpusizh3JURiBDjbsNjOIleYq','66x2x3KZNB0MF6YRc5XIYw=='),(3,_binary '','katarina@gmail.com','2019-06-26 20:01:56','Grujic','Katarina-Glorija','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ=='),(4,_binary '','marko@gmail.com','2019-06-26 20:01:56','Markovic','Marko','AjLAcUiNLnUfi0H4yXbrE9/PqCQAerWP','oSo0UHjkPRZL4qE0WfJVEQ==');
+INSERT INTO `user` VALUES 
+(1,_binary '','s.bokic@yahoo.com','2019-06-26 20:01:56','bokic','stefan','uzLdXi4KJCMBIh15mFV8a4bbWE1u36Da','Okwtg72MiybJ2npowE0Udg=='),(2,_binary '','andrija@gmail.com','2019-06-26 20:01:56','cvejic','andrija','uzLdXi4KJCMBIh15mFV8a4bbWE1u36Da','Okwtg72MiybJ2npowE0Udg=='),(3,_binary '','katarina@gmail.com','2019-06-26 20:01:56','Grujic','Katarina-Glorija','uzLdXi4KJCMBIh15mFV8a4bbWE1u36Da','Okwtg72MiybJ2npowE0Udg=='),(4,_binary '','marko@gmail.com','2019-06-26 20:01:56','Markovic','Marko','uzLdXi4KJCMBIh15mFV8a4bbWE1u36Da','Okwtg72MiybJ2npowE0Udg==');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
