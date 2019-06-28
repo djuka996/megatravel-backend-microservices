@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.megatravel.xmlservice.services.CoordinatorService;
+import com.megatravel.xmlservice.services.XXECheckService;
 
 @RestController
 @RequestMapping
@@ -18,6 +19,9 @@ public class XmlConverterController {
 
 	@Autowired
 	private CoordinatorService service;
+	
+	@Autowired
+	private XXECheckService xxeCheckService;
 	
 	@RequestMapping(value = "/verify", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE, produces = MediaType.TEXT_XML_VALUE)
 	public ResponseEntity<String> verifySignatureAndDecode(@RequestBody String message, 
@@ -31,6 +35,12 @@ public class XmlConverterController {
 												@RequestParam("recipient-serial-number") String recipientSerialNumber,
 												@RequestParam("sender") String sender) {
 		return new ResponseEntity<String>(this.service.signAndEncode(message, recipientSerialNumber, sender), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/validate", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE)
+	public ResponseEntity<Void> checkForXXE(@RequestBody String message) {
+		this.xxeCheckService.validate(message);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
 	}
 	
 }

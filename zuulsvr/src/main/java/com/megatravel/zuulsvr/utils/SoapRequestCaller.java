@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import com.megatravel.zuulsvr.interfaces.XmlServiceFeignClient;
-import com.netflix.zuul.context.RequestContext;
 
 @Component
 public class SoapRequestCaller {
@@ -45,11 +46,10 @@ public class SoapRequestCaller {
 				connection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
 				connection.setRequestProperty("SOAPAction", utilites.returnSoapAction(fullUrl, message));
 				connection.setDoOutput(true);
-				//ResponseEntity<String> response = this.service.verifySignatureAndDecode(message, recipient, this.utilites.getWebServiceNameFromRoute(fullUrl));
-				//message = response.getBody();
-				//String serialNumber = response.getHeaders().getFirst("X-Serial-number");
-				String serialNumber = "124324";
-				RequestContext.getCurrentContext().addZuulRequestHeader(StringUtilities.SERIAL_NUMBER_HEADER, serialNumber);
+				/*ResponseEntity<Void> response = this.service.checkForXXE(message);
+				if(!response.getStatusCode().equals(HttpStatus.ACCEPTED)) {
+					return new ServiceResponse(INTERNAL_SERVER_ERROR, 500);
+				}*/
 				OutputStream outStream = connection.getOutputStream();
 				OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream);
 				outStreamWriter.write(message);
