@@ -21,4 +21,7 @@ public interface XmlServiceFeignClient {
 												@RequestParam("recipient-serial-number") String recipientSerialNumber,
 												@RequestParam("sender") String sender);
 	
+	@RequestMapping(value = "/validate", method = RequestMethod.POST, consumes = MediaType.TEXT_XML_VALUE)
+	public ResponseEntity<Void> checkForXXE(@RequestBody String message);
+	
 }
