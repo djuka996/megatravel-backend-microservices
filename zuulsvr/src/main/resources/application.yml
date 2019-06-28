@@ -9,6 +9,7 @@ server:
    trust-store: classpath:zuulTrust.p12
    trust-store-password: sifra
    trust-store-type: PKCS12
+   client-auth: want
 endpoints:
   restart:
     enabled: true
@@ -83,9 +84,9 @@ eureka:
     nonSecurePortEnabled: true #Kada https ukljuci staviti false
     securePortEnabled: false
     securePort: ${server.port}
-    statusPageUrl: http://localhost:${server.port}/info
-    healthCheckUrl: http://localhost:${server.port}/health
-    homePageUrl: http://localhost:${server.port}
+    statusPageUrl: https://localhost:${server.port}/info
+    healthCheckUrl: https://localhost:${server.port}/health
+    homePageUrl: https://localhost:${server.port}
   client:
     register-with-eureka: true
     fetch-registry: true
@@ -95,7 +96,7 @@ eureka:
       #defaultZone: http://discovery:8761/eureka/
       
       #1. konekcija na eclipse
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://localhost:8761/eureka/
       
       #1. konekcija na google cloud
       #defaultZone: http://35.239.99.194:8761/eureka/ 
