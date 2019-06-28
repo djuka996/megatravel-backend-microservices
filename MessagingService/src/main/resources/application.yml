@@ -43,7 +43,7 @@ eureka:
       
   instance:
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: true
+    nonSecurePortEnabled: false
     securePortEnabled: true
     securePort: ${server.port}
     homePageUrl: https://${eureka.instance.hostname}:${server.port}/

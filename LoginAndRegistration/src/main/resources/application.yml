@@ -92,7 +92,7 @@ eureka:
       
   instance:
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: true #TRUE za A2 ovde menjati https
+    nonSecurePortEnabled: false #false kada ukljucim https A2
     securePortEnabled: true #true
     securePort: ${server.port}
     statusPageUrl: https://localhost:${server.port}/info

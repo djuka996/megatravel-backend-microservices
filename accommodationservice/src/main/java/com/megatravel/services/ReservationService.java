@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.megatravel.decodeJWT.DecodeJwtToken;
 import com.megatravel.dtosoap.room_reservation.RoomReservationDTO;
 import com.megatravel.model.hotel.Image;
 import com.megatravel.model.hotel.Room;
@@ -43,7 +44,7 @@ public class ReservationService{
 
 
 	public List<RoomReservation> getAllReservationsForUser(Long id,HttpServletRequest request){
-		List<RoomReservation> found = reservationRepository.findAll();
+		List<RoomReservation> found = reservationRepository.findAllByUsersReservation_Id(id);
 		if(found.size()==0)
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No data.");
 		return found;
@@ -135,15 +136,21 @@ public class ReservationService{
 
 	public boolean cancelReservation(Long id,HttpServletRequest request) {
 		RoomReservation found = this.getReservation(id,request);
-		if(!found.getRoomReservation().isCancellationAllowed())
+		if(found.isRealised())
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Not allowed to cancel.");
 		if(!checkIfOkayToCancel(found))
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Not allowed to cancel.");
+		if(!found.getUsersReservation().getEmail().equals(DecodeJwtToken.getUsername(request.getHeader("Authorization"))))
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not allowed to cancel.");
 		reservationRepository.delete(found);
 		return true;
 	}
 	
-	private Boolean checkIfOkayToCancel(RoomReservation roomReservation) {
+	public static Boolean checkIfOkayToCancel(RoomReservation roomReservation) {
+		if(roomReservation.isRealised())
+			return false;
+		//if(!roomReservation.getRoomReservation().isCancellationAllowed())
+		//	return false;
 		Calendar current = Calendar.getInstance();
 		Calendar beginDate = Calendar.getInstance();
 		current.setTime(new Date());
