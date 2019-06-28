@@ -45,7 +45,7 @@ eureka:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: true #TRUE
+    nonSecurePortEnabled: false #TRUE
     securePortEnabled: true #true
     securePort: ${server.port}
     statusPageUrl: https://localhost:${server.port}/info

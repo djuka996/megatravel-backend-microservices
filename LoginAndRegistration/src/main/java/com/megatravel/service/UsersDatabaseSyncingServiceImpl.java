@@ -56,10 +56,10 @@ public class UsersDatabaseSyncingServiceImpl implements UsersDatabaseSyncingServ
 		List<SystemUserInfoDTO> result = new ArrayList<SystemUserInfoDTO>();
 		for(User user : users) {
 			if(this.containsRole("ROLE_AGENT", user.getRoles())){
-				user.setActive(true);
+				user.setActive(user.isActive());
 			}
 			else {
-				user.setActive(false);
+				user.setActive(user.isActive());
 			}
 			
 			result.add(new SystemUserInfoDTO(user));		

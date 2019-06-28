@@ -14,7 +14,7 @@ import java.util.Date;
 import com.megatravel.dtosoap.hotel.RoomDTO;
 import com.megatravel.dtosoap.system_user_info.SystemUserInfoDTO;
 import com.megatravel.model.room_reservation.RoomReservation;
-
+import com.megatravel.services.ReservationService;
 
 public class RoomReservationDTO {
 
@@ -37,6 +37,10 @@ public class RoomReservationDTO {
     	this.realised = reservation.isRealised();
     	this.price = reservation.getPrice();
     	this.lastChangedTime = reservation.getLastChangedTime();
+		if(ReservationService.checkIfOkayToCancel(reservation))
+			this.setAllowedCancel(true);
+		else 
+			this.setAllowedCancel(false);
     	this.roomDTO = (reservation.getRoomReservation() == null) ? null: new RoomDTO(reservation.getRoomReservation());
     	this.userDTO = (reservation.getUsersReservation() == null) ? null : new SystemUserInfoDTO(reservation.getUsersReservation());
     }
