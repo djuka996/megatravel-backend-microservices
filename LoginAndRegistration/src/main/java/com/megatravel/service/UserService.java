@@ -18,6 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.megatravel.configuration.MyLogger;
 import com.megatravel.dto.system_user_info.SystemUserInfoDTO;
 import com.megatravel.exception.CustomException;
 import com.megatravel.jwt.JwtTokenUtils;
@@ -79,13 +80,11 @@ public class UserService {
 	public SystemUserInfoDTO changeState(Long id, boolean boolState) {
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
-			logger.info("User with id = " + id + " returned");
 			user.get().setActive(boolState);
 			userRepository.save(user.get());
 			return new SystemUserInfoDTO(user.get());
 		}
 		else {
-			logger.error("Error when returning user - error: " + "Requested user with id " + id + " doesn't exist.");
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested user with id " + id + " doesn't exist.");
 		}
 	}
@@ -93,11 +92,9 @@ public class UserService {
 	public User findOneUser(Long id) {
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
-			logger.info("User with id = " + id + " returned");
 			return user.get();
 		}
 		else {
-			logger.error("Error when returning user - error: " + "Requested user with id " + id + " doesn't exist.");
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested user with id " + id + " doesn't exist.");
 		}
 	}
@@ -149,7 +146,7 @@ public class UserService {
 	}
 	
 	public User findByEmail(String email) {
-		logger.info("User with email = " + email + " returned");
+
 		return userRepository.findByEmail(email);
 	}
 
@@ -159,10 +156,8 @@ public class UserService {
 		if(role.isPresent()) {
 			user.getRoles().add(role.get());
 			userRepository.save(user);
-			logger.info("Role with id = " + roleId + " added to user with id = " + userId);
 		}
 		else {
-			logger.error("Error when adding role to user - error: " + "Requested role with id " + roleId + " doesn't exist.");
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested role with id " + roleId + " doesn't exist.");
 		}	
 	}
@@ -172,11 +167,9 @@ public class UserService {
 		Optional<Role> role = roleRepository.findById(roleId);
 		if(role.isPresent()) {			
 			user.getRoles().remove(role.get());
-			userRepository.save(user);
-			logger.info("Role with id = " + roleId + " deleted from user with id = " + userId);
+			userRepository.save(user);			
 		}
 		else {
-			logger.error("Error when deleting role from user - error: " + "Requested role with id " + roleId + " doesn't exist.");
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "Requested role with id " + roleId + " doesn't exist.");
 		}	
 	}
@@ -184,10 +177,8 @@ public class UserService {
 	public boolean deleteUser(Long userId) {
 		try {
 			userRepository.deleteById(userId);
-			logger.info(" deleted user with id = " + userId);
 			return true;
 		} catch (Exception e) {
-			logger.info(" unable to deleted user with id = " + userId);
 			return false;
 		}
 			
