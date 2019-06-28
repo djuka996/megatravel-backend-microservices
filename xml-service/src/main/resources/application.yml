@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: xmlservice
+    
+server:
+  port: ${PORT:4555}
+  ssl:
+   enabled: true
+   key-store: classpath:xmlutils.p12
+   key-store-password: sifra
+   key-store-type: PKCS12
+   key-store-alies: search(pki)
+   trust-store: classpath:xmlutilsTrust.p12
+   trust-store-password: sifra
+   trust-store-type: PKCS12
+
+logging:
+    level:
+      com.netflix: WARN
+      org.springframework.web: WARN
+      com.megatravel: DEBUG
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+        defaultZone: https://localhost:8761/eureka/
