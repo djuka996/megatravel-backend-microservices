@@ -46,8 +46,8 @@ public class Message {
 
 	public Message(com.megatravel.dtosoap.system_user_info.MessageDTO messageDTO ) {
 		this.id = messageDTO.getId();
-		this.caption = messageDTO.getCaption();
-		this.text = messageDTO.getText();
+		this.caption = messageDTO.getCaption().replace("<", "&lt;").replace(">", "&gt;");
+		this.text = messageDTO.getText().replace("<", "&lt;").replace(">", "&gt;");
 		this.opened = messageDTO.isOpened();
 		this.date = messageDTO.getDate();
 		this.lastChangedTime = new Date();

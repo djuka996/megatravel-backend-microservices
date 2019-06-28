@@ -21,8 +21,8 @@ public class AccomodationTypeDTO {
     public AccomodationTypeDTO() { }
     
     public AccomodationTypeDTO(AccomodationType accomodationType) {
-    	this.id = accomodationType.getId();
-    	this.name = accomodationType.getName();
+    	this.id = accomodationType.getId(); 
+    	this.name = accomodationType.getName().replace("<", "&lt;").replace(">", "&gt;");
     	this.lastChangedTime = accomodationType.getLastChangedTime();
     }
 

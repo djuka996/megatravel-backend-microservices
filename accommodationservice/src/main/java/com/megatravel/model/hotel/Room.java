@@ -55,7 +55,7 @@ public class Room {
 
 	public Room(RoomDTO roomDTO) {
 		this.id = roomDTO.getId();
-		this.description = roomDTO.getDescription();
+		this.description = roomDTO.getDescription().replace("<", "&lt;").replace(">", "&gt;");;
 		this.cancellationDays = roomDTO.getCancellationDays();
 		this.cancellationAllowed = roomDTO.isCancellationAllowed();
 		this.capacity = roomDTO.getCapacity();

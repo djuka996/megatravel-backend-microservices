@@ -22,7 +22,7 @@ public class ExtraOptionDTO {
 
     public ExtraOptionDTO(ExtraOption option) {
     	this.id = option.getId();
-    	this.name = option.getName();
+    	this.name = option.getName().replace("<", "&lt;").replace(">", "&gt;");;
     	this.lastChangedTime = option.getLastChangedTime();
 	}
 

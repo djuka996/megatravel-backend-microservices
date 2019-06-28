@@ -27,9 +27,9 @@ public class AddressDTO {
     
     public AddressDTO(Address address) {
     	this.id = address.getId();
-    	this.country = address.getCountry();
-    	this.city = address.getCity();
-    	this.street = address.getStreet();
+    	this.country = address.getCountry().replace("<", "&lt;").replace(">", "&gt;");
+    	this.city = address.getCity().replace("<", "&lt;").replace(">", "&gt;");
+    	this.street = address.getStreet().replace("<", "&lt;").replace(">", "&gt;");
     	this.streetNumber = address.getStreetNumber();
     	this.coordinateX = address.getCoordinateX();
     	this.coordinateY = address.getCoordinateY();

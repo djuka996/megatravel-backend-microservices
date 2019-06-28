@@ -104,7 +104,7 @@ public class RatingServiceImpl implements RatingService {
 		if(userReview == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user review found");
 		}
-		userReview.setComment(userReviewDTO.getComment());
+		userReview.setComment(userReviewDTO.getComment().replace("<", "&lt;").replace(">", "&gt;"));
 		userReview.setRating(userReviewDTO.getRating());
 		userReview.setApproved(userReviewDTO.isApproved());
 		userReview.setLastChangedTime(new Date());
@@ -115,7 +115,7 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public UserReviewDTO createReview(UserReviewDTO userReviewDTO) {
 		UserReview userReview = new UserReview();
-		userReview.setComment(userReviewDTO.getComment());
+		userReview.setComment(userReviewDTO.getComment().replace("<", "&lt;").replace(">", "&gt;"));
 		userReview.setRating(userReviewDTO.getRating());
 		userReview.setApproved(false);
 		userReview.setLastChangedTime(new Date());
