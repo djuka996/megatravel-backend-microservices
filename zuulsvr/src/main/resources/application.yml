@@ -80,7 +80,7 @@ eureka:
   instance:
     secureVirtualHostName: ${spring.application.name}
     prefer-ip-address: true
-    nonSecurePortEnabled: true #Kada https ukljuci staviti false
+    nonSecurePortEnabled: false #Kada https ukljuci staviti false
     securePortEnabled: true
     securePort: ${server.port}
     statusPageUrl: http://localhost:${server.port}/info
