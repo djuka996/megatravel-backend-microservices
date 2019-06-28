@@ -1,7 +1,7 @@
 server:
   port: ${PORT:43573}
   ssl:
-   enabled: false
+   enabled: true
    key-store: classpath:rating.p12
    key-store-password: sifra
    key-store-type: PKCS12
@@ -45,8 +45,8 @@ eureka:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
     secureVirtualHostName: ${spring.application.name}
-    nonSecurePortEnabled: true #TRUE
-    securePortEnabled: false #true
+    nonSecurePortEnabled: false #TRUE
+    securePortEnabled: true #true
     securePort: ${server.port}
     statusPageUrl: https://localhost:${server.port}/info
     healthCheckUrl: https://localhost:${server.port}/health

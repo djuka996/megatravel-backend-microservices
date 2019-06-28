@@ -46,10 +46,10 @@ public class SoapRequestCaller {
 				connection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
 				connection.setRequestProperty("SOAPAction", utilites.returnSoapAction(fullUrl, message));
 				connection.setDoOutput(true);
-				/*ResponseEntity<Void> response = this.service.checkForXXE(message);
+				ResponseEntity<Void> response = this.service.checkForXXE(message);
 				if(!response.getStatusCode().equals(HttpStatus.ACCEPTED)) {
 					return new ServiceResponse(INTERNAL_SERVER_ERROR, 500);
-				}*/
+				}
 				OutputStream outStream = connection.getOutputStream();
 				OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream);
 				outStreamWriter.write(message);

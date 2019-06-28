@@ -1,11 +1,11 @@
 server:
   port: ${PORT:5555}
   ssl:
-   enabled: false #Kada https ukljuci staviti TRUE
+   enabled: true #Kada https ukljuci staviti TRUE
    key-store: classpath:zuul.p12
    key-store-password: sifra
    key-store-type: PKCS12
-   key-alias: zuul gateway (pki)
+   key-alias: zuulgateway(pki)
    trust-store: classpath:zuulTrust.p12
    trust-store-password: sifra
    trust-store-type: PKCS12
@@ -81,8 +81,8 @@ eureka:
   instance:
     secureVirtualHostName: ${spring.application.name}
     prefer-ip-address: true
-    nonSecurePortEnabled: true #Kada https ukljuci staviti false
-    securePortEnabled: false
+    nonSecurePortEnabled: false #Kada https ukljuci staviti false
+    securePortEnabled: true
     securePort: ${server.port}
     statusPageUrl: https://localhost:${server.port}/info
     healthCheckUrl: https://localhost:${server.port}/health
