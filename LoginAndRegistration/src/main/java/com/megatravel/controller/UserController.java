@@ -213,6 +213,9 @@ public class UserController {
 		if(user == null) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
+		if(!user.isActive()) {
+			return new ResponseEntity<>(HttpStatus.LOCKED);
+		}
 
 		try {
 			String jwt = userService.signin(loginDTO.getEmail(), loginDTO.getPassword());
