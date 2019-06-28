@@ -108,10 +108,12 @@ public class RoomService{
 	}
 	
 	public Boolean updateRating(Long id,HttpServletRequest request) {
-		double rating =  roomRepository.updateRating(id);
-		Room room = this.getRoom(id,request);
-		room.getRoomsHotel().setRating(rating);
-		hotelRepository.save(room.getRoomsHotel());
+		Double rating =  roomRepository.updateRating(id);
+		if(rating != null) {
+			Room room = this.getRoom(id,request);
+			room.getRoomsHotel().setRating(rating);
+			hotelRepository.save(room.getRoomsHotel());
+		}
 		return true;
 	}
 	

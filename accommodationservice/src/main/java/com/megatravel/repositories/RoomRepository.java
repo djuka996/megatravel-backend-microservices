@@ -19,7 +19,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 	
 	List<Room> findAllByRoomsHotel_Id(Long id);
 	
-	@Query("SELECT AVG(r.rating) FROM UserReview r WHERE r.room.id = ?1 AND r.approved = true")
+	@Query("SELECT AVG(r.rating) FROM UserReview r WHERE r.room.id = ?1")
 	double updateRating(Long id);
 
 	List<Room> findAllByLastChangedTimeBetween(Date start, Date end);
