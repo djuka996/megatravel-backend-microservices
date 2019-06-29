@@ -51,8 +51,33 @@ public class RoomService {
 		}
 	}
 
-	public List<Room> findAllSearch(String city, Date beginDate, Date endDate, int numberOfPeople, Pageable pageable) {
-		Page<Room> rooms = roomRepository.findResult(city, beginDate, endDate, numberOfPeople, pageable);
+	public List<Room> findAllSearch(String city, Date beginDate, Date endDate, int numberOfPeople, String orderByValue, Pageable pageable) {
+		Page<Room> rooms = null;
+		
+		if (orderByValue.equals("NONE")) 
+		{
+			rooms = roomRepository.findResult(city, beginDate, endDate, numberOfPeople, pageable);
+		} 
+		else if (orderByValue.equals("PRICE")) 
+		{
+			rooms = roomRepository.findResultOrderByPrice(city, beginDate, endDate, numberOfPeople, pageable);
+		} 
+		else if (orderByValue.equals("LOCATION")) 
+		{
+			rooms = roomRepository.findResult(city, beginDate, endDate, numberOfPeople, pageable);
+		} 
+		else if (orderByValue.equals("MARK")) 
+		{
+			rooms = roomRepository.findResultOrderByRating(city, beginDate, endDate, numberOfPeople, pageable);
+		}
+		else if (orderByValue.equals("CATEGORY")) 
+		{
+			rooms = roomRepository.findResultOrderByRating(city, beginDate, endDate, numberOfPeople, pageable);
+		}
+		else 
+		{
+			rooms = roomRepository.findResult(city, beginDate, endDate, numberOfPeople, pageable);
+		}
 
 		if (rooms.hasContent()) {
 			MyLogger.info("findAll findAllSearch", true, null, null, "All Room returned");
@@ -61,7 +86,7 @@ public class RoomService {
 				
 				AmountType found = amountTypeRepository.findCurrentlyPriced(room.getId());
 				if(found != null) {
-					room.setCurrentlyPrice(found.getPrice().doubleValue());
+					//room.setCurrentlyPrice(found.getPrice().doubleValue());
 					roomRepository.save(room);
 				}
 					
@@ -92,7 +117,7 @@ public class RoomService {
 
 	public List<Room> findAllAdvanceSearch(String city, Date beginDate, Date endDate, int numberOfPeople,
 			String accomodationtype, double category, List<String> additionalService, double distance,
-			String orderByValue, Pageable pageable) {
+			String orderByValue, int cancellationDays, boolean cancelationAllowed, Pageable pageable) {
 		if(additionalService.isEmpty()) {
 			extraOptionsRepository.findAll().forEach(extraOption -> {
 				additionalService.add(extraOption.getName());
@@ -100,9 +125,12 @@ public class RoomService {
 		}
 		
 		Page<Room> rooms = null;
-		if (orderByValue.equals("NONE")) 
+		if(cancellationDays > 0) {
+			rooms = roomRepository.findResultAdvanceCancelation(additionalService, beginDate, endDate, numberOfPeople,
+					accomodationtype, category, cancelationAllowed, cancellationDays, pageable);
+		}
+		else if (orderByValue.equals("NONE")) 
 		{
-			//TODO Stefan FIX IT
 			rooms = roomRepository.findResultAdvance(additionalService, beginDate, endDate, numberOfPeople,
 					accomodationtype, category, pageable);
 			//rooms = roomRepository.findAll(pageable);

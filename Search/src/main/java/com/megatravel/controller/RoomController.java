@@ -39,11 +39,12 @@ public class RoomController {
 		if(searchDTO.isAdvance()) {
 			rooms = convertToDTORoomList(roomService.findAllAdvanceSearch(searchDTO.getCity(), 
 					searchDTO.getBeginDate(), searchDTO.getEndDate(), searchDTO.getNumberOfPeople(), 
-					searchDTO.getAccomodationtype(), searchDTO.getCategory(), searchDTO.getAdditionalService(), searchDTO.getDistance(), searchDTO.getOrderByValue(), pageable));
+					searchDTO.getAccomodationtype(), searchDTO.getCategory(), searchDTO.getAdditionalService(), searchDTO.getDistance(), 
+					searchDTO.getOrderByValue(), searchDTO.getCancellationDays(), searchDTO.isCancelationAllowed(), pageable));
 		}
 		else {
 			rooms = convertToDTORoomList(roomService.findAllSearch(searchDTO.getCity(), 
-					searchDTO.getBeginDate(), searchDTO.getEndDate(), searchDTO.getNumberOfPeople(), pageable));
+					searchDTO.getBeginDate(), searchDTO.getEndDate(), searchDTO.getNumberOfPeople(), searchDTO.getOrderByValue() ,pageable));
 		}
 			
 		HttpHeaders headers = new HttpHeaders();

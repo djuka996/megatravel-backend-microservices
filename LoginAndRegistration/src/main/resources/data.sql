@@ -289,7 +289,7 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (1,'Pitanja za smestaj','2019-01-02 00:00:00','2019-01-02 00:00:00',_binary '','Da li mogu da dodjem u 3',1,3,2),(2,'Pitanja za smestaj','2019-01-02 00:00:00','2019-01-02 00:00:00',_binary '\0','Mozete',1,2,3),(3,'Pitanja za smestaj','2019-01-02 00:00:00','2019-01-02 00:00:00',_binary '','Hvala',1,3,2);
+INSERT INTO `message` VALUES (1,'Pitanja za smestaj','2019-01-02 15:00:00','2019-01-02 00:00:00',_binary '','Da li mogu da dodjem u 3',1,3,2),(2,'Pitanja za smestaj','2019-01-02 15:30:00','2019-01-02 00:00:00',_binary '\0','Mozete',1,2,3),(3,'Pitanja za smestaj','2019-01-02 16:00:00','2019-01-02 00:00:00',_binary '','Hvala',1,3,2);
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 
