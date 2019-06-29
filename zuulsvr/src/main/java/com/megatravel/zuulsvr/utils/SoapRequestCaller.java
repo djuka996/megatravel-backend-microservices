@@ -31,9 +31,6 @@ public class SoapRequestCaller {
 	@Autowired
 	private StringUtilities utilites;
 	
-	@Autowired
-	private XmlServiceFeignClient service;
-	
 	public ServiceResponse sendRequestTo(String fullUrl, String recipient, HttpServletRequest request) {
 		URL url;
 		HttpURLConnection connection = null;
@@ -46,10 +43,6 @@ public class SoapRequestCaller {
 				connection.setRequestProperty("Content-Type", "text/xml; charset=utf-8");
 				connection.setRequestProperty("SOAPAction", utilites.returnSoapAction(fullUrl, message));
 				connection.setDoOutput(true);
-				ResponseEntity<Void> response = this.service.checkForXXE(message);
-				if(!response.getStatusCode().equals(HttpStatus.ACCEPTED)) {
-					return new ServiceResponse(INTERNAL_SERVER_ERROR, 500);
-				}
 				OutputStream outStream = connection.getOutputStream();
 				OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream);
 				outStreamWriter.write(message);
