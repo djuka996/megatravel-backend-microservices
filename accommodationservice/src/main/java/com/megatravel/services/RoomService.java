@@ -1,5 +1,6 @@
 package com.megatravel.services;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -67,12 +68,19 @@ public class RoomService{
 		toSave.setRoomReservations(new HashSet<>());
 		toSave.setUnitPriceInformations(new HashSet<>());
 		Room saved = roomRepository.save(toSave);	
-		/*List<ImageDTO> receivedImages = room.getImagesDTO();
+		List<ImageDTO> receivedImages = room.getImageDTO();
 		for (ImageDTO imageDTO : receivedImages) {
 			Image foundImg = imageRepository.findImageByFilePathEquals(imageDTO.getFilePath());
-			foundImg.setRoomImage(saved);
-			imageRepository.save(foundImg);
-		}*/	
+			if(foundImg == null)
+			{
+				Image newImg = new Image();
+				newImg.setFilePath(imageDTO.getFilePath());
+				newImg.setLastChangedTime(new Date());
+				newImg.setHotel(gotHotel);
+				newImg.setRoomImage(saved);
+				imageRepository.save(newImg);
+			}			
+		}	
 		return saved;
 	}
 

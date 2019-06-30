@@ -81,6 +81,7 @@ public class UserService {
 		Optional<User> user = userRepository.findById(id);
 		if(user.isPresent()) {
 			user.get().setActive(boolState);
+			user.get().setLastChangedTime(new Date());
 			userRepository.save(user.get());
 			return new SystemUserInfoDTO(user.get());
 		}

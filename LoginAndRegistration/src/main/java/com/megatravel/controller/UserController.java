@@ -281,9 +281,13 @@ public class UserController {
 					
 					Role roleAgent = roleService.findByRoleName("ROLE_AGENT");
 					user.getRoles().add(roleAgent);
+					roleAgent.setLastChangedTime(new Date());
+					roleService.save(roleAgent);
 					isAgent = true;
 				}
 				else{
+					role.setLastChangedTime(new Date());
+					roleService.save(role);
 					user.getRoles().add(role);	
 				}
 		}
