@@ -27,7 +27,7 @@ endpointInterface = "com.megatravel.interfaces.MessageServiceInterface")
 @Component
 public class MessageServiceImpl implements MessageServiceInterface {
 
-	public static final String ENDPOINT = "/inbox";
+	public static final String ENDPOINT = "/services/inbox";
 	
 	@Autowired
 	private MessageService messageService;
